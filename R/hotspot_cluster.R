@@ -35,7 +35,7 @@ hotspot_cluster <- function(hotspots,
     if (!is.numeric(interval)) stop("Require numeric interval")
     if (interval <= 0) stop("Require positive interval")
 
-    time_options <- c("secs", "mins", "hours", "days", "weeks", "months", "years")
+    time_options <- c("secs", "mins", "hours", "days", "weeks", "timestamps")
     if (!time_unit %in% time_options) {
       stop(paste0("Argument time_unit is not one of ",
                   paste0("'", time_options, "'", collapse = ", "), collapse = " "))
