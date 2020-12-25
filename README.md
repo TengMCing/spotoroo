@@ -11,14 +11,16 @@ The goal of hotspotcluster is to …
 
 ## Installation
 
-You can install the released version of hotspotcluster from
-[CRAN](https://CRAN.R-project.org) with:
+<!-- You can install the released version of hotspotcluster from [CRAN](https://CRAN.R-project.org) with: -->
 
-``` r
-install.packages("hotspotcluster")
-```
+<!-- ``` r -->
 
-And the development version from [GitHub](https://github.com/) with:
+<!-- install.packages("hotspotcluster") -->
+
+<!-- ``` -->
+
+You can install the development version from
+[GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
@@ -29,34 +31,73 @@ devtools::install_github("TengMCing/hotspotcluster")
 
 This is a basic example which shows you how to solve a common problem:
 
-``` r
-# library(hotspotcluster)
-## basic example code
-```
-
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
+The first 20 observations of the built-in dataset `hotspots`.
 
 ``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
+hotspotcluster::hotspots[1:20,]
+#>    id    lon    lat time_id
+#> 1   1 141.12 -37.10       1
+#> 2   2 141.14 -37.10       1
+#> 3   3 141.12 -37.12       1
+#> 4   4 141.14 -37.12       1
+#> 5   5 141.16 -37.12       1
+#> 6   6 141.12 -37.14       1
+#> 7   7 141.14 -37.14       1
+#> 8   8 141.16 -37.14       1
+#> 9   9 141.12 -37.16       1
+#> 10 10 141.14 -37.16       1
+#> 11 11 141.10 -37.12       1
+#> 12 12 141.10 -37.14       1
+#> 13 13 141.10 -37.12       2
+#> 14 14 141.12 -37.12       2
+#> 15 15 141.14 -37.12       2
+#> 16 16 141.10 -37.14       2
+#> 17 17 141.12 -37.14       2
+#> 18 18 141.14 -37.14       2
+#> 19 19 141.30 -37.64       2
+#> 20 20 141.30 -37.66       2
 ```
 
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date. `devtools::build_readme()` is handy for this. You could also
-use GitHub Actions to re-render `README.Rmd` every time you push. An
-example workflow can be found here:
-<https://github.com/r-lib/actions/tree/master/examples>.
+Perform spatiotemporal clustering on this data.
 
-You can also embed plots, for example:
+``` r
+results <- hotspotcluster::hotspot_cluster(hotspots)
+#> Clustering <U+2713> 
+#> Compute ignition points <U+2713> 
+#> Time taken: 0 mins 26 secs for 5000 observations
+#> (0.005 secs/obs)
+```
 
-<img src="man/figures/README-pressure-1.png" width="100%" />
+The ignition points of the first 20 bushfires.
 
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub and CRAN.
+``` r
+data.frame(lon = results$ignition_lon, lat = results$ignition_lat)[1:20,]
+#>         lon       lat
+#> 1  141.1300 -37.13000
+#> 2  141.3000 -37.65000
+#> 3  141.4800 -37.35000
+#> 4  147.1600 -37.85000
+#> 5  148.1050 -37.57999
+#> 6  144.1800 -38.35000
+#> 7  143.5800 -36.15000
+#> 8  143.1425 -37.28250
+#> 9  141.1500 -36.54000
+#> 10 143.3600 -37.32000
+#> 11 148.6300 -37.47000
+#> 12 148.4233 -37.10333
+#> 13 148.8000 -37.30000
+#> 14 148.8000 -37.36000
+#> 15 148.8500 -37.38000
+#> 16 144.7400 -36.86000
+#> 17 144.2300 -37.28000
+#> 18 143.6300 -36.12000
+#> 19 143.6333 -36.12667
+#> 20 143.8700 -36.84000
+```
+
+The memberships of the first 20 hotspots.
+
+``` r
+results$memberships[1:20]
+#>  [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2
+```

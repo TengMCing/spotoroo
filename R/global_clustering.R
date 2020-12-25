@@ -1,11 +1,10 @@
-#' @export
-global_clustering <- function(lon, lat, time_id, ActiveTime, AdjDist){
+global_clustering <- function(lon, lat, time_id, ActiveTime, AdjDist, ignition_center){
 
   global_memberships <- rep(0, length(lon))
 
   start_time <- Sys.time()
 
-  pb <- progress::progress_bar$new(format = "[:bar] :current/:total (:percent) eta: :eta",
+  pb <- progress::progress_bar$new(format = "Clustering [:bar] :current/:total (:percent) eta: :eta",
                                    total = max(time_id))
   pb$tick(0)
 
@@ -26,21 +25,28 @@ global_clustering <- function(lon, lat, time_id, ActiveTime, AdjDist){
                                               indexes)
   }
 
+  cat("Clustering \u2713 \n")
+
+  results <- ignition_points(lon, lat, time_id, global_memberships, ignition_center)
+  results$memberships <- global_memberships
+
   end_time <- Sys.time()
   time_taken <- end_time - start_time
-  message(paste0("Time taken: ",
+  cat(paste0("Time taken: ",
                  as.numeric(time_taken, units = "secs") %/% 60,
                  " mins ",
                  round(as.numeric(time_taken, units = "secs") %% 60, 0),
                  " secs for ",
                  length(lon),
-                 " data points"
+                 " observations\n"
   )
   )
 
-  message(paste0("(",
+  cat(paste0("(",
                  round(as.numeric(time_taken, units = "secs")/length(lon), 3),
-                 " secs per data point)"))
+                 " secs/obs)\n"))
 
-  return(global_memberships)
+
+
+  return(results)
 }
