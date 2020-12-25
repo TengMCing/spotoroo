@@ -31,7 +31,7 @@ The goal of hotspotcluster is to ...
 You can install the development version from [GitHub](https://github.com/) with:
 
 ``` r
-# install.packages("devtools")
+install.packages("devtools")
 devtools::install_github("TengMCing/hotspotcluster")
 ```
 ## Example
@@ -46,13 +46,14 @@ load_all()
 The first 20 observations of the built-in dataset `hotspots`.
 
 ```{r}
-hotspotcluster::hotspots[1:20,]
+library(hotspotcluster)
+hotspots[1:20,]
 ```
 
 Perform spatiotemporal clustering on this data.
 
 ```{r example}
-results <- hotspotcluster::hotspot_cluster(hotspots)
+results <- hotspot_cluster(hotspots)
 ```
 
 The ignition points of the first 20 bushfires.

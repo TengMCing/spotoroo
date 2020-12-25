@@ -23,7 +23,7 @@ You can install the development version from
 [GitHub](https://github.com/) with:
 
 ``` r
-# install.packages("devtools")
+install.packages("devtools")
 devtools::install_github("TengMCing/hotspotcluster")
 ```
 
@@ -34,7 +34,8 @@ This is a basic example which shows you how to solve a common problem:
 The first 20 observations of the built-in dataset `hotspots`.
 
 ``` r
-hotspotcluster::hotspots[1:20,]
+library(hotspotcluster)
+hotspots[1:20,]
 #>    id    lon    lat time_id
 #> 1   1 141.12 -37.10       1
 #> 2   2 141.14 -37.10       1
@@ -61,7 +62,7 @@ hotspotcluster::hotspots[1:20,]
 Perform spatiotemporal clustering on this data.
 
 ``` r
-results <- hotspotcluster::hotspot_cluster(hotspots)
+results <- hotspot_cluster(hotspots)
 #> Clustering <U+2713> 
 #> Compute ignition points <U+2713> 
 #> Time taken: 0 mins 26 secs for 5000 observations
