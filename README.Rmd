@@ -43,10 +43,14 @@ library(devtools)
 load_all()
 ```
 
+```{r}
+library(hotspotcluster)
+```
+
+
 The built-in dataset `hotspots5000`.
 
 ```{r}
-library(hotspotcluster)
 str(hotspots5000)
 ```
 

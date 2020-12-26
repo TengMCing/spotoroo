@@ -31,10 +31,13 @@ devtools::install_github("TengMCing/hotspotcluster")
 
 This is a basic example which shows you how to solve a common problem:
 
+``` r
+library(hotspotcluster)
+```
+
 The built-in dataset `hotspots5000`.
 
 ``` r
-library(hotspotcluster)
 str(hotspots5000)
 #> 'data.frame':    5000 obs. of  4 variables:
 #>  $ id     : int  1 2 3 4 5 6 7 8 9 10 ...
@@ -58,7 +61,7 @@ hotspots5000[1:10,]
 #> 10 10 141.14 -37.16 2019-10-01 03:20:00
 ```
 
-<img src="man/figures/README-unnamed-chunk-5-1.png" width="70%" height="70%" />
+<img src="man/figures/README-unnamed-chunk-6-1.png" width="70%" height="70%" />
 
 Perform spatiotemporal clustering on this dataset.
 
@@ -113,4 +116,4 @@ results$hotspots[1:10,]
 #> 10 141.14 -37.16 2019-10-01 03:20:00           1
 ```
 
-<img src="man/figures/README-unnamed-chunk-8-1.png" width="70%" height="70%" />
+<img src="man/figures/README-unnamed-chunk-9-1.png" width="70%" height="70%" />
