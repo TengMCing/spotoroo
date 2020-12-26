@@ -54,7 +54,7 @@ str(hotspots5000)
 hotspots5000[1:10,]
 ```
 
-```{r echo = FALSE, warning=FALSE, message=FALSE, error=FALSE, dpi=600, out.width = "70%", out.height="70%"}
+```{r echo = FALSE, warning=FALSE, message=FALSE, error=FALSE, out.width = "70%", out.height="70%"}
 library(tidyverse)
 library(rnaturalearth)
 au_map <- ne_states(country = "Australia", returnclass = "sf")
@@ -93,7 +93,7 @@ The memberships of the first 10 hotspots.
 results$hotspots[1:10,]
 ```
 
-```{r echo = FALSE, warning=FALSE, message=FALSE, error=FALSE, dpi=600, out.width = "70%", out.height="70%"}
+```{r echo = FALSE, warning=FALSE, message=FALSE, error=FALSE, out.width = "70%", out.height="70%"}
 ggplot(results$ignitions) +
   geom_sf(data = vic_map) +
   geom_point(aes(ignition_lon, ignition_lat), alpha = 0.5) +

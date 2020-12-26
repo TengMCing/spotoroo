@@ -76,7 +76,7 @@ results <- hotspot_cluster(hotspots5000,
 #> Clustering <U+2713> 
 #> Compute ignition points <U+2713> 
 #> Number of clusters: 217
-#> Time taken: 0 mins 29 secs for 5000 obs (0.006 secs/obs)
+#> Time taken: 0 mins 31 secs for 5000 obs (0.006 secs/obs)
 ```
 
 The ignition points of the first 10 bushfires.
