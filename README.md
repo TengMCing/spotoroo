@@ -58,7 +58,7 @@ hotspots5000[1:10,]
 #> 10 10 141.14 -37.16 2019-10-01 03:20:00
 ```
 
-<img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-5-1.png" width="70%" />
 
 Perform spatiotemporal clustering on this dataset.
 
@@ -76,7 +76,7 @@ results <- hotspot_cluster(hotspots5000,
 #> Clustering <U+2713> 
 #> Compute ignition points <U+2713> 
 #> Number of clusters: 217
-#> Time taken: 0 mins 28 secs for 5000 obs (0.006 secs/obs)
+#> Time taken: 0 mins 27 secs for 5000 obs (0.005 secs/obs)
 ```
 
 The ignition points of the first 10 bushfires.
@@ -113,4 +113,4 @@ results$hotspots[1:10,]
 #> 10 141.14 -37.16 2019-10-01 03:20:00           1
 ```
 
-<img src="man/figures/README-unnamed-chunk-8-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-8-1.png" width="70%" />
