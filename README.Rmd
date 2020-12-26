@@ -51,10 +51,10 @@ str(hotspots5000)
 ```
 
 ```{r}
-hotspots5000[1:20,]
+hotspots5000[1:10,]
 ```
 
-```{r echo = FALSE, warning=FALSE, message=FALSE, error=FALSE}
+```{r echo = FALSE, warning=FALSE, message=FALSE, error=FALSE, dpi=600}
 library(tidyverse)
 library(rnaturalearth)
 au_map <- ne_states(country = "Australia", returnclass = "sf")
@@ -62,7 +62,8 @@ vic_map <- au_map[7,]
 ggplot(hotspots5000) +
   geom_sf(data = vic_map) +
   geom_point(aes(lon, lat), alpha = 0.3) +
-  ggthemes::theme_map()
+  ggthemes::theme_map() +
+  ggtitle("Raw Hotspots")
 ```
 
 
@@ -80,22 +81,23 @@ results <- hotspot_cluster(hotspots5000,
                            timestep = 1)
 ```
 
-The ignition points of the first 20 bushfires.
+The ignition points of the first 10 bushfires.
 
 ```{r}
-results$ignitions[1:20,]
+results$ignitions[1:10,]
 ```
 
-The memberships of the first 20 hotspots.
+The memberships of the first 10 hotspots.
 
 ```{r}
-results$hotspots[1:20,]
+results$hotspots[1:10,]
 ```
 
-```{r echo = FALSE, warning=FALSE, message=FALSE, error=FALSE}
+```{r echo = FALSE, warning=FALSE, message=FALSE, error=FALSE, dpi=600}
 ggplot(results$ignitions) +
   geom_sf(data = vic_map) +
   geom_point(aes(ignition_lon, ignition_lat), alpha = 0.5) +
-  ggthemes::theme_map()
+  ggthemes::theme_map() +
+  ggtitle("Ignition Points")
 ```
 
