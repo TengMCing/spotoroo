@@ -43,7 +43,7 @@ library(devtools)
 load_all()
 ```
 
-The first 20 observations of the built-in dataset `hotspots5000`.
+The built-in dataset `hotspots5000`.
 
 ```{r}
 library(hotspotcluster)
@@ -54,8 +54,19 @@ str(hotspots5000)
 hotspots5000[1:20,]
 ```
 
+```{r echo = FALSE, warning=FALSE, message=FALSE, error=FALSE}
+library(tidyverse)
+library(rnaturalearth)
+au_map <- ne_states(country = "Australia", returnclass = "sf")
+vic_map <- au_map[7,]
+ggplot(hotspots5000) +
+  geom_sf(data = vic_map) +
+  geom_point(aes(lon, lat), alpha = 0.3) +
+  ggthemes::theme_map()
+```
 
-Perform spatiotemporal clustering on this data.
+
+Perform spatiotemporal clustering on this dataset.
 
 ```{r example}
 results <- hotspot_cluster(hotspots5000, 
@@ -81,4 +92,10 @@ The memberships of the first 20 hotspots.
 results$hotspots[1:20,]
 ```
 
+```{r echo = FALSE, warning=FALSE, message=FALSE, error=FALSE}
+ggplot(results$ignitions) +
+  geom_sf(data = vic_map) +
+  geom_point(aes(ignition_lon, ignition_lat), alpha = 0.5) +
+  ggthemes::theme_map()
+```
 

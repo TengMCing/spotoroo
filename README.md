@@ -31,7 +31,7 @@ devtools::install_github("TengMCing/hotspotcluster")
 
 This is a basic example which shows you how to solve a common problem:
 
-The first 20 observations of the built-in dataset `hotspots5000`.
+The built-in dataset `hotspots5000`.
 
 ``` r
 library(hotspotcluster)
@@ -68,7 +68,9 @@ hotspots5000[1:20,]
 #> 20 20 141.30 -37.66 2019-10-01 04:30:00
 ```
 
-Perform spatiotemporal clustering on this data.
+<img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" />
+
+Perform spatiotemporal clustering on this dataset.
 
 ``` r
 results <- hotspot_cluster(hotspots5000, 
@@ -84,7 +86,7 @@ results <- hotspot_cluster(hotspots5000,
 #> Clustering <U+2713> 
 #> Compute ignition points <U+2713> 
 #> Number of clusters: 217
-#> Time taken: 0 mins 26 secs for 5000 obs (0.005 secs/obs)
+#> Time taken: 0 mins 29 secs for 5000 obs (0.006 secs/obs)
 ```
 
 The ignition points of the first 20 bushfires.
@@ -140,3 +142,5 @@ results$hotspots[1:20,]
 #> 19 141.30 -37.64 2019-10-01 04:30:00           2
 #> 20 141.30 -37.66 2019-10-01 04:30:00           2
 ```
+
+<img src="man/figures/README-unnamed-chunk-8-1.png" width="100%" />
