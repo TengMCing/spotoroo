@@ -43,29 +43,42 @@ library(devtools)
 load_all()
 ```
 
-The first 20 observations of the built-in dataset `hotspots`.
+The first 20 observations of the built-in dataset `hotspots5000`.
 
 ```{r}
 library(hotspotcluster)
-hotspots[1:20,]
+str(hotspots5000)
 ```
+
+```{r}
+hotspots5000[1:20,]
+```
+
 
 Perform spatiotemporal clustering on this data.
 
 ```{r example}
-results <- hotspot_cluster(hotspots)
+results <- hotspot_cluster(hotspots5000, 
+                           lon = "lon", 
+                           lat = "lat", 
+                           obstime = "obstime",
+                           ActiveTime = 24,
+                           AdjDist = 3000,
+                           ignition_center = "mean",
+                           time_unit = "hours",
+                           timestep = 1)
 ```
 
 The ignition points of the first 20 bushfires.
 
 ```{r}
-data.frame(lon = results$ignition_lon, lat = results$ignition_lat)[1:20,]
+results$ignitions[1:20,]
 ```
 
 The memberships of the first 20 hotspots.
 
 ```{r}
-results$memberships[1:20]
+results$hotspots[1:20,]
 ```
 
 
