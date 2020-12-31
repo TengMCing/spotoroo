@@ -113,7 +113,7 @@ summary(results)
 
 Plot of the result.
 
-```{r}
+```{r out.width = "70%", out.height="70%"}
 plot(results, ignition = TRUE)
 ```
 
