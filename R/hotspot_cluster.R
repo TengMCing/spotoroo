@@ -94,14 +94,34 @@ hotspot_cluster <- function(hotspots,
 
 }
 
-
+#' @export
 summary.hotspotcluster <- function(results, ...){
   cat(paste0("Number of clusters: ", max(results$hotspots$memberships), "\n"))
 }
 
 
 
-plot.hotspotcluster <- function(results, hotspots = TRUE, ignition = FALSE, ...){
+#' Plotting spatiotemporal clustering results
+#'
+#' \code{plot} method for class "\code{hotspotcluster}"
+#'
+#' @param results code{hotspotcluster} object, result of \code{\link{hotspot_cluster}}.
+#' @param hotspot whether or not to plot the hotspots.
+#' @param ignition whether or not to plot the ignitions.
+#' @return a \code{ggplot} object
+#' @examples
+#' results <- hotspot_cluster(hotspots5000,
+#'                            lon = "lon",
+#'                            lat = "lat",
+#'                            obstime = "obstime",
+#'                            ActiveTime = 24,
+#'                            AdjDist = 3000,
+#'                            ignition_center = "mean",
+#'                            time_unit = "hours",
+#'                            timestep = 1)
+#' plot(results)
+#' @export
+plot.hotspotcluster <- function(results, hotspot = TRUE, ignition = FALSE, ...){
 
   if (!is.logical(ignition)) stop("ignition is not logical")
   if (!is.logical(hotspots)) stop("ignition is not logical")
