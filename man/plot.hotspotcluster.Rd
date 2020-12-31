@@ -7,7 +7,7 @@
 \method{plot}{hotspotcluster}(results, hotspot = TRUE, ignition = FALSE, ...)
 }
 \arguments{
-\item{results}{code{hotspotcluster} object, result of \code{\link{hotspot_cluster}}.}
+\item{results}{\code{hotspotcluster} object, result of \code{\link{hotspot_cluster}}.}
 
 \item{hotspot}{whether or not to plot the hotspots.}
 
