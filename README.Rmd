@@ -58,7 +58,7 @@ str(hotspots5000)
 hotspots5000[1:10,]
 ```
 
-```{r echo = FALSE, warning=FALSE, message=FALSE, error=FALSE, out.width = "70%", out.height="70%"}
+```{r echo = TRUE, warning=FALSE, message=FALSE, error=FALSE, out.width = "70%", out.height="70%"}
 library(tidyverse)
 library(rnaturalearth)
 au_map <- ne_states(country = "Australia", returnclass = "sf")
@@ -114,6 +114,9 @@ summary(results)
 Plot of the result.
 
 ```{r out.width = "70%", out.height="70%"}
-plot(results, ignition = TRUE)
+p <- ggplot() +
+  geom_sf(data = vic_map) +
+  ggthemes::theme_map()
+plot(results, ignition = TRUE, bottom = p)
 ```
 

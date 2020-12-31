@@ -4,17 +4,21 @@
 \alias{plot.hotspotcluster}
 \title{Plotting spatiotemporal clustering results}
 \usage{
-\method{plot}{hotspotcluster}(results, hotspot = TRUE, ignition = FALSE, ...)
+\method{plot}{hotspotcluster}(results, ignition = FALSE, hotspot = TRUE, bottom = NULL, ...)
 }
 \arguments{
-\item{results}{\code{hotspotcluster} object, result of \code{\link{hotspot_cluster}}.}
+\item{results}{a \code{hotspotcluster} object, result of \code{\link{hotspot_cluster}}.}
 
-\item{hotspot}{whether or not to plot the hotspots.}
+\item{ignition}{logical; whether or not to plot the ignitions.}
 
-\item{ignition}{whether or not to plot the ignitions.}
+\item{hotspot}{logical; whether or not to plot the hotspots.}
+
+\item{bottom}{a \code{ggplot} object (optional). plot onto this object.}
+
+\item{...}{further arguments will be omitted.}
 }
 \value{
-a \code{ggplot} object
+a \code{ggplot} object.
 }
 \description{
 \code{plot} method for class "\code{hotspotcluster}"

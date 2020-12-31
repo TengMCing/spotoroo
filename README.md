@@ -61,6 +61,18 @@ hotspots5000[1:10,]
 #> 10 10 141.14 -37.16 2019-10-01 03:20:00
 ```
 
+``` r
+library(tidyverse)
+library(rnaturalearth)
+au_map <- ne_states(country = "Australia", returnclass = "sf")
+vic_map <- au_map[7,]
+ggplot(hotspots5000) +
+  geom_sf(data = vic_map) +
+  geom_point(aes(lon, lat), alpha = 0.3) +
+  ggthemes::theme_map() +
+  ggtitle("Raw Hotspots")
+```
+
 <img src="man/figures/README-unnamed-chunk-6-1.png" width="70%" height="70%" />
 
 Perform spatiotemporal clustering on this dataset.
@@ -127,7 +139,10 @@ summary(results)
 Plot of the result.
 
 ``` r
-plot(results, ignition = TRUE)
+p <- ggplot() +
+  geom_sf(data = vic_map) +
+  ggthemes::theme_map()
+plot(results, ignition = TRUE, bottom = p)
 ```
 
 <img src="man/figures/README-unnamed-chunk-11-1.png" width="70%" height="70%" />

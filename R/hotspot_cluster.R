@@ -105,10 +105,12 @@ summary.hotspotcluster <- function(results, ...){
 #'
 #' \code{plot} method for class "\code{hotspotcluster}"
 #'
-#' @param results \code{hotspotcluster} object, result of \code{\link{hotspot_cluster}}.
-#' @param hotspot whether or not to plot the hotspots.
-#' @param ignition whether or not to plot the ignitions.
-#' @return a \code{ggplot} object
+#' @param results a \code{hotspotcluster} object, result of \code{\link{hotspot_cluster}}.
+#' @param hotspot logical; whether or not to plot the hotspots.
+#' @param ignition logical; whether or not to plot the ignitions.
+#' @param bottom a \code{ggplot} object (optional). plot onto this object.
+#' @param ... further arguments will be omitted.
+#' @return a \code{ggplot} object.
 #' @examples
 #' results <- hotspot_cluster(hotspots5000,
 #'                            lon = "lon",
@@ -121,12 +123,18 @@ summary.hotspotcluster <- function(results, ...){
 #'                            timestep = 1)
 #' plot(results)
 #' @export
-plot.hotspotcluster <- function(results, ignition = FALSE, hotspot = TRUE, ...){
+plot.hotspotcluster <- function(results, ignition = FALSE, hotspot = TRUE, bottom = NULL, ...){
 
   if (!is.logical(ignition)) stop("ignition is not logical")
   if (!is.logical(hotspot)) stop("ignition is not logical")
 
-  p <- ggplot2::ggplot() + ggplot2::theme_bw()
+  if (ggplot2::is.ggplot(bottom)) {
+    p <- bottom
+  } else {
+    p <- ggplot2::ggplot() + ggplot2::theme_bw()
+  }
+
+
 
   if (hotspot) {
     p <- p + ggplot2::geom_point(data = results$hotspots,
