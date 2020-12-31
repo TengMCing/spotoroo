@@ -71,8 +71,6 @@ hotspot_cluster <- function(hotspots,
   end_time <- Sys.time()
   time_taken <- end_time - start_time
 
-  cat(paste0("Number of clusters: ", max(global_memberships), "\n"))
-
   cat(paste0("Time taken: ",
              as.numeric(time_taken, units = "secs") %/% 60,
              " mins ",
@@ -88,8 +86,43 @@ hotspot_cluster <- function(hotspots,
              " secs/obs)\n"))
 
 
+  class(results) <- "hotspotcluster"
+
+
 
   return(results)
 
 }
 
+
+summary.hotspotcluster <- function(results, ...){
+  cat(paste0("Number of clusters: ", max(results$hotspots$memberships), "\n"))
+}
+
+
+
+plot.hotspotcluster <- function(results, hotspots = TRUE, ignition = FALSE, ...){
+
+  if (!is.logical(ignition)) stop("ignition is not logical")
+  if (!is.logical(hotspots)) stop("ignition is not logical")
+
+  p <- ggplot2::ggplot() + ggplot2::theme_bw()
+
+  if (hotspots) {
+    p <- p + ggplot2::geom_point(data = results$hotspots,
+                                 ggplot2::aes(lon, lat), alpha = 0.6)
+  }
+
+
+  if (ignition) {
+    p <- p +
+      ggplot2::geom_point(data = results$ignitions,
+                                 ggplot2::aes(ignition_lon,
+                                              ignition_lat,
+                                              col = "ignition")) +
+    ggplot2::scale_color_manual(values = "red") +
+    ggplot2::labs(col = "", x = "lon", y = "lat")
+  }
+
+  p
+}
