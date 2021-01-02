@@ -9,68 +9,55 @@ hotspot_cluster <- function(hotspots,
                             time_unit = NULL,
                             timestep = NULL){
 
-  if (!is.list(hotspots)) stop("Object hotspots is not a list or a dataframe")
-  if (!is.character(lon)) stop("Argument lon is not a string")
-  if (!is.character(lat)) stop("Argument lat is not a string")
-  if (!is.character(obstime)) stop("Argument obstime is not a string")
+  # safe checks
+  check_type("list", hotspots)
+  check_type_bundle("character", lon, lat, obstime)
+  check_in(c("mean", "median"), ignition_center)
+  is_non_negative(ActiveTime)
+  is_positive(AdjDist)
 
+  # access cols
   lon <- hotspots[[lon]]
   lat <- hotspots[[lat]]
   obstime <- hotspots[[obstime]]
 
-  time_id <- obstime
+  # more safe checks and handle time col
+  time_id <- handle_hotspots_cols(lon,
+                                  lat,
+                                  obstime,
+                                  time_unit,
+                                  timestep)
 
-  if (is.null(lon)) stop(paste0("Can't find ", lon, " in object hotspots"))
-  if (is.null(lat)) stop(paste0("Can't find ", lat, " in object hotspots"))
-  if (is.null(obstime)) stop(paste0("Can't find ", obstime, " in object hotspots"))
-
-  if (ActiveTime < 0) stop("Require non-negative ActiveTime")
-  if (AdjDist <= 0) stop("Require positive AdjDist")
-
-  if ((!is.null(time_unit)) | (!is.null(timestep))){
-    if (is.null(time_unit)) warning("Missing argument time_unit, ignore argument timestep")
-    if (is.null(timestep)) warning("Missing argument timestep, ignore argument time_unit")
-  }
-
-  if ((!is.null(time_unit)) & (!is.null(timestep))){
-    if (!is.character(time_unit)) stop("Argument time_unit is not a string")
-    if (!is.numeric(timestep)) stop("Require numeric timestep")
-    if (timestep <= 0) stop("Require positive timestep")
-
-    time_options <- c("secs", "mins", "hours", "days", "numeric")
-    if (!time_unit %in% time_options) {
-      stop(paste0("Argument time_unit is not one of ",
-                  paste0("'", time_options, "'", collapse = ", "), collapse = " "))
-    }
-
-    time_id <- transform_time_id(obstime, time_unit, timestep)
-  }
-
-
-  if ((length(lon) != length(lat)) | (length(lat)!= length(obstime))){
-    stop("Require equal length of lon, lat and obstime")
-  }
-
-  if (!(length(lon)>0 & is.numeric(lon))) stop("Require numeric lon")
-  if (!(length(lat)>0 & is.numeric(lat))) stop("Require numeric lat")
-  if (!(length(time_id)>0 & is.numeric(time_id))) stop("Require numeric time_id")
-  if (!ignition_center %in% c("mean", "median")){
-    stop("Argument ignition_center is neither 'mean' nor 'median'")
-  }
-
+  # start timing
   start_time <- Sys.time()
 
-  global_memberships <- global_clustering(lon, lat, time_id, ActiveTime, AdjDist, ignition_center)
-  ignitions <- ignition_points(lon, lat, obstime, global_memberships, ignition_center)
+  # obtain memberships
+  global_memberships <- global_clustering(lon,
+                                          lat,
+                                          time_id,
+                                          ActiveTime,
+                                          AdjDist,
+                                          ignition_center)
+  # compute ignition points
+  ignitions <- ignition_points(lon,
+                               lat,
+                               obstime,
+                               global_memberships,
+                               ignition_center)
 
-  results <- list(hotspots = data.frame(lon, lat, obstime, memberships = global_memberships),
+  # bind results
+  results <- list(hotspots = data.frame(lon,
+                                        lat,
+                                        obstime,
+                                        memberships = global_memberships),
                   ignitions = ignitions)
 
 
-
+  # stop timing
   end_time <- Sys.time()
   time_taken <- end_time - start_time
 
+  # print run time
   cat(paste0("Time taken: ",
              as.numeric(time_taken, units = "secs") %/% 60,
              " mins ",
@@ -78,21 +65,25 @@ hotspot_cluster <- function(hotspots,
              " secs for ",
              length(lon),
              " obs "
-  )
-  )
-
+             )
+      )
   cat(paste0("(",
              round(as.numeric(time_taken, units = "secs")/length(lon), 3),
              " secs/obs)\n"))
 
-
+  # set result class
   class(results) <- "hotspotcluster"
 
-
-
+  # return result
   return(results)
 
 }
+
+
+
+
+
+
 
 #' @export
 summary.hotspotcluster <- function(results, ...){
@@ -101,13 +92,16 @@ summary.hotspotcluster <- function(results, ...){
 
 
 
+
+
+
 #' Plotting spatiotemporal clustering results
 #'
 #' \code{plot} method for class "\code{hotspotcluster}"
 #'
 #' @param results a \code{hotspotcluster} object, result of \code{\link{hotspot_cluster}}.
-#' @param hotspot logical; whether or not to plot the hotspots.
-#' @param ignition logical; whether or not to plot the ignitions.
+#' @param draw_ignitions logical; whether or not to plot the ignitions.
+#' @param draw_hotspots logical; whether or not to plot the hotspots.
 #' @param bottom a \code{ggplot} object (optional). plot onto this object.
 #' @param ... further arguments will be omitted.
 #' @return a \code{ggplot} object.
@@ -123,25 +117,29 @@ summary.hotspotcluster <- function(results, ...){
 #'                            timestep = 1)
 #' plot(results)
 #' @export
-plot.hotspotcluster <- function(results, ignition = FALSE, hotspot = TRUE, bottom = NULL, ...){
+plot.hotspotcluster <- function(results,
+                                draw_ignitions = TRUE,
+                                draw_hotspots = TRUE,
+                                bottom = NULL,
+                                ...){
 
-  if (!is.logical(ignition)) stop("ignition is not logical")
-  if (!is.logical(hotspot)) stop("ignition is not logical")
+  # safe check
+  check_type_bundle("logical", ignition, hotspot)
 
+  # whether or not to draw on an existing plot
   if (ggplot2::is.ggplot(bottom)) {
     p <- bottom
   } else {
     p <- ggplot2::ggplot() + ggplot2::theme_bw()
   }
 
-
-
+  # draw hotspots
   if (hotspot) {
     p <- p + ggplot2::geom_point(data = results$hotspots,
                                  ggplot2::aes(lon, lat), alpha = 0.6)
   }
 
-
+  # draw ignitions
   if (ignition) {
     p <- p +
       ggplot2::geom_point(data = results$ignitions,
@@ -152,5 +150,6 @@ plot.hotspotcluster <- function(results, ignition = FALSE, hotspot = TRUE, botto
     ggplot2::labs(col = "", x = "lon", y = "lat")
   }
 
-  p
+  # return the plot
+  return(p)
 }
