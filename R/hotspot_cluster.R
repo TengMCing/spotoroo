@@ -5,6 +5,7 @@ hotspot_cluster <- function(hotspots,
                             obstime = "obstime",
                             ActiveTime = 24,
                             AdjDist = 3000,
+                            MinPts = 4,
                             ignition_center = "mean",
                             time_unit = NULL,
                             timestep = NULL){
@@ -38,20 +39,15 @@ hotspot_cluster <- function(hotspots,
                                           ActiveTime,
                                           AdjDist,
                                           ignition_center)
-  # compute ignition points
-  ignitions <- ignition_points(lon,
-                               lat,
-                               obstime,
-                               global_memberships,
-                               ignition_center)
 
-  # bind results
-  results <- list(hotspots = data.frame(lon,
-                                        lat,
-                                        obstime,
-                                        memberships = global_memberships),
-                  ignitions = ignitions)
-
+  # handle noises
+  results <- handle_noises(lon,
+                           lat,
+                           obstime,
+                           ignition_center,
+                           global_memberships,
+                           time_unit,
+                           MinPts)
 
   # stop timing
   end_time <- Sys.time()
@@ -80,16 +76,67 @@ hotspot_cluster <- function(hotspots,
 }
 
 
+# number of obs in each cluster
+# ave obs in clusters
+# time, distance, coverage
+# CLI
 
+len_of_fire <- function(obstime, time_unit){
 
+  return(as.numeric(difftime(max(obstime),
+                             min(obstime),
+                             units = time_unit)))
+}
 
+fire_time_summary <- function(results, time_unit){
+
+  time_sum <- dplyr::summarise(dplyr::group_by(results$hotspots,
+                                               memberships),
+                               t_diff = len_of_fire(obstime,
+                                                    results$time_unit))
+  return(time_sum$t_diff)
+}
+
+dist_of_fire <- function(lon, lat, ilon, ilat){
+
+}
 
 
 #' @export
 summary.hotspotcluster <- function(results, ...){
-  cat(paste0("Number of clusters: ", max(results$hotspots$memberships), "\n"))
-}
 
+  noise_prop <- mean(results$hotspots$noise) * 100
+  results$hotspots <- dplyr::filter(results$hotspots, !noise)
+
+  cat("Clusters:\n")
+
+  cat(paste("    total   ",
+            max(results$hotspots$memberships),
+            "\n"))
+
+  cat(paste("    ave obs ",
+            format(mean(dplyr::count(results$hotspots,
+                                     memberships)$n),
+                   digits = 3),
+            "\n"))
+
+  t_diff <- fire_time_summary(results, time_unit)
+
+  cat(paste("    ave time",
+            format(mean(t_diff),
+                   digits = 3),
+            results$time_unit,
+            "\n"))
+
+
+  cat("Noises:\n")
+
+  cat(paste("    prop    ",
+            format(noise_prop,
+                   digits = 3),
+            "   %\n"))
+
+}
 
 
 
@@ -99,12 +146,14 @@ summary.hotspotcluster <- function(results, ...){
 #'
 #' \code{plot} method for class "\code{hotspotcluster}"
 #'
-#' @param results a \code{hotspotcluster} object, result of \code{\link{hotspot_cluster}}.
-#' @param draw_ignitions logical; whether or not to plot the ignitions.
-#' @param draw_hotspots logical; whether or not to plot the hotspots.
-#' @param bottom a \code{ggplot} object (optional). plot onto this object.
+#' @param results an object of class "\code{hotspotcluster}",
+#' a result of a call to \code{\link{hotspot_cluster}}.
+#' @param draw_ignitions logical; if \code{TRUE}, plot the ignition points.
+#' @param draw_hotspots logical; if \code{TRUE}, plot the hotspots.
+#' @param bottom an object of class "\code{ggplot}"", optional; if \code{TRUE},
+#' plot onto this object.
 #' @param ... further arguments will be omitted.
-#' @return a \code{ggplot} object.
+#' @return an object of class "\code{ggplot}",
 #' @examples
 #' results <- hotspot_cluster(hotspots5000,
 #'                            lon = "lon",
@@ -120,35 +169,61 @@ summary.hotspotcluster <- function(results, ...){
 plot.hotspotcluster <- function(results,
                                 draw_ignitions = TRUE,
                                 draw_hotspots = TRUE,
+                                draw_noises = TRUE,
                                 bottom = NULL,
                                 ...){
 
   # safe check
-  check_type_bundle("logical", ignition, hotspot)
+  check_type_bundle("logical", draw_ignitions, draw_hotspots, draw_noises)
+
 
   # whether or not to draw on an existing plot
-  if (ggplot2::is.ggplot(bottom)) {
+  if (ggplot2::is.ggplot(bottom)){
     p <- bottom
   } else {
     p <- ggplot2::ggplot() + ggplot2::theme_bw()
   }
 
   # draw hotspots
-  if (hotspot) {
-    p <- p + ggplot2::geom_point(data = results$hotspots,
-                                 ggplot2::aes(lon, lat), alpha = 0.6)
+  if (draw_hotspots){
+
+    p <- p + ggplot2::geom_point(data = dplyr::filter(results$hotspots,
+                                                      !noise),
+                                 ggplot2::aes(lon,
+                                              lat),
+                                 alpha = 0.6)
+
+  }
+
+  # draw noises
+  if (draw_noises){
+
+    p <- p + ggplot2::geom_point(data = dplyr::filter(results$hotspots,
+                                                      noise),
+                                 ggplot2::aes(lon,
+                                              lat,
+                                              col = "noise"),
+                                 alpha = 0.3)
+
   }
 
   # draw ignitions
-  if (ignition) {
+  if (draw_ignitions){
     p <- p +
       ggplot2::geom_point(data = results$ignitions,
                                  ggplot2::aes(ignition_lon,
                                               ignition_lat,
-                                              col = "ignition")) +
-    ggplot2::scale_color_manual(values = "red") +
-    ggplot2::labs(col = "", x = "lon", y = "lat")
+                                              col = "ignition"))
   }
+
+  # define colours
+  draw_cols <- c("red", "blue")[c(draw_ignitions, draw_noises)]
+  if (length(draw_cols) > 0){
+    p <- p + ggplot2::scale_color_manual(values = draw_cols)
+  }
+
+  # define labs
+  p <- p + ggplot2::labs(col = "", x = "lon", y = "lat")
 
   # return the plot
   return(p)

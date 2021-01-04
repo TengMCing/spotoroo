@@ -97,7 +97,7 @@ The memberships of the first 10 hotspots.
 results$hotspots[1:10,]
 ```
 
-```{r echo = FALSE, warning=FALSE, message=FALSE, error=FALSE, out.width = "70%", out.height="70%"}
+```{r echo = TRUE, warning=FALSE, message=FALSE, error=FALSE, out.width = "70%", out.height="70%"}
 ggplot(results$ignitions) +
   geom_sf(data = vic_map) +
   geom_point(aes(ignition_lon, ignition_lat), alpha = 0.5) +

@@ -7,18 +7,20 @@
 \method{plot}{hotspotcluster}(results, draw_ignitions = TRUE, draw_hotspots = TRUE, bottom = NULL, ...)
 }
 \arguments{
-\item{results}{a \code{hotspotcluster} object, result of \code{\link{hotspot_cluster}}.}
+\item{results}{an object of class "\code{hotspotcluster}",
+a result of a call to \code{\link{hotspot_cluster}}.}
 
-\item{draw_ignitions}{logical; whether or not to plot the ignitions.}
+\item{draw_ignitions}{logical; if \code{TRUE}, plot the ignition points.}
 
-\item{draw_hotspots}{logical; whether or not to plot the hotspots.}
+\item{draw_hotspots}{logical; if \code{TRUE}, plot the hotspots.}
 
-\item{bottom}{a \code{ggplot} object (optional). plot onto this object.}
+\item{bottom}{an object of class "\code{ggplot}"", optional; if \code{TRUE},
+plot onto this object.}
 
 \item{...}{further arguments will be omitted.}
 }
 \value{
-a \code{ggplot} object.
+an object of class "\code{ggplot}",
 }
 \description{
 \code{plot} method for class "\code{hotspotcluster}"
