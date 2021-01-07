@@ -1,20 +1,20 @@
-transform_time_id <- function(time_id, time_unit, timestep){
+transform_timeID <- function(timeID, timeUnit, timeStep){
 
-  if (time_unit == "numeric") {
-    if (!is.numeric(time_id)) stop("Require numeric time_id")
-    min_time <- min(time_id)
-    time_id <- time_id - min_time
-    time_id <- time_id %/% timestep
-    time_id <- as.integer(time_id) + 1L
+  if (timeUnit == "numeric") {
+    if (!is.numeric(timeID)) stop("Require numeric timeID")
+    min_time <- min(timeID)
+    timeID <- timeID - min_time
+    timeID <- timeID %/% timeStep
+    timeID <- as.integer(timeID) + 1L
   } else {
 
-    time_id <- difftime(time_id, min(time_id), units = time_unit) / timestep
-    time_id <- as.integer(round(as.numeric(time_id))) + 1L
+    timeID <- difftime(timeID, min(timeID), units = timeUnit) / timeStep
+    timeID <- as.integer(round(as.numeric(timeID))) + 1L
   }
 
-  cat("Transform time_id \u2713 \n")
+  cat("Transform timeID \u2713 \n")
 
-  time_id
+  timeID
 }
 
 

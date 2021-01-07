@@ -1,4 +1,4 @@
-local_clustering <- function(lon, lat, AdjDist){
+local_clustering <- function(lon, lat, adjDist){
 
   if (length(lon) == 1) return(c(1))
 
@@ -13,7 +13,7 @@ local_clustering <- function(lon, lat, AdjDist){
 
     while (TRUE) {
 
-      nearby_hospots <- nearby_hotspots(hotspots_list, pointer, lon, lat, AdjDist)
+      nearby_hospots <- nearby_hotspots(hotspots_list, pointer, lon, lat, adjDist)
       if (!is.null(nearby_hospots)) hotspots_list <- c(hotspots_list, nearby_hospots)
 
       if (pointer_pos < length(hotspots_list)) {

@@ -2,32 +2,32 @@
 hotspot_cluster <- function(hotspots,
                             lon = "lon",
                             lat = "lat",
-                            obstime = "obstime",
-                            ActiveTime = 24,
-                            AdjDist = 3000,
-                            MinPts = 4,
-                            ignition_center = "mean",
-                            time_unit = NULL,
-                            timestep = NULL){
+                            obsTime = "obsTime",
+                            activeTime = 24,
+                            adjDist = 3000,
+                            minPts = 4,
+                            ignitionCenter = "mean",
+                            timeUnit = NULL,
+                            timeStep = NULL){
 
   # safe checks
   check_type("list", hotspots)
-  check_type_bundle("character", lon, lat, obstime)
-  check_in(c("mean", "median"), ignition_center)
-  is_non_negative(ActiveTime)
-  is_positive(AdjDist)
+  check_type_bundle("character", lon, lat, obsTime)
+  check_in(c("mean", "median"), ignitionCenter)
+  is_non_negative(activeTime)
+  is_positive(adjDist)
 
   # access cols
   lon <- hotspots[[lon]]
   lat <- hotspots[[lat]]
-  obstime <- hotspots[[obstime]]
+  obsTime <- hotspots[[obsTime]]
 
   # more safe checks and handle time col
-  time_id <- handle_hotspots_cols(lon,
-                                  lat,
-                                  obstime,
-                                  time_unit,
-                                  timestep)
+  timeID <- handle_hotspots_cols(lon,
+                                 lat,
+                                 obsTime,
+                                 timeUnit,
+                                 timeStep)
 
   # start timing
   start_time <- Sys.time()
@@ -35,19 +35,31 @@ hotspot_cluster <- function(hotspots,
   # obtain memberships
   global_memberships <- global_clustering(lon,
                                           lat,
-                                          time_id,
-                                          ActiveTime,
-                                          AdjDist,
-                                          ignition_center)
-
+                                          timeID,
+                                          activeTime,
+                                          adjDist)
   # handle noises
-  results <- handle_noises(lon,
-                           lat,
-                           obstime,
-                           ignition_center,
-                           global_memberships,
-                           time_unit,
-                           MinPts)
+  global_memberships <- handle_noises(global_memberships, minPts)
+
+  # get ignition points
+  ignitions <- list()
+  if (!all_noises(global_memberships)){
+    ignitions <- ignition_points(lon,
+                                 lat,
+                                 obsTime,
+                                 global_memberships,
+                                 ignitionCenter)
+  }
+
+  # bind results
+  results <- list(hotspots = data.frame(lon,
+                                        lat,
+                                        obsTime,
+                                        memberships = global_memberships,
+                                        noise = global_memberships == -1),
+                  ignitions = ignitions,
+                  timeUnit = timeUnit)
+
 
   # stop timing
   end_time <- Sys.time()
@@ -81,19 +93,19 @@ hotspot_cluster <- function(hotspots,
 # time, distance, coverage
 # CLI
 
-len_of_fire <- function(obstime, time_unit){
+len_of_fire <- function(obsTime, timeUnit){
 
-  return(as.numeric(difftime(max(obstime),
-                             min(obstime),
-                             units = time_unit)))
+  return(as.numeric(difftime(max(obsTime),
+                             min(obsTime),
+                             units = timeUnit)))
 }
 
-fire_time_summary <- function(results, time_unit){
+fire_time_summary <- function(results, timeUnit){
 
   time_sum <- dplyr::summarise(dplyr::group_by(results$hotspots,
                                                memberships),
-                               t_diff = len_of_fire(obstime,
-                                                    results$time_unit))
+                               t_diff = len_of_fire(obsTime,
+                                                    results$timeUnit))
   return(time_sum$t_diff)
 }
 
@@ -120,12 +132,12 @@ summary.hotspotcluster <- function(results, ...){
                    digits = 3),
             "\n"))
 
-  t_diff <- fire_time_summary(results, time_unit)
+  t_diff <- fire_time_summary(results, timeUnit)
 
   cat(paste("    ave time",
             format(mean(t_diff),
                    digits = 3),
-            results$time_unit,
+            results$timeUnit,
             "\n"))
 
 
@@ -148,8 +160,8 @@ summary.hotspotcluster <- function(results, ...){
 #'
 #' @param results an object of class "\code{hotspotcluster}",
 #' a result of a call to \code{\link{hotspot_cluster}}.
-#' @param draw_ignitions logical; if \code{TRUE}, plot the ignition points.
-#' @param draw_hotspots logical; if \code{TRUE}, plot the hotspots.
+#' @param drawIgnitions logical; if \code{TRUE}, plot the ignition points.
+#' @param drawHotspots logical; if \code{TRUE}, plot the hotspots.
 #' @param bottom an object of class "\code{ggplot}"", optional; if \code{TRUE},
 #' plot onto this object.
 #' @param ... further arguments will be omitted.
@@ -158,23 +170,23 @@ summary.hotspotcluster <- function(results, ...){
 #' results <- hotspot_cluster(hotspots5000,
 #'                            lon = "lon",
 #'                            lat = "lat",
-#'                            obstime = "obstime",
-#'                            ActiveTime = 24,
-#'                            AdjDist = 3000,
-#'                            ignition_center = "mean",
-#'                            time_unit = "hours",
-#'                            timestep = 1)
+#'                            obsTime = "obsTime",
+#'                            activeTime = 24,
+#'                            adjDist = 3000,
+#'                            ignitionCenter = "mean",
+#'                            timeUnit = "hours",
+#'                            timeStep = 1)
 #' plot(results)
 #' @export
 plot.hotspotcluster <- function(results,
-                                draw_ignitions = TRUE,
-                                draw_hotspots = TRUE,
-                                draw_noises = TRUE,
+                                drawIgnitions = TRUE,
+                                drawHotspots = TRUE,
+                                drawNoises = TRUE,
                                 bottom = NULL,
                                 ...){
 
   # safe check
-  check_type_bundle("logical", draw_ignitions, draw_hotspots, draw_noises)
+  check_type_bundle("logical", drawIgnitions, drawHotspots, drawNoises)
 
 
   # whether or not to draw on an existing plot
@@ -185,7 +197,7 @@ plot.hotspotcluster <- function(results,
   }
 
   # draw hotspots
-  if (draw_hotspots){
+  if (drawHotspots){
 
     p <- p + ggplot2::geom_point(data = dplyr::filter(results$hotspots,
                                                       !noise),
@@ -196,7 +208,7 @@ plot.hotspotcluster <- function(results,
   }
 
   # draw noises
-  if (draw_noises){
+  if (drawNoises){
 
     p <- p + ggplot2::geom_point(data = dplyr::filter(results$hotspots,
                                                       noise),
@@ -208,7 +220,7 @@ plot.hotspotcluster <- function(results,
   }
 
   # draw ignitions
-  if (draw_ignitions){
+  if (drawIgnitions){
     p <- p +
       ggplot2::geom_point(data = results$ignitions,
                                  ggplot2::aes(ignition_lon,
@@ -217,7 +229,7 @@ plot.hotspotcluster <- function(results,
   }
 
   # define colours
-  draw_cols <- c("red", "blue")[c(draw_ignitions, draw_noises)]
+  draw_cols <- c("red", "blue")[c(drawIgnitions, drawNoises)]
   if (length(draw_cols) > 0){
     p <- p + ggplot2::scale_color_manual(values = draw_cols)
   }

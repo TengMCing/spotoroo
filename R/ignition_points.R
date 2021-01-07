@@ -1,15 +1,15 @@
-ignition_points <- function(lon, lat, obstime, memberships, ignition_center = "mean"){
+ignition_points <- function(lon, lat, obsTime, memberships, ignitionCenter = "mean"){
 
   ignition_lon <- rep(0, max(memberships))
   ignition_lat <- rep(0, max(memberships))
-  ignition_obstime <- rep(obstime[1], max(memberships))
+  ignition_obsTime <- rep(obsTime[1], max(memberships))
 
   for (i in 1:max(memberships)){
 
-    earliest_time <- min(obstime[memberships == i])
-    ignition_obstime[i] <- earliest_time
-    indexes <- (obstime == earliest_time) & (memberships == i)
-    if (ignition_center == "mean") {
+    earliest_time <- min(obsTime[memberships == i])
+    ignition_obsTime[i] <- earliest_time
+    indexes <- (obsTime == earliest_time) & (memberships == i)
+    if (ignitionCenter == "mean") {
       ignition_lon[i] <- mean(lon[indexes])
       ignition_lat[i] <- mean(lat[indexes])
     } else {
@@ -23,5 +23,5 @@ ignition_points <- function(lon, lat, obstime, memberships, ignition_center = "m
 
   data.frame(ignition_lon = ignition_lon,
              ignition_lat = ignition_lat,
-             ignition_obstime = ignition_obstime)
+             ignition_obsTime = ignition_obsTime)
 }

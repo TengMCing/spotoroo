@@ -1,21 +1,21 @@
 #' Define the interval for the current timestamp
 #'
 #' Define the interval for the current timestamp.
-#' The interval is defined as \deqn{[max(1, t - ActiveTime),t]}
+#' The interval is defined as \deqn{[max(1, t - activeTime),t]}
 #'
-#' @param time_id The time indexes which is an integer vector.
+#' @param timeID The time indexes which is an integer vector.
 #' @param t The current timestamp which is an integer number
-#' @param ActiveTime The
+#' @param activeTime The
 #' @return The indexes of the time index which is in the defined interval. An integer vector.
 #' @examples
-#' time_id <- c(4, 4, 5, 9, 12, 22)
-#' define_interval(time_id, t = 30, ActiveTime = 24)
+#' timeID <- c(4, 4, 5, 9, 12, 22)
+#' define_interval(timeID, t = 30, activeTime = 24)
 #' # 4 5 6
 #' @noRd
-define_interval <- function(time_id, t, ActiveTime){
-  left <- max(1, t - ActiveTime)
+define_interval <- function(timeID, t, activeTime){
+  left <- max(1, t - activeTime)
   right <- t
-  indexes <- (time_id >= left) & (time_id <= right)
+  indexes <- (timeID >= left) & (timeID <= right)
   if (sum(indexes) == 0) return(NULL)
   which(indexes)
 }

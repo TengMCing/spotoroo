@@ -48,14 +48,14 @@ library(hotspotcluster)
 ```
 
 
-The built-in dataset `hotspots5000`.
+The built-in dataset `hotspots500`.
 
 ```{r}
-str(hotspots5000)
+str(hotspots500)
 ```
 
 ```{r}
-hotspots5000[1:10,]
+hotspots500[1:10,]
 ```
 
 ```{r echo = TRUE, warning=FALSE, message=FALSE, error=FALSE, out.width = "70%", out.height="70%"}
@@ -63,7 +63,7 @@ library(tidyverse)
 library(rnaturalearth)
 au_map <- ne_states(country = "Australia", returnclass = "sf")
 vic_map <- au_map[7,]
-ggplot(hotspots5000) +
+ggplot(hotspots500) +
   geom_sf(data = vic_map) +
   geom_point(aes(lon, lat), alpha = 0.3) +
   ggthemes::theme_map() +
@@ -74,15 +74,16 @@ ggplot(hotspots5000) +
 Perform spatiotemporal clustering on this dataset.
 
 ```{r example}
-results <- hotspot_cluster(hotspots5000, 
+results <- hotspot_cluster(hotspots500, 
                            lon = "lon", 
                            lat = "lat", 
-                           obstime = "obstime",
-                           ActiveTime = 24,
-                           AdjDist = 3000,
-                           ignition_center = "mean",
-                           time_unit = "hours",
-                           timestep = 1)
+                           obsTime = "obsTime",
+                           activeTime = 24,
+                           adjDist = 3000,
+                           minPts = 4,
+                           ignitionCenter = "mean",
+                           timeUnit = "hours",
+                           timeStep = 1)
 ```
 
 The ignition points of the first 10 bushfires.
@@ -117,6 +118,10 @@ Plot of the result.
 p <- ggplot() +
   geom_sf(data = vic_map) +
   ggthemes::theme_map()
-plot(results, ignition = TRUE, bottom = p)
+plot(results, 
+     draw_hotspots = TRUE, 
+     draw_noises = TRUE, 
+     draw_ignitions = TRUE, 
+     bottom = p)
 ```
 

@@ -92,16 +92,19 @@ check_numeric_column_bundle <- function(...){
   }
 }
 
-check_integer_time_id <- function(time_id){
-  if (!(length(time_id)>0 & is.integer(time_id))) {
-    s1 <- "Internal variable time_id is not an integer vector. "
+check_integer_timeID <- function(timeID){
+  if (!(length(timeID)>0 & is.integer(timeID))) {
+    s1 <- "Internal variable timeID is not an integer vector. "
     s2 <- "A proper transformation for the time column is needed. "
     s3 <- "Consider to provide proper values to formal arguments "
-    s4 <- "`time_unit` and `timestep` to perform the transformation"
+    s4 <- "`timeUnit` and `timeStep` to perform the transformation"
     stop(paste0(s1, s2, s3, s4))
   }
 }
 
+all_noises <- function(global_membersihips){
+  all(global_membersihips == -1)
+}
 
 
 

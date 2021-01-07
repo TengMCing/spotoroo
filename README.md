@@ -35,20 +35,20 @@ This is a basic example which shows you how to solve a common problem:
 library(hotspotcluster)
 ```
 
-The built-in dataset `hotspots5000`.
+The built-in dataset `hotspots500`.
 
 ``` r
-str(hotspots5000)
-#> 'data.frame':    5000 obs. of  4 variables:
+str(hotspots500)
+#> 'data.frame':    500 obs. of  4 variables:
 #>  $ id     : int  1 2 3 4 5 6 7 8 9 10 ...
 #>  $ lon    : num  141 141 141 141 141 ...
 #>  $ lat    : num  -37.1 -37.1 -37.1 -37.1 -37.1 ...
-#>  $ obstime: POSIXct, format: "2019-10-01 03:20:00" "2019-10-01 03:20:00" ...
+#>  $ obsTime: POSIXct, format: "2019-10-01 03:20:00" "2019-10-01 03:20:00" ...
 ```
 
 ``` r
-hotspots5000[1:10,]
-#>    id    lon    lat             obstime
+hotspots500[1:10,]
+#>    id    lon    lat             obsTime
 #> 1   1 141.12 -37.10 2019-10-01 03:20:00
 #> 2   2 141.14 -37.10 2019-10-01 03:20:00
 #> 3   3 141.12 -37.12 2019-10-01 03:20:00
@@ -66,7 +66,7 @@ library(tidyverse)
 library(rnaturalearth)
 au_map <- ne_states(country = "Australia", returnclass = "sf")
 vic_map <- au_map[7,]
-ggplot(hotspots5000) +
+ggplot(hotspots500) +
   geom_sf(data = vic_map) +
   geom_point(aes(lon, lat), alpha = 0.3) +
   ggthemes::theme_map() +
@@ -78,26 +78,27 @@ ggplot(hotspots5000) +
 Perform spatiotemporal clustering on this dataset.
 
 ``` r
-results <- hotspot_cluster(hotspots5000, 
+results <- hotspot_cluster(hotspots500, 
                            lon = "lon", 
                            lat = "lat", 
-                           obstime = "obstime",
-                           ActiveTime = 24,
-                           AdjDist = 3000,
-                           ignition_center = "mean",
-                           time_unit = "hours",
-                           timestep = 1)
-#> Transform time_id <U+2713> 
+                           obsTime = "obsTime",
+                           activeTime = 24,
+                           adjDist = 3000,
+                           minPts = 4,
+                           ignitionCenter = "mean",
+                           timeUnit = "hours",
+                           timeStep = 1)
+#> Transform timeID <U+2713> 
 #> Clustering <U+2713> 
 #> Compute ignition points <U+2713> 
-#> Time taken: 0 mins 34 secs for 5000 obs (0.007 secs/obs)
+#> Time taken: 0 mins 1 secs for 500 obs (0.002 secs/obs)
 ```
 
 The ignition points of the first 10 bushfires.
 
 ``` r
 results$ignitions[1:10,]
-#>    ignition_lon ignition_lat    ignition_obstime
+#>    ignition_lon ignition_lat    ignition_obsTime
 #> 1       141.136    -37.13000 2019-10-01 03:20:00
 #> 2       141.300    -37.65000 2019-10-01 04:30:00
 #> 3       141.480    -37.34000 2019-10-02 03:00:00
@@ -114,7 +115,7 @@ The memberships of the first 10 hotspots.
 
 ``` r
 results$hotspots[1:10,]
-#>       lon    lat             obstime memberships noise
+#>       lon    lat             obsTime memberships noise
 #> 1  141.12 -37.10 2019-10-01 03:20:00           1 FALSE
 #> 2  141.14 -37.10 2019-10-01 03:20:00           1 FALSE
 #> 3  141.12 -37.12 2019-10-01 03:20:00           1 FALSE
@@ -142,11 +143,11 @@ Summary of the clustering result.
 ``` r
 summary(results)
 #> Clusters:
-#>     total    110 
-#>     ave obs  43.6 
-#>     ave time 16.3 hours 
+#>     total    33 
+#>     ave obs  13.6 
+#>     ave time 2.12 hours 
 #> Noises:
-#>     prop     4    %
+#>     prop     10    %
 ```
 
 Plot of the result.
@@ -155,7 +156,11 @@ Plot of the result.
 p <- ggplot() +
   geom_sf(data = vic_map) +
   ggthemes::theme_map()
-plot(results, ignition = TRUE, bottom = p)
+plot(results, 
+     draw_hotspots = TRUE, 
+     draw_noises = TRUE, 
+     draw_ignitions = TRUE, 
+     bottom = p)
 ```
 
 <img src="man/figures/README-unnamed-chunk-11-1.png" width="70%" height="70%" />

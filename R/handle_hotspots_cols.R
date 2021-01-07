@@ -1,22 +1,22 @@
-handle_hotspots_cols <- function(lon, lat, obstime, time_unit, timestep){
+handle_hotspots_cols <- function(lon, lat, obsTime, timeUnit, timeStep){
 
-  time_id <- obstime
+  timeID <- obsTime
 
-  is_null_bundle(lon, lat, obstime)
-  any_null_warning(time_unit, timestep)
+  is_null_bundle(lon, lat, obsTime)
+  any_null_warning(timeUnit, timeStep)
 
-  if (!all_null_bool(time_unit, timestep)) {
-    check_type("character", time_unit)
-    check_type("numeric", timestep)
-    is_positive(timestep)
-    check_in(c("secs", "mins", "hours", "days", "numeric"), time_unit)
-    time_id <- transform_time_id(obstime, time_unit, timestep)
+  if (!all_null_bool(timeUnit, timeStep)) {
+    check_type("character", timeUnit)
+    check_type("numeric", timeStep)
+    is_positive(timeStep)
+    check_in(c("secs", "mins", "hours", "days", "numeric"), timeUnit)
+    timeID <- transform_timeID(obsTime, timeUnit, timeStep)
   }
 
-  equal_length(lon, lat, obstime)
+  equal_length(lon, lat, obsTime)
   check_numeric_column_bundle(lon, lat)
-  check_integer_time_id(time_id)
+  check_integer_timeID(timeID)
 
-  return(time_id)
+  return(timeID)
 
 }
