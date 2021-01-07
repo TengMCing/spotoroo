@@ -4,15 +4,22 @@
 \alias{plot.hotspotcluster}
 \title{Plotting spatiotemporal clustering results}
 \usage{
-\method{plot}{hotspotcluster}(results, draw_ignitions = TRUE, draw_hotspots = TRUE, bottom = NULL, ...)
+\method{plot}{hotspotcluster}(
+  results,
+  drawIgnitions = TRUE,
+  drawHotspots = TRUE,
+  drawNoises = TRUE,
+  bottom = NULL,
+  ...
+)
 }
 \arguments{
 \item{results}{an object of class "\code{hotspotcluster}",
 a result of a call to \code{\link{hotspot_cluster}}.}
 
-\item{draw_ignitions}{logical; if \code{TRUE}, plot the ignition points.}
+\item{drawIgnitions}{logical; if \code{TRUE}, plot the ignition points.}
 
-\item{draw_hotspots}{logical; if \code{TRUE}, plot the hotspots.}
+\item{drawHotspots}{logical; if \code{TRUE}, plot the hotspots.}
 
 \item{bottom}{an object of class "\code{ggplot}"", optional; if \code{TRUE},
 plot onto this object.}
@@ -29,11 +36,11 @@ an object of class "\code{ggplot}",
 results <- hotspot_cluster(hotspots5000,
                            lon = "lon",
                            lat = "lat",
-                           obstime = "obstime",
-                           ActiveTime = 24,
-                           AdjDist = 3000,
-                           ignition_center = "mean",
-                           time_unit = "hours",
-                           timestep = 1)
+                           obsTime = "obsTime",
+                           activeTime = 24,
+                           adjDist = 3000,
+                           ignitionCenter = "mean",
+                           timeUnit = "hours",
+                           timeStep = 1)
 plot(results)
 }

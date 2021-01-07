@@ -1,3 +1,16 @@
+#' Handle columns of the main dataset
+#'
+#' Handle columns of the main dataset. Check relevant columns and transform
+#' time column.
+#'
+#' @param lon numeric; a vector of longitude value.
+#' @param lat numeric; a vector of latitude value.
+#' @param obsTime numeric; a vector of observed time.
+#' @param timeUnit character; one of "s" (seconds), "m" (minutes), "h" (hours),
+#'                 "d" (days) and "n" (numeric).
+#' @param timeStep numeric; how many units of timeUnit as a time step.
+#' @return integer; a vector of time indexes.
+#' @noRd
 handle_noises <- function(global_memberships, minPts) {
 
   # count every membership
