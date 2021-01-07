@@ -1,12 +1,14 @@
-global_clustering <- function(lon, lat, timeID, activeTime, adjDist){
+global_clustering <- function(lon, lat, timeID, activeTime, adjDist) {
 
   global_memberships <- rep(0, length(lon))
 
-  pb <- progress::progress_bar$new(format = "Clustering [:bar] :current/:total (:percent) eta: :eta",
+  barstr <- "Clustering [:bar] :current/:total (:percent) eta: :eta"
+
+  pb <- progress::progress_bar$new(format = barstr,
                                    total = max(timeID))
   pb$tick(0)
 
-  for (t in 1:max(timeID)){
+  for (t in 1:max(timeID)) {
 
     pb$tick(1)
 

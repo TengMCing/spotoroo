@@ -1,4 +1,4 @@
-nearby_hotspots <- function(hotspot_list, pointer, lon, lat, adjDist){
+nearby_hotspots <- function(hotspot_list, pointer, lon, lat, adjDist) {
 
   if (length(lon) == 1) return(NULL)
 

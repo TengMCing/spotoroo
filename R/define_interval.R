@@ -12,7 +12,7 @@
 #' define_interval(timeID, t = 30, activeTime = 24)
 #' # 4 5 6
 #' @noRd
-define_interval <- function(timeID, t, activeTime){
+define_interval <- function(timeID, t, activeTime) {
   left <- max(1, t - activeTime)
   right <- t
   indexes <- (timeID >= left) & (timeID <= right)

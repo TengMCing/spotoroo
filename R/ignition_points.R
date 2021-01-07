@@ -1,10 +1,10 @@
-ignition_points <- function(lon, lat, obsTime, memberships, ignitionCenter = "mean"){
+ignition_points <- function(lon, lat, obsTime, memberships, ignitionCenter = "mean") {
 
   ignition_lon <- rep(0, max(memberships))
   ignition_lat <- rep(0, max(memberships))
   ignition_obsTime <- rep(obsTime[1], max(memberships))
 
-  for (i in 1:max(memberships)){
+  for (i in 1:max(memberships)) {
 
     earliest_time <- min(obsTime[memberships == i])
     ignition_obsTime[i] <- earliest_time

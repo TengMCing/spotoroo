@@ -1,4 +1,7 @@
-transform_timeID <- function(timeID, timeUnit, timeStep){
+transform_time_id <- function(timeID, timeUnit, timeStep) {
+
+  tb <- list(s = "secs", m = "mins", h = "hours", d = "days", n = "numeric")
+  timeUnit <- tb[[timeUnit]]
 
   if (timeUnit == "numeric") {
     if (!is.numeric(timeID)) stop("Require numeric timeID")

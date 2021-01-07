@@ -1,4 +1,4 @@
-update_memberships <- function(lon, lat, global_memberships, local_memberships, indexes){
+update_memberships <- function(lon, lat, global_memberships, local_memberships, indexes) {
 
   if (sum(global_memberships[indexes]) == 0) {
     global_memberships[indexes] <- adjust_memberships(local_memberships, max(global_memberships))
@@ -39,7 +39,7 @@ update_memberships <- function(lon, lat, global_memberships, local_memberships, 
 
   }
 
-  if (length(type2) != 0){
+  if (length(type2) != 0) {
     fin_memberships[type2] <- adjust_memberships(local_memberships[type2], max(global_memberships))
   }
 

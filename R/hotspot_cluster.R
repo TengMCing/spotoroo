@@ -6,11 +6,21 @@ hotspot_cluster <- function(hotspots,
                             activeTime = 24,
                             adjDist = 3000,
                             minPts = 4,
-                            ignitionCenter = "mean",
-                            timeUnit = NULL,
-                            timeStep = NULL){
+                            ignitionCenter = c("mean", "median"),
+                            timeUnit = c("s", "m", "h", "d", "n"),
+                            timeStep = NULL) {
+
+  # default values
+  if (is.atomic(ignitionCenter) & length(ignitionCenter) == 2) {
+    if (ignitionCenter == c("mean", "median")) ignitionCenter <- "mean"
+  }
+
+  if (is.atomic(timeUnit) & length(timeUnit) == 5) {
+    if (timeUnit == c("s", "m", "h", "d", "n")) timeUnit <- "h"
+  }
 
   # safe checks
+  is_length_one_bundle(lon, lat, obsTime, activeTime, adjDist, timeStep)
   check_type("list", hotspots)
   check_type_bundle("character", lon, lat, obsTime)
   check_in(c("mean", "median"), ignitionCenter)
@@ -23,27 +33,20 @@ hotspot_cluster <- function(hotspots,
   obsTime <- hotspots[[obsTime]]
 
   # more safe checks and handle time col
-  timeID <- handle_hotspots_cols(lon,
-                                 lat,
-                                 obsTime,
-                                 timeUnit,
-                                 timeStep)
+  timeID <- handle_hotspots_cols(lon, lat, obsTime, timeUnit, timeStep)
 
   # start timing
   start_time <- Sys.time()
 
   # obtain memberships
-  global_memberships <- global_clustering(lon,
-                                          lat,
-                                          timeID,
-                                          activeTime,
-                                          adjDist)
+  global_memberships <- global_clustering(lon, lat, timeID, activeTime, adjDist)
+
   # handle noises
   global_memberships <- handle_noises(global_memberships, minPts)
 
   # get ignition points
   ignitions <- list()
-  if (!all_noises(global_memberships)){
+  if (!all_noises(global_memberships)) {
     ignitions <- ignition_points(lon,
                                  lat,
                                  obsTime,
@@ -93,14 +96,14 @@ hotspot_cluster <- function(hotspots,
 # time, distance, coverage
 # CLI
 
-len_of_fire <- function(obsTime, timeUnit){
+len_of_fire <- function(obsTime, timeUnit) {
 
   return(as.numeric(difftime(max(obsTime),
                              min(obsTime),
                              units = timeUnit)))
 }
 
-fire_time_summary <- function(results, timeUnit){
+fire_time_summary <- function(results, timeUnit) {
 
   time_sum <- dplyr::summarise(dplyr::group_by(results$hotspots,
                                                memberships),
@@ -109,13 +112,13 @@ fire_time_summary <- function(results, timeUnit){
   return(time_sum$t_diff)
 }
 
-dist_of_fire <- function(lon, lat, ilon, ilat){
+dist_of_fire <- function(lon, lat, ilon, ilat) {
 
 }
 
 
 #' @export
-summary.hotspotcluster <- function(results, ...){
+summary.hotspotcluster <- function(results, ...) {
 
   noise_prop <- mean(results$hotspots$noise) * 100
   results$hotspots <- dplyr::filter(results$hotspots, !noise)
@@ -183,21 +186,21 @@ plot.hotspotcluster <- function(results,
                                 drawHotspots = TRUE,
                                 drawNoises = TRUE,
                                 bottom = NULL,
-                                ...){
+                                ...) {
 
   # safe check
   check_type_bundle("logical", drawIgnitions, drawHotspots, drawNoises)
 
 
   # whether or not to draw on an existing plot
-  if (ggplot2::is.ggplot(bottom)){
+  if (ggplot2::is.ggplot(bottom)) {
     p <- bottom
   } else {
     p <- ggplot2::ggplot() + ggplot2::theme_bw()
   }
 
   # draw hotspots
-  if (drawHotspots){
+  if (drawHotspots) {
 
     p <- p + ggplot2::geom_point(data = dplyr::filter(results$hotspots,
                                                       !noise),
@@ -208,7 +211,7 @@ plot.hotspotcluster <- function(results,
   }
 
   # draw noises
-  if (drawNoises){
+  if (drawNoises) {
 
     p <- p + ggplot2::geom_point(data = dplyr::filter(results$hotspots,
                                                       noise),
@@ -220,7 +223,7 @@ plot.hotspotcluster <- function(results,
   }
 
   # draw ignitions
-  if (drawIgnitions){
+  if (drawIgnitions) {
     p <- p +
       ggplot2::geom_point(data = results$ignitions,
                                  ggplot2::aes(ignition_lon,
@@ -230,7 +233,7 @@ plot.hotspotcluster <- function(results,
 
   # define colours
   draw_cols <- c("red", "blue")[c(drawIgnitions, drawNoises)]
-  if (length(draw_cols) > 0){
+  if (length(draw_cols) > 0) {
     p <- p + ggplot2::scale_color_manual(values = draw_cols)
   }
 

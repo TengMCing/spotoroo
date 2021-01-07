@@ -1,4 +1,4 @@
-handle_noises <- function(global_memberships, minPts){
+handle_noises <- function(global_memberships, minPts) {
 
   # count every membership
   membership_count <- dplyr::count(data.frame(id = 1:length(global_memberships),
@@ -11,7 +11,7 @@ handle_noises <- function(global_memberships, minPts){
   indexes <- global_memberships %in% noise_clusters
   global_memberships[indexes] <- -1
 
-  if (all_noises(global_memberships)){
+  if (all_noises(global_memberships)) {
     warning("All observations are noises!!!")
   } else {
     global_memberships[!indexes] <- adjust_memberships(global_memberships[!indexes], 0)

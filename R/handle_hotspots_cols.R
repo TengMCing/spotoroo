@@ -1,4 +1,4 @@
-handle_hotspots_cols <- function(lon, lat, obsTime, timeUnit, timeStep){
+handle_hotspots_cols <- function(lon, lat, obsTime, timeUnit, timeStep) {
 
   timeID <- obsTime
 
@@ -9,8 +9,8 @@ handle_hotspots_cols <- function(lon, lat, obsTime, timeUnit, timeStep){
     check_type("character", timeUnit)
     check_type("numeric", timeStep)
     is_positive(timeStep)
-    check_in(c("secs", "mins", "hours", "days", "numeric"), timeUnit)
-    timeID <- transform_timeID(obsTime, timeUnit, timeStep)
+    check_in(c("s", "m", "h", "d", "n"), timeUnit)
+    timeID <- transform_time_id(obsTime, timeUnit, timeStep)
   }
 
   equal_length(lon, lat, obsTime)

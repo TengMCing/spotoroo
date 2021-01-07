@@ -86,10 +86,11 @@ results <- hotspot_cluster(hotspots500,
                            adjDist = 3000,
                            minPts = 4,
                            ignitionCenter = "mean",
-                           timeUnit = "hours",
+                           timeUnit = "h",
                            timeStep = 1)
 #> Transform timeID <U+2713> 
 #> Clustering <U+2713> 
+#> Handel noises <U+2713> 
 #> Compute ignition points <U+2713> 
 #> Time taken: 0 mins 1 secs for 500 obs (0.002 secs/obs)
 ```
@@ -145,7 +146,7 @@ summary(results)
 #> Clusters:
 #>     total    33 
 #>     ave obs  13.6 
-#>     ave time 2.12 hours 
+#>     ave time 2.12 h 
 #> Noises:
 #>     prop     10    %
 ```
@@ -157,9 +158,9 @@ p <- ggplot() +
   geom_sf(data = vic_map) +
   ggthemes::theme_map()
 plot(results, 
-     draw_hotspots = TRUE, 
-     draw_noises = TRUE, 
-     draw_ignitions = TRUE, 
+     drawHotspots = TRUE, 
+     drawNoises = TRUE, 
+     drawIgnitions = TRUE, 
      bottom = p)
 ```
 

@@ -1,4 +1,4 @@
-local_clustering <- function(lon, lat, adjDist){
+local_clustering <- function(lon, lat, adjDist) {
 
   if (length(lon) == 1) return(c(1))
 
@@ -9,7 +9,7 @@ local_clustering <- function(lon, lat, adjDist){
   memberships <- NULL
   label <- NULL
 
-  while (TRUE){
+  while (TRUE) {
 
     while (TRUE) {
 
