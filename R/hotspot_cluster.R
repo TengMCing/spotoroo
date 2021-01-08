@@ -83,7 +83,7 @@ hotspot_cluster <- function(hotspots,
              " secs/obs)\n"))
 
   # set result class
-  class(results) <- "hotspotcluster"
+  class(results) <- "spotoroo"
 
   # return result
   return(results)
@@ -118,7 +118,7 @@ dist_of_fire <- function(lon, lat, ilon, ilat) {
 
 
 #' @export
-summary.hotspotcluster <- function(results, ...) {
+summary.spotoroo <- function(results, ...) {
 
   noise_prop <- mean(results$hotspots$noise) * 100
   results$hotspots <- dplyr::filter(results$hotspots, !noise)
@@ -159,16 +159,16 @@ summary.hotspotcluster <- function(results, ...) {
 
 #' Plotting spatiotemporal clustering results
 #'
-#' \code{plot} method for class "\code{hotspotcluster}"
+#' \code{plot} method for class "\code{spotoroo}"
 #'
-#' @param results an object of class "\code{hotspotcluster}",
+#' @param results an object of class "\code{spotoroo}",
 #' a result of a call to \code{\link{hotspot_cluster}}.
 #' @param drawIgnitions logical; if \code{TRUE}, plot the ignition points.
 #' @param drawHotspots logical; if \code{TRUE}, plot the hotspots.
-#' @param bottom an object of class "\code{ggplot}"", optional; if \code{TRUE},
+#' @param bottom an object of class "\code{ggplot}", optional; if \code{TRUE},
 #' plot onto this object.
 #' @param ... further arguments will be omitted.
-#' @return an object of class "\code{ggplot}",
+#' @return an object of class "\code{ggplot}".
 #' @examples
 #' results <- hotspot_cluster(hotspots5000,
 #'                            lon = "lon",
@@ -176,17 +176,18 @@ summary.hotspotcluster <- function(results, ...) {
 #'                            obsTime = "obsTime",
 #'                            activeTime = 24,
 #'                            adjDist = 3000,
+#'                            minPts = 4,
 #'                            ignitionCenter = "mean",
-#'                            timeUnit = "hours",
+#'                            timeUnit = "h",
 #'                            timeStep = 1)
 #' plot(results)
 #' @export
-plot.hotspotcluster <- function(results,
-                                drawIgnitions = TRUE,
-                                drawHotspots = TRUE,
-                                drawNoises = TRUE,
-                                bottom = NULL,
-                                ...) {
+plot.spotoroo <- function(results,
+                          drawIgnitions = TRUE,
+                          drawHotspots = TRUE,
+                          drawNoises = TRUE,
+                          bottom = NULL,
+                          ...) {
 
   # safe check
   check_type_bundle("logical", drawIgnitions, drawHotspots, drawNoises)

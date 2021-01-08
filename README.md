@@ -1,21 +1,21 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# hotspotcluster
+# spotoroo
 
 <!-- badges: start -->
 
 <!-- badges: end -->
 
-The goal of hotspotcluster is to …
+The goal of spotoroo is to …
 
 ## Installation
 
-<!-- You can install the released version of hotspotcluster from [CRAN](https://CRAN.R-project.org) with: -->
+<!-- You can install the released version of spotoroo from [CRAN](https://CRAN.R-project.org) with: -->
 
 <!-- ``` r -->
 
-<!-- install.packages("hotspotcluster") -->
+<!-- install.packages("spotoroo") -->
 
 <!-- ``` -->
 
@@ -24,7 +24,7 @@ You can install the development version from
 
 ``` r
 install.packages("devtools")
-devtools::install_github("TengMCing/hotspotcluster")
+devtools::install_github("TengMCing/spotoroo")
 ```
 
 ## Example
@@ -32,7 +32,7 @@ devtools::install_github("TengMCing/hotspotcluster")
 This is a basic example which shows you how to solve a common problem:
 
 ``` r
-library(hotspotcluster)
+library(spotoroo)
 ```
 
 The built-in dataset `hotspots500`.

@@ -13,26 +13,26 @@ knitr::opts_chunk$set(
 )
 ```
 
-# hotspotcluster
+# spotoroo
 
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of hotspotcluster is to ...
+The goal of spotoroo is to ...
 
 ## Installation
 
-<!-- You can install the released version of hotspotcluster from [CRAN](https://CRAN.R-project.org) with: -->
+<!-- You can install the released version of spotoroo from [CRAN](https://CRAN.R-project.org) with: -->
 
 <!-- ``` r -->
-<!-- install.packages("hotspotcluster") -->
+<!-- install.packages("spotoroo") -->
 <!-- ``` -->
 
 You can install the development version from [GitHub](https://github.com/) with:
 
 ``` r
 install.packages("devtools")
-devtools::install_github("TengMCing/hotspotcluster")
+devtools::install_github("TengMCing/spotoroo")
 ```
 ## Example
 
@@ -44,7 +44,7 @@ load_all()
 ```
 
 ```{r}
-library(hotspotcluster)
+library(spotoroo)
 ```
 
 
