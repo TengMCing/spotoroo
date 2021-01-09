@@ -1,16 +1,19 @@
-#' Handle columns of the main dataset
+#' Handle noise clusters
 #'
-#' Handle columns of the main dataset. Check relevant columns and transform
-#' time column.
+#' Handle noise clusters with a given threshold (minimum number of points of
+#' a cluster). Noises will be assigned with membership label \code{-1}. Normal
+#' clusters will be assigned with adjusted membership labels.
 #'
-#' @param lon numeric; a vector of longitude value.
-#' @param lat numeric; a vector of latitude value.
-#' @param obsTime numeric; a vector of observed time.
-#' @param timeUnit character; one of "s" (seconds), "m" (minutes), "h" (hours),
-#'                 "d" (days) and "n" (numeric).
-#' @param timeStep numeric; how many units of timeUnit as a time step.
-#' @return integer; a vector of time indexes.
-#' @noRd
+#' @param global_memberships integer; a vector of membership labels.
+#' @param minPts numeric (>0); minimum number of points of a cluster.
+#' @return integer; a vector of membership labels.
+#' @examples
+#' global_memberships <- c(1,1,1,2,2,2,2,2,2,3,3,3,3,3,3)
+#'
+#' handle_noises(global_memberships, 4)
+#'
+#' # -1 -1 -1 1 1 1 1 1 1 2 2 2 2 2 2
+#' @export
 handle_noises <- function(global_memberships, minPts) {
 
   # count every membership

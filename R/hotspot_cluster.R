@@ -20,8 +20,10 @@ hotspot_cluster <- function(hotspots,
   }
 
   # safe checks
-  is_length_one_bundle(lon, lat, obsTime, activeTime, adjDist, timeStep)
+  is_length_one_bundle(lon, lat, obsTime, activeTime, adjDist, minPts, timeStep)
   check_type("list", hotspots)
+  check_type("numeric", minPts)
+  is_non_negative(minPts)
   check_type_bundle("character", lon, lat, obsTime)
   check_in(c("mean", "median"), ignitionCenter)
   is_non_negative(activeTime)

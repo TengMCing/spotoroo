@@ -1,22 +1,26 @@
-#' Clustering hotspots spatially and temporally
+#' Cluster hotspots spatially and temporally
 #'
-#' Clustering hotspots spatially and temporally.
+#' Cluster hotspots spatially and temporally.
 #'
-#' @param lon numeric; a vector of longitude value.
-#' @param lat numeric; a vector of latitude value.
-#' @param timeID integer; a vector of time indexes.
-#' @param activeTime numeric; see also \code{\link{hotspot_cluster}}.
-#' @param adjDist numeric; see also \code{\link{hotspot_cluster}}.
+#' @param lon numeric; a vector of longitude values.
+#' @param lat numeric; a vector of latitude values.
+#' @param timeID integer (>=1); a vector of time indexes.
+#' @param activeTime numeric; time tolerance.
+#'                   see also \code{\link{hotspot_cluster}}.
+#' @param adjDist numeric; distance tolerance.
+#'                see also \code{\link{hotspot_cluster}}.
 #' @return integer; a vector of membership labels.
 #' @examples
 #' lon <- c(141.1, 141.14, 141.12, 141.14, 141.16, 141.12, 141.14,
 #'           141.16, 141.12, 141.14)
 #' lat <- c(-37.10, -37.10, -37.12, -37.12, -37.12, -37.14, -37.14,
 #'          -37.14, -37.16, -37.16)
-#' timeID <- rep(1, 10)
+#' timeID <- c(rep(1, 5), rep(26, 5))
+#'
 #' global_clustering(lon, lat, timeID, 24, 3000)
-#' # 1 1 1 1 1 1 1 1 1 1
-#' @noRd
+#'
+#' # 1 1 1 1 1 2 2 2 2 2
+#' @export
 global_clustering <- function(lon, lat, timeID, activeTime, adjDist) {
 
   global_memberships <- rep(0, length(lon))

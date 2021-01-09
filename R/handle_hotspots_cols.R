@@ -1,6 +1,6 @@
-#' Handle columns of the main dataset
+#' Handle columns of the main data set
 #'
-#' Handle columns of the main dataset. Check relevant columns and transform
+#' Handle columns of the main data set. Check relevant columns and transform
 #' time column.
 #'
 #' @param lon numeric; a vector of longitude value.

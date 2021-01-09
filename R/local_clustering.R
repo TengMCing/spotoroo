@@ -1,5 +1,25 @@
+#' Cluster hotspots spatially
+#'
+#' Cluster hotspots spatially.
+#'
+#' @param lon numeric; a vector of longitude values.
+#' @param lat numeric; a vector of latitude values.
+#' @param adjDist numeric (>0); distance tolerance.
+#'                see also \code{\link{hotspot_cluster}}.
+#' @return integer; a vector of membership labels
+#' @examples
+#' lon <- c(141.1, 141.14, 141.12, 141.14, 141.16, 141.12, 141.14,
+#'           141.16, 141.12, 141.14)
+#' lat <- c(-37.10, -37.10, -37.12, -37.12, -37.12, -37.14, -37.14,
+#'          -37.14, -37.16, -37.16)
+#'
+#' local_clustering(lon, lat, 2000)
+#'
+#' # 1 2 3 3 3 4 4 4 5 5
+#' @export
 local_clustering <- function(lon, lat, adjDist) {
 
+  # only one hotspots
   if (length(lon) == 1) return(c(1))
 
   hotspots_list <- c(1)
@@ -9,10 +29,13 @@ local_clustering <- function(lon, lat, adjDist) {
   memberships <- NULL
   label <- NULL
 
+  # find all clusters
   while (TRUE) {
 
+    # find a cluster
     while (TRUE) {
 
+      # push nearby hotspots into list
       nearby_hospots <- nearby_hotspots(hotspots_list, pointer, lon, lat, adjDist)
       if (!is.null(nearby_hospots)) hotspots_list <- c(hotspots_list, nearby_hospots)
 
@@ -25,6 +48,7 @@ local_clustering <- function(lon, lat, adjDist) {
 
     }
 
+    # assign membership labels
     if (is.null(memberships)) {
       memberships <- rep(1, length(hotspots_list))
       label <- 1
@@ -45,6 +69,6 @@ local_clustering <- function(lon, lat, adjDist) {
 
   }
 
-  memberships[order(hotspots_list)]
+  return(memberships[order(hotspots_list)])
 
 }
