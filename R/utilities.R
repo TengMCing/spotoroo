@@ -66,18 +66,14 @@ any_null_warning <- function(...) {
   bool_vec <- unlist(lapply(vars, is.null))
   if (any(bool_vec)) {
     varname <- var_names[bool_vec][1]
-    warning("Formal argument `",
-            varname,
-            "` is missing, formal argument `",
-            paste0(var_names[!bool_vec], collapse = "``, `"),
-            "` is ignored")
+    cli::cli_alert_warning("Formal argument `{varname}` is missing, formal argument `{paste0(var_names[!bool_vec], collapse = '` ')}` will be ignored")
   }
 }
 
-all_null_bool <- function(...) {
+any_null_bool <- function(...) {
   vars <- list(...)
   bool_vec <- unlist(lapply(vars, is.null))
-  all(bool_vec)
+  any(bool_vec)
 }
 
 equal_length <- function(...) {

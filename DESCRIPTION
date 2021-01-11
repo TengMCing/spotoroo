@@ -19,4 +19,5 @@ Imports:
     geodist (>= 0.0.6),
     progress (>= 1.2.0),
     ggplot2 (>= 3.3.0),
-    dplyr (>= 1.0.0)
+    dplyr (>= 1.0.0),
+    cli (>= 2.2.0)

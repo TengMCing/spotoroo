@@ -42,7 +42,7 @@ transform_time_id <- function(obsTime, timeUnit, timeStep) {
     timeID <- as.integer(round(as.numeric(timeID))) + 1L
   }
 
-  cat("Transform timeID \u2713 \n")
+  cli::cli_alert_success("Transform timeID")
 
   timeID
 }

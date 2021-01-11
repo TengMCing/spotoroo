@@ -28,12 +28,12 @@ handle_noises <- function(global_memberships, minPts) {
   global_memberships[indexes] <- -1
 
   if (all_noises(global_memberships)) {
-    warning("All observations are noises!!!")
+    cli::cli_alert_warning("All observations are noises!!!")
   } else {
     global_memberships[!indexes] <- adjust_memberships(global_memberships[!indexes], 0)
   }
 
-  cat("Handel noises \u2713 \n")
+  cli::cli_alert_success("Handle noises")
 
   return(global_memberships)
 }

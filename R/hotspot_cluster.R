@@ -6,18 +6,9 @@ hotspot_cluster <- function(hotspots,
                             activeTime = 24,
                             adjDist = 3000,
                             minPts = 4,
-                            ignitionCenter = c("mean", "median"),
-                            timeUnit = c("s", "m", "h", "d", "n"),
+                            ignitionCenter = "mean",
+                            timeUnit = NULL,
                             timeStep = NULL) {
-
-  # default values
-  if (is.atomic(ignitionCenter) & length(ignitionCenter) == 2) {
-    if (ignitionCenter == c("mean", "median")) ignitionCenter <- "mean"
-  }
-
-  if (is.atomic(timeUnit) & length(timeUnit) == 5) {
-    if (timeUnit == c("s", "m", "h", "d", "n")) timeUnit <- "h"
-  }
 
   # safe checks
   is_length_one_bundle(lon, lat, obsTime, activeTime, adjDist, minPts, timeStep)
@@ -71,18 +62,13 @@ hotspot_cluster <- function(hotspots,
   time_taken <- end_time - start_time
 
   # print run time
-  cat(paste0("Time taken: ",
-             as.numeric(time_taken, units = "secs") %/% 60,
-             " mins ",
-             round(as.numeric(time_taken, units = "secs") %% 60, 0),
-             " secs for ",
-             length(lon),
-             " obs "
-             )
-      )
-  cat(paste0("(",
-             round(as.numeric(time_taken, units = "secs")/length(lon), 3),
-             " secs/obs)\n"))
+  total_secs <- as.numeric(time_taken, units = "secs")
+  taken_mins <- total_secs %/% 60
+  taken_secs <- round(total_secs %% 60, 0)
+
+  cli::cli_text(paste("Time taken: {taken_mins} min{?s} {taken_secs} sec{?s}",
+                      "for {length(lon)} obs",
+                      "({round(total_secs/length(lon), 3)} secs/obs)"))
 
   # set result class
   class(results) <- "spotoroo"

@@ -53,7 +53,7 @@ global_clustering <- function(lon, lat, timeID, activeTime, adjDist) {
                                               indexes)
   }
 
-  cat("Clustering \u2713 \n")
+  cli::cli_alert_success("Clustering")
 
   global_memberships
 

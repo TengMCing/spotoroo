@@ -19,7 +19,7 @@ handle_hotspots_cols <- function(lon, lat, obsTime, timeUnit, timeStep) {
   is_null_bundle(lon, lat, obsTime)
   any_null_warning(timeUnit, timeStep)
 
-  if (!all_null_bool(timeUnit, timeStep)) {
+  if (!any_null_bool(timeUnit, timeStep)) {
     check_type("character", timeUnit)
     check_type("numeric", timeStep)
     is_positive(timeStep)

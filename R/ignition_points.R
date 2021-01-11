@@ -58,7 +58,7 @@ ignition_points <- function(lon,
 
   }
 
-  cat("Compute ignition points \u2713 \n")
+  cli::cli_alert_success("Compute ignition points")
 
   data.frame(ignition_lon = ignition_lon,
              ignition_lat = ignition_lat,
