@@ -27,7 +27,7 @@ handle_noises <- function(global_memberships, minPts) {
   indexes <- global_memberships %in% noise_clusters
   global_memberships[indexes] <- -1
 
-  if (all_noises(global_memberships)) {
+  if (all_noises_bool(global_memberships)) {
     cli::cli_alert_warning("All observations are noises!!!")
   } else {
     global_memberships[!indexes] <- adjust_memberships(global_memberships[!indexes], 0)

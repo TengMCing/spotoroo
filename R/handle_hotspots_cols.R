@@ -16,8 +16,11 @@ handle_hotspots_cols <- function(lon, lat, obsTime, timeUnit, timeStep) {
   timeID <- obsTime
 
   # safe checks
-  is_null_bundle(lon, lat, obsTime)
-  any_null_warning(timeUnit, timeStep)
+  is_not_null_bundle(lon, lat, obsTime)
+  if (!all_null_bool(timeUnit, timeStep)){
+    any_null_warning(timeUnit, timeStep)
+  }
+
 
   if (!any_null_bool(timeUnit, timeStep)) {
     check_type("character", timeUnit)

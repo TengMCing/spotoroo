@@ -37,7 +37,7 @@ ignition_points <- function(lon,
                             lat,
                             obsTime,
                             memberships,
-                            ignitionCenter = "mean") {
+                            ignitionCenter) {
 
   ignition_lon <- rep(0, max(memberships))
   ignition_lat <- rep(0, max(memberships))

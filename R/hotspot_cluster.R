@@ -39,7 +39,7 @@ hotspot_cluster <- function(hotspots,
 
   # get ignition points
   ignitions <- list()
-  if (!all_noises(global_memberships)) {
+  if (!all_noises_bool(global_memberships)) {
     ignitions <- ignition_points(lon,
                                  lat,
                                  obsTime,
