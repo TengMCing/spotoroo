@@ -5,7 +5,7 @@
 #' clusters will be assigned with adjusted membership labels.
 #'
 #' @param global_memberships integer; a vector of membership labels.
-#' @param minPts numeric (>0); minimum number of points of a cluster.
+#' @param minPts numeric (>=0); minimum number of points of a cluster.
 #' @return integer; a vector of membership labels.
 #' @examples
 #' global_memberships <- c(1,1,1,2,2,2,2,2,2,3,3,3,3,3,3)

@@ -9,7 +9,7 @@ handle_noises(global_memberships, minPts)
 \arguments{
 \item{global_memberships}{integer; a vector of membership labels.}
 
-\item{minPts}{numeric (>0); minimum number of points of a cluster.}
+\item{minPts}{numeric (>=0); minimum number of points of a cluster.}
 }
 \value{
 integer; a vector of membership labels.

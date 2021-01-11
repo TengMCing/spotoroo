@@ -4,7 +4,7 @@
 \alias{ignition_points}
 \title{Calculate ignition points}
 \usage{
-ignition_points(lon, lat, obsTime, memberships, ignitionCenter = "mean")
+ignition_points(lon, lat, obsTime, memberships, ignitionCenter)
 }
 \arguments{
 \item{lon}{numeric; a vector of longitude values.}

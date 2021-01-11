@@ -1,3 +1,27 @@
+#' Spatiotemporal clustering of hotspots
+#'
+#' Cluster hotspots spatially and temporally.
+#'
+#' @param hotspots list/data frame; a list contains information of hotspots.
+#' @param lon character; the name of the column of the list which contains
+#'                       longitude values.
+#' @param lat character; the name of the column of the list which contains
+#'                       latitude values.
+#' @param obsTime character; the name of the column of the list which contains
+#'                       observed time.
+#' @param activeTime numeric (>=0); time tolerance.
+#' @param adjDist numeric (>0); distance tolerance.
+#' @param minPts numeric (>0); minimum number of points in a cluster.
+#' @param ignitionCenter character;
+#' @param timeUnit sldfjks
+#' @param timeStep sldfjks
+#' @return integer; a vector of membership labels.
+#' @examples
+#' global_memberships <- c(1,1,1,2,2,2,2,2,2,3,3,3,3,3,3)
+#'
+#' handle_noises(global_memberships, 4)
+#'
+#' # -1 -1 -1 1 1 1 1 1 1 2 2 2 2 2 2
 #' @export
 hotspot_cluster <- function(hotspots,
                             lon = "lon",
@@ -100,13 +124,11 @@ fire_time_summary <- function(results, timeUnit) {
   return(time_sum$t_diff)
 }
 
-dist_of_fire <- function(lon, lat, ilon, ilat) {
-
-}
-
 
 #' @export
-summary.spotoroo <- function(results, ...) {
+summary.spotoroo <- function(object, ...) {
+
+  results <- object
 
   noise_prop <- mean(results$hotspots$noise) * 100
   results$hotspots <- dplyr::filter(results$hotspots, !noise)
@@ -147,18 +169,47 @@ summary.spotoroo <- function(results, ...) {
 
 #' Plotting spatiotemporal clustering results
 #'
-#' \code{plot} method for class "\code{spotoroo}"
+#' \code{plot} method for class "\code{spotoroo}";
+#' see also \code{\link{plot_results}}.
+#'
+#' @param x an object of class "\code{spotoroo}",
+#' a result of a call to \code{\link{hotspot_cluster}}.
+#' @param \dots additional arguments pass to \code{plot_results()}
+#' @examples
+#' data("hotspots500")
+#' results <- hotspot_cluster(hotspots500,
+#'                            lon = "lon",
+#'                            lat = "lat",
+#'                            obsTime = "obsTime",
+#'                            activeTime = 24,
+#'                            adjDist = 3000,
+#'                            minPts = 4,
+#'                            ignitionCenter = "mean",
+#'                            timeUnit = "h",
+#'                            timeStep = 1)
+#'
+#' plot(results)
+#' @export
+plot.spotoroo <- function(x, ...) {
+  plot_results(x, ...)
+}
+
+
+#' Plotting spatiotemporal clustering results
+#'
+#' can be called by \code{plot.spotoroo()}.
 #'
 #' @param results an object of class "\code{spotoroo}",
 #' a result of a call to \code{\link{hotspot_cluster}}.
 #' @param drawIgnitions logical; if \code{TRUE}, plot the ignition points.
 #' @param drawHotspots logical; if \code{TRUE}, plot the hotspots.
+#' @param drawNoises sldfjks
 #' @param bottom an object of class "\code{ggplot}", optional; if \code{TRUE},
 #' plot onto this object.
-#' @param ... further arguments will be omitted.
 #' @return an object of class "\code{ggplot}".
 #' @examples
-#' results <- hotspot_cluster(hotspots5000,
+#' data("hotspots500")
+#' results <- hotspot_cluster(hotspots500,
 #'                            lon = "lon",
 #'                            lat = "lat",
 #'                            obsTime = "obsTime",
@@ -170,12 +221,12 @@ summary.spotoroo <- function(results, ...) {
 #'                            timeStep = 1)
 #' plot(results)
 #' @export
-plot.spotoroo <- function(results,
-                          drawIgnitions = TRUE,
-                          drawHotspots = TRUE,
-                          drawNoises = TRUE,
-                          bottom = NULL,
-                          ...) {
+plot_results <- function(results,
+                         drawIgnitions = TRUE,
+                         drawHotspots = TRUE,
+                         drawNoises = TRUE,
+                         bottom = NULL) {
+
 
   # safe check
   check_type_bundle("logical", drawIgnitions, drawHotspots, drawNoises)
@@ -215,9 +266,9 @@ plot.spotoroo <- function(results,
   if (drawIgnitions) {
     p <- p +
       ggplot2::geom_point(data = results$ignitions,
-                                 ggplot2::aes(ignition_lon,
-                                              ignition_lat,
-                                              col = "ignition"))
+                          ggplot2::aes(ignition_lon,
+                                       ignition_lat,
+                                       col = "ignition"))
   }
 
   # define colours
@@ -231,4 +282,5 @@ plot.spotoroo <- function(results,
 
   # return the plot
   return(p)
+
 }

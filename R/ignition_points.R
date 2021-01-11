@@ -52,8 +52,8 @@ ignition_points <- function(lon,
       ignition_lon[i] <- mean(lon[indexes])
       ignition_lat[i] <- mean(lat[indexes])
     } else {
-      ignition_lon[i] <- median(lon[indexes])
-      ignition_lat[i] <- median(lat[indexes])
+      ignition_lon[i] <- stats::median(lon[indexes])
+      ignition_lat[i] <- stats::median(lat[indexes])
     }
 
   }

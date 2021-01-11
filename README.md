@@ -88,11 +88,11 @@ results <- hotspot_cluster(hotspots500,
                            ignitionCenter = "mean",
                            timeUnit = "h",
                            timeStep = 1)
-#> Transform timeID <U+2713> 
-#> Clustering <U+2713> 
-#> Handel noises <U+2713> 
-#> Compute ignition points <U+2713> 
-#> Time taken: 0 mins 1 secs for 500 obs (0.002 secs/obs)
+#> √ Transform timeID
+#> √ Clustering
+#> √ Handle noises
+#> √ Compute ignition points
+#> Time taken: 0 mins 1 sec for 500 obs (0.002 secs/obs)
 ```
 
 The ignition points of the first 10 bushfires.
