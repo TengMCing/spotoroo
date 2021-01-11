@@ -10,11 +10,11 @@
 \item{x}{an object of class "\code{spotoroo}",
 a result of a call to \code{\link{hotspot_cluster}}.}
 
-\item{\dots}{additional arguments pass to \code{plot_results()}}
+\item{\dots}{additional arguments pass to \code{plot_spotoroo()}}
 }
 \description{
-\code{plot} method for class "\code{spotoroo}";
-see also \code{\link{plot_results}}.
+\code{plot} method for class "\code{spotoroo}", a simple wrapper of
+\code{plot_spotoroo()}, see also \code{\link{plot_spotoroo}}.
 }
 \examples{
 data("hotspots500")
