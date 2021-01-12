@@ -16,9 +16,13 @@
 #'                       one of "mean" and "median".
 #' @return a data frame of ignition points
 #' \itemize{
+#'   \item \code{memberships} : membership labels.
 #'   \item \code{ignition_lon} : longitude of ignition points.
 #'   \item \code{ignition_lat} : latitude of ignition points.
 #'   \item \code{ignition_obsTime} : observed time of ignition points.
+#'   \item \code{timeID} : time indexes.
+#'   \item \code{clusterObs} : number of observations in the cluster.
+#'   \item \code{clusterTimeLen} : time frame of the cluster.
 #' }
 #' @examples
 #' lon <- c(141.1, 141.14, 141.12, 141.14, 141.16, 141.12, 141.14,
@@ -39,6 +43,7 @@ ignition_points <- function(lon,
                             memberships,
                             ignitionCenter) {
 
+  # init vec
   ignition_lon <- rep(0, max(memberships))
   ignition_lat <- rep(0, max(memberships))
   ignition_obsTime <- rep(obsTime[1], max(memberships))
@@ -46,14 +51,24 @@ ignition_points <- function(lon,
   obs <- rep(0, max(memberships))
   timeLen <- rep(0, max(memberships))
 
+  # for each cluster
   for (i in 1:max(memberships)) {
 
+    # get earliest observed time
     earliest_time <- min(obsTime[memberships == i])
     ignition_obsTime[i] <- earliest_time
+
+    # get earliest time index
     earliest_timeID <- min(timeID[memberships == i])
     ignition_timeID[i] <- earliest_timeID
+
+    # count observations
     obs[i] <- sum(memberships == i)
+
+    # calc time len using time indexes
     timeLen[i] <- max(timeID[memberships == i]) - min(timeID[memberships == i])
+
+    # extract earliest observed hotspots
     indexes <- (obsTime == earliest_time) & (memberships == i)
     if (ignitionCenter == "mean") {
       ignition_lon[i] <- mean(lon[indexes])

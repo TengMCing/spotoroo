@@ -23,9 +23,13 @@ one of "mean" and "median".}
 \value{
 a data frame of ignition points
 \itemize{
+\item \code{memberships} : membership labels.
 \item \code{ignition_lon} : longitude of ignition points.
 \item \code{ignition_lat} : latitude of ignition points.
 \item \code{ignition_obsTime} : observed time of ignition points.
+\item \code{timeID} : time indexes.
+\item \code{clusterObs} : number of observations in the cluster.
+\item \code{clusterTimeLen} : time frame of the cluster.
 }
 }
 \description{

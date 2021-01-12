@@ -1,6 +1,6 @@
-#' Plotting spatiotemporal clustering results spatially
+#' Plotting spatiotemporal clustering results spatially: without fire movement
 #'
-#' can be called by \code{plot.spotoroo()} and \code{plot_spotoroo()}.
+#' can be called by \code{plot.spotoroo()} or \code{plot_spotoroo()}.
 #'
 #' @param results an object of class "\code{spotoroo}",
 #' a result of a call to \code{\link{hotspot_cluster}}.
@@ -10,7 +10,8 @@
 #' @param hotspots logical; if \code{TRUE}, plot the hotspots.
 #' @param noises logical; if \code{TRUE}, plot the noises.
 #' @param bottom an object of class "\code{ggplot}", optional; if \code{TRUE},
-#' plot onto this object.
+#' plot onto this object. Now it only supports object without colour related
+#' aesthetics.
 #' @return an object of class "\code{ggplot}".
 #' @examples
 #' data("hotspots500")
@@ -47,6 +48,8 @@ static_spotoroo <- function(results,
   # extract corresponding clusters
   if (!identical("all", clusters)){
     check_type("numeric", clusters)
+
+    if (length(clusters) == 0) stop("Please provide valid cluster ID.")
 
     indexes <- results$ignitions$memberships %in% clusters
     results$ignitions <- results$ignitions[indexes, ]

@@ -17,11 +17,20 @@
 #' @param timeStep sldfjks
 #' @return integer; a vector of membership labels.
 #' @examples
-#' global_memberships <- c(1,1,1,2,2,2,2,2,2,3,3,3,3,3,3)
+#' data("hotspots500")
 #'
-#' handle_noises(global_memberships, 4)
+#' results <- hotspot_cluster(hotspots500,
+#'                            lon = "lon",
+#'                            lat = "lat",
+#'                            obsTime = "obsTime",
+#'                            activeTime = 24,
+#'                            adjDist = 3000,
+#'                            minPts = 4,
+#'                            ignitionCenter = "mean",
+#'                            timeUnit = "h",
+#'                            timeStep = 1)
 #'
-#' # -1 -1 -1 1 1 1 1 1 1 2 2 2 2 2 2
+#'
 #' @export
 hotspot_cluster <- function(hotspots,
                             lon = "lon",
@@ -35,11 +44,11 @@ hotspot_cluster <- function(hotspots,
                             timeStep = NULL) {
 
   # safe checks
-  is_length_one_bundle(lon, lat, obsTime, activeTime, adjDist, minPts, timeStep)
+  is_length_one_bundle(lon, lat, obsTime, activeTime, adjDist, minPts, ignitionCenter)
   check_type("list", hotspots)
   check_type("numeric", minPts)
   is_non_negative(minPts)
-  check_type_bundle("character", lon, lat, obsTime)
+  check_type_bundle("character", lon, lat, obsTime, ignitionCenter)
   check_in(c("mean", "median"), ignitionCenter)
   is_non_negative(activeTime)
   is_positive(adjDist)
@@ -72,6 +81,7 @@ hotspot_cluster <- function(hotspots,
                                  ignitionCenter)
   }
 
+  # get relationship between hotspots and ignitions
   to_ignition <- hotspots_to_ignitions(lon,
                                        lat,
                                        timeID,
@@ -87,8 +97,8 @@ hotspot_cluster <- function(hotspots,
                                         timeID,
                                         memberships = global_memberships,
                                         noise = global_memberships == -1,
-                                        distToIgnition = to_ignition$fin_vec,
-                                        timeToIgnition = to_ignition$time_vec),
+                                        distToIgnition = to_ignition$distToIgnition,
+                                        timeFromIgnition = to_ignition$timeFromIgnition),
                   ignitions = ignitions,
                   settings = list(activeTime = activeTime,
                                   adjDist = adjDist,

@@ -2,7 +2,7 @@
 % Please edit documentation in R/static_spotoroo.R
 \name{static_spotoroo}
 \alias{static_spotoroo}
-\title{Plotting spatiotemporal clustering results spatially}
+\title{Plotting spatiotemporal clustering results spatially: without fire movement}
 \usage{
 static_spotoroo(
   results,
@@ -27,13 +27,14 @@ vector is given, plot corresponding clusters.}
 \item{ignitions}{logical; if \code{TRUE}, plot the ignition points.}
 
 \item{bottom}{an object of class "\code{ggplot}", optional; if \code{TRUE},
-plot onto this object.}
+plot onto this object. Now it only supports object without colour related
+aesthetics.}
 }
 \value{
 an object of class "\code{ggplot}".
 }
 \description{
-can be called by \code{plot.spotoroo()} and \code{plot_spotoroo()}.
+can be called by \code{plot.spotoroo()} or \code{plot_spotoroo()}.
 }
 \examples{
 data("hotspots500")

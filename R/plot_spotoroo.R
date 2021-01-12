@@ -16,7 +16,8 @@
 #' @param hotspots logical; if \code{TRUE}, plot the hotspots.
 #' @param noises logical; if \code{TRUE}, plot the noises.
 #' @param bottom an object of class "\code{ggplot}", optional; if \code{TRUE},
-#' plot onto this object.
+#' plot onto this object. Now it only supports object without colour related
+#' aesthetics.
 #' @return an object of class "\code{ggplot}".
 #' @examples
 #' data("hotspots500")

@@ -48,9 +48,18 @@ integer; a vector of membership labels.
 Cluster hotspots spatially and temporally.
 }
 \examples{
-global_memberships <- c(1,1,1,2,2,2,2,2,2,3,3,3,3,3,3)
+data("hotspots500")
 
-handle_noises(global_memberships, 4)
+results <- hotspot_cluster(hotspots500,
+                           lon = "lon",
+                           lat = "lat",
+                           obsTime = "obsTime",
+                           activeTime = 24,
+                           adjDist = 3000,
+                           minPts = 4,
+                           ignitionCenter = "mean",
+                           timeUnit = "h",
+                           timeStep = 1)
 
-# -1 -1 -1 1 1 1 1 1 1 2 2 2 2 2 2
+
 }
