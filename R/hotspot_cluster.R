@@ -72,13 +72,23 @@ hotspot_cluster <- function(hotspots,
                                  ignitionCenter)
   }
 
+  to_ignition <- hotspots_to_ignitions(lon,
+                                       lat,
+                                       timeID,
+                                       global_memberships,
+                                       ignitions)
+
+
+
   # bind results
   results <- list(hotspots = data.frame(lon,
                                         lat,
                                         obsTime,
                                         timeID,
                                         memberships = global_memberships,
-                                        noise = global_memberships == -1),
+                                        noise = global_memberships == -1,
+                                        distToIgnition = to_ignition$fin_vec,
+                                        timeToIgnition = to_ignition$time_vec),
                   ignitions = ignitions,
                   settings = list(activeTime = activeTime,
                                   adjDist = adjDist,

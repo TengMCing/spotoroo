@@ -72,6 +72,6 @@ ignition_points <- function(lon,
              lat = ignition_lat,
              obsTime = ignition_obsTime,
              timeID = ignition_timeID,
-             obs = obs,
-             timeLen = timeLen)
+             clusterObs = obs,
+             clusterTimeLen = timeLen)
 }
