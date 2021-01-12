@@ -3,24 +3,24 @@
 \docType{data}
 \name{hotspots5000}
 \alias{hotspots5000}
-\title{Prices of 50,000 round cut diamonds.}
+\title{5000 observations of satellite hotspots.}
 \format{
-A data frame with 53940 rows and 10 variables:
+A data frame with 5000 rows and 4 variables:
 \describe{
-\item{id}{price, in US dollars}
-\item{lat}{weight of the diamond, in carats}
-\item{lon}{price, in US dollars}
-\item{obsTime}{weight of the diamond, in carats}
+\item{id}{unique identifier}
+\item{lon}{longitude}
+\item{lat}{latitude}
+\item{obsTime}{observed time}
 }
 }
 \source{
-\url{http://www.diamondse.info/}
+\url{https://www.eorc.jaxa.jp/ptree/}
 }
 \usage{
 hotspots5000
 }
 \description{
-A dataset containing the prices and other attributes of almost 54,000
-diamonds.
+A dataset containing the 5000 observations of satellite hotspots in
+Victoria, Australia during the 2019-2020 Australian bushfire season.
 }
 \keyword{datasets}
