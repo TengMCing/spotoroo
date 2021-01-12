@@ -99,34 +99,34 @@ The ignition points of the first 10 bushfires.
 
 ``` r
 results$ignitions[1:10,]
-#>    ignition_lon ignition_lat    ignition_obsTime
-#> 1       141.136    -37.13000 2019-10-01 03:20:00
-#> 2       141.300    -37.65000 2019-10-01 04:30:00
-#> 3       141.480    -37.34000 2019-10-02 03:00:00
-#> 4       147.160    -37.85000 2019-10-02 04:40:00
-#> 5       148.120    -37.57999 2019-10-02 04:50:00
-#> 6       143.140    -37.25999 2019-10-03 01:00:00
-#> 7       141.150    -36.54000 2019-10-03 04:30:00
-#> 8       148.435    -37.10000 2019-10-06 04:00:00
-#> 9       144.240    -37.28000 2019-10-14 21:40:00
-#> 10      143.870    -36.84000 2019-10-21 02:10:00
+#>    memberships ignition_lon ignition_lat    ignition_obsTime ignition_timeID
+#> 1            1      141.136    -37.13000 2019-10-01 03:20:00               1
+#> 2            2      141.300    -37.65000 2019-10-01 04:30:00               2
+#> 3            3      141.480    -37.34000 2019-10-02 03:00:00              25
+#> 4            4      147.160    -37.85000 2019-10-02 04:40:00              26
+#> 5            5      148.120    -37.57999 2019-10-02 04:50:00              27
+#> 6            6      143.140    -37.25999 2019-10-03 01:00:00              47
+#> 7            7      141.150    -36.54000 2019-10-03 04:30:00              50
+#> 8            8      148.435    -37.10000 2019-10-06 04:00:00             122
+#> 9            9      144.240    -37.28000 2019-10-14 21:40:00             331
+#> 10          10      143.870    -36.84000 2019-10-21 02:10:00             480
 ```
 
 The memberships of the first 10 hotspots.
 
 ``` r
 results$hotspots[1:10,]
-#>       lon    lat             obsTime memberships noise
-#> 1  141.12 -37.10 2019-10-01 03:20:00           1 FALSE
-#> 2  141.14 -37.10 2019-10-01 03:20:00           1 FALSE
-#> 3  141.12 -37.12 2019-10-01 03:20:00           1 FALSE
-#> 4  141.14 -37.12 2019-10-01 03:20:00           1 FALSE
-#> 5  141.16 -37.12 2019-10-01 03:20:00           1 FALSE
-#> 6  141.12 -37.14 2019-10-01 03:20:00           1 FALSE
-#> 7  141.14 -37.14 2019-10-01 03:20:00           1 FALSE
-#> 8  141.16 -37.14 2019-10-01 03:20:00           1 FALSE
-#> 9  141.12 -37.16 2019-10-01 03:20:00           1 FALSE
-#> 10 141.14 -37.16 2019-10-01 03:20:00           1 FALSE
+#>       lon    lat             obsTime timeID memberships noise
+#> 1  141.12 -37.10 2019-10-01 03:20:00      1           1 FALSE
+#> 2  141.14 -37.10 2019-10-01 03:20:00      1           1 FALSE
+#> 3  141.12 -37.12 2019-10-01 03:20:00      1           1 FALSE
+#> 4  141.14 -37.12 2019-10-01 03:20:00      1           1 FALSE
+#> 5  141.16 -37.12 2019-10-01 03:20:00      1           1 FALSE
+#> 6  141.12 -37.14 2019-10-01 03:20:00      1           1 FALSE
+#> 7  141.14 -37.14 2019-10-01 03:20:00      1           1 FALSE
+#> 8  141.16 -37.14 2019-10-01 03:20:00      1           1 FALSE
+#> 9  141.12 -37.16 2019-10-01 03:20:00      1           1 FALSE
+#> 10 141.14 -37.16 2019-10-01 03:20:00      1           1 FALSE
 ```
 
 ``` r
@@ -139,17 +139,13 @@ ggplot(results$ignitions) +
 
 <img src="man/figures/README-unnamed-chunk-9-1.png" width="70%" height="70%" />
 
-Summary of the clustering result.
+<!-- Summary of the clustering result. -->
 
-``` r
-summary(results)
-#> Clusters:
-#>     total    33 
-#>     ave obs  13.6 
-#>     ave time 2.12 h 
-#> Noises:
-#>     prop     10    %
-```
+<!-- ```{r} -->
+
+<!-- summary(results) -->
+
+<!-- ``` -->
 
 Plot of the result.
 
@@ -157,11 +153,13 @@ Plot of the result.
 p <- ggplot() +
   geom_sf(data = vic_map) +
   ggthemes::theme_map()
-plot(results, 
-     drawHotspots = TRUE, 
-     drawNoises = TRUE, 
-     drawIgnitions = TRUE, 
+plot(results,
+     type = "scatter",
+     clusters = "all",
+     hotspots = TRUE, 
+     noises = TRUE, 
+     ignitions = TRUE, 
      bottom = p)
 ```
 
-<img src="man/figures/README-unnamed-chunk-11-1.png" width="70%" height="70%" />
+<img src="man/figures/README-unnamed-chunk-10-1.png" width="70%" height="70%" />

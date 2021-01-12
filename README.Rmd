@@ -120,10 +120,12 @@ Plot of the result.
 p <- ggplot() +
   geom_sf(data = vic_map) +
   ggthemes::theme_map()
-plot(results, 
-     drawHotspots = TRUE, 
-     drawNoises = TRUE, 
-     drawIgnitions = TRUE, 
+plot(results,
+     type = "scatter",
+     clusters = "all",
+     hotspots = TRUE, 
+     noises = TRUE, 
+     ignitions = TRUE, 
      bottom = p)
 ```
 
