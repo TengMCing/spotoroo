@@ -111,6 +111,10 @@ dynamic_spotoroo <- function(results,
 
   }
 
+  # overcome overlapping
+  fire_mov_records$lon <- jitter(fire_mov_records$lon)
+  fire_mov_records$lat <- jitter(fire_mov_records$lat)
+
   p <- p + ggplot2::geom_point(data = fire_mov_records,
                                ggplot2::aes(lon, lat),
                                col = "blue") +
