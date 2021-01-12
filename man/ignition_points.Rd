@@ -4,7 +4,7 @@
 \alias{ignition_points}
 \title{Calculate ignition points}
 \usage{
-ignition_points(lon, lat, obsTime, memberships, ignitionCenter)
+ignition_points(lon, lat, obsTime, timeID, memberships, ignitionCenter)
 }
 \arguments{
 \item{lon}{numeric; a vector of longitude values.}
@@ -12,6 +12,8 @@ ignition_points(lon, lat, obsTime, memberships, ignitionCenter)
 \item{lat}{numeric; a vector of latitude values.}
 
 \item{obsTime}{date/numeric; a vector of observed time.}
+
+\item{timeID}{integer (>=1); a vector of time indexes.}
 
 \item{memberships}{integer; a vector of membership labels.}
 

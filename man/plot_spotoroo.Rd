@@ -6,9 +6,11 @@
 \usage{
 plot_spotoroo(
   results,
-  drawIgnitions = TRUE,
-  drawHotspots = TRUE,
-  drawNoises = TRUE,
+  type = "scatter",
+  clusters = "all",
+  hotspots = TRUE,
+  noises = TRUE,
+  ignitions = TRUE,
   bottom = NULL
 )
 }
@@ -16,11 +18,16 @@ plot_spotoroo(
 \item{results}{an object of class "\code{spotoroo}",
 a result of a call to \code{\link{hotspot_cluster}}.}
 
-\item{drawIgnitions}{logical; if \code{TRUE}, plot the ignition points.}
+\item{type}{character; plot type; one of "scatter" and "trace".}
 
-\item{drawHotspots}{logical; if \code{TRUE}, plot the hotspots.}
+\item{clusters}{character/numeric; if "all", plot all clusters. if a numeric
+vector is given, plot corresponding clusters.}
 
-\item{drawNoises}{logical; if \code{TRUE}, plot the noises.}
+\item{hotspots}{logical; if \code{TRUE}, plot the hotspots.}
+
+\item{noises}{logical; if \code{TRUE}, plot the noises.}
+
+\item{ignitions}{logical; if \code{TRUE}, plot the ignition points.}
 
 \item{bottom}{an object of class "\code{ggplot}", optional; if \code{TRUE},
 plot onto this object.}

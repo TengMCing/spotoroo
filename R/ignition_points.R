@@ -10,6 +10,7 @@
 #' @param lon numeric; a vector of longitude values.
 #' @param lat numeric; a vector of latitude values.
 #' @param obsTime date/numeric; a vector of observed time.
+#' @param timeID integer (>=1); a vector of time indexes.
 #' @param memberships integer; a vector of membership labels.
 #' @param ignitionCenter character; method of calculating ignition points,
 #'                       one of "mean" and "median".
@@ -36,17 +37,21 @@
 ignition_points <- function(lon,
                             lat,
                             obsTime,
+                            timeID,
                             memberships,
                             ignitionCenter) {
 
   ignition_lon <- rep(0, max(memberships))
   ignition_lat <- rep(0, max(memberships))
   ignition_obsTime <- rep(obsTime[1], max(memberships))
+  ignition_timeID <- rep(timeID[1], max(memberships))
 
   for (i in 1:max(memberships)) {
 
     earliest_time <- min(obsTime[memberships == i])
     ignition_obsTime[i] <- earliest_time
+    earliest_timeID <- min(timeID[memberships == i])
+    ignition_timeID[i] <- earliest_timeID
     indexes <- (obsTime == earliest_time) & (memberships == i)
     if (ignitionCenter == "mean") {
       ignition_lon[i] <- mean(lon[indexes])
@@ -63,5 +68,6 @@ ignition_points <- function(lon,
   data.frame(memberships = 1:max(memberships),
              ignition_lon = ignition_lon,
              ignition_lat = ignition_lat,
-             ignition_obsTime = ignition_obsTime)
+             ignition_obsTime = ignition_obsTime,
+             ignition_timeID = ignition_timeID)
 }
