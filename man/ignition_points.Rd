@@ -43,11 +43,9 @@ lon <- c(141.1, 141.14, 141.12, 141.14, 141.16, 141.12, 141.14,
 lat <- c(-37.10, -37.10, -37.12, -37.12, -37.12, -37.14, -37.14,
          -37.14, -37.16, -37.16)
 obsTime <- c(rep(1, 5), rep(26, 5))
+timeID <- c(rep(1, 5), rep(26, 5))
 memberships <- c(1, 1, 1, 1, 1, 2, 2, 2, 2, 2)
 
-global_clustering(lon, lat, obsTime, memberships, "mean")
+ignition_points(lon, lat, obsTime, timeID, memberships, "mean")
 
-#   ignition_lon ignition_lat ignition_obsTime
-# 1      141.132      -37.112                1
-# 2      141.136      -37.148               26
 }

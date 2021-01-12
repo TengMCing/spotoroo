@@ -28,7 +28,7 @@ Transform observed time to time indexes.
 The earliest observed time has a corresponding time index \code{1}. The
 difference between any time to the earliest observed time will be transformed
 using the given time unit and divided by the given time step. The final
-indexes will be rounded to integer.
+indexes will be floored to integer.
 }
 \examples{
 obsTime <- as.Date(c("2020-01-01",

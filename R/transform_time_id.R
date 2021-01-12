@@ -5,7 +5,7 @@
 #' The earliest observed time has a corresponding time index \code{1}. The
 #' difference between any time to the earliest observed time will be transformed
 #' using the given time unit and divided by the given time step. The final
-#' indexes will be rounded to integer.
+#' indexes will be floored to integer.
 #'
 #' @param obsTime date/numeric; a vector of observed time of hotspots. If
 #'                              \code{timeUnit} = \code{"n"}, \code{obsTime}
@@ -39,7 +39,7 @@ transform_time_id <- function(obsTime, timeUnit, timeStep) {
   } else {
 
     timeID <- difftime(obsTime, min(obsTime), units = timeUnit) / timeStep
-    timeID <- as.integer(round(as.numeric(timeID))) + 1L
+    timeID <- as.integer(floor(as.numeric(timeID))) + 1L
   }
 
   cli::cli_alert_success("Transform timeID")

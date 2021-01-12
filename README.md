@@ -96,17 +96,17 @@ The ignition points of the first 10 bushfires.
 
 ``` r
 results$ignitions[1:10,]
-#>    memberships ignition_lon ignition_lat    ignition_obsTime ignition_timeID
-#> 1            1      141.136    -37.13000 2019-10-01 03:20:00               1
-#> 2            2      141.300    -37.65000 2019-10-01 04:30:00               2
-#> 3            3      141.480    -37.34000 2019-10-02 03:00:00              25
-#> 4            4      147.160    -37.85000 2019-10-02 04:40:00              26
-#> 5            5      148.120    -37.57999 2019-10-02 04:50:00              27
-#> 6            6      143.140    -37.25999 2019-10-03 01:00:00              47
-#> 7            7      141.150    -36.54000 2019-10-03 04:30:00              50
-#> 8            8      148.435    -37.10000 2019-10-06 04:00:00             122
-#> 9            9      144.240    -37.28000 2019-10-14 21:40:00             331
-#> 10          10      143.870    -36.84000 2019-10-21 02:10:00             480
+#>    memberships     lon       lat             obsTime timeID obs timeLen
+#> 1            1 141.136 -37.13000 2019-10-01 03:20:00      1  18       0
+#> 2            2 141.300 -37.65000 2019-10-01 04:30:00      2   4       0
+#> 3            3 141.480 -37.34000 2019-10-02 03:00:00     24  19       5
+#> 4            4 147.160 -37.85000 2019-10-02 04:40:00     26   9       1
+#> 5            5 148.120 -37.57999 2019-10-02 04:50:00     26   4       0
+#> 6            6 143.140 -37.25999 2019-10-03 01:00:00     46  25       4
+#> 7            7 141.150 -36.54000 2019-10-03 04:30:00     50   5       1
+#> 8            8 148.435 -37.10000 2019-10-06 04:00:00    121   6       0
+#> 9            9 144.240 -37.28000 2019-10-14 21:40:00    331   5       2
+#> 10          10 143.870 -36.84000 2019-10-21 02:10:00    479  29       3
 ```
 
 The memberships of the first 10 hotspots.
@@ -129,7 +129,7 @@ results$hotspots[1:10,]
 ``` r
 ggplot(results$ignitions) +
   geom_sf(data = vic_map) +
-  geom_point(aes(ignition_lon, ignition_lat), alpha = 0.5) +
+  geom_point(aes(lon, lat), alpha = 0.5) +
   ggthemes::theme_map() +
   ggtitle("Ignition Points")
 ```
@@ -151,7 +151,7 @@ p <- ggplot() +
   geom_sf(data = vic_map) +
   ggthemes::theme_map()
 plot(results,
-     type = "scatter",
+     type = "static",
      clusters = "all",
      hotspots = TRUE, 
      noises = TRUE, 
@@ -160,3 +160,32 @@ plot(results,
 ```
 
 <img src="man/figures/README-unnamed-chunk-10-1.png" width="70%" height="70%" />
+
+``` r
+p <- ggplot() +
+  geom_sf(data = vic_map) +
+  ggthemes::theme_map()
+plot(results,
+     type = "static",
+     clusters = 1:10,
+     hotspots = TRUE, 
+     noises = TRUE, 
+     ignitions = TRUE, 
+     bottom = p)
+```
+
+<img src="man/figures/README-unnamed-chunk-11-1.png" width="70%" height="70%" />
+
+``` r
+p <- ggplot() +
+  geom_sf(data = vic_map) +
+  ggthemes::theme_map()
+plot(results,
+     type = "dynamic",
+     clusters = 12,
+     hotspots = TRUE, 
+     noises = FALSE, 
+     bottom = p)
+```
+
+<img src="man/figures/README-unnamed-chunk-12-1.png" width="70%" height="70%" />

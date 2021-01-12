@@ -98,7 +98,7 @@ results$hotspots[1:10,]
 ```{r echo = TRUE, warning=FALSE, message=FALSE, error=FALSE, out.width = "70%", out.height="70%"}
 ggplot(results$ignitions) +
   geom_sf(data = vic_map) +
-  geom_point(aes(ignition_lon, ignition_lat), alpha = 0.5) +
+  geom_point(aes(lon, lat), alpha = 0.5) +
   ggthemes::theme_map() +
   ggtitle("Ignition Points")
 ```
@@ -118,7 +118,7 @@ p <- ggplot() +
   geom_sf(data = vic_map) +
   ggthemes::theme_map()
 plot(results,
-     type = "scatter",
+     type = "static",
      clusters = "all",
      hotspots = TRUE, 
      noises = TRUE, 
@@ -126,3 +126,29 @@ plot(results,
      bottom = p)
 ```
 
+
+```{r out.width = "70%", out.height="70%"}
+p <- ggplot() +
+  geom_sf(data = vic_map) +
+  ggthemes::theme_map()
+plot(results,
+     type = "static",
+     clusters = 1:10,
+     hotspots = TRUE, 
+     noises = TRUE, 
+     ignitions = TRUE, 
+     bottom = p)
+```
+
+
+```{r out.width = "70%", out.height="70%"}
+p <- ggplot() +
+  geom_sf(data = vic_map) +
+  ggthemes::theme_map()
+plot(results,
+     type = "dynamic",
+     clusters = 12,
+     hotspots = TRUE, 
+     noises = FALSE, 
+     bottom = p)
+```
