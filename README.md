@@ -167,7 +167,7 @@ p <- ggplot() +
   ggthemes::theme_map()
 plot(results,
      type = "static",
-     clusters = 1:10,
+     clusters = 1:3,
      hotspots = TRUE, 
      noises = FALSE, 
      ignitions = TRUE)
