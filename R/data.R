@@ -42,3 +42,19 @@
 #' }
 #' @source \url{https://www.eorc.jaxa.jp/ptree/}
 "hotspots5000"
+
+
+
+#' simple features map of Victoria.
+#'
+#' A dataset containing the simple features of Victoria, Australia.
+#'
+#' The dataset is obtained via the following codes:\cr
+#' \code{library(rnaturalearth)}\cr
+#' \code{au_map <- ne_states(country = "Australia", returnclass = "sf")}\cr
+#' \code{vic_map <- au_map[7,]$geometry}
+#'
+#'
+#' @format A "\code{sf}" object with 1 row
+#' @source \url{https://www.naturalearthdata.com/}
+"vic_map"

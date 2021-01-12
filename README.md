@@ -63,9 +63,6 @@ hotspots500[1:10,]
 
 ``` r
 library(tidyverse)
-library(rnaturalearth)
-au_map <- ne_states(country = "Australia", returnclass = "sf")
-vic_map <- au_map[7,]
 ggplot(hotspots500) +
   geom_sf(data = vic_map) +
   geom_point(aes(lon, lat), alpha = 0.3) +
