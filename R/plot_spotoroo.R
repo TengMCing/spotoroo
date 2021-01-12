@@ -30,6 +30,8 @@ plot_spotoroo <- function(results,
                           drawNoises = TRUE,
                           bottom = NULL) {
 
+  n <- noise <- lon <- lat <- ignition_lon <- ignition_lat <- NULL
+
   if (!"spotoroo" %in% class(results)) {
     stop('Needs a "spotoroo" object as input.')
   }

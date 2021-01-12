@@ -16,6 +16,8 @@
 #' @export
 handle_noises <- function(global_memberships, minPts) {
 
+  n <- NULL
+
   # count every membership
   membership_count <- dplyr::count(data.frame(id = 1:length(global_memberships),
                                               global_memberships),

@@ -116,6 +116,7 @@ len_of_fire <- function(obsTime, timeUnit) {
 }
 
 fire_time_summary <- function(results, timeUnit) {
+  memberships <- obsTime <- NULL
 
   time_sum <- dplyr::summarise(dplyr::group_by(results$hotspots,
                                                memberships),
@@ -127,6 +128,8 @@ fire_time_summary <- function(results, timeUnit) {
 
 #' @export
 summary.spotoroo <- function(object, ...) {
+
+  noise <- memberships <- timeUnit <- NULL
 
   results <- object
 
