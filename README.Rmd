@@ -106,11 +106,13 @@ ggplot(results$ignitions) +
   ggtitle("Ignition Points")
 ```
 
-Summary of the clustering result.
+<!-- Summary of the clustering result. -->
 
-```{r}
-summary(results)
-```
+<!-- ```{r} -->
+<!-- summary(results) -->
+<!-- ``` -->
+
+
 
 Plot of the result.
 

@@ -60,7 +60,8 @@ ignition_points <- function(lon,
 
   cli::cli_alert_success("Compute ignition points")
 
-  data.frame(ignition_lon = ignition_lon,
+  data.frame(memberships = 1:max(memberships),
+             ignition_lon = ignition_lon,
              ignition_lat = ignition_lat,
              ignition_obsTime = ignition_obsTime)
 }

@@ -78,7 +78,13 @@ hotspot_cluster <- function(hotspots,
                                         memberships = global_memberships,
                                         noise = global_memberships == -1),
                   ignitions = ignitions,
-                  timeUnit = timeUnit)
+                  settings = list(activeTime = activeTime,
+                                  adjDist = adjDist,
+                                  minPts = minPts,
+                                  ignitionCenter = ignitionCenter,
+                                  timeUnit = timeUnit,
+                                  timeStep = timeStep)
+                  )
 
 
   # stop timing
@@ -103,68 +109,11 @@ hotspot_cluster <- function(hotspots,
 }
 
 
-# number of obs in each cluster
-# ave obs in clusters
-# time, distance, coverage
-# CLI
 
-len_of_fire <- function(obsTime, timeUnit) {
-
-  return(as.numeric(difftime(max(obsTime),
-                             min(obsTime),
-                             units = timeUnit)))
-}
-
-fire_time_summary <- function(results, timeUnit) {
-  memberships <- obsTime <- NULL
-
-  time_sum <- dplyr::summarise(dplyr::group_by(results$hotspots,
-                                               memberships),
-                               t_diff = len_of_fire(obsTime,
-                                                    results$timeUnit))
-  return(time_sum$t_diff)
-}
-
-
-#' @export
-summary.spotoroo <- function(object, ...) {
-
-  noise <- memberships <- timeUnit <- NULL
-
-  results <- object
-
-  noise_prop <- mean(results$hotspots$noise) * 100
-  results$hotspots <- dplyr::filter(results$hotspots, !noise)
-
-  cat("Clusters:\n")
-
-  cat(paste("    total   ",
-            max(results$hotspots$memberships),
-            "\n"))
-
-  cat(paste("    ave obs ",
-            format(mean(dplyr::count(results$hotspots,
-                                     memberships)$n),
-                   digits = 3),
-            "\n"))
-
-  t_diff <- fire_time_summary(results, timeUnit)
-
-  cat(paste("    ave time",
-            format(mean(t_diff),
-                   digits = 3),
-            results$timeUnit,
-            "\n"))
-
-
-  cat("Noises:\n")
-
-  cat(paste("    prop    ",
-            format(noise_prop,
-                   digits = 3),
-            "   %\n"))
-
-}
+# summary.spotoroo <- function(object, ...) {
+#
+#
+# }
 
 
 
