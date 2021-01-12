@@ -135,9 +135,8 @@ plot(results,
      type = "static",
      clusters = 1:10,
      hotspots = TRUE, 
-     noises = TRUE, 
-     ignitions = TRUE, 
-     bottom = p)
+     noises = FALSE, 
+     ignitions = TRUE)
 ```
 
 
@@ -149,6 +148,5 @@ plot(results,
      type = "dynamic",
      clusters = 12,
      hotspots = TRUE, 
-     noises = FALSE, 
-     bottom = p)
+     noises = FALSE)
 ```

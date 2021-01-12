@@ -169,9 +169,8 @@ plot(results,
      type = "static",
      clusters = 1:10,
      hotspots = TRUE, 
-     noises = TRUE, 
-     ignitions = TRUE, 
-     bottom = p)
+     noises = FALSE, 
+     ignitions = TRUE)
 ```
 
 <img src="man/figures/README-unnamed-chunk-11-1.png" width="70%" height="70%" />
@@ -184,8 +183,7 @@ plot(results,
      type = "dynamic",
      clusters = 12,
      hotspots = TRUE, 
-     noises = FALSE, 
-     bottom = p)
+     noises = FALSE)
 ```
 
 <img src="man/figures/README-unnamed-chunk-12-1.png" width="70%" height="70%" />
