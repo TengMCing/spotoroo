@@ -197,7 +197,7 @@ plot(results,
 ``` r
 plot(results,
      type = "dynamic",
-     clusters = 12,
+     clusters = 36,
      hotspots = TRUE, 
      noises = FALSE)
 ```

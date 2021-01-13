@@ -69,7 +69,7 @@ static_spotoroo <- function(results,
   # draw hotspots
   if (hotspots) {
 
-    p <- p + ggplot2::geom_jitter(data = dplyr::filter(results$hotspots,
+    p <- p + ggplot2::geom_point(data = dplyr::filter(results$hotspots,
                                                        !noise),
                                   ggplot2::aes(lon,
                                                lat),
@@ -80,7 +80,7 @@ static_spotoroo <- function(results,
   # draw noises
   if (noises) {
 
-    p <- p + ggplot2::geom_jitter(data = dplyr::filter(results$hotspots,
+    p <- p + ggplot2::geom_point(data = dplyr::filter(results$hotspots,
                                                        noise),
                                   ggplot2::aes(lon,
                                                lat,
