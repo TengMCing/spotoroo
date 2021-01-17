@@ -26,7 +26,7 @@ local_clustering <- function(lon, lat, adjDist) {
   pointer <- c(1)
   pointer_pos <- 1
 
-  memberships <- NULL
+  membership <- NULL
   label <- NULL
 
   # find all clusters
@@ -55,13 +55,13 @@ local_clustering <- function(lon, lat, adjDist) {
     }
 
     # assign membership labels
-    if (is.null(memberships)) {
-      memberships <- rep(1, length(hotspots_list))
+    if (is.null(membership)) {
+      membership <- rep(1, length(hotspots_list))
       label <- 1
     } else {
       label <- label + 1
-      new_len <- length(hotspots_list) - length(memberships)
-      memberships <- c(memberships, rep(label, new_len))
+      new_len <- length(hotspots_list) - length(membership)
+      membership <- c(membership, rep(label, new_len))
     }
 
 
@@ -75,6 +75,6 @@ local_clustering <- function(lon, lat, adjDist) {
 
   }
 
-  memberships[order(hotspots_list)]
+  membership[order(hotspots_list)]
 
 }

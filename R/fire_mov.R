@@ -8,15 +8,15 @@ fire_mov <- function(results, cluster, method = "mean"){
   check_type("numeric", cluster)
   check_type("character", method)
 
-  if (cluster > max(results$hotspots$memberships)) {
+  if (cluster > max(results$hotspots$membership)) {
     stop(paste("Cluster", cluster, "does not exist!"))
   }
 
-  indexes <- results$hotspots$memberships == cluster
+  indexes <- results$hotspots$membership == cluster
   all_hotspots <- results$hotspots[indexes, ]
 
-  fin_lon <- results$ignitions$lon[results$ignitions$memberships == cluster]
-  fin_lat <- results$ignitions$lat[results$ignitions$memberships == cluster]
+  fin_lon <- results$ignition$lon[results$ignition$membership == cluster]
+  fin_lat <- results$ignition$lat[results$ignition$membership == cluster]
 
   for (i in min(all_hotspots$timeID):max(all_hotspots$timeID)) {
 
@@ -40,7 +40,7 @@ fire_mov <- function(results, cluster, method = "mean"){
 
   }
 
-  fin_data_set <- data.frame(memberships = cluster,
+  fin_data_set <- data.frame(membership = cluster,
                              lon = fin_lon,
                              lat = fin_lat,
                              timeID = 1:length(fin_lon))

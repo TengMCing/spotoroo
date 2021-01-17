@@ -49,12 +49,12 @@ static_spotoroo <- function(results,
   if (!identical("all", clusters)){
     check_type("numeric", clusters)
 
-    if (length(clusters) == 0) stop("Please provide valid cluster ID.")
+    if (length(clusters) == 0) stop("Please provide valid membership labels.")
 
-    indexes <- results$ignitions$memberships %in% clusters
-    results$ignitions <- results$ignitions[indexes, ]
+    indexes <- results$ignition$membership %in% clusters
+    results$ignition <- results$ignition[indexes, ]
 
-    indexes <- results$hotspots$memberships %in% c(clusters, -1)
+    indexes <- results$hotspots$membership %in% c(clusters, -1)
     results$hotspots <- results$hotspots[indexes, ]
   }
 
@@ -92,7 +92,7 @@ static_spotoroo <- function(results,
   # draw ignitions
   if (ignitions) {
     p <- p +
-      ggplot2::geom_point(data = results$ignitions,
+      ggplot2::geom_point(data = results$ignition,
                           ggplot2::aes(lon,
                                        lat,
                                        col = "ignition"))

@@ -71,36 +71,28 @@ ggplot(hotspots500) +
 Perform spatiotemporal clustering on this dataset.
 
 ```{r example}
-results <- hotspot_cluster(hotspots500, 
-                           lon = "lon", 
-                           lat = "lat", 
-                           obsTime = "obsTime",
-                           activeTime = 24,
-                           adjDist = 3000,
-                           minPts = 4,
-                           ignitionCenter = "mean",
-                           timeUnit = "h",
-                           timeStep = 1)
+result <- hotspot_cluster(hotspots500,
+                          lon = "lon",
+                          lat = "lat",
+                          obsTime = "obsTime",
+                          activeTime = 24,
+                          adjDist = 3000,
+                          minPts = 4,
+                          ignitionCenter = "mean",
+                          timeUnit = "h",
+                          timeStep = 1)
 ```
 
 The ignition points of the first 10 bushfires.
 
 ```{r}
-results$ignitions[1:10,]
+result$ignition[1:10,]
 ```
 
 The memberships of the first 10 hotspots.
 
 ```{r}
-results$hotspots[1:10,]
-```
-
-```{r echo = TRUE, warning=FALSE, message=FALSE, error=FALSE, out.width = "70%", out.height="70%"}
-ggplot(results$ignitions) +
-  geom_sf(data = vic_map) +
-  geom_point(aes(lon, lat), alpha = 0.5) +
-  ggthemes::theme_map() +
-  ggtitle("Ignition Points")
+result$hotspots[1:10,]
 ```
 
 <!-- Summary of the clustering result. -->
@@ -117,7 +109,7 @@ Plot of the result.
 p <- ggplot() +
   geom_sf(data = vic_map) +
   ggthemes::theme_map()
-plot(results,
+plot(result,
      type = "static",
      clusters = "all",
      hotspots = TRUE, 
@@ -128,7 +120,7 @@ plot(results,
 
 
 ```{r out.width = "70%", out.height="70%"}
-plot(results,
+plot(result,
      type = "static",
      clusters = 1:3,
      hotspots = TRUE, 
@@ -138,9 +130,9 @@ plot(results,
 
 
 ```{r out.width = "70%", out.height="70%"}
-plot(results,
+plot(result,
      type = "dynamic",
-     clusters = 36,
+     clusters = 21:32,
      hotspots = TRUE, 
      noises = FALSE)
 ```

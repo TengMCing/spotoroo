@@ -23,7 +23,7 @@
 #' @export
 global_clustering <- function(lon, lat, timeID, activeTime, adjDist) {
 
-  global_memberships <- rep(0, length(lon))
+  global_membership <- rep(0, length(lon))
 
   barstr <- "Clustering [:bar] :current/:total (:percent) eta: :eta"
 
@@ -40,22 +40,22 @@ global_clustering <- function(lon, lat, timeID, activeTime, adjDist) {
 
     # safe checks
     if (is.null(indexes)) next
-    if (all(global_memberships[indexes] != 0)) next
+    if (all(global_membership[indexes] != 0)) next
 
     # clustering spatially
-    local_memberships <- local_clustering(lon[indexes], lat[indexes], adjDist)
+    local_membership <- local_clustering(lon[indexes], lat[indexes], adjDist)
 
-    # update memberships
-    global_memberships <-  update_memberships(lon,
+    # update membership
+    global_membership <-  update_membership(lon,
                                               lat,
-                                              global_memberships,
-                                              local_memberships,
+                                              global_membership,
+                                              local_membership,
                                               indexes)
   }
 
   cli::cli_alert_success("Clustering")
 
-  global_memberships
+  global_membership
 
 
 }

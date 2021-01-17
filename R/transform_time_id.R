@@ -42,7 +42,7 @@ transform_time_id <- function(obsTime, timeUnit, timeStep) {
     timeID <- as.integer(floor(as.numeric(timeID))) + 1L
   }
 
-  cli::cli_alert_success("Transform timeID")
+  cli::cli_alert_success("Transform observed time {cli::symbol$arrow_right} time indexes | {.val {timeStep}} {timeUnit}")
 
   timeID
 }

@@ -11,13 +11,13 @@
 #' @param timeStep numeric; how many units of timeUnit as a time step.
 #' @return integer; a vector of time indexes.
 #' @noRd
-handle_hotspots_cols <- function(lon, lat, obsTime, timeUnit, timeStep) {
+handle_hotspots_col <- function(lon, lat, obsTime, timeUnit, timeStep) {
 
   timeID <- obsTime
 
   # safe checks
   is_not_null_bundle(lon, lat, obsTime)
-  if (!all_null_bool(timeUnit, timeStep)){
+  if (!all_null_bool(timeUnit, timeStep)) {
     any_null_warning(timeUnit, timeStep)
   }
 

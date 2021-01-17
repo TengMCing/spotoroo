@@ -40,8 +40,8 @@ hotspot_cluster <- function(hotspots,
                             adjDist = 3000,
                             minPts = 4,
                             ignitionCenter = "mean",
-                            timeUnit = NULL,
-                            timeStep = NULL) {
+                            timeUnit = "h",
+                            timeStep = 1) {
 
   # safe checks
   is_length_one_bundle(lon, lat, obsTime, activeTime, adjDist, minPts, ignitionCenter)
@@ -59,53 +59,56 @@ hotspot_cluster <- function(hotspots,
   obsTime <- hotspots[[obsTime]]
 
   # more safe checks and handle time col
-  timeID <- handle_hotspots_cols(lon, lat, obsTime, timeUnit, timeStep)
+  timeID <- handle_hotspots_col(lon, lat, obsTime, timeUnit, timeStep)
 
   # start timing
   start_time <- Sys.time()
 
-  # obtain memberships
-  global_memberships <- global_clustering(lon, lat, timeID, activeTime, adjDist)
+  # obtain membership
+  global_membership <- global_clustering(lon, lat, timeID, activeTime, adjDist)
 
-  # handle noises
-  global_memberships <- handle_noises(global_memberships, minPts)
+  # handle noise
+  global_membership <- handle_noise(global_membership, minPts)
 
   # get ignition points
-  ignitions <- list()
-  if (!all_noises_bool(global_memberships)) {
-    ignitions <- ignition_points(lon,
-                                 lat,
-                                 obsTime,
-                                 timeID,
-                                 global_memberships,
-                                 ignitionCenter)
+  ignition <- list()
+  if (!all_noise_bool(global_membership)) {
+    ignition <- ignition_point(lon,
+                               lat,
+                               obsTime,
+                               timeUnit,
+                               timeID,
+                               global_membership,
+                               ignitionCenter)
   }
 
-  # get relationship between hotspots and ignitions
-  to_ignition <- hotspots_to_ignitions(lon,
-                                       lat,
-                                       timeID,
-                                       global_memberships,
-                                       ignitions)
-
+  # get relationship between hotspots and ignition
+  to_ignition <- hotspot_to_ignition(lon,
+                                     lat,
+                                     obsTime,
+                                     timeUnit,
+                                     global_membership,
+                                     ignition)
 
 
   # bind results
-  results <- list(hotspots = data.frame(lon,
-                                        lat,
-                                        obsTime,
-                                        timeID,
-                                        memberships = global_memberships,
-                                        noise = global_memberships == -1,
-                                        distToIgnition = to_ignition$distToIgnition,
-                                        timeFromIgnition = to_ignition$timeFromIgnition),
-                  ignitions = ignitions,
-                  settings = list(activeTime = activeTime,
-                                  adjDist = adjDist,
-                                  minPts = minPts,
-                                  ignitionCenter = ignitionCenter,
-                                  timeUnit = timeUnit,
-                                  timeStep = timeStep)
+  result <- list(hotspots = data.frame(lon,
+                                       lat,
+                                       obsTime,
+                                       timeID,
+                                       membership = global_membership,
+                                       noise = global_membership == -1,
+                                       distToIgnition = to_ignition$distToIgnition,
+                                       distToIgnitionUnit = "m",
+                                       timeFromIgnition = to_ignition$timeFromIgnition,
+                                       timeFromIgnitionUnit = timeUnit),
+                 ignition = ignition,
+                 setting = list(activeTime = activeTime,
+                                adjDist = adjDist,
+                                minPts = minPts,
+                                ignitionCenter = ignitionCenter,
+                                timeUnit = timeUnit,
+                                timeStep = timeStep)
                   )
 
 
@@ -118,15 +121,18 @@ hotspot_cluster <- function(hotspots,
   taken_mins <- total_secs %/% 60
   taken_secs <- round(total_secs %% 60, 0)
 
-  cli::cli_text(paste("Time taken: {taken_mins} min{?s} {taken_secs} sec{?s}",
-                      "for {length(lon)} obs",
-                      "({round(total_secs/length(lon), 3)} secs/obs)"))
+  cli::cli_alert_info(paste("Time taken: {.val {taken_mins}} min{?s}",
+                      "{.val {taken_secs}} sec{?s}",
+                      "for {.val {length(lon)}} obs",
+                      "({.val {round(total_secs/length(lon), 3)}} secs/obs)"))
+
+  cli::cli_alert_info("{.val {max(global_membership)}} fire{?s} found")
 
   # set result class
-  class(results) <- "spotoroo"
+  class(result) <- "spotoroo"
 
   # return result
-  return(results)
+  return(result)
 
 }
 

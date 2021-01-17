@@ -35,7 +35,7 @@ dynamic_spotoroo <- function(results,
                              noises = FALSE,
                              bottom = NULL) {
 
-  noise <- lon <- lat <- timeID <- memberships <- NULL
+  noise <- lon <- lat <- timeID <- membership <- NULL
 
   if (!"spotoroo" %in% class(results)) {
     stop('Needs a "spotoroo" object as input.')
@@ -51,10 +51,10 @@ dynamic_spotoroo <- function(results,
 
     if (length(clusters) == 0) stop("Please provide valid cluster ID.")
 
-    indexes <- results$ignitions$memberships %in% clusters
-    results$ignitions <- results$ignitions[indexes, ]
+    indexes <- results$ignition$membership %in% clusters
+    results$ignition <- results$ignition[indexes, ]
 
-    indexes <- results$hotspots$memberships %in% c(clusters, -1)
+    indexes <- results$hotspots$membership %in% c(clusters, -1)
     results$hotspots <- results$hotspots[indexes, ]
   }
 
@@ -92,11 +92,11 @@ dynamic_spotoroo <- function(results,
   fire_mov_records <- NULL
 
   if (identical("all", clusters)) {
-    clusters <- 1:max(results$hotspots$memberships)
+    clusters <- 1:max(results$hotspots$membership)
   }
 
-  if (length(clusters) > 1) {
-    cli::cli_alert_info("Plotting multiple clusters in dynamic mode is not recommended.")
+  if (length(clusters) > 12) {
+    cli::cli_alert_info("Plotting more than 12 clusters in dynamic mode is not recommended.")
   }
 
   # get fire mov
@@ -105,22 +105,26 @@ dynamic_spotoroo <- function(results,
 
     if (is.null(fire_mov_records)) {
       fire_mov_records <- temp_data
+      igpoints <- temp_data[1,]
     } else {
       fire_mov_records <- dplyr::bind_rows(fire_mov_records, temp_data)
+      igpoints <- dplyr::bind_rows(igpoints, temp_data[1,])
     }
 
   }
 
+
   p <- p + ggplot2::geom_point(data = fire_mov_records,
                                ggplot2::aes(lon, lat),
                                col = "blue") +
-    ggplot2::geom_point(data = fire_mov_records[1, ],
+    ggplot2::geom_point(data = igpoints,
                         ggplot2::aes(lon, lat, col = "ignition"),
                         size = 2) +
     ggplot2::geom_path(data = fire_mov_records,
-                       ggplot2::aes(lon, lat, group = memberships),
+                       ggplot2::aes(lon, lat, group = membership),
                        col = "blue") +
-    ggplot2::scale_color_manual(values = c("red", "blue")[c(TRUE, noises)])
+    ggplot2::scale_color_manual(values = c("red", "blue")[c(TRUE, noises)]) +
+    ggplot2::facet_wrap(~membership, scales = "free")
 
   p <- p + ggplot2::labs(col = "", x = "lon", y = "lat")
 

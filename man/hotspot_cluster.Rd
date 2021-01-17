@@ -13,8 +13,8 @@ hotspot_cluster(
   adjDist = 3000,
   minPts = 4,
   ignitionCenter = "mean",
-  timeUnit = NULL,
-  timeStep = NULL
+  timeUnit = "h",
+  timeStep = 1
 )
 }
 \arguments{
