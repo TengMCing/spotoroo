@@ -89,7 +89,7 @@ result <- hotspot_cluster(hotspots500,
 #> √ Clustering
 #> √ Handle noise
 #> √ Compute ignition points
-#> i Time taken: 0 mins 1 sec for 500 obs (0.002 secs/obs)
+#> i Time taken: 0 mins 1 sec for 500 obs (0.003 secs/obs)
 #> i 38 fires found
 ```
 
@@ -188,7 +188,7 @@ plot(result,
 ``` r
 plot(result,
      type = "dynamic",
-     clusters = 21:32,
+     clusters = c(26, 28),
      hotspots = TRUE, 
      noises = FALSE)
 ```

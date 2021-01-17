@@ -132,7 +132,7 @@ plot(result,
 ```{r out.width = "70%", out.height="70%"}
 plot(result,
      type = "dynamic",
-     clusters = 21:32,
+     clusters = c(26, 28),
      hotspots = TRUE, 
      noises = FALSE)
 ```
