@@ -138,11 +138,11 @@ plot_fire_mov <- function(result,
   title <- ""
 
   if (!is.null(from)) {
-    title <- paste("From:", from, " ")
+    title <- paste("From:", from)
   }
 
   if (!is.null(to)) {
-    title <- paste("To:", to)
+    title <- paste(title, "To:", to)
   }
 
   if ((!is.null(from)) | (!is.null(to))) {

@@ -4,12 +4,14 @@
 #'
 #' if \code{type} = "\code{def}", result will be plotted spatially,
 #' see also \code{\link{plot_fire}}.
+#' if \code{type} = "\code{timeline}", timeline will be made,
+#' see also \code{\link{timeline}}.
 #' if \code{type} = "\code{mov}", fire movement will be plotted.
 #' see also \code{plot_fire_mov}.
 #'
 #' @param result an object of class "\code{spotoroo}",
 #' a result of a call to \code{\link{hotspot_cluster}}.
-#' @param type character; plot type; one of "def" and "mov".
+#' @param type character; plot type; one of "def", "timeline" and "mov".
 #' @param cluster character/numeric; if "all", plot all clusters. if a numeric
 #'                 vector is given, plot corresponding clusters.
 #' @param ignition logical; if \code{TRUE}, plot the ignition points.
@@ -76,6 +78,13 @@ plot_spotoroo <- function(result,
                        from,
                        to,
                        bg)
+  }
+
+  if (type == "timeline") {
+
+    p <- plot_timeline(result,
+                       from,
+                       to)
   }
 
   p

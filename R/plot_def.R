@@ -91,6 +91,21 @@ plot_def <- function(result,
   # define labs
   p <- p + ggplot2::labs(col = "", x = "lon", y = "lat")
 
+  # add title
+  title <- ""
+
+  if (!is.null(from)) {
+    title <- paste("From:", from)
+  }
+
+  if (!is.null(to)) {
+    title <- paste(title, "To:", to)
+  }
+
+  if ((!is.null(from)) | (!is.null(to))) {
+    p <- p + ggplot2::labs(subtitle = title)
+  }
+
   # return the plot
   return(p)
 
