@@ -2,34 +2,42 @@
 % Please edit documentation in R/plot_spotoroo.R
 \name{plot_spotoroo}
 \alias{plot_spotoroo}
-\title{Plotting spatiotemporal clustering results}
+\title{Plotting spatiotemporal clustering result}
 \usage{
 plot_spotoroo(
-  results,
-  type = "static",
-  clusters = "all",
-  hotspots = TRUE,
-  noises = FALSE,
-  ignitions = TRUE,
-  bottom = NULL
+  result,
+  type = "def",
+  cluster = "all",
+  hotspot = TRUE,
+  noise = FALSE,
+  ignition = TRUE,
+  from = NULL,
+  to = NULL,
+  bg = NULL
 )
 }
 \arguments{
-\item{results}{an object of class "\code{spotoroo}",
+\item{result}{an object of class "\code{spotoroo}",
 a result of a call to \code{\link{hotspot_cluster}}.}
 
-\item{type}{character; plot type; one of "static" and "dynamic".}
+\item{type}{character; plot type; one of "def" and "mov".}
 
-\item{clusters}{character/numeric; if "all", plot all clusters. if a numeric
+\item{cluster}{character/numeric; if "all", plot all clusters. if a numeric
 vector is given, plot corresponding clusters.}
 
-\item{hotspots}{logical; if \code{TRUE}, plot the hotspots.}
+\item{hotspot}{logical; if \code{TRUE}, plot the hotspots.}
 
-\item{noises}{logical; if \code{TRUE}, plot the noises.}
+\item{noise}{logical; if \code{TRUE}, plot the noises.}
 
-\item{ignitions}{logical; if \code{TRUE}, plot the ignition points.}
+\item{ignition}{logical; if \code{TRUE}, plot the ignition points.}
 
-\item{bottom}{an object of class "\code{ggplot}", optional; if \code{TRUE},
+\item{from}{time/numeric; start time, data type depends on type of observed
+time.}
+
+\item{to}{time/numeric; end time, data type depends on type of observed
+time.}
+
+\item{bg}{an object of class "\code{ggplot}", optional; if \code{TRUE},
 plot onto this object. Now it only supports object without colour related
 aesthetics.}
 }
@@ -40,23 +48,23 @@ an object of class "\code{ggplot}".
 can be called by \code{plot.spotoroo()}.
 }
 \details{
-if \code{type} = "\code{static}", results will be plotted spatially,
-see also \code{\link{static_spotoroo}}.
-if \code{type} = "\code{dynamic}", the plot will be faceted by time.
-see also \code{dynamic_spotoroo}.
+if \code{type} = "\code{def}", result will be plotted spatially,
+see also \code{\link{plot_fire}}.
+if \code{type} = "\code{mov}", fire movement will be plotted.
+see also \code{plot_fire_mov}.
 }
 \examples{
 data("hotspots500")
-results <- hotspot_cluster(hotspots500,
-                           lon = "lon",
-                           lat = "lat",
-                           obsTime = "obsTime",
-                           activeTime = 24,
-                           adjDist = 3000,
-                           minPts = 4,
-                           ignitionCenter = "mean",
-                           timeUnit = "h",
-                           timeStep = 1)
+result <- hotspot_cluster(hotspots500,
+                          lon = "lon",
+                          lat = "lat",
+                          obsTime = "obsTime",
+                          activeTime = 24,
+                          adjDist = 3000,
+                          minPts = 4,
+                          ignitionCenter = "mean",
+                          timeUnit = "h",
+                          timeStep = 1)
 
-plot_spotoroo(results)
+plot_spotoroo(result)
 }

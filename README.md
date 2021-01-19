@@ -85,12 +85,33 @@ result <- hotspot_cluster(hotspots500,
                           ignitionCenter = "mean",
                           timeUnit = "h",
                           timeStep = 1)
-#> √ Transform observed time > time indexes | 1 hours
-#> √ Clustering
+#> 
+#> ------------------------------ SPOTOROO 0.0.0.9000 -----------------------------
+#> 
+#> -- Calling Core Function : `hotspot_cluster()` --
+#> 
+#> -- 1 time index = 1 hours
+#> √ Transform observed time > time indexes
+#> i 1226 time indexes found
+#> 
+#> -- activeTime = 24 time indexes | adjDist = 3000 meters
+#> √ Cluster
+#> i 68 clusters found (including noise)
+#> 
+#> -- minPts = 4
 #> √ Handle noise
-#> √ Compute ignition points
-#> i Time taken: 0 mins 1 sec for 500 obs (0.003 secs/obs)
-#> i 38 fires found
+#> i 38 clusters left
+#> i noise propotion : 11.6 %
+#> 
+#> -- ignitionCenter = 'mean'
+#> √ Compute ignition points for clusters
+#> i average hotspots : 11.6
+#> i average duration : 1.9 hours
+#> 
+#> -- Time taken = 0 mins 1 sec for 500 hotspots
+#> i 0.002 secs per hotspot
+#> 
+#> --------------------------------------------------------------------------------
 ```
 
 The ignition points of the first 10 bushfires.
@@ -164,33 +185,33 @@ p <- ggplot() +
   geom_sf(data = vic_map) +
   ggthemes::theme_map()
 plot(result,
-     type = "static",
-     clusters = "all",
-     hotspots = TRUE, 
-     noises = TRUE, 
-     ignitions = TRUE, 
-     bottom = p)
+     type = "def",
+     cluster = "all",
+     hotspot = TRUE, 
+     noise = TRUE, 
+     ignition = TRUE, 
+     bg = p)
 ```
 
 <img src="man/figures/README-unnamed-chunk-9-1.png" width="70%" height="70%" />
 
 ``` r
 plot(result,
-     type = "static",
-     clusters = 1:3,
-     hotspots = TRUE, 
-     noises = FALSE, 
-     ignitions = TRUE)
+     type = "def",
+     cluster = 1:3,
+     hotspot = TRUE, 
+     noise = FALSE, 
+     ignition = TRUE)
 ```
 
 <img src="man/figures/README-unnamed-chunk-10-1.png" width="70%" height="70%" />
 
 ``` r
 plot(result,
-     type = "dynamic",
-     clusters = c(26, 28),
-     hotspots = TRUE, 
-     noises = FALSE)
+     type = "mov",
+     cluster = c(26, 28),
+     hotspot = TRUE, 
+     noise = FALSE)
 ```
 
 <img src="man/figures/README-unnamed-chunk-11-1.png" width="70%" height="70%" />

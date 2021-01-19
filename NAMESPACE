@@ -2,12 +2,10 @@
 
 S3method(plot,spotoroo)
 export(dist_point_to_vector)
-export(dynamic_spotoroo)
 export(global_clustering)
 export(handle_noise)
 export(hotspot_cluster)
 export(ignition_point)
 export(local_clustering)
 export(plot_spotoroo)
-export(static_spotoroo)
 export(transform_time_id)

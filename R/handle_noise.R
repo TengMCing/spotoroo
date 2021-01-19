@@ -16,6 +16,11 @@
 #' @export
 handle_noise <- function(global_membership, minPts) {
 
+  cli::cli_div(theme = list(span.vrb = list(color = "yellow"),
+                            span.unit = list(color = "magenta"),
+                            span.side = list(color = "grey")))
+  cli::cli_h3("{.field minPts} = {.val {minPts}}")
+
   n <- NULL
 
   # count every membership
@@ -35,7 +40,10 @@ handle_noise <- function(global_membership, minPts) {
     global_membership[!indexes] <- adjust_membership(global_membership[!indexes], 0)
   }
 
-  cli::cli_alert_success("Handle noise")
+  cli::cli_alert_success("{.vrb Handle} {.field noise}")
+  cli::cli_alert_info("{.val {max(global_membership)}} cluster{?s} {.side left}")
+  cli::cli_alert_info("noise {.side propotion} : {.val {mean(global_membership == -1)*100} %} ")
+  cli::cli_end()
 
   return(global_membership)
 }

@@ -110,29 +110,29 @@ p <- ggplot() +
   geom_sf(data = vic_map) +
   ggthemes::theme_map()
 plot(result,
-     type = "static",
-     clusters = "all",
-     hotspots = TRUE, 
-     noises = TRUE, 
-     ignitions = TRUE, 
-     bottom = p)
+     type = "def",
+     cluster = "all",
+     hotspot = TRUE, 
+     noise = TRUE, 
+     ignition = TRUE, 
+     bg = p)
 ```
 
 
 ```{r out.width = "70%", out.height="70%"}
 plot(result,
-     type = "static",
-     clusters = 1:3,
-     hotspots = TRUE, 
-     noises = FALSE, 
-     ignitions = TRUE)
+     type = "def",
+     cluster = 1:3,
+     hotspot = TRUE, 
+     noise = FALSE, 
+     ignition = TRUE)
 ```
 
 
 ```{r out.width = "70%", out.height="70%"}
 plot(result,
-     type = "dynamic",
-     clusters = c(26, 28),
-     hotspots = TRUE, 
-     noises = FALSE)
+     type = "mov",
+     cluster = c(26, 28),
+     hotspot = TRUE, 
+     noise = FALSE)
 ```

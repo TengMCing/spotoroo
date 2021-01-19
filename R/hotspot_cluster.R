@@ -58,6 +58,18 @@ hotspot_cluster <- function(hotspots,
   lat <- hotspots[[lat]]
   obsTime <- hotspots[[obsTime]]
 
+  cli::cli_div(theme = list(span.vrb = list(color = "yellow"),
+                            span.unit = list(color = "magenta"),
+                            span.side = list(color = "grey"),
+                            span.def = list(color = "black"),
+                            rule = list("font-weight" = "bold",
+                                        "margin-top" = 1,
+                                        "margin-bottom" = 0,
+                                        color = "cyan",
+                                        "font-color" = "black")))
+  cli::cli_rule(center = "{.def SPOTOROO 0.0.0.9000}")
+  cli::cli_h2("Calling Core Function : {.fn hotspot_cluster}")
+
   # more safe checks and handle time col
   timeID <- handle_hotspots_col(lon, lat, obsTime, timeUnit, timeStep)
 
@@ -121,12 +133,13 @@ hotspot_cluster <- function(hotspots,
   taken_mins <- total_secs %/% 60
   taken_secs <- round(total_secs %% 60, 0)
 
-  cli::cli_alert_info(paste("Time taken: {.val {taken_mins}} min{?s}",
-                      "{.val {taken_secs}} sec{?s}",
-                      "for {.val {length(lon)}} obs",
-                      "({.val {round(total_secs/length(lon), 3)}} secs/obs)"))
 
-  cli::cli_alert_info("{.val {max(global_membership)}} fire{?s} found")
+  cli::cli_h3(paste("{.field Time taken} = {.val {taken_mins}} {.unit min{?s}}",
+                      "{.val {taken_secs}} {.unit sec{?s}}",
+                      "{.side for} {.val {length(lon)}} hotspots"))
+  cli::cli_alert_info("{.val {round(total_secs/length(lon), 3)}} {.unit sec{?s}} {.side per} hotspot")
+  cli::cli_rule()
+  cli::cli_end()
 
   # set result class
   class(result) <- "spotoroo"

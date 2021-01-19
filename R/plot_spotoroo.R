@@ -1,71 +1,81 @@
-#' Plotting spatiotemporal clustering results
+#' Plotting spatiotemporal clustering result
 #'
 #' can be called by \code{plot.spotoroo()}.
 #'
-#' if \code{type} = "\code{static}", results will be plotted spatially,
-#' see also \code{\link{static_spotoroo}}.
-#' if \code{type} = "\code{dynamic}", the plot will be faceted by time.
-#' see also \code{dynamic_spotoroo}.
+#' if \code{type} = "\code{def}", result will be plotted spatially,
+#' see also \code{\link{plot_fire}}.
+#' if \code{type} = "\code{mov}", fire movement will be plotted.
+#' see also \code{plot_fire_mov}.
 #'
-#' @param results an object of class "\code{spotoroo}",
+#' @param result an object of class "\code{spotoroo}",
 #' a result of a call to \code{\link{hotspot_cluster}}.
-#' @param type character; plot type; one of "static" and "dynamic".
-#' @param clusters character/numeric; if "all", plot all clusters. if a numeric
+#' @param type character; plot type; one of "def" and "mov".
+#' @param cluster character/numeric; if "all", plot all clusters. if a numeric
 #'                 vector is given, plot corresponding clusters.
-#' @param ignitions logical; if \code{TRUE}, plot the ignition points.
-#' @param hotspots logical; if \code{TRUE}, plot the hotspots.
-#' @param noises logical; if \code{TRUE}, plot the noises.
-#' @param bottom an object of class "\code{ggplot}", optional; if \code{TRUE},
+#' @param ignition logical; if \code{TRUE}, plot the ignition points.
+#' @param hotspot logical; if \code{TRUE}, plot the hotspots.
+#' @param noise logical; if \code{TRUE}, plot the noises.
+#' @param from time/numeric; start time, data type depends on type of observed
+#'                           time.
+#' @param to time/numeric; end time, data type depends on type of observed
+#'                         time.
+#' @param bg an object of class "\code{ggplot}", optional; if \code{TRUE},
 #' plot onto this object. Now it only supports object without colour related
 #' aesthetics.
 #' @return an object of class "\code{ggplot}".
 #' @examples
 #' data("hotspots500")
-#' results <- hotspot_cluster(hotspots500,
-#'                            lon = "lon",
-#'                            lat = "lat",
-#'                            obsTime = "obsTime",
-#'                            activeTime = 24,
-#'                            adjDist = 3000,
-#'                            minPts = 4,
-#'                            ignitionCenter = "mean",
-#'                            timeUnit = "h",
-#'                            timeStep = 1)
+#' result <- hotspot_cluster(hotspots500,
+#'                           lon = "lon",
+#'                           lat = "lat",
+#'                           obsTime = "obsTime",
+#'                           activeTime = 24,
+#'                           adjDist = 3000,
+#'                           minPts = 4,
+#'                           ignitionCenter = "mean",
+#'                           timeUnit = "h",
+#'                           timeStep = 1)
 #'
-#' plot_spotoroo(results)
+#' plot_spotoroo(result)
 #' @export
-plot_spotoroo <- function(results,
-                          type = "static",
-                          clusters = "all",
-                          hotspots = TRUE,
-                          noises = FALSE,
-                          ignitions = TRUE,
-                          bottom = NULL) {
+plot_spotoroo <- function(result,
+                          type = "def",
+                          cluster = "all",
+                          hotspot = TRUE,
+                          noise = FALSE,
+                          ignition = TRUE,
+                          from = NULL,
+                          to = NULL,
+                          bg = NULL) {
 
-  if (!"spotoroo" %in% class(results)) {
+  if (!"spotoroo" %in% class(result)) {
     stop('Needs a "spotoroo" object as input.')
   }
 
   check_type("character", type)
   is_length_one(type)
 
-  if (type == "static") {
-    p <- static_spotoroo(results,
-                         clusters,
-                         hotspots,
-                         noises,
-                         ignitions,
-                         bottom)
+  if (type == "def") {
+    p <- plot_def(result,
+                  cluster,
+                  hotspot,
+                  noise,
+                  ignition,
+                  from,
+                  to,
+                  bg)
 
   }
 
-  if (type == "dynamic") {
+  if (type == "mov") {
 
-    p <- dynamic_spotoroo(results,
-                          clusters,
-                          hotspots,
-                          noises,
-                          bottom)
+    p <- plot_fire_mov(result,
+                       cluster,
+                       hotspot,
+                       noise,
+                       from,
+                       to,
+                       bg)
   }
 
   p

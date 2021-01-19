@@ -42,7 +42,14 @@ transform_time_id <- function(obsTime, timeUnit, timeStep) {
     timeID <- as.integer(floor(as.numeric(timeID))) + 1L
   }
 
-  cli::cli_alert_success("Transform observed time {cli::symbol$arrow_right} time indexes | {.val {timeStep}} {timeUnit}")
+  cli::cli_div(theme = list(span.vrb = list(color = "yellow"),
+                            span.unit = list(color = "magenta"),
+                            span.side = list(color = "grey")))
+  cli::cli_h3("{.val 1} {.unit time index} = {.val {timeStep}} {.unit {timeUnit}}")
+  cli::cli_alert_success("{.vrb Transform} {.field observed time} {cli::symbol$arrow_right} {.field time indexes}")
+  cli::cli_alert_info("{.val {max(timeID)}} {.unit time indexes} {.side found}")
+
+  cli::cli_end()
 
   timeID
 }

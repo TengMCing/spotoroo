@@ -23,6 +23,12 @@
 #' @export
 global_clustering <- function(lon, lat, timeID, activeTime, adjDist) {
 
+  cli::cli_div(theme = list(span.vrb = list(color = "yellow"),
+                            span.unit = list(color = "magenta"),
+                            span.side = list(color = "grey")))
+  cli::cli_h3("{.field activeTime} = {.val {activeTime}} {.unit time indexes} | {.field adjDist} = {.val {adjDist}} {.unit meters}")
+
+
   global_membership <- rep(0, length(lon))
 
   barstr <- "Clustering [:bar] :current/:total (:percent) eta: :eta"
@@ -53,7 +59,9 @@ global_clustering <- function(lon, lat, timeID, activeTime, adjDist) {
                                               indexes)
   }
 
-  cli::cli_alert_success("Clustering")
+  cli::cli_alert_success("{.vrb Cluster}")
+  cli::cli_alert_info("{.val {max(global_membership)}} cluster{?s} {.side found (including noise)}")
+  cli::cli_end()
 
   global_membership
 
