@@ -35,22 +35,25 @@ plot_timeline <- function(result,
                                      membership,
                                      col = noise),
                         alpha = 0.4) +
-    ggplot2::theme_bw()
+    ggplot2::theme_light(base_size = 9) +
+    ggplot2::theme(axis.ticks.y = element_blank())
 
   # add title
-  title <- ""
+  title <- paste("Fires Selected:", nrow(result$ignition), "\n")
+  left <- min(result$hotspots$obsTime)
+  right <- max(result$hotspots$obsTime)
 
-  if (!is.null(from)) {
-    title <- paste("From:", from)
-  }
+  if (!is.null(from)) left <- from
+  title <- paste0(title, "From: ", left, "\n")
 
-  if (!is.null(to)) {
-    title <- paste(title, "To:", to)
-  }
+  if (!is.null(to)) right <- to
+  title <- paste0(title, "To:      ", right)
 
-  if ((!is.null(from)) | (!is.null(to))) {
-    p <- p + ggplot2::labs(subtitle = title)
-  }
+  p <- p + ggplot2::labs(title = "Timeline",
+                         subtitle = title,
+                         y = "")
+
+  p <- ggExtra::ggMarginal(p, groupColour = TRUE, margins = c("x"))
 
   p
 }

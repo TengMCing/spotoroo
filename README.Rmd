@@ -137,8 +137,7 @@ plot(result,
      bg = plot_vic_map())
 ```
 
-```{r}
-plot(result,
-     "timeline")
+```{r out.width = "70%", out.height="70%"}
+plot(result, "timeline")
 ```
 

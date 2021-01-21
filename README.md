@@ -207,8 +207,7 @@ plot(result,
 <img src="man/figures/README-unnamed-chunk-11-1.png" width="70%" height="70%" />
 
 ``` r
-plot(result,
-     "timeline")
+plot(result, "timeline")
 ```
 
-<img src="man/figures/README-unnamed-chunk-12-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-12-1.png" width="70%" height="70%" />

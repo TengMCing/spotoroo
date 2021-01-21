@@ -80,7 +80,7 @@ plot_fire_mov <- function(result,
   }
 
 
-  p <- ggplot2::ggplot() + ggplot2::theme_bw(base_size = 9) +
+  p <- ggplot2::ggplot() + ggplot2::theme_light(base_size = 9) +
     ggplot2::theme(axis.line = element_blank(),
                    axis.text = element_blank(),
                    axis.ticks = element_blank(),
