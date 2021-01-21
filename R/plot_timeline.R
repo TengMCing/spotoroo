@@ -33,7 +33,7 @@ plot_timeline <- function(result,
   p <- ggplot2::ggplot(result$hotspots) +
     ggplot2::geom_point(ggplot2::aes(obsTime,
                                      membership,
-                                     col = noise),
+                                     col = ifelse(noise, "noise", "fire")),
                         alpha = 0.4) +
     ggplot2::theme_light(base_size = 9) +
     ggplot2::theme(axis.ticks.y = element_blank())
@@ -52,9 +52,13 @@ plot_timeline <- function(result,
   p <- p + ggplot2::labs(title = "Timeline",
                          subtitle = title,
                          y = "Fire ID",
-                         x = "")
+                         x = "",
+                         col = "")
 
-  p <- ggExtra::ggMarginal(p, groupColour = TRUE, margins = c("x"))
+  p <- ggExtra::ggMarginal(p,
+                           groupColour = TRUE,
+                           groupFill = TRUE,
+                           margins = c("x"))
 
   p
 }
