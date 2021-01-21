@@ -51,7 +51,8 @@ plot_timeline <- function(result,
 
   p <- p + ggplot2::labs(title = "Timeline",
                          subtitle = title,
-                         y = "")
+                         y = "Fire ID",
+                         x = "")
 
   p <- ggExtra::ggMarginal(p, groupColour = TRUE, margins = c("x"))
 
