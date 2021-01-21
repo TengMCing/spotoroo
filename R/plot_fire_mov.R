@@ -1,7 +1,7 @@
+#' @export
 plot_fire_mov <- function(result,
                           cluster = "all",
                           hotspot = TRUE,
-                          noise = FALSE,
                           from = NULL,
                           to = NULL,
                           bg = NULL) {
@@ -11,8 +11,8 @@ plot_fire_mov <- function(result,
   }
 
   # safety check
-  check_type_bundle("logical", hotspot, noise)
-  is_length_one_bundle(hotspot, noise)
+  check_type_bundle("logical", hotspot)
+  is_length_one_bundle(hotspot)
 
   # extract corresponding clusters
   if (!identical("all", cluster)){
@@ -77,12 +77,19 @@ plot_fire_mov <- function(result,
     }
   }
 
-  # whether or not to draw on an existing plot
-  if (ggplot2::is.ggplot(bg)) {
-    p <- bg
-  } else {
-    p <- ggplot2::ggplot() + ggplot2::theme_bw()
-  }
+
+  p <- ggplot2::ggplot() + ggplot2::theme_bw(base_size = 9) +
+    ggplot2::theme(axis.line = element_blank(),
+                   axis.text = element_blank(),
+                   axis.ticks = element_blank(),
+                   axis.title = element_blank(),
+                   panel.background = element_blank(),
+                   panel.grid = element_blank(),
+                   panel.spacing = unit(0, "lines"),
+                   plot.background = element_blank(),
+                   legend.justification = c(0, 0),
+                   legend.position = "right")
+
 
   # draw hotspots
   if (hotspot) {
@@ -95,61 +102,67 @@ plot_fire_mov <- function(result,
 
   }
 
-  # draw noises
-  if (noise) {
-
-    p <- p + ggplot2::geom_point(data = dplyr::filter(result$hotspots,
-                                                      noise),
-                                 ggplot2::aes(lon,
-                                              lat,
-                                              col = "noise"),
-                                 alpha = 0.2)
-
-  }
 
   fire_mov_record$type <- "fire movement"
   fire_mov_record$type[fire_mov_record$ignition] <- "ignition"
 
 
   # draw fire mov
-  p <- p + ggplot2::geom_point(data = fire_mov_record,
-                               ggplot2::aes(lon, lat, col = type))
+  p <- p + ggplot2::geom_point(data = dplyr::filter(fire_mov_record,
+                                                    type == "ignition"),
+                               ggplot2::aes(lon, lat),
+                               col = "red") +
+    ggplot2::geom_point(data = dplyr::filter(fire_mov_record,
+                                             type != "ignition"),
+                        ggplot2::aes(lon, lat, col = "fire center"))
 
 
   # add path
   data2 <- dplyr::filter(dplyr::mutate(dplyr::group_by(fire_mov_record,
                                                        membership),
-                                       mov_count = n()),
+                                       mov_count = dplyr::n()),
                          mov_count > 1)
 
   if (nrow(data2) > 0) {
-    p <- p +     ggplot2::geom_path(data = data2,
-                                    ggplot2::aes(lon, lat, col = "fire movement"))
+    p <- p + ggplot2::geom_path(data = data2,
+                                ggplot2::aes(lon, lat),
+                                col = "blue")
   }
 
 
   # facet
   p <- p + ggplot2::facet_wrap(~membership,
                         scales = "free") +
-    ggplot2::labs(col = "", x = "lon", y = "lat")
+    ggplot2::labs(col = "", x = "lon", y = "lat") +
+    ggplot2::scale_color_manual(values = "blue")
 
 
   # add title
-  title <- ""
+  title <- paste("Fires Selected:", nrow(result$ignition), "\n")
+  left <- min(result$hotspots$obsTime)
+  right <- max(result$hotspots$obsTime)
 
-  if (!is.null(from)) {
-    title <- paste("From:", from)
+  if (!is.null(from)) left <- from
+  title <- paste0(title, "From: ", left, "\n")
+
+  if (!is.null(to)) right <- to
+  title <- paste0(title, "To:      ", right)
+
+  if (ggplot2::is.ggplot(bg)) {
+    bg <- bg + ggplot2::geom_point(data = result$ignition,
+                                   ggplot2::aes(lon, lat, col = "ignition")) +
+      ggrepel::geom_text_repel(data = result$ignition,
+                                  ggplot2::aes(lon, lat, label = membership)) +
+      ggplot2::labs(title = "Fire Movement",
+                    subtitle = title,
+                    col = "") +
+      ggplot2::theme(legend.position = "right") +
+      ggplot2::scale_color_manual(values = "red")
+    p <- patchwork:::`/.ggplot`(bg, p)
+  } else {
+    p <- p + ggplot2::labs(title = "Fire Movement",
+                           subtitle = title)
   }
-
-  if (!is.null(to)) {
-    title <- paste(title, "To:", to)
-  }
-
-  if ((!is.null(from)) | (!is.null(to))) {
-    p <- p + ggplot2::labs(subtitle = title)
-  }
-
-
 
   p
 

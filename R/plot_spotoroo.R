@@ -74,7 +74,6 @@ plot_spotoroo <- function(result,
     p <- plot_fire_mov(result,
                        cluster,
                        hotspot,
-                       noise,
                        from,
                        to,
                        bg)

@@ -1,3 +1,4 @@
+#' @export
 plot_def <- function(result,
                      cluster = "all",
                      hotspot = TRUE,
@@ -36,6 +37,10 @@ plot_def <- function(result,
 
     indexes <- result$hotspots$obsTime >= from
     result$hotspots <- result$hotspots[indexes, ]
+
+    if (nrow(result$hotspots) == 0) {
+      stop(paste("No hotspots observed later than", from))
+    }
   }
 
   # to date
@@ -46,6 +51,10 @@ plot_def <- function(result,
 
     indexes <- result$hotspots$obsTime <= to
     result$hotspots <- result$hotspots[indexes, ]
+
+    if (nrow(result$hotspots) == 0) {
+      stop(paste("No hotspots observed ealier than", from))
+    }
   }
 
 
@@ -53,7 +62,7 @@ plot_def <- function(result,
   if (ggplot2::is.ggplot(bg)) {
     p <- bg
   } else {
-    p <- ggplot2::ggplot() + ggplot2::theme_bw()
+    p <- ggplot2::ggplot() + ggthemes::theme_map()
   }
 
   # draw hotspots
@@ -62,8 +71,10 @@ plot_def <- function(result,
     p <- p + ggplot2::geom_point(data = dplyr::filter(result$hotspots,
                                                       !noise),
                                  ggplot2::aes(lon,
-                                              lat),
-                                 alpha = 0.4)
+                                              lat,
+                                              col = "hotspot"),
+                                 alpha = 0.4,
+                                 size = 2)
 
   }
 
@@ -75,7 +86,8 @@ plot_def <- function(result,
                                  ggplot2::aes(lon,
                                               lat,
                                               col = "noise"),
-                                 alpha = 0.2)
+                                 alpha = 0.2,
+                                 size = 2)
 
   }
 
@@ -85,26 +97,31 @@ plot_def <- function(result,
       ggplot2::geom_point(data = result$ignition,
                           ggplot2::aes(lon,
                                        lat,
-                                       col = "ignition"))
+                                       col = "ignition"),
+                          size = 2)
   }
 
-  # define labs
-  p <- p + ggplot2::labs(col = "", x = "lon", y = "lat")
+  # define color
+  pal <- c("#1b9e77", "#d95f02", "#7570b3")[c(hotspot, ignition, noise)]
+  p <- p + ggplot2::scale_color_manual(values = pal) +
+    ggplot2::theme(legend.position = "right") +
+    ggplot2::labs(col = "")
+
 
   # add title
-  title <- ""
+  title <- paste("Fires Selected:", nrow(result$ignition), "\n")
+  left <- min(result$hotspots$obsTime)
+  right <- max(result$hotspots$obsTime)
 
-  if (!is.null(from)) {
-    title <- paste("From:", from)
-  }
+  if (!is.null(from)) left <- from
+  title <- paste0(title, "From: ", left, "\n")
 
-  if (!is.null(to)) {
-    title <- paste(title, "To:", to)
-  }
+  if (!is.null(to)) right <- to
+  title <- paste0(title, "To:      ", right)
 
-  if ((!is.null(from)) | (!is.null(to))) {
-    p <- p + ggplot2::labs(subtitle = title)
-  }
+  p <- p + ggplot2::labs(title = "Overall of Clustering Results",
+                         subtitle = title)
+
 
   # return the plot
   return(p)

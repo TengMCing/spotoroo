@@ -101,7 +101,7 @@ result <- hotspot_cluster(hotspots500,
 #> -- minPts = 4
 #> √ Handle noise
 #> i 38 clusters left
-#> i noise propotion : 11.6 %
+#> i noise proportion : 11.6 %
 #> 
 #> -- ignitionCenter = 'mean'
 #> √ Compute ignition points for clusters
@@ -181,16 +181,13 @@ result$hotspots[1:10,]
 Plot of the result.
 
 ``` r
-p <- ggplot() +
-  geom_sf(data = vic_map) +
-  ggthemes::theme_map()
 plot(result,
      type = "def",
      cluster = "all",
      hotspot = TRUE, 
-     noise = TRUE, 
+     noise = FALSE, 
      ignition = TRUE, 
-     bg = p)
+     bg = plot_vic_map())
 ```
 
 <img src="man/figures/README-unnamed-chunk-9-1.png" width="70%" height="70%" />
@@ -201,7 +198,8 @@ plot(result,
      cluster = 1:3,
      hotspot = TRUE, 
      noise = FALSE, 
-     ignition = TRUE)
+     ignition = TRUE,
+     bg = plot_vic_map())
 ```
 
 <img src="man/figures/README-unnamed-chunk-10-1.png" width="70%" height="70%" />
@@ -209,9 +207,9 @@ plot(result,
 ``` r
 plot(result,
      type = "mov",
-     cluster = c(26, 28),
+     cluster = 26:29,
      hotspot = TRUE, 
-     noise = FALSE)
+     bg = plot_vic_map())
 ```
 
 <img src="man/figures/README-unnamed-chunk-11-1.png" width="70%" height="70%" />
