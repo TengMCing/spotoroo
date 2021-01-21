@@ -4,6 +4,7 @@ plot_fire_mov <- function(result,
                           hotspot = TRUE,
                           from = NULL,
                           to = NULL,
+                          step = 1,
                           bg = NULL) {
 
   if (!"spotoroo" %in% class(result)) {
@@ -13,6 +14,7 @@ plot_fire_mov <- function(result,
   # safety check
   check_type_bundle("logical", hotspot)
   is_length_one_bundle(hotspot)
+
 
   # extract corresponding clusters
   if (!identical("all", cluster)){
@@ -36,7 +38,7 @@ plot_fire_mov <- function(result,
   fire_mov_record <- NULL
 
   for (i in cluster) {
-    temp_data <- get_fire_mov(result, i)
+    temp_data <- get_fire_mov(result, i, step)
 
     if (is.null(fire_mov_record)) {
       fire_mov_record <- temp_data
@@ -109,12 +111,12 @@ plot_fire_mov <- function(result,
 
   # draw fire mov
   p <- p + ggplot2::geom_point(data = dplyr::filter(fire_mov_record,
-                                                    type == "ignition"),
-                               ggplot2::aes(lon, lat),
-                               col = "red") +
-    ggplot2::geom_point(data = dplyr::filter(fire_mov_record,
                                              type != "ignition"),
-                        ggplot2::aes(lon, lat, col = "fire center"))
+                        ggplot2::aes(lon, lat, col = "fire center")) +
+    ggplot2::geom_point(data = dplyr::filter(fire_mov_record,
+                                             type == "ignition"),
+                        ggplot2::aes(lon, lat),
+                        col = "red")
 
 
   # add path

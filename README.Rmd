@@ -48,19 +48,19 @@ library(spotoroo)
 ```
 
 
-The built-in dataset `hotspots500`.
+The built-in dataset `hotspots_fin`.
 
 ```{r}
-str(hotspots500)
+str(hotspots_fin)
 ```
 
 ```{r}
-hotspots500[1:10,]
+hotspots_fin[1:10,]
 ```
 
 ```{r echo = TRUE, warning=FALSE, message=FALSE, error=FALSE, out.width = "70%", out.height="70%"}
 library(tidyverse)
-ggplot(hotspots500) +
+ggplot(hotspots_fin) +
   geom_sf(data = vic_map) +
   geom_point(aes(lon, lat), alpha = 0.3) +
   ggthemes::theme_map() +
@@ -71,7 +71,7 @@ ggplot(hotspots500) +
 Perform spatiotemporal clustering on this dataset.
 
 ```{r example}
-result <- hotspot_cluster(hotspots500,
+result <- hotspot_cluster(hotspots_fin,
                           lon = "lon",
                           lat = "lat",
                           obsTime = "obsTime",
@@ -83,10 +83,10 @@ result <- hotspot_cluster(hotspots500,
                           timeStep = 1)
 ```
 
-The ignition points of the first 10 bushfires.
+The ignition points of the bushfires.
 
 ```{r}
-result$ignition[1:10,]
+result$ignition
 ```
 
 The memberships of the first 10 hotspots.
@@ -119,7 +119,7 @@ plot(result,
 ```{r out.width = "70%", out.height="70%"}
 plot(result,
      type = "def",
-     cluster = 1:3,
+     cluster = 1:2,
      hotspot = TRUE, 
      noise = FALSE, 
      ignition = TRUE,
@@ -130,7 +130,8 @@ plot(result,
 ```{r out.width = "70%", out.height="70%"}
 plot(result,
      type = "mov",
-     cluster = 26:29,
+     cluster = "all",
+     step = 24,
      hotspot = TRUE, 
      bg = plot_vic_map())
 ```

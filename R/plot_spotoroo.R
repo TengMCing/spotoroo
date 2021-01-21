@@ -21,6 +21,7 @@
 #'                           time.
 #' @param to time/numeric; end time, data type depends on type of observed
 #'                         time.
+#' @param step sdf
 #' @param bg an object of class "\code{ggplot}", optional; if \code{TRUE},
 #' plot onto this object. Now it only supports object without colour related
 #' aesthetics.
@@ -48,6 +49,7 @@ plot_spotoroo <- function(result,
                           ignition = TRUE,
                           from = NULL,
                           to = NULL,
+                          step = 1,
                           bg = NULL) {
 
   if (!"spotoroo" %in% class(result)) {
@@ -76,6 +78,7 @@ plot_spotoroo <- function(result,
                        hotspot,
                        from,
                        to,
+                       step,
                        bg)
   }
 

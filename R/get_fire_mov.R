@@ -1,4 +1,4 @@
-get_fire_mov <- function(result, cluster, method = "mean"){
+get_fire_mov <- function(result, cluster, step = 1, method = "mean"){
 
   # check class
   if (!"spotoroo" %in% class(result)) {
@@ -6,9 +6,11 @@ get_fire_mov <- function(result, cluster, method = "mean"){
   }
 
   # safety check
-  is_length_one_bundle(cluster, method)
-  check_type("numeric", cluster)
+  is_length_one_bundle(cluster, method, step)
+  check_type("numeric", cluster, step)
   check_type("character", method)
+  step <- round(step)
+  is_positive(step)
 
   # if cluster does not exist
   if (cluster > max(result$hotspots$membership)) {
@@ -25,10 +27,15 @@ get_fire_mov <- function(result, cluster, method = "mean"){
   fin_obsTime <- result$ignition$obsTime[result$ignition$membership == cluster]
   fin_timeID <- result$ignition$timeID[result$ignition$membership == cluster]
   fin_ignition <- TRUE
+  j <- 0
+  temp_lon <- c()
+  temp_lat <- c()
 
   # for each time ID
   if (min(all_hotspots$timeID) + 1 <= max(all_hotspots$timeID)) {
     for (i in (min(all_hotspots$timeID) + 1):max(all_hotspots$timeID)) {
+
+      j <- j + 1
 
       # if no hotspots in this time ID
       if (sum(all_hotspots$timeID == i) == 0) next
@@ -36,21 +43,34 @@ get_fire_mov <- function(result, cluster, method = "mean"){
       # extract hotspots in this time ID
       current_hotspots <- all_hotspots[all_hotspots$timeID == i, ]
 
-      # calc centroid lon and lat
-      if (method == "mean") {
-        fin_lon <- c(fin_lon, mean(current_hotspots$lon))
-        fin_lat <- c(fin_lat, mean(current_hotspots$lat))
+      temp_lon <- c(temp_lon, current_hotspots$lon)
+      temp_lat <- c(temp_lat, current_hotspots$lat)
+
+      if (j >= step) {
+
+        j <- 0
+
+        # calc centroid lon and lat
+        if (method == "mean") {
+          fin_lon <- c(fin_lon, mean(temp_lon))
+          fin_lat <- c(fin_lat, mean(temp_lat))
+        }
+
+        if (method == "median") {
+          fin_lon <- c(fin_lon, stats::median(temp_lon))
+          fin_lat <- c(fin_lat, stats::median(temp_lat))
+        }
+
+        # append obsTime and timeID
+        fin_obsTime <- c(fin_obsTime, max(current_hotspots$obsTime))
+        fin_timeID <- c(fin_timeID, i)
+        fin_ignition <- c(fin_ignition, FALSE)
+
+        temp_lon <- c()
+        temp_lat <- c()
       }
 
-      if (method == "median") {
-        fin_lon <- c(fin_lon, stats::median(current_hotspots$lon))
-        fin_lat <- c(fin_lat, stats::median(current_hotspots$lat))
-      }
 
-      # append obsTime and timeID
-      fin_obsTime <- c(fin_obsTime, max(current_hotspots$obsTime))
-      fin_timeID <- c(fin_timeID, i)
-      fin_ignition <- c(fin_ignition, FALSE)
 
     }
   }
