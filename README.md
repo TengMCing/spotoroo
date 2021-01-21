@@ -39,44 +39,25 @@ The built-in dataset `hotspots_fin`.
 
 ``` r
 str(hotspots_fin)
-#> 'data.frame':    1070 obs. of  10 variables:
-#>  $ lon                 : num  147 146 143 149 142 ...
-#>  $ lat                 : num  -37.5 -37.9 -37.8 -37.4 -37.1 ...
-#>  $ obsTime             : POSIXct, format: "2020-02-01 05:20:00" "2020-01-02 06:30:00" ...
-#>  $ timeID              : int  2955 2236 2261 2714 2620 2259 2810 2282 2547 2478 ...
-#>  $ membership          : num  -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 ...
-#>  $ noise               : logi  TRUE TRUE TRUE TRUE TRUE TRUE ...
-#>  $ distToIgnition      : num  0 0 0 0 0 0 0 0 0 0 ...
-#>  $ distToIgnitionUnit  : Factor w/ 1 level "m": 1 1 1 1 1 1 1 1 1 1 ...
-#>  $ timeFromIgnition    : 'difftime' num  0 0 0 0 ...
-#>   ..- attr(*, "units")= chr "hours"
-#>  $ timeFromIgnitionUnit: Factor w/ 1 level "h": 1 1 1 1 1 1 1 1 1 1 ...
+#> 'data.frame':    1070 obs. of  3 variables:
+#>  $ lon    : num  147 146 143 149 142 ...
+#>  $ lat    : num  -37.5 -37.9 -37.8 -37.4 -37.1 ...
+#>  $ obsTime: POSIXct, format: "2020-02-01 05:20:00" "2020-01-02 06:30:00" ...
 ```
 
 ``` r
 hotspots_fin[1:10,]
-#>       lon       lat             obsTime timeID membership noise distToIgnition
-#> 1  147.46 -37.46000 2020-02-01 05:20:00   2955         -1  TRUE              0
-#> 2  146.48 -37.93999 2020-01-02 06:30:00   2236         -1  TRUE              0
-#> 3  143.44 -37.82000 2020-01-03 07:20:00   2261         -1  TRUE              0
-#> 4  149.30 -37.36000 2020-01-22 05:10:00   2714         -1  TRUE              0
-#> 5  142.14 -37.06000 2020-01-18 06:40:00   2620         -1  TRUE              0
-#> 6  142.16 -37.50000 2020-01-03 05:40:00   2259         -1  TRUE              0
-#> 7  149.42 -37.34000 2020-01-26 04:40:00   2810         -1  TRUE              0
-#> 8  147.68 -36.62000 2020-01-04 05:10:00   2282         -1  TRUE              0
-#> 9  148.48 -37.40000 2020-01-15 05:20:00   2547         -1  TRUE              0
-#> 10 148.04 -36.38000 2020-01-12 08:50:00   2478         -1  TRUE              0
-#>    distToIgnitionUnit timeFromIgnition timeFromIgnitionUnit
-#> 1                   m          0 hours                    h
-#> 2                   m          0 hours                    h
-#> 3                   m          0 hours                    h
-#> 4                   m          0 hours                    h
-#> 5                   m          0 hours                    h
-#> 6                   m          0 hours                    h
-#> 7                   m          0 hours                    h
-#> 8                   m          0 hours                    h
-#> 9                   m          0 hours                    h
-#> 10                  m          0 hours                    h
+#>       lon       lat             obsTime
+#> 1  147.46 -37.46000 2020-02-01 05:20:00
+#> 2  146.48 -37.93999 2020-01-02 06:30:00
+#> 3  143.44 -37.82000 2020-01-03 07:20:00
+#> 4  149.30 -37.36000 2020-01-22 05:10:00
+#> 5  142.14 -37.06000 2020-01-18 06:40:00
+#> 6  142.16 -37.50000 2020-01-03 05:40:00
+#> 7  149.42 -37.34000 2020-01-26 04:40:00
+#> 8  147.68 -36.62000 2020-01-04 05:10:00
+#> 9  148.48 -37.40000 2020-01-15 05:20:00
+#> 10 148.04 -36.38000 2020-01-12 08:50:00
 ```
 
 ``` r
@@ -109,25 +90,25 @@ result <- hotspot_cluster(hotspots_fin,
 #> -- Calling Core Function : `hotspot_cluster()` --
 #> 
 #> -- 1 time index = 1 hours
-#> √ Transform observed time > time indexes
+#> v Transform observed time > time indexes
 #> i 970 time indexes found
 #> 
 #> -- activeTime = 24 time indexes | adjDist = 3000 meters
-#> √ Cluster
+#> v Cluster
 #> i 16 clusters found (including noise)
 #> 
 #> -- minPts = 4
-#> √ Handle noise
+#> v Handle noise
 #> i 6 clusters left
 #> i noise proportion : 0.934579439252336 %
 #> 
 #> -- ignitionCenter = 'mean'
-#> √ Compute ignition points for clusters
+#> v Compute ignition points for clusters
 #> i average hotspots : 176.7
 #> i average duration : 131.9 hours
 #> 
-#> -- Time taken = 0 mins 4 secs for 1070 hotspots
-#> i 0.004 secs per hotspot
+#> -- Time taken = 0 mins 3 secs for 1070 hotspots
+#> i 0.003 secs per hotspot
 #> 
 #> --------------------------------------------------------------------------------
 ```
@@ -224,3 +205,10 @@ plot(result,
 ```
 
 <img src="man/figures/README-unnamed-chunk-11-1.png" width="70%" height="70%" />
+
+``` r
+plot(result,
+     "timeline")
+```
+
+<img src="man/figures/README-unnamed-chunk-12-1.png" width="100%" />
