@@ -172,7 +172,7 @@ result$hotspots[1:10,]
 Plot of the result.
 
 ``` r
-plot(result)
+plot(result, bg = plot_vic_map())
 ```
 
 <img src="man/figures/README-unnamed-chunk-9-1.png" width="70%" height="70%" />
@@ -187,7 +187,7 @@ plot(result, cluster = c(1,2,3,4))
 plot(result,
      type = "mov",
      cluster = 1:6,
-     step = 1,
+     step = 12,
      hotspot = TRUE,
      bg = plot_vic_map())
 ```
