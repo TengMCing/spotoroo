@@ -107,7 +107,7 @@ result <- hotspot_cluster(hotspots_fin,
 #> i average hotspots : 176.7
 #> i average duration : 131.9 hours
 #> 
-#> -- Time taken = 0 mins 3 secs for 1070 hotspots
+#> -- Time taken = 0 mins 4 secs for 1070 hotspots
 #> i 0.003 secs per hotspot
 #> 
 #> --------------------------------------------------------------------------------
@@ -172,25 +172,13 @@ result$hotspots[1:10,]
 Plot of the result.
 
 ``` r
-plot(result,
-     type = "def",
-     cluster = "all",
-     hotspot = TRUE, 
-     noise = FALSE, 
-     ignition = TRUE, 
-     bg = plot_vic_map())
+plot(result)
 ```
 
 <img src="man/figures/README-unnamed-chunk-9-1.png" width="70%" height="70%" />
 
 ``` r
-plot(result,
-     type = "def",
-     cluster = 1:2,
-     hotspot = TRUE, 
-     noise = FALSE, 
-     ignition = TRUE,
-     bg = plot_vic_map())
+plot(result, cluster = c(1,2,3,4))
 ```
 
 <img src="man/figures/README-unnamed-chunk-10-1.png" width="70%" height="70%" />
@@ -198,9 +186,9 @@ plot(result,
 ``` r
 plot(result,
      type = "mov",
-     cluster = "all",
-     step = 24,
-     hotspot = TRUE, 
+     cluster = 1:6,
+     step = 1,
+     hotspot = TRUE,
      bg = plot_vic_map())
 ```
 
