@@ -72,7 +72,7 @@ ggplot(hotspots_fin) +
 Perform spatiotemporal clustering on this dataset.
 
 ```{r example}
-result <- hotspot_cluster(hotspots_fin,
+result <- hotspot_cluster(hotspots,
                           lon = "lon",
                           lat = "lat",
                           obsTime = "obsTime",
@@ -107,34 +107,21 @@ result$hotspots[1:10,]
 Plot of the result.
 
 ```{r out.width = "70%", out.height="70%"}
-plot(result,
-     type = "def",
-     cluster = "all",
-     hotspot = TRUE, 
-     noise = FALSE, 
-     ignition = TRUE, 
-     bg = plot_vic_map())
+plot(result)
 ```
 
 
 ```{r out.width = "70%", out.height="70%"}
-plot(result,
-     type = "def",
-     cluster = 1:2,
-     hotspot = TRUE, 
-     noise = FALSE, 
-     ignition = TRUE,
-     bg = plot_vic_map())
+plot(result, cluster = c(1,2,3,4))
 ```
 
 
 ```{r out.width = "70%", out.height="70%"}
 plot(result,
      type = "mov",
-     cluster = "all",
-     step = 24,
-     hotspot = TRUE, 
-     bg = plot_vic_map())
+     cluster = 1:6,
+     step = 1,
+     hotspot = TRUE)
 ```
 
 ```{r out.width = "70%", out.height="70%"}

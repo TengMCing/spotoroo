@@ -62,50 +62,107 @@ plot_def <- function(result,
   if (ggplot2::is.ggplot(bg)) {
     p <- bg
   } else {
-    p <- ggplot2::ggplot() + ggthemes::theme_map()
+    p <- ggplot2::ggplot() +
+      ggplot2::theme_bw(base_size = 9) +
+      ggplot2::theme(axis.line = element_blank(),
+                     axis.text = element_blank(),
+                     axis.ticks = element_blank(),
+                     axis.title = element_blank(),
+                     panel.background = element_blank(),
+                     panel.border = element_blank(),
+                     panel.grid = element_blank(),
+                     panel.spacing = unit(0, "lines"),
+                     plot.background = element_blank(),
+                     legend.justification = c(0, 0),
+                     legend.position = c(0, 0))
   }
 
-  # draw hotspots
-  if (hotspot) {
+  if (length(unique(result$hotspots$membership)) <= 9) {
 
-    p <- p + ggplot2::geom_point(data = dplyr::filter(result$hotspots,
-                                                      !noise),
-                                 ggplot2::aes(lon,
-                                              lat,
-                                              col = "hotspot"),
-                                 alpha = 0.4,
-                                 size = 2)
+    # draw hotspots
+    if (hotspot) {
 
+      p <- p + ggplot2::geom_point(data = dplyr::filter(result$hotspots,
+                                                        !noise),
+                                   ggplot2::aes(lon,
+                                                lat,
+                                                col = as.character(membership)),
+                                   alpha = 0.4,
+                                   size = 1.5)
+
+    }
+
+    # draw noises
+    if (noise) {
+
+      p <- p + ggplot2::geom_point(data = dplyr::filter(result$hotspots,
+                                                        noise),
+                                   ggplot2::aes(lon,
+                                                lat),
+                                   col = "black",
+                                   alpha = 0.2,
+                                   size = 1.5)
+
+    }
+
+    # draw ignitions
+    if (ignition) {
+      p <- p +
+        ggplot2::geom_point(data = result$ignition,
+                            ggplot2::aes(lon,
+                                         lat),
+                            col = "black",
+                            size = 1.5)
+    }
+
+    # define color
+    p <- p + ggplot2::scale_color_brewer(palette = "Set1") +
+      ggplot2::theme(legend.position = "none") +
+      ggplot2::labs(col = "")
+
+  } else {
+    # draw hotspots
+    if (hotspot) {
+
+      p <- p + ggplot2::geom_point(data = dplyr::filter(result$hotspots,
+                                                        !noise),
+                                   ggplot2::aes(lon,
+                                                lat),
+                                   col = "black",
+                                   alpha = 0.4,
+                                   size = 1.5)
+
+    }
+
+    # draw noises
+    if (noise) {
+
+      p <- p + ggplot2::geom_point(data = dplyr::filter(result$hotspots,
+                                                        noise),
+                                   ggplot2::aes(lon,
+                                                lat),
+                                   col = "blue",
+                                   alpha = 0.2,
+                                   size = 1.5)
+
+    }
+
+    # draw ignitions
+    if (ignition) {
+      p <- p +
+        ggplot2::geom_point(data = result$ignition,
+                            ggplot2::aes(lon,
+                                         lat),
+                            col = "red",
+                            size = 1.5)
+    }
+
+    # define color
+    p <- p + ggplot2::theme(legend.position = "none") +
+      ggplot2::labs(col = "")
   }
 
-  # draw noises
-  if (noise) {
 
-    p <- p + ggplot2::geom_point(data = dplyr::filter(result$hotspots,
-                                                      noise),
-                                 ggplot2::aes(lon,
-                                              lat,
-                                              col = "noise"),
-                                 alpha = 0.2,
-                                 size = 2)
-
-  }
-
-  # draw ignitions
-  if (ignition) {
-    p <- p +
-      ggplot2::geom_point(data = result$ignition,
-                          ggplot2::aes(lon,
-                                       lat,
-                                       col = "ignition"),
-                          size = 2)
-  }
-
-  # define color
-  pal <- c("#1b9e77", "#d95f02", "#7570b3")[c(hotspot, ignition, noise)]
-  p <- p + ggplot2::scale_color_manual(values = pal) +
-    ggplot2::theme(legend.position = "right") +
-    ggplot2::labs(col = "")
 
 
   # add title
@@ -119,7 +176,10 @@ plot_def <- function(result,
   if (!is.null(to)) right <- to
   title <- paste0(title, "To:      ", right)
 
-  p <- p + ggplot2::labs(title = "Overall of Clustering Results",
+  title2 <- "Overview of Fires"
+  if (ignition) title2 <- paste0(title2, " and Ignition Locations")
+
+  p <- p + ggplot2::labs(title = title2,
                          subtitle = title)
 
 
