@@ -47,6 +47,11 @@ ignition_point <- function(lon,
                            membership,
                            ignitionCenter) {
 
+  cli::cli_div(theme = list(span.vrb = list(color = "yellow"),
+                            span.unit = list(color = "magenta"),
+                            span.side = list(color = "grey")))
+  cli::cli_h3("{.field ignitionCenter} = {.val {ignitionCenter}}")
+
   tb <- list(s = "secs", m = "mins", h = "hours", d = "days", n = "numeric")
   timeUnit <- tb[[timeUnit]]
 
@@ -103,10 +108,7 @@ ignition_point <- function(lon,
 
   }
 
-  cli::cli_div(theme = list(span.vrb = list(color = "yellow"),
-                             span.unit = list(color = "magenta"),
-                             span.side = list(color = "grey")))
-  cli::cli_h3("{.field ignitionCenter} = {.val {ignitionCenter}}")
+
   cli::cli_alert_success("{.vrb Compute} {.field ignition points} {.side for} clusters")
   cli::cli_alert_info("{.side average} hotspots : {round(mean(obs),1)}")
   cli::cli_alert_info("{.side average} duration : {round(mean(timeLen),1)} {.unit {timeUnit}}")

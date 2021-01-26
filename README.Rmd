@@ -79,6 +79,7 @@ result <- hotspot_cluster(hotspots_fin,
                           activeTime = 24,
                           adjDist = 3000,
                           minPts = 4,
+                          minTime = 3,
                           ignitionCenter = "mean",
                           timeUnit = "h",
                           timeStep = 1)
@@ -120,12 +121,12 @@ plot(result, cluster = c(1,2,3,4))
 plot(result,
      type = "mov",
      cluster = 1:6,
-     step = 12,
+     step = 3,
      hotspot = TRUE,
      bg = plot_vic_map())
 ```
 
 ```{r out.width = "70%", out.height="70%"}
-plot(result, "timeline")
+plot_timeline(result, dateLabel = "%b %d", mainBreak = "1 week")
 ```
 

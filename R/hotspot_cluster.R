@@ -12,6 +12,7 @@
 #' @param activeTime numeric (>=0); time tolerance.
 #' @param adjDist numeric (>0); distance tolerance.
 #' @param minPts numeric (>0); minimum number of points in a cluster.
+#' @param minTime sdfsd
 #' @param ignitionCenter character;
 #' @param timeUnit sldfjks
 #' @param timeStep sldfjks
@@ -26,6 +27,7 @@
 #'                            activeTime = 24,
 #'                            adjDist = 3000,
 #'                            minPts = 4,
+#'                            minTime = 3,
 #'                            ignitionCenter = "mean",
 #'                            timeUnit = "h",
 #'                            timeStep = 1)
@@ -39,25 +41,35 @@ hotspot_cluster <- function(hotspots,
                             activeTime = 24,
                             adjDist = 3000,
                             minPts = 4,
+                            minTime = 3,
                             ignitionCenter = "mean",
                             timeUnit = "h",
                             timeStep = 1) {
 
   # safe checks
-  is_length_one_bundle(lon, lat, obsTime, activeTime, adjDist, minPts, ignitionCenter)
+  is_length_one_bundle(lon,
+                       lat,
+                       obsTime,
+                       activeTime,
+                       adjDist,
+                       minPts,
+                       minTime,
+                       ignitionCenter)
   check_type("list", hotspots)
-  check_type("numeric", minPts)
-  is_non_negative(minPts)
+  check_type_bundle("numeric", activeTime, adjDist, minPts, minTime)
+  is_non_negative_bundle(activeTime, minPts, minTime)
+  is_positive(adjDist)
   check_type_bundle("character", lon, lat, obsTime, ignitionCenter)
   check_in(c("mean", "median"), ignitionCenter)
-  is_non_negative(activeTime)
-  is_positive(adjDist)
+
+
 
   # access cols
   lon <- hotspots[[lon]]
   lat <- hotspots[[lat]]
   obsTime <- hotspots[[obsTime]]
 
+  # command line output
   cli::cli_div(theme = list(span.vrb = list(color = "yellow"),
                             span.unit = list(color = "magenta"),
                             span.side = list(color = "grey"),
@@ -80,7 +92,7 @@ hotspot_cluster <- function(hotspots,
   global_membership <- global_clustering(lon, lat, timeID, activeTime, adjDist)
 
   # handle noise
-  global_membership <- handle_noise(global_membership, minPts)
+  global_membership <- handle_noise(global_membership, timeID, minPts, minTime)
 
   # get ignition points
   ignition <- list()

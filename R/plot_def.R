@@ -12,6 +12,22 @@ plot_def <- function(result,
     stop('Needs a "spotoroo" object as input.')
   }
 
+  # define ggplot function
+  aes <- ggplot2::aes
+  geom_point <- ggplot2::geom_point
+  labs <- ggplot2::labs
+  theme <- ggplot2::theme
+  theme_bw <- ggplot2::theme_bw
+  ggplot <- ggplot2::ggplot
+  element_blank <- ggplot2::element_blank
+  unit <- ggplot2::unit
+  scale_color_brewer <- ggplot2::scale_color_brewer
+
+  # define dplyr function
+  filter <- dplyr::filter
+
+
+
   # safety chek
   check_type_bundle("logical", hotspot, ignition, noise)
   is_length_one_bundle(hotspot, ignition, noise)
@@ -62,19 +78,19 @@ plot_def <- function(result,
   if (ggplot2::is.ggplot(bg)) {
     p <- bg
   } else {
-    p <- ggplot2::ggplot() +
-      ggplot2::theme_bw(base_size = 9) +
-      ggplot2::theme(axis.line = element_blank(),
-                     axis.text = element_blank(),
-                     axis.ticks = element_blank(),
-                     axis.title = element_blank(),
-                     panel.background = element_blank(),
-                     panel.border = element_blank(),
-                     panel.grid = element_blank(),
-                     panel.spacing = unit(0, "lines"),
-                     plot.background = element_blank(),
-                     legend.justification = c(0, 0),
-                     legend.position = c(0, 0))
+    p <- ggplot() +
+      theme_bw(base_size = 9) +
+      theme(axis.line = element_blank(),
+            axis.text = element_blank(),
+            axis.ticks = element_blank(),
+            axis.title = element_blank(),
+            panel.background = element_blank(),
+            panel.border = element_blank(),
+            panel.grid = element_blank(),
+            panel.spacing = unit(0, "lines"),
+            plot.background = element_blank(),
+            legend.justification = c(0, 0),
+            legend.position = c(0, 0))
   }
 
   if (length(unique(result$hotspots$membership)) <= 9) {
@@ -82,84 +98,85 @@ plot_def <- function(result,
     # draw hotspots
     if (hotspot) {
 
-      p <- p + ggplot2::geom_point(data = dplyr::filter(result$hotspots,
-                                                        !noise),
-                                   ggplot2::aes(lon,
-                                                lat,
-                                                col = as.character(membership)),
-                                   alpha = 0.4,
-                                   size = 1.5)
+      p <- p + geom_point(data = filter(result$hotspots,
+                                        !noise),
+                          aes(lon,
+                              lat,
+                              col = as.character(membership)),
+                          alpha = 0.4,
+                          size = 1.5)
 
     }
 
     # draw noises
     if (noise) {
 
-      p <- p + ggplot2::geom_point(data = dplyr::filter(result$hotspots,
-                                                        noise),
-                                   ggplot2::aes(lon,
-                                                lat),
-                                   col = "black",
-                                   alpha = 0.2,
-                                   size = 1.5)
+      p <- p + geom_point(data = filter(result$hotspots,
+                                        noise),
+                          aes(lon,
+                              lat),
+                          col = "black",
+                          alpha = 0.2,
+                          size = 1.5)
 
     }
 
     # draw ignitions
     if (ignition) {
       p <- p +
-        ggplot2::geom_point(data = result$ignition,
-                            ggplot2::aes(lon,
-                                         lat),
-                            col = "black",
-                            size = 1.5)
+        geom_point(data = result$ignition,
+                            aes(lon,
+                                lat),
+                   col = "black",
+                   size = 1.5)
     }
 
     # define color
-    p <- p + ggplot2::scale_color_brewer(palette = "Set1") +
-      ggplot2::theme(legend.position = "none") +
-      ggplot2::labs(col = "")
+    p <- p + scale_color_brewer(palette = "Set1") +
+      theme(legend.position = "none") +
+      labs(col = "")
 
   } else {
     # draw hotspots
     if (hotspot) {
 
-      p <- p + ggplot2::geom_point(data = dplyr::filter(result$hotspots,
-                                                        !noise),
-                                   ggplot2::aes(lon,
-                                                lat),
-                                   col = "black",
-                                   alpha = 0.4,
-                                   size = 1.5)
+      p <- p + geom_point(data = filter(result$hotspots,
+                                        !noise),
+                          aes(lon,
+                              lat),
+                          col = "black",
+                          alpha = 0.4,
+                          size = 1.5)
 
     }
 
     # draw noises
     if (noise) {
 
-      p <- p + ggplot2::geom_point(data = dplyr::filter(result$hotspots,
-                                                        noise),
-                                   ggplot2::aes(lon,
-                                                lat),
-                                   col = "blue",
-                                   alpha = 0.2,
-                                   size = 1.5)
+      p <- p + geom_point(data = filter(result$hotspots,
+                                        noise),
+                          aes(lon,
+                              lat),
+                          col = "blue",
+                          alpha = 0.2,
+                          size = 1.5)
 
     }
 
     # draw ignitions
     if (ignition) {
       p <- p +
-        ggplot2::geom_point(data = result$ignition,
-                            ggplot2::aes(lon,
-                                         lat),
-                            col = "red",
-                            size = 1.5)
+        geom_point(data = result$ignition,
+                   aes(lon,
+                       lat),
+                   col = "red",
+                   size = 1.5)
     }
 
     # define color
-    p <- p + ggplot2::theme(legend.position = "none") +
-      ggplot2::labs(col = "")
+    p <- p +
+      theme(legend.position = "none") +
+      labs(col = "")
   }
 
 
@@ -179,7 +196,7 @@ plot_def <- function(result,
   title2 <- "Overview of Fires"
   if (ignition) title2 <- paste0(title2, " and Ignition Locations")
 
-  p <- p + ggplot2::labs(title = title2,
+  p <- p + labs(title = title2,
                          subtitle = title)
 
 

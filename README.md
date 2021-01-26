@@ -81,6 +81,7 @@ result <- hotspot_cluster(hotspots_fin,
                           activeTime = 24,
                           adjDist = 3000,
                           minPts = 4,
+                          minTime = 3,
                           ignitionCenter = "mean",
                           timeUnit = "h",
                           timeStep = 1)
@@ -97,7 +98,7 @@ result <- hotspot_cluster(hotspots_fin,
 #> v Cluster
 #> i 16 clusters found (including noise)
 #> 
-#> -- minPts = 4
+#> -- minPts = 4 | minTime = 3
 #> v Handle noise
 #> i 6 clusters left
 #> i noise proportion : 0.934579439252336 %
@@ -108,7 +109,7 @@ result <- hotspot_cluster(hotspots_fin,
 #> i average duration : 131.9 hours
 #> 
 #> -- Time taken = 0 mins 4 secs for 1070 hotspots
-#> i 0.003 secs per hotspot
+#> i 0.004 secs per hotspot
 #> 
 #> --------------------------------------------------------------------------------
 ```
@@ -187,7 +188,7 @@ plot(result, cluster = c(1,2,3,4))
 plot(result,
      type = "mov",
      cluster = 1:6,
-     step = 12,
+     step = 3,
      hotspot = TRUE,
      bg = plot_vic_map())
 ```
@@ -195,7 +196,7 @@ plot(result,
 <img src="man/figures/README-unnamed-chunk-11-1.png" width="70%" height="70%" />
 
 ``` r
-plot(result, "timeline")
+plot_timeline(result, dateLabel = "%b %d", mainBreak = "1 week")
 ```
 
 <img src="man/figures/README-unnamed-chunk-12-1.png" width="70%" height="70%" />

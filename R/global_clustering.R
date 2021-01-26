@@ -53,10 +53,10 @@ global_clustering <- function(lon, lat, timeID, activeTime, adjDist) {
 
     # update membership
     global_membership <-  update_membership(lon,
-                                              lat,
-                                              global_membership,
-                                              local_membership,
-                                              indexes)
+                                            lat,
+                                            global_membership,
+                                            local_membership,
+                                            indexes)
   }
 
   cli::cli_alert_success("{.vrb Cluster}")

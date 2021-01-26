@@ -40,6 +40,16 @@ is_non_negative <- function(x, varname = deparse(substitute(x))) {
   if (x<0) stop("Formal argument `", varname, "` requires non-negative input")
 }
 
+# STOP; check if multiple variables are non-negative
+is_non_negative_bundle <- function(...) {
+  vars <- list(...)
+  var_names <- as.character(sys.call())[2:(length(vars) + 1)]
+
+  for (i in 1:length(vars)) {
+    is_non_negative(vars[[i]], varname = var_names[i])
+  }
+}
+
 # STOP; check if variable is positive
 is_positive <- function(x, varname = deparse(substitute(x))) {
   if (x<=0) stop("Formal argument `", varname, "` requires positive input")

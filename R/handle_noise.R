@@ -5,7 +5,9 @@
 #' clusters will be assigned with adjusted membership labels.
 #'
 #' @param global_membership integer; a vector of membership labels.
+#' @obsTime sdlfkjs
 #' @param minPts numeric (>=0); minimum number of points of a cluster.
+#' @param minTime sdf
 #' @return integer; a vector of membership labels.
 #' @examples
 #' global_membership <- c(1,1,1,2,2,2,2,2,2,3,3,3,3,3,3)
@@ -14,22 +16,27 @@
 #'
 #' # -1 -1 -1 1 1 1 1 1 1 2 2 2 2 2 2
 #' @export
-handle_noise <- function(global_membership, minPts) {
+handle_noise <- function(global_membership, timeID, minPts, minTime) {
 
   cli::cli_div(theme = list(span.vrb = list(color = "yellow"),
                             span.unit = list(color = "magenta"),
                             span.side = list(color = "grey")))
-  cli::cli_h3("{.field minPts} = {.val {minPts}}")
+  cli::cli_h3("{.field minPts} = {.val {minPts}} | {.field minTime} = {.val {minTime}}")
 
   n <- NULL
+  `%>%` <- dplyr::`%>%`
 
   # count every membership
-  membership_count <- dplyr::count(data.frame(id = 1:length(global_membership),
-                                              global_membership),
-                                   global_membership)
+  membership_count <- data.frame(id = 1:length(global_membership),
+                                 timeID,
+                                 global_membership) %>%
+    dplyr::group_by(global_membership) %>%
+    dplyr::summarise(n = n(), timelen = max(timeID) - min(timeID))
+
 
   # filter noise
-  noise_clusters <- dplyr::filter(membership_count, n < minPts)
+  noise_clusters <- dplyr::filter(membership_count,
+                                  n < minPts | timelen < minTime)
   noise_clusters <- noise_clusters[['global_membership']]
   indexes <- global_membership %in% noise_clusters
   global_membership[indexes] <- -1
