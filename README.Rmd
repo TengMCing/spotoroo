@@ -127,6 +127,6 @@ plot(result,
 ```
 
 ```{r out.width = "70%", out.height="70%"}
-plot_timeline(result, dateLabel = "%b %d", mainBreak = "1 week")
+plot(result, "timeline", dateLabel = "%b %d", mainBreak = "1 week")
 ```
 

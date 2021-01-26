@@ -22,6 +22,9 @@
 #' @param to time/numeric; end time, data type depends on type of observed
 #'                         time.
 #' @param step sdf
+#' @param mainBreak sdf
+#' @param minorBreak sdf
+#' @param dateLable sdf
 #' @param bg an object of class "\code{ggplot}", optional; if \code{TRUE},
 #' plot onto this object. Now it only supports object without colour related
 #' aesthetics.
@@ -35,6 +38,7 @@
 #'                           activeTime = 24,
 #'                           adjDist = 3000,
 #'                           minPts = 4,
+#'                           minTime = 3,
 #'                           ignitionCenter = "mean",
 #'                           timeUnit = "h",
 #'                           timeStep = 1)
@@ -50,6 +54,9 @@ plot_spotoroo <- function(result,
                           from = NULL,
                           to = NULL,
                           step = 1,
+                          mainBreak = NULL,
+                          minorBreak = NULL,
+                          dateLabel = NULL,
                           bg = NULL) {
 
   if (!"spotoroo" %in% class(result)) {
@@ -86,7 +93,10 @@ plot_spotoroo <- function(result,
 
     p <- plot_timeline(result,
                        from,
-                       to)
+                       to,
+                       mainBreak,
+                       minorBreak,
+                       dateLabel)
   }
 
   p
