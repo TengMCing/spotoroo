@@ -71,7 +71,14 @@ ggplot(hotspots_fin) +
 
 <img src="man/figures/README-unnamed-chunk-6-1.png" width="70%" height="70%" />
 
-Perform spatiotemporal clustering on this dataset.
+Perform spatiotemporal clustering on this dataset. You need to provide
+the data, here it is “hotspots\_fin”, specify which columns correspond
+to the spatial variables (lon, lat), and which to time steps (obsTime).
+There is a choice of options for the algorithm. “activeTime” sets the
+time to consider that a fire can be active, and longer than this between
+hotspots will create a new cluster. “adjDist” sets the maximum spatial
+distance between hotspots beyond which they would be considered part of
+a different cluster.
 
 ``` r
 result <- hotspot_cluster(hotspots_fin,
@@ -109,7 +116,7 @@ result <- hotspot_cluster(hotspots_fin,
 #> i average duration : 131.9 hours
 #> 
 #> -- Time taken = 0 mins 5 secs for 1070 hotspots
-#> i 0.005 secs per hotspot
+#> i 0.004 secs per hotspot
 #> 
 #> --------------------------------------------------------------------------------
 ```
@@ -170,7 +177,8 @@ result$hotspots[1:10,]
 
 <!-- ``` -->
 
-Plot of the result.
+Plot of the result. In this example, there is a total of 6 clusters, so
+all can be displayed.
 
 ``` r
 plot(result, bg = plot_vic_map())
@@ -178,11 +186,19 @@ plot(result, bg = plot_vic_map())
 
 <img src="man/figures/README-unnamed-chunk-9-1.png" width="70%" height="70%" />
 
+You can also choose a subset of clusters, and this will plot withou a
+map, so that you can see a zoomed in view of the hotspot clusters and
+their ignition points.
+
 ``` r
 plot(result, cluster = c(1,2,3,4))
 ```
 
 <img src="man/figures/README-unnamed-chunk-10-1.png" width="70%" height="70%" />
+
+To examine the fire movements, use the option “mov”, and the movement
+will be shown as connected lines between centroids at each time step,
+for each cluster.
 
 ``` r
 plot(result,
@@ -194,6 +210,9 @@ plot(result,
 ```
 
 <img src="man/figures/README-unnamed-chunk-11-1.png" width="70%" height="70%" />
+
+To examine the time line of clusters, to learn about intensity of fire
+periods use the option “timeline”.
 
 ``` r
 plot(result, "timeline", 
