@@ -105,17 +105,19 @@ result$hotspots[1:10,]
 
 
 
-Plot of the result.
+Plot of the result. In this example, there is a total of 6 clusters, so all can be displayed. 
 
 ```{r out.width = "70%", out.height="70%"}
 plot(result, bg = plot_vic_map())
 ```
 
+You can also choose a subset of clusters, and this will plot withou a map, so that you can see a zoomed in view of the hotspot clusters and their ignition points. 
 
 ```{r out.width = "70%", out.height="70%"}
 plot(result, cluster = c(1,2,3,4))
 ```
 
+To examine the fire movements, use the option "mov", and the movement will be shown as connected lines between centroids at each time step, for each cluster.  
 
 ```{r out.width = "70%", out.height="70%"}
 plot(result,
@@ -125,6 +127,8 @@ plot(result,
      hotspot = TRUE,
      bg = plot_vic_map())
 ```
+
+To examine the time line of clusters, to learn about intensity of fire periods use the option "timeline".
 
 ```{r out.width = "70%", out.height="70%"}
 plot(result, "timeline", dateLabel = "%b %d", mainBreak = "1 week")

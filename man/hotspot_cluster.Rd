@@ -12,6 +12,7 @@ hotspot_cluster(
   activeTime = 24,
   adjDist = 3000,
   minPts = 4,
+  minTime = 3,
   ignitionCenter = "mean",
   timeUnit = "h",
   timeStep = 1
@@ -35,6 +36,8 @@ observed time.}
 
 \item{minPts}{numeric (>0); minimum number of points in a cluster.}
 
+\item{minTime}{sdfsd}
+
 \item{ignitionCenter}{character;}
 
 \item{timeUnit}{sldfjks}
@@ -57,6 +60,7 @@ results <- hotspot_cluster(hotspots500,
                            activeTime = 24,
                            adjDist = 3000,
                            minPts = 4,
+                           minTime = 3,
                            ignitionCenter = "mean",
                            timeUnit = "h",
                            timeStep = 1)

@@ -4,12 +4,14 @@
 \alias{handle_noise}
 \title{Handle noise clusters}
 \usage{
-handle_noise(global_membership, minPts)
+handle_noise(global_membership, timeID, minPts, minTime)
 }
 \arguments{
 \item{global_membership}{integer; a vector of membership labels.}
 
 \item{minPts}{numeric (>=0); minimum number of points of a cluster.}
+
+\item{minTime}{sdf}
 }
 \value{
 integer; a vector of membership labels.

@@ -13,6 +13,10 @@ plot_spotoroo(
   ignition = TRUE,
   from = NULL,
   to = NULL,
+  step = 1,
+  mainBreak = NULL,
+  minorBreak = NULL,
+  dateLabel = NULL,
   bg = NULL
 )
 }
@@ -37,9 +41,17 @@ time.}
 \item{to}{time/numeric; end time, data type depends on type of observed
 time.}
 
+\item{step}{sdf}
+
+\item{mainBreak}{sdf}
+
+\item{minorBreak}{sdf}
+
 \item{bg}{an object of class "\code{ggplot}", optional; if \code{TRUE},
 plot onto this object. Now it only supports object without colour related
 aesthetics.}
+
+\item{dateLable}{sdf}
 }
 \value{
 an object of class "\code{ggplot}".
@@ -64,6 +76,7 @@ result <- hotspot_cluster(hotspots500,
                           activeTime = 24,
                           adjDist = 3000,
                           minPts = 4,
+                          minTime = 3,
                           ignitionCenter = "mean",
                           timeUnit = "h",
                           timeStep = 1)
