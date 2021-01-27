@@ -46,45 +46,94 @@ plot_timeline <- function(result,
   result$hotspots$membership[result$hotspots$membership == -1] <- -base10 +
     noise_vec
 
+  not_noise <- dplyr::filter(result$hotspots, !noise)
+  not_noise <- dplyr::group_by(not_noise, membership)
+  not_noise <- dplyr::summarise(not_noise,
+                                startt = min(obsTime),
+                                endt = max(obsTime))
+
+  if (max_index < 50) {
+    p <- ggplot2::ggplot() +
+      ggplot2::geom_point(data = dplyr::filter(result$hotspots,
+                                               !noise),
+                          ggplot2::aes(obsTime,
+                                       membership,
+                                       col = "fire"),
+                          alpha = 0.3)
+  } else {
+
+    p <- ggplot2::ggplot() +
+      ggplot2::geom_point(data = dplyr::filter(result$hotspots,
+                                               !noise),
+                          ggplot2::aes(obsTime,
+                                       membership,
+                                       col = "fire"),
+                          alpha = 0) +
+      # ggplot2::geom_point(data = not_noise,
+      #                     ggplot2::aes(startt,
+      #                                  membership),
+      #                     alpha = 1,
+      #                     col = "#1b9e77") +
+      # ggplot2::geom_point(data = not_noise,
+      #                     ggplot2::aes(endt,
+      #                                  membership),
+      #                     alpha = 1,
+      #                     col = "#1b9e77") +
+      ggplot2::geom_segment(data = not_noise,
+                            ggplot2::aes(x = startt,
+                                         xend = endt,
+                                         y = membership,
+                                         yend = membership),
+                            alpha = 1,
+                            col = "#1b9e77",
+                            size = 1.25)
+  }
+
+  p <- p + ggplot2::geom_hline(yintercept = 0, alpha = 0.5)
+
+  noise_num <- nrow(dplyr::filter(result$hotspots, noise))
+
+  if (noise_num > 50) {
+    p <- p + ggplot2::geom_density(data = dplyr::filter(result$hotspots,
+                                                        noise),
+                                   ggplot2::aes(obsTime,
+                                                (..scaled.. - 2) * base10 * 0.5
+                                   ),
+                                   linetype = 2,
+                                   col = ggplot2::alpha("black", 0.4)
+    )
+
+    p <- p + ggplot2::geom_density(data = dplyr::filter(result$hotspots,
+                                                        noise),
+                                   ggplot2::aes(obsTime,
+                                                (-..scaled.. - 2) *
+                                                  base10 *
+                                                  0.5
+                                   ),
+                                   linetype = 2,
+                                   col = ggplot2::alpha("black", 0.4)
+    )
+  }
 
 
-  p <- ggplot2::ggplot() +
-    ggplot2::geom_point(data = dplyr::filter(result$hotspots,
-                                             !noise),
-                        ggplot2::aes(obsTime,
-                                     membership,
-                                     col = "fire"),
-                        alpha = 0.3)
-
-  p <- p + ggplot2::geom_density(data = dplyr::filter(result$hotspots,
-                                                      noise),
-                                 ggplot2::aes(obsTime,
-                                              (..scaled.. - 2) * base10 * 0.5
-                                              ),
-                                 linetype = 2
-                                 )
-
-  p <- p + ggplot2::geom_density(data = dplyr::filter(result$hotspots,
-                                                      noise),
-                                 ggplot2::aes(obsTime,
-                                              (-..scaled.. - 2) * base10 * 0.5
-                                              ),
-                                 linetype = 2
-                                 )
 
   p <- p + ggplot2::geom_point(data = dplyr::filter(result$hotspots,
                                                     noise),
                                ggplot2::aes(obsTime,
                                             membership,
                                             col = "noise"),
-                               alpha = 0.2)
+                               alpha = c(0.4, 0.2)[c(noise_num <=50,
+                                                     noise_num > 50)],
+                               size = 1)
 
 
   p <- p + ggplot2::theme_light(base_size = 9) +
     ggplot2::theme(axis.ticks.y = ggplot2::element_blank(),
                    legend.position = "none") +
     ggplot2::scale_y_continuous(breaks = y_values,
-                                labels = y_labs) +
+                                labels = y_labs,
+                                minor_breaks = NULL,
+                                expand = c(0, base10 * 0.5)) +
     ggplot2::scale_color_brewer(palette = "Dark2")
 
 
@@ -114,7 +163,7 @@ plot_timeline <- function(result,
   if (!is.null(to)) right <- to
   title <- paste0(title, "To:      ", right)
 
-  p <- p + ggplot2::labs(title = "Timeline",
+  p <- p + ggplot2::labs(title = "Timeline of Fires and Noise",
                          subtitle = title,
                          y = "Fire ID",
                          x = "",
@@ -123,7 +172,7 @@ plot_timeline <- function(result,
   p <- ggExtra::ggMarginal(p,
                            groupColour = TRUE,
                            groupFill = TRUE,
-                           margins = c("both"))
+                           margins = c("x"))
 
   p
 }

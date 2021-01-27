@@ -154,9 +154,12 @@ plot_fire_mov <- function(result,
   temp_data <- group_by(fire_mov_record, membership) %>%
     filter(timeID == min(timeID))
 
-  p <- p + geom_text(data = temp_data,
-                               aes(lon, lat, label = "F"),
-                               col = "black")
+  p <- p + geom_point(data = temp_data,
+                      aes(lon, lat),
+                      col = "black",
+                      shape = 21,
+                      size = 3
+                      )
   rm(temp_data)
 
   # draw line
@@ -175,9 +178,11 @@ plot_fire_mov <- function(result,
   temp_data <- group_by(fire_mov_record, membership) %>%
     filter(timeID == max(timeID))
 
-  p <- p + geom_text(data = temp_data,
-                              aes(lon, lat, label = "T"),
-                              col = "black")
+  p <- p + geom_point(data = temp_data,
+                      aes(lon, lat),
+                      col = "black",
+                      shape = 24,
+                      size = 2.5)
   rm(temp_data)
 
 
@@ -221,7 +226,7 @@ plot_fire_mov <- function(result,
                                         aes(lon,
                                             lat,
                                             label = membership)) +
-      labs(title = "Fire Movement",
+      labs(title = bquote(Fire~Movement~(Delta:Start*" | "*Omicron:End)),
            subtitle = subtitle,
            col = "") +
       theme(legend.position = "none") +
@@ -231,7 +236,8 @@ plot_fire_mov <- function(result,
 
   } else {
 
-    p <- p + labs(title = "Fire Movement", subtitle = subtitle)
+    p <- p + labs(title = "Fire Movement (Rectangle: Start point | Triangle: End Point)",
+                  subtitle = subtitle)
 
   }
 

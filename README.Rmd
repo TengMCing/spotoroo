@@ -121,12 +121,15 @@ plot(result, cluster = c(1,2,3,4))
 plot(result,
      type = "mov",
      cluster = 1:6,
-     step = 3,
+     step = 6,
      hotspot = TRUE,
      bg = plot_vic_map())
 ```
 
 ```{r out.width = "70%", out.height="70%"}
-plot(result, "timeline", dateLabel = "%b %d", mainBreak = "1 week")
+plot(result, "timeline", 
+     dateLabel = "%b %d", 
+     mainBreak = "1 week", 
+     minorBreak = "1 day")
 ```
 
