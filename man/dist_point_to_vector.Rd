@@ -2,7 +2,7 @@
 % Please edit documentation in R/dist_point_to_vector.R
 \name{dist_point_to_vector}
 \alias{dist_point_to_vector}
-\title{Calculate the geodesic of a point to multiple points}
+\title{Calculating the geodesic of a point to multiple points}
 \usage{
 dist_point_to_vector(plon, plat, vlon, vlat)
 }
@@ -19,10 +19,10 @@ dist_point_to_vector(plon, plat, vlon, vlat)
 numeric; the geodesic of a point to multiple points in meters.
 }
 \description{
-Calculate the geodesic of a point to multiple points given coordinate
-information.
+\code{dist_point_to_vector()} calculates the geodesic of a point to multiple
+points given the coordinate information.
 The calculation of the geodesic uses the mapbox cheap ruler.
-See also \code{\link[geodist]{geodist}} for more details.
+See also \code{\link[geodist:geodist_vec]{geodist::geodist_vec()}} for more details.
 }
 \examples{
 vlon <- c(141.12, 141.13)
@@ -30,5 +30,4 @@ vlat <- c(-37.1, -37.0)
 
 dist_point_to_vector(141.12, -37.1, vlon, vlat)
 
-# 0.00 11148.63
 }

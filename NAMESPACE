@@ -2,6 +2,7 @@
 
 S3method(plot,spotoroo)
 export(dist_point_to_vector)
+export(get_fire_mov)
 export(global_clustering)
 export(handle_noise)
 export(hotspot_cluster)

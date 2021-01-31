@@ -1,15 +1,16 @@
 #' Update membership labels
 #'
-#' Update membership labels by combining clustering results in different
-#' timestamps.
+#' Update membership labels by combining local clustering results in different
+#' intervals.
 #'
 #' @param lon numeric; a vector of longitude value.
 #' @param lat numeric; a vector of latitude value.
-#' @param global_membership integer; a vector of all membership labels.
+#' @param global_membership integer; a vector of the membership labels of
+#'                                   all hotspots.
 #' @param local_membership integer; a vector of membership labels of the
-#'                                   current timestamp.
-#' @param indexes integer; indexes of hotspots in the current timestamp.
-#' @return integer; a vector of all membership labels.
+#'                                  hotspots in the current interval.
+#' @param indexes integer; indexes of hotspots in the current interval.
+#' @return integer; a vector of membership labels of all hotspots.
 #' @noRd
 update_membership <- function(lon,
                               lat,
@@ -40,11 +41,11 @@ update_membership <- function(lon,
 
   shared_clusteres <- unique(local_membership[old_p])
 
-  # completely new points; new points but in a previous cluster
+  # completely new points; new points but in a shared cluster
   type1 <- new_p[local_membership[new_p] %in% shared_clusteres]
   type2 <- new_p[!local_membership[new_p] %in% shared_clusteres]
 
-  # new points but in a previous cluster
+  # new points but in a shared cluster
   for (i in type1) {
 
     bool <- local_membership[old_p] == local_membership[i]

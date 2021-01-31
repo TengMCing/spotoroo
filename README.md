@@ -105,7 +105,7 @@ result <- hotspot_cluster(hotspots_fin,
 #> v Cluster
 #> i 16 clusters found (including noise)
 #> 
-#> -- minPts = 4 | minTime = 3
+#> -- minPts = 4 hotspots | minTime = 3 time indexes
 #> v Handle noise
 #> i 6 clusters left
 #> i noise proportion : 0.934579439252336 %
@@ -115,7 +115,7 @@ result <- hotspot_cluster(hotspots_fin,
 #> i average hotspots : 176.7
 #> i average duration : 131.9 hours
 #> 
-#> -- Time taken = 0 mins 5 secs for 1070 hotspots
+#> -- Time taken = 0 mins 4 secs for 1070 hotspots
 #> i 0.004 secs per hotspot
 #> 
 #> --------------------------------------------------------------------------------

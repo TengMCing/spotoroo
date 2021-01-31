@@ -2,7 +2,7 @@
 % Please edit documentation in R/global_clustering.R
 \name{global_clustering}
 \alias{global_clustering}
-\title{Cluster hotspots spatially and temporally}
+\title{Clustering hotspots spatially and temporally}
 \usage{
 global_clustering(lon, lat, timeID, activeTime, adjDist)
 }
@@ -13,17 +13,21 @@ global_clustering(lon, lat, timeID, activeTime, adjDist)
 
 \item{timeID}{integer (>=1); a vector of time indexes.}
 
-\item{activeTime}{numeric; time tolerance.
-see also \code{\link{hotspot_cluster}}.}
+\item{activeTime}{numeric (>=0); time tolerance; unit is time index.}
 
-\item{adjDist}{numeric; distance tolerance.
-see also \code{\link{hotspot_cluster}}.}
+\item{adjDist}{numeric (>0); distance tolerance; unit is metre.}
 }
 \value{
 integer; a vector of membership labels.
 }
 \description{
-Cluster hotspots spatially and temporally.
+`global_clustering()`` clusters hotspots spatially and temporally.
+}
+\details{
+For more details about the clustering algorithm and the parameter
+\code{activeTime} and \code{adjDist}, please check the documentation
+of \code{\link[=hotspot_cluster]{hotspot_cluster()}}.
+This function performs the \strong{first 3 steps} of the clustering algorithm.
 }
 \examples{
 lon <- c(141.1, 141.14, 141.12, 141.14, 141.16, 141.12, 141.14,
@@ -32,7 +36,8 @@ lat <- c(-37.10, -37.10, -37.12, -37.12, -37.12, -37.14, -37.14,
          -37.14, -37.16, -37.16)
 timeID <- c(rep(1, 5), rep(26, 5))
 
+global_clustering(lon, lat, timeID, 12, 1500)
 global_clustering(lon, lat, timeID, 24, 3000)
+global_clustering(lon, lat, timeID, 36, 6000)
 
-# 1 1 1 1 1 2 2 2 2 2
 }

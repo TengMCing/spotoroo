@@ -1,4 +1,4 @@
-#' Calculate temporal and spatial relationships between hotspots and ignition points
+#' Calculating spatiotemporal information between hotspots and ignition points
 #'
 #' compute distance to ignition points; compute time from ignition.
 #'
@@ -24,6 +24,10 @@ hotspot_to_ignition <- function(lon,
                                 timeUnit,
                                 membership,
                                 ignition) {
+
+  if (all(membership == -1)) {
+    return(list(distToIgnition = NA, timeFromIgnition = NA))
+  }
 
   tb <- list(s = "secs", m = "mins", h = "hours", d = "days", n = "numeric")
   timeUnit <- tb[[timeUnit]]

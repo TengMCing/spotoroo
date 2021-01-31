@@ -1,14 +1,17 @@
-#' Cluster hotspots spatially and temporally
+#' Clustering hotspots spatially and temporally
 #'
-#' Cluster hotspots spatially and temporally.
+#' `global_clustering()`` clusters hotspots spatially and temporally.
+#'
+#' For more details about the clustering algorithm and the parameter
+#' `activeTime` and `adjDist`, please check the documentation
+#' of [hotspot_cluster()].
+#' This function performs the **first 3 steps** of the clustering algorithm.
 #'
 #' @param lon numeric; a vector of longitude values.
 #' @param lat numeric; a vector of latitude values.
 #' @param timeID integer (>=1); a vector of time indexes.
-#' @param activeTime numeric; time tolerance.
-#'                   see also \code{\link{hotspot_cluster}}.
-#' @param adjDist numeric; distance tolerance.
-#'                see also \code{\link{hotspot_cluster}}.
+#' @param activeTime numeric (>=0); time tolerance; unit is time index.
+#' @param adjDist numeric (>0); distance tolerance; unit is metre.
 #' @return integer; a vector of membership labels.
 #' @examples
 #' lon <- c(141.1, 141.14, 141.12, 141.14, 141.16, 141.12, 141.14,
@@ -17,9 +20,10 @@
 #'          -37.14, -37.16, -37.16)
 #' timeID <- c(rep(1, 5), rep(26, 5))
 #'
+#' global_clustering(lon, lat, timeID, 12, 1500)
 #' global_clustering(lon, lat, timeID, 24, 3000)
+#' global_clustering(lon, lat, timeID, 36, 6000)
 #'
-#' # 1 1 1 1 1 2 2 2 2 2
 #' @export
 global_clustering <- function(lon, lat, timeID, activeTime, adjDist) {
 
@@ -44,11 +48,11 @@ global_clustering <- function(lon, lat, timeID, activeTime, adjDist) {
     # find hotspots in the current interval
     indexes <- define_interval(timeID, t, activeTime)
 
-    # safe checks
+    # safety checks
     if (is.null(indexes)) next
     if (all(global_membership[indexes] != 0)) next
 
-    # clustering spatially
+    # perform clustering spatially
     local_membership <- local_clustering(lon[indexes], lat[indexes], adjDist)
 
     # update membership
@@ -67,3 +71,4 @@ global_clustering <- function(lon, lat, timeID, activeTime, adjDist) {
 
 
 }
+

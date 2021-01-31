@@ -1,3 +1,37 @@
+#' Calculate fire movement
+#'
+#' Calculate the movement of a single fire per a given timestamps.
+#'
+#' @param result spotoroo result object; get from \code{\link{hotspot_cluster}}.
+#' @param cluster integer; the membership lable of the fire.
+#' @param step integer; step size.
+#' @param method character; "mean" or "median", method of centre calculation.
+#' @return a data frame of fire movement
+#' \itemize{
+#'   \item \code{membership} : membership labels.
+#'   \item \code{lon} : longitude of fire centre.
+#'   \item \code{lat} : latitude of fire centre.
+#'   \item \code{timeID} : time indexes.
+#'   \item \code{obsTime} : observed time (approximated).
+#'   \item \code{ignition} : whether or not it is a ignition point.
+#' }
+#' @examples
+#' result <- hotspot_cluster(hotspots_fin,
+#'                           lon = "lon",
+#'                           lat = "lat",
+#'                           obsTime = "obsTime",
+#'                           activeTime = 24,
+#'                           adjDist = 3000,
+#'                           minPts = 4,
+#'                           minTime = 3,
+#'                           ignitionCenter = "mean",
+#'                           timeUnit = "h",
+#'                           timeStep = 1)
+#'
+#' get_fire_mov(result, cluster = 1, step = 1, method = "mean")
+#' get_fire_mov(result, cluster = 2, step = 3, method = "median")
+#'
+#' @export
 get_fire_mov <- function(result, cluster, step = 1, method = "mean"){
 
   # check class
@@ -22,10 +56,11 @@ get_fire_mov <- function(result, cluster, step = 1, method = "mean"){
   all_hotspots <- result$hotspots[indexes, ]
 
   # init vectors
-  fin_lon <- result$ignition$lon[result$ignition$membership == cluster]
-  fin_lat <- result$ignition$lat[result$ignition$membership == cluster]
-  fin_obsTime <- result$ignition$obsTime[result$ignition$membership == cluster]
-  fin_timeID <- result$ignition$timeID[result$ignition$membership == cluster]
+  indexes <- result$ignition$membership == cluster
+  fin_lon <- result$ignition$lon[indexes]
+  fin_lat <- result$ignition$lat[indexes]
+  fin_obsTime <- result$ignition$obsTime[indexes]
+  fin_timeID <- result$ignition$timeID[indexes]
   fin_ignition <- TRUE
   j <- 0
   temp_lon <- c()
@@ -54,9 +89,7 @@ get_fire_mov <- function(result, cluster, step = 1, method = "mean"){
         if (method == "mean") {
           fin_lon <- c(fin_lon, mean(temp_lon))
           fin_lat <- c(fin_lat, mean(temp_lat))
-        }
-
-        if (method == "median") {
+        } else {
           fin_lon <- c(fin_lon, stats::median(temp_lon))
           fin_lat <- c(fin_lat, stats::median(temp_lat))
         }
@@ -87,3 +120,5 @@ get_fire_mov <- function(result, cluster, step = 1, method = "mean"){
   # return output
   fin_data_set
 }
+
+

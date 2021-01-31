@@ -1,3 +1,33 @@
+#' Default method of plotting spotoroo result
+#'
+#' Default method of plotting spotoroo result. A scatter plot will be made.
+#'
+#' @param result spotoroo result object; get from \code{\link{hotspot_cluster}}.
+#' @param cluster integer/character; the membership labels of fires to display.
+#' "all" stands for plotting all clusters.
+#' @param hotspot logical; display hotspots?
+#' @param noise logical; display noise?
+#' @param ignition logical; display ignition points?
+#' @param from date/datetime; only display data after this date/datetime.
+#' @param to date/datetime; only display data before this date/datetime.
+#' @param bg ggplot object; background image.
+#' @return a ggplot object
+#' @examples
+#' result <- hotspot_cluster(hotspots_fin,
+#'                           lon = "lon",
+#'                           lat = "lat",
+#'                           obsTime = "obsTime",
+#'                           activeTime = 24,
+#'                           adjDist = 3000,
+#'                           minPts = 4,
+#'                           minTime = 3,
+#'                           ignitionCenter = "mean",
+#'                           timeUnit = "h",
+#'                           timeStep = 1)
+#'
+#' plot_def(result, cluster = 1:6, bg = plot_vic_map())
+#' plot_def(result, cluster = "all", bg = plot_vic_map())
+#'
 #' @export
 plot_def <- function(result,
                      cluster = "all",
@@ -28,7 +58,7 @@ plot_def <- function(result,
 
 
 
-  # safety chek
+  # safety check
   check_type_bundle("logical", hotspot, ignition, noise)
   is_length_one_bundle(hotspot, ignition, noise)
 
@@ -55,7 +85,7 @@ plot_def <- function(result,
     result$hotspots <- result$hotspots[indexes, ]
 
     if (nrow(result$hotspots) == 0) {
-      stop(paste("No hotspots observed later than", from))
+      stop(paste("No hotspots/noise observed later than", from))
     }
   }
 
@@ -69,7 +99,7 @@ plot_def <- function(result,
     result$hotspots <- result$hotspots[indexes, ]
 
     if (nrow(result$hotspots) == 0) {
-      stop(paste("No hotspots observed ealier than", from))
+      stop(paste("No hotspots/noise observed ealier than", from))
     }
   }
 
@@ -122,7 +152,7 @@ plot_def <- function(result,
     }
 
     # draw ignitions
-    if (ignition) {
+    if (ignition & length(unique(result$hotspots$membership)) > 1) {
       p <- p +
         geom_point(data = result$ignition,
                             aes(lon,

@@ -1,11 +1,15 @@
-#' Cluster hotspots spatially
+#' Clustering hotspots spatially
 #'
-#' Cluster hotspots spatially.
+#' `local_clustering()` clusters hotspots spatially.
+#'
+#' For more details about the clustering algorithm and the parameter `adjDist`,
+#' please check the documentation of [hotspot_cluster()].
+#' This function performs the **step 2** of the clustering algorithm. It
+#' clusters hotspots in a given interval.
 #'
 #' @param lon numeric; a vector of longitude values.
 #' @param lat numeric; a vector of latitude values.
-#' @param adjDist numeric (>0); distance tolerance.
-#'                see also \code{\link{hotspot_cluster}}.
+#' @param adjDist numeric (>0); distance tolerance; unit is metre.
 #' @return integer; a vector of membership labels
 #' @examples
 #' lon <- c(141.1, 141.14, 141.12, 141.14, 141.16, 141.12, 141.14,
@@ -14,8 +18,9 @@
 #'          -37.14, -37.16, -37.16)
 #'
 #' local_clustering(lon, lat, 2000)
+#' local_clustering(lon, lat, 3000)
+#' local_clustering(lon, lat, 4000)
 #'
-#' # 1 2 3 3 3 4 4 4 5 5
 #' @export
 local_clustering <- function(lon, lat, adjDist) {
 

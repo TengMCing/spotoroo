@@ -1,16 +1,21 @@
-#' Calculate ignition points
+#' Calculating ignition points
 #'
-#' Calculate ignition points using membership labels.
+#' `ignition_point()` calculates ignition points using membership labels.
 #'
+#' For more details about the clustering algorithm and the parameter
+#' `timeUnit`, `timeID` and `ignitionCenter`,
+#' please check the documentation of [hotspot_cluster()].
+#' This function performs the **step 5** of the clustering algorithm. It
+#' calculates ignition points.
 #' For a cluster, when there are multiple earliest hotspots, if
-#' ignitionCenter = "mean", the centroid of these hotspots will be used
-#' as the ignition point, if ignitionCenter = "median", median longitude
+#' `ignitionCenter` is "mean", the centroid of these hotspots will be used
+#' as the ignition point, if `ignitionCenter` is "median", median longitude
 #' and median latitude of these hotspots will be used.
 #'
 #' @param lon numeric; a vector of longitude values.
 #' @param lat numeric; a vector of latitude values.
-#' @param obsTime date/numeric; a vector of observed time.
-#' @param timeUnit character; the unit of time, one of "s" (secs), "m"(mins),
+#' @param obsTime date/datetime/numeric; a vector of observed time.
+#' @param timeUnit character; one of "s" (secs), "m"(mins),
 #'                            "h"(hours), "d"(days) and "n"(numeric).
 #' @param timeID integer (>=1); a vector of time indexes.
 #' @param membership integer; a vector of membership labels.
@@ -19,12 +24,13 @@
 #' @return a data frame of ignition points
 #' \itemize{
 #'   \item \code{membership} : membership labels.
-#'   \item \code{ignition_lon} : longitude of ignition points.
-#'   \item \code{ignition_lat} : latitude of ignition points.
-#'   \item \code{ignition_obsTime} : observed time of ignition points.
+#'   \item \code{lon} : longitude of ignition points.
+#'   \item \code{lat} : latitude of ignition points.
+#'   \item \code{obsTime} : observed time of ignition points.
 #'   \item \code{timeID} : time indexes.
-#'   \item \code{clusterObs} : number of observations in the cluster.
-#'   \item \code{clusterTimeLen} : time frame of the cluster.
+#'   \item \code{obsInCluster} : number of observations in the cluster.
+#'   \item \code{clusterTimeLen} : length of time of the cluster.
+#'   \item \code{clusterTimeLenUnit} : unit of length of time.
 #' }
 #' @examples
 #' lon <- c(141.1, 141.14, 141.12, 141.14, 141.16, 141.12, 141.14,
@@ -37,6 +43,7 @@
 #' membership <- c(1, 1, 1, 1, 1, 2, 2, 2, 2, 2)
 #'
 #' ignition_point(lon, lat, obsTime, timeUnit, timeID, membership, "mean")
+#' ignition_point(lon, lat, obsTime, timeUnit, timeID, membership, "median")
 #'
 #' @export
 ignition_point <- function(lon,
@@ -75,24 +82,26 @@ ignition_point <- function(lon,
   # for each cluster
   for (i in 1:max(membership)) {
 
+    indexes <- membership == i
+
     # get earliest observed time
-    earliest_time <- min(obsTime[membership == i])
+    earliest_time <- min(obsTime[indexes])
     ignition_obsTime[i] <- earliest_time
 
     # get earliest time index
-    earliest_timeID <- min(timeID[membership == i])
+    earliest_timeID <- min(timeID[indexes])
     ignition_timeID[i] <- earliest_timeID
 
     # count observations
-    obs[i] <- sum(membership == i)
+    obs[i] <- sum(indexes)
 
-    # calc time len using time indexes or obs time
+    # calculate time len using time indexes or obs time
     if (timeUnit != "numeric") {
-      timeLen[i] <- difftime(max(obsTime[membership == i]),
-                             min(obsTime[membership == i]),
+      timeLen[i] <- difftime(max(obsTime[indexes]),
+                             min(obsTime[indexes]),
                              units = timeUnit)
     } else {
-      timeLen[i] <- max(timeID[membership == i]) - min(timeID[membership == i])
+      timeLen[i] <- max(timeID[indexes]) - min(timeID[indexes])
     }
 
 

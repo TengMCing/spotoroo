@@ -7,27 +7,34 @@
 \method{plot}{spotoroo}(x, ...)
 }
 \arguments{
-\item{x}{an object of class "\code{spotoroo}",
-a result of a call to \code{\link{hotspot_cluster}}.}
+\item{x}{\code{spotoroo} object;
+a result of a call to \code{\link[=hotspot_cluster]{hotspot_cluster()}}.}
 
-\item{\dots}{additional arguments pass to \code{plot_spotoroo()}}
+\item{\dots}{additional arguments pass to \code{\link[=plot_spotoroo]{plot_spotoroo()}}}
 }
 \description{
-\code{plot} method for class "\code{spotoroo}", a simple wrapper of
-\code{plot_spotoroo()}, see also \code{\link{plot_spotoroo}}.
+\code{\link[=plot.spotoroo]{plot.spotoroo()}} is the \code{plot} method of the class \code{spotoroo}.
+It is a simple wrapper of \code{\link[=plot_spotoroo]{plot_spotoroo()}}.
 }
 \examples{
-data("hotspots500")
-results <- hotspot_cluster(hotspots500,
+results <- hotspot_cluster(hotspots_fin,
                            lon = "lon",
                            lat = "lat",
                            obsTime = "obsTime",
                            activeTime = 24,
                            adjDist = 3000,
                            minPts = 4,
+                           minTime = 3,
                            ignitionCenter = "mean",
                            timeUnit = "h",
                            timeStep = 1)
 
+# default plot
 plot(results)
+
+# three different types of plots
+plot(results, "def")
+plot(results, "mov")
+plot(results, "timeline")
+
 }

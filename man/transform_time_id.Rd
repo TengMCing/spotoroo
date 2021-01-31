@@ -2,33 +2,35 @@
 % Please edit documentation in R/transform_time_id.R
 \name{transform_time_id}
 \alias{transform_time_id}
-\title{Transform observed time to time indexes}
+\title{Transforming a series of time or datetime to time indexes}
 \usage{
 transform_time_id(obsTime, timeUnit, timeStep)
 }
 \arguments{
-\item{obsTime}{date/numeric; a vector of observed time of hotspots. If
-\code{timeUnit} = \code{"n"}, \code{obsTime}
-can be a numeric vector, otherwise, it needs
-to be in date time format.}
+\item{obsTime}{date/datetime/numeric; a vector of observed time of hotspots.
+If \code{timeUnit} is "n", \code{obsTime}
+needs to be a numeric vector,
+otherwise, it needs to be in
+date or datetime format.}
 
 \item{timeUnit}{character; the unit of time, one of "s" (secs), "m"(mins),
 "h"(hours), "d"(days) and "n"(numeric).}
 
-\item{timeStep}{numeric (>0); the number of units of timeUnit as a time
-step.}
+\item{timeStep}{numeric (>0); number of units of \code{timeUnit} in a time step.}
 }
 \value{
 integer; a vector of time indexes.
 }
 \description{
-Transform observed time to time indexes.
+\code{\link[=transform_time_id]{transform_time_id()}} transforms a series of time or datetime to
+time indexes.
 }
 \details{
-The earliest observed time has a corresponding time index \code{1}. The
-difference between any time to the earliest observed time will be transformed
-using the given time unit and divided by the given time step. The final
-indexes will be floored to integer.
+The earliest time is assigned with a time index \code{1}.
+The difference between any other time to the earliest
+time is transformed using the \code{timeUnit} and divided
+by the \code{timeStep}. These differences are floored to integer and
+used as the time indexes.
 }
 \examples{
 obsTime <- as.Date(c("2020-01-01",
@@ -36,6 +38,16 @@ obsTime <- as.Date(c("2020-01-01",
                      "2020-01-04"))
 
 transform_time_id(obsTime, "h", 1)
+transform_time_id(obsTime, "m", 60)
+transform_time_id(obsTime, "s", 3600)
 
-# 1 25 73
+obsTime <- c(1,
+             1.5,
+             4.5,
+             6)
+
+transform_time_id(obsTime, "n", 1)
+transform_time_id(obsTime, "n", 1.5)
+
+
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/ignition_point.R
 \name{ignition_point}
 \alias{ignition_point}
-\title{Calculate ignition points}
+\title{Calculating ignition points}
 \usage{
 ignition_point(lon, lat, obsTime, timeUnit, timeID, membership, ignitionCenter)
 }
@@ -11,9 +11,9 @@ ignition_point(lon, lat, obsTime, timeUnit, timeID, membership, ignitionCenter)
 
 \item{lat}{numeric; a vector of latitude values.}
 
-\item{obsTime}{date/numeric; a vector of observed time.}
+\item{obsTime}{date/datetime/numeric; a vector of observed time.}
 
-\item{timeUnit}{character; the unit of time, one of "s" (secs), "m"(mins),
+\item{timeUnit}{character; one of "s" (secs), "m"(mins),
 "h"(hours), "d"(days) and "n"(numeric).}
 
 \item{timeID}{integer (>=1); a vector of time indexes.}
@@ -27,21 +27,27 @@ one of "mean" and "median".}
 a data frame of ignition points
 \itemize{
 \item \code{membership} : membership labels.
-\item \code{ignition_lon} : longitude of ignition points.
-\item \code{ignition_lat} : latitude of ignition points.
-\item \code{ignition_obsTime} : observed time of ignition points.
+\item \code{lon} : longitude of ignition points.
+\item \code{lat} : latitude of ignition points.
+\item \code{obsTime} : observed time of ignition points.
 \item \code{timeID} : time indexes.
-\item \code{clusterObs} : number of observations in the cluster.
-\item \code{clusterTimeLen} : time frame of the cluster.
+\item \code{obsInCluster} : number of observations in the cluster.
+\item \code{clusterTimeLen} : length of time of the cluster.
+\item \code{clusterTimeLenUnit} : unit of length of time.
 }
 }
 \description{
-Calculate ignition points using membership labels.
+\code{ignition_point()} calculates ignition points using membership labels.
 }
 \details{
+For more details about the clustering algorithm and the parameter
+\code{timeUnit}, \code{timeID} and \code{ignitionCenter},
+please check the documentation of \code{\link[=hotspot_cluster]{hotspot_cluster()}}.
+This function performs the \strong{step 5} of the clustering algorithm. It
+calculates ignition points.
 For a cluster, when there are multiple earliest hotspots, if
-ignitionCenter = "mean", the centroid of these hotspots will be used
-as the ignition point, if ignitionCenter = "median", median longitude
+\code{ignitionCenter} is "mean", the centroid of these hotspots will be used
+as the ignition point, if \code{ignitionCenter} is "median", median longitude
 and median latitude of these hotspots will be used.
 }
 \examples{
@@ -55,5 +61,6 @@ timeID <- c(rep(1, 5), rep(26, 5))
 membership <- c(1, 1, 1, 1, 1, 2, 2, 2, 2, 2)
 
 ignition_point(lon, lat, obsTime, timeUnit, timeID, membership, "mean")
+ignition_point(lon, lat, obsTime, timeUnit, timeID, membership, "median")
 
 }

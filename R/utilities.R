@@ -55,6 +55,16 @@ is_positive <- function(x, varname = deparse(substitute(x))) {
   if (x<=0) stop("Formal argument `", varname, "` requires positive input")
 }
 
+# STOP; check if multiple variables are positive
+is_positive_bundle <- function(...) {
+  vars <- list(...)
+  var_names <- as.character(sys.call())[2:(length(vars) + 1)]
+
+  for (i in 1:length(vars)) {
+    is_positive(vars[[i]], varname = var_names[i])
+  }
+}
+
 # STOP; check if variable is one of a vector of values
 check_in <- function(values, x, varname = deparse(substitute(x))) {
   if (!x %in% values) {

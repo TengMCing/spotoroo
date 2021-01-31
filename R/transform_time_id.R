@@ -1,20 +1,22 @@
-#' Transform observed time to time indexes
+#' Transforming a series of time or datetime to time indexes
 #'
-#' Transform observed time to time indexes.
+#' [transform_time_id()] transforms a series of time or datetime to
+#' time indexes.
 #'
-#' The earliest observed time has a corresponding time index \code{1}. The
-#' difference between any time to the earliest observed time will be transformed
-#' using the given time unit and divided by the given time step. The final
-#' indexes will be floored to integer.
+#' The earliest time is assigned with a time index \code{1}.
+#' The difference between any other time to the earliest
+#' time is transformed using the `timeUnit` and divided
+#' by the `timeStep`. These differences are floored to integer and
+#' used as the time indexes.
 #'
-#' @param obsTime date/numeric; a vector of observed time of hotspots. If
-#'                              \code{timeUnit} = \code{"n"}, \code{obsTime}
-#'                              can be a numeric vector, otherwise, it needs
-#'                              to be in date time format.
+#' @param obsTime date/datetime/numeric; a vector of observed time of hotspots.
+#'                                       If `timeUnit` is "n", `obsTime`
+#'                                       needs to be a numeric vector,
+#'                                       otherwise, it needs to be in
+#'                                       date or datetime format.
 #' @param timeUnit character; the unit of time, one of "s" (secs), "m"(mins),
 #'                            "h"(hours), "d"(days) and "n"(numeric).
-#' @param timeStep numeric (>0); the number of units of timeUnit as a time
-#'                               step.
+#' @param timeStep numeric (>0); number of units of `timeUnit` in a time step.
 #' @return integer; a vector of time indexes.
 #' @examples
 #' obsTime <- as.Date(c("2020-01-01",
@@ -22,8 +24,18 @@
 #'                      "2020-01-04"))
 #'
 #' transform_time_id(obsTime, "h", 1)
+#' transform_time_id(obsTime, "m", 60)
+#' transform_time_id(obsTime, "s", 3600)
 #'
-#' # 1 25 73
+#' obsTime <- c(1,
+#'              1.5,
+#'              4.5,
+#'              6)
+#'
+#' transform_time_id(obsTime, "n", 1)
+#' transform_time_id(obsTime, "n", 1.5)
+#'
+#'
 #' @export
 transform_time_id <- function(obsTime, timeUnit, timeStep) {
 
