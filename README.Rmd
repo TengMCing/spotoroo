@@ -63,7 +63,7 @@ hotspots_fin[1:10,]
 ```{r echo = TRUE, warning=FALSE, message=FALSE, error=FALSE, out.width = "70%", out.height="70%"}
 library(tidyverse)
 vic_map +
-  geom_point(aes(lon, lat), alpha = 0.3) +
+  geom_point(data = hotspots_fin, aes(lon, lat), alpha = 0.3) +
   ggtitle("Raw Hotspots")
 ```
 
@@ -71,7 +71,7 @@ vic_map +
 Perform spatiotemporal clustering on this dataset. You need to provide the data, here it is "hotspots_fin", specify which columns correspond to the spatial variables (lon, lat), and which to time steps (obsTime). There is a choice of options for the algorithm. "activeTime" sets the time to consider that a fire can be active, and longer than this between hotspots will create a new cluster. "adjDist" sets the maximum spatial distance between hotspots beyond which they would be considered part of a different cluster. 
 
 ```{r example}
-result <- hotspot_cluster(hotspots5000,
+result <- hotspot_cluster(hotspots_fin,
                           lon = "lon",
                           lat = "lat",
                           obsTime = "obsTime",
