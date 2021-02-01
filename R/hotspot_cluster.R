@@ -83,10 +83,35 @@
 #'                                      "d" (days) and "n" (numeric).
 #' @param timeStep **OPTIONAL**; numeric (>0); number of units of `timeUnit` in
 #'                                             a time step.
-#' @return A `spotoroo` object; the clustering result.
+#' @return A `spotoroo` object; the clustering result; it is also a list:
+#' \itemize{
+#'   \item \code{hotspots} : a data frame contains information of hotspots.
+#'   \itemize{
+#'     \item \code{lon} : longitude.
+#'     \item \code{lat} : latitude.
+#'     \item \code{obsTime} : observed time.
+#'     \item \code{timeID} : time index.
+#'     \item \code{membership} : membership label.
+#'     \item \code{noise} : whether it is noise.
+#'     \item \code{distToIgnition} : distance to ignition.
+#'     \item \code{distToIgnitionUnit} : unit of distance to ignition.
+#'     \item \code{timeFromIgnition} : time from ignition.
+#'   }
+#'   \item \code{ignition} : a data frame contains information of ignition
+#'                           points.
+#'   \itemize{
+#'     \item \code{lon} : longitude.
+#'     \item \code{lat} : latitude.
+#'     \item \code{obsTime} : observed time.
+#'     \item \code{timeID} : time index.
+#'     \item \code{obsInCluster} : number of observations in the cluster.
+#'     \item \code{clusterTimeLen} : length of time of the cluster.
+#'   }
+#'   \item \code{setting} : a list contains the clustering settings.
+#' }
 #' @examples
 #'
-#' hotspot_cluster(hotspots_fin,
+#' result <- hotspot_cluster(hotspots_fin,
 #'                 lon = "lon",
 #'                 lat = "lat",
 #'                 obsTime = "obsTime",
@@ -97,6 +122,8 @@
 #'                 ignitionCenter = "mean",
 #'                 timeUnit = "h",
 #'                 timeStep = 1)
+#'
+#' plot(result)
 #'
 #'
 #' @export
@@ -241,7 +268,7 @@ hotspot_cluster <- function(hotspots,
 
 #' Plotting spatiotemporal clustering results
 #'
-#' [plot.spotoroo()] is the `plot` method of the class `spotoroo`.
+#' `plot.spotoroo()` is the `plot` method of the class `spotoroo`.
 #' It is a simple wrapper of [plot_spotoroo()].
 #'
 #' @param x `spotoroo` object;
@@ -272,5 +299,4 @@ hotspot_cluster <- function(hotspots,
 plot.spotoroo <- function(x, ...) {
   plot_spotoroo(x, ...)
 }
-
 

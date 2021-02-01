@@ -1,16 +1,21 @@
-#' Calculate fire movement
+#' Calculation of the fire movement
 #'
-#' Calculate the movement of a single fire per a given timestamps.
+#' `get_fire_mov()` calculates the movement of a single fire per `step` time
+#' indexes. It collects hotspots per `step` time indexes, then
+#' takes the mean or median of the longitude and latitude as the centre of the
+#' fire.
 #'
-#' @param result spotoroo result object; get from \code{\link{hotspot_cluster}}.
-#' @param cluster integer; the membership lable of the fire.
-#' @param step integer; step size.
-#' @param method character; "mean" or "median", method of centre calculation.
-#' @return a data frame of fire movement
+#' @param result `spotoroo` object; a result of a call to [hotspot_cluster()].
+#' @param cluster integer; the membership label of the cluster.
+#' @param step integer (>=0); step size used in the calculation of the
+#'                            fire movement.
+#' @param method character; "mean" or "median", method of the calculation of
+#'                          the centre of the fire.
+#' @return data.frame; the fire movement
 #' \itemize{
 #'   \item \code{membership} : membership labels.
-#'   \item \code{lon} : longitude of fire centre.
-#'   \item \code{lat} : latitude of fire centre.
+#'   \item \code{lon} : longitude of the centre of the fire.
+#'   \item \code{lat} : latitude of the centre of the fire.
 #'   \item \code{timeID} : time indexes.
 #'   \item \code{obsTime} : observed time (approximated).
 #'   \item \code{ignition} : whether or not it is a ignition point.
@@ -47,7 +52,11 @@ get_fire_mov <- function(result, cluster, step = 1, method = "mean"){
   is_positive(step)
 
   # if cluster does not exist
-  if (cluster > max(result$hotspots$membership)) {
+  if (cluster == -1) {
+    stop("Can not calculate the movement of noise.")
+  }
+
+  if (!cluster %in% result$hotspots$membership) {
     stop(paste("Cluster", cluster, "does not exist!"))
   }
 
@@ -85,7 +94,7 @@ get_fire_mov <- function(result, cluster, step = 1, method = "mean"){
 
         j <- 0
 
-        # calc centroid lon and lat
+        # calculate centroid lon and lat
         if (method == "mean") {
           fin_lon <- c(fin_lon, mean(temp_lon))
           fin_lat <- c(fin_lat, mean(temp_lat))

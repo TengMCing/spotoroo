@@ -2,7 +2,7 @@
 % Please edit documentation in R/ignition_point.R
 \name{ignition_point}
 \alias{ignition_point}
-\title{Calculating ignition points}
+\title{Calculation of the ignition points}
 \usage{
 ignition_point(lon, lat, obsTime, timeUnit, timeID, membership, ignitionCenter)
 }

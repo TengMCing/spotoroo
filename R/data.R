@@ -58,3 +58,17 @@
 #' @format A "\code{sf}" object with 1 row
 #' @source \url{https://www.naturalearthdata.com/}
 "vic_map"
+
+#' 5000 observations of satellite hotspots.
+#'
+#' A dataset containing the 1070 observations of satellite hotspots in
+#' Victoria, Australia during the 2019-2020 Australian bushfire season.
+#'
+#' @format A data frame with 1070 rows and 3 variables:
+#' \describe{
+#'   \item{lon}{longitude}
+#'   \item{lat}{latitude}
+#'   \item{obsTime}{observed time}
+#' }
+#' @source \url{https://www.eorc.jaxa.jp/ptree/}
+"hotspots_fin"

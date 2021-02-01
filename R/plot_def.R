@@ -1,17 +1,19 @@
-#' Default method of plotting spotoroo result
+#' Default method of plotting the clustering results
 #'
-#' Default method of plotting spotoroo result. A scatter plot will be made.
+#' `plot_def()` plots the clustering result spatially as a scatter plot.
 #'
-#' @param result spotoroo result object; get from \code{\link{hotspot_cluster}}.
-#' @param cluster integer/character; the membership labels of fires to display.
-#' "all" stands for plotting all clusters.
-#' @param hotspot logical; display hotspots?
-#' @param noise logical; display noise?
-#' @param ignition logical; display ignition points?
-#' @param from date/datetime; only display data after this date/datetime.
-#' @param to date/datetime; only display data before this date/datetime.
-#' @param bg ggplot object; background image.
-#' @return a ggplot object
+#' @param result `spotoroo` object; a result of a call to [hotspot_cluster()].
+#' @param cluster character/integer; if "all", plot all clusters. if a integer
+#'                vector is given, plot corresponding clusters.
+#' @param hotspot logical; if `TRUE`, plot the hotspots.
+#' @param noise logical; if `TRUE`, plot the noise.
+#' @param ignition logical; if `TRUE`, plot the ignition points.
+#' @param from **OPTIONAL**; date/datetime/numeric; start time; the data type
+#'                           needs to be the same as the provided observed time.
+#' @param to **OPTIONAL**; date/datetime/numeric; end time; the data type
+#'                         needs to be the same as the provided observed time.
+#' @param bg **OPTIONAL**; `ggplot` object; if specified, plot onto this object.
+#' @return `ggplot` object; the plot of the clustering results.
 #' @examples
 #' result <- hotspot_cluster(hotspots_fin,
 #'                           lon = "lon",
@@ -25,8 +27,8 @@
 #'                           timeUnit = "h",
 #'                           timeStep = 1)
 #'
-#' plot_def(result, cluster = 1:6, bg = plot_vic_map())
-#' plot_def(result, cluster = "all", bg = plot_vic_map())
+#' plot_def(result, cluster = 1:3)
+#' plot_def(result, cluster = "all")
 #'
 #' @export
 plot_def <- function(result,
@@ -138,7 +140,7 @@ plot_def <- function(result,
 
     }
 
-    # draw noises
+    # draw noise
     if (noise) {
 
       p <- p + geom_point(data = filter(result$hotspots,
@@ -167,6 +169,7 @@ plot_def <- function(result,
       labs(col = "")
 
   } else {
+    # too many clusters
     # draw hotspots
     if (hotspot) {
 

@@ -2,7 +2,7 @@
 % Please edit documentation in R/dist_point_to_vector.R
 \name{dist_point_to_vector}
 \alias{dist_point_to_vector}
-\title{Calculating the geodesic of a point to multiple points}
+\title{Calculation of the geodesic of a point to multiple points}
 \usage{
 dist_point_to_vector(plon, plat, vlon, vlat)
 }

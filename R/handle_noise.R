@@ -1,6 +1,6 @@
 #' Handling noise in the clustering results
 #'
-#' `handle_noise()`` finds noise from the clustering results and label it with
+#' `handle_noise() finds noise from the clustering results and label it with
 #' `-1`.
 #'
 #' For more details about the clustering algorithm and the parameter
@@ -40,7 +40,7 @@ handle_noise <- function(global_membership, timeID, minPts, minTime) {
                                  timeID,
                                  global_membership) %>%
     dplyr::group_by(global_membership) %>%
-    dplyr::summarise(n = n(), timelen = max(timeID) - min(timeID))
+    dplyr::summarise(n = dplyr::n(), timelen = max(timeID) - min(timeID))
 
 
   # filter noise

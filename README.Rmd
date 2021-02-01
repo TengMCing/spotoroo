@@ -17,6 +17,7 @@ Sys.setlocale("LC_ALL","English")
 # spotoroo
 
 <!-- badges: start -->
+[![R-CMD-check](https://github.com/TengMCing/spotoroo/workflows/R-CMD-check/badge.svg)](https://github.com/TengMCing/spotoroo/actions)
 <!-- badges: end -->
 
 The goal of spotoroo is to ...
@@ -61,10 +62,8 @@ hotspots_fin[1:10,]
 
 ```{r echo = TRUE, warning=FALSE, message=FALSE, error=FALSE, out.width = "70%", out.height="70%"}
 library(tidyverse)
-ggplot(hotspots_fin) +
-  geom_sf(data = vic_map) +
+vic_map +
   geom_point(aes(lon, lat), alpha = 0.3) +
-  ggthemes::theme_map() +
   ggtitle("Raw Hotspots")
 ```
 
@@ -72,7 +71,7 @@ ggplot(hotspots_fin) +
 Perform spatiotemporal clustering on this dataset. You need to provide the data, here it is "hotspots_fin", specify which columns correspond to the spatial variables (lon, lat), and which to time steps (obsTime). There is a choice of options for the algorithm. "activeTime" sets the time to consider that a fire can be active, and longer than this between hotspots will create a new cluster. "adjDist" sets the maximum spatial distance between hotspots beyond which they would be considered part of a different cluster. 
 
 ```{r example}
-result <- hotspot_cluster(hotspots_fin,
+result <- hotspot_cluster(hotspots5000,
                           lon = "lon",
                           lat = "lat",
                           obsTime = "obsTime",
@@ -108,7 +107,7 @@ result$hotspots[1:10,]
 Plot of the result. In this example, there is a total of 6 clusters, so all can be displayed. 
 
 ```{r out.width = "70%", out.height="70%"}
-plot(result, bg = plot_vic_map())
+plot(result, bg = vic_map)
 ```
 
 You can also choose a subset of clusters, and this will plot withou a map, so that you can see a zoomed in view of the hotspot clusters and their ignition points. 
@@ -123,17 +122,17 @@ To examine the fire movements, use the option "mov", and the movement will be sh
 plot(result,
      type = "mov",
      cluster = 1:6,
-     step = 6,
+     step = 3,
      hotspot = TRUE,
-     bg = plot_vic_map())
+     bg = vic_map)
 ```
+
 
 To examine the time line of clusters, to learn about intensity of fire periods use the option "timeline".
 
 ```{r out.width = "70%", out.height="70%"}
 plot(result, "timeline", 
      dateLabel = "%b %d", 
-     mainBreak = "1 week", 
-     minorBreak = "1 day")
+     mainBreak = "1 week")
 ```
 

@@ -1,34 +1,87 @@
 #' Plotting spatiotemporal clustering result
 #'
-#' can be called by \code{plot.spotoroo()}.
+#' `plot_spotoroo()` takes a `spotoroo` object to produce plots of the
+#' clustering results. It can be called by [plot.spotoroo()].
 #'
-#' if \code{type} = "\code{def}", result will be plotted spatially,
-#' see also \code{\link{plot_fire}}.
-#' if \code{type} = "\code{timeline}", timeline will be made,
-#' see also \code{\link{timeline}}.
-#' if \code{type} = "\code{mov}", fire movement will be plotted.
-#' see also \code{plot_fire_mov}.
+#' if `type` is "def", the clustering results will be plotted spatially.
+#' See also [plot_def()]. Available parameters:
+#' - `result`
+#' - `type`
+#' - `cluster`
+#' - `ignition`
+#' - `hotspot`
+#' - `noise`
+#' - `from` (**OPTIONAL**)
+#' - `to` (**OPTIONAL**)
+#' - `bg` (**OPTIONAL**)
 #'
-#' @param result an object of class "\code{spotoroo}",
-#' a result of a call to \code{\link{hotspot_cluster}}.
-#' @param type character; plot type; one of "def", "timeline" and "mov".
-#' @param cluster character/numeric; if "all", plot all clusters. if a numeric
-#'                 vector is given, plot corresponding clusters.
-#' @param ignition logical; if \code{TRUE}, plot the ignition points.
-#' @param hotspot logical; if \code{TRUE}, plot the hotspots.
-#' @param noise logical; if \code{TRUE}, plot the noises.
-#' @param from time/numeric; start time, data type depends on type of observed
-#'                           time.
-#' @param to time/numeric; end time, data type depends on type of observed
-#'                         time.
-#' @param step sdf
-#' @param mainBreak sdf
-#' @param minorBreak sdf
-#' @param dateLable sdf
-#' @param bg an object of class "\code{ggplot}", optional; if \code{TRUE},
-#' plot onto this object. Now it only supports object without colour related
-#' aesthetics.
-#' @return an object of class "\code{ggplot}".
+#' if `type` is "mov", plot of the fire movement will be made.
+#' See also [plot_fire_mov()]. Available parameters:
+#' - `result`
+#' - `type`
+#' - `cluster`
+#' - `hotspot`
+#' - `from` (**OPTIONAL**)
+#' - `to` (**OPTIONAL**)
+#' - `step`
+#' - `bg` (**OPTIONAL**)
+#'
+#' if `type` is "timeline", plot of the timeline will be made.
+#' See also [plot_timeline()]. Available parameters:
+#' - `result`
+#' - `type`
+#' - `from` (**OPTIONAL**)
+#' - `to` (**OPTIONAL**)
+#' - `mainBreak` (**OPTIONAL**)
+#' - `minorBreak` (**OPTIONAL**)
+#' - `dateLabel` (**OPTIONAL**)
+#'
+#' @param result `spotoroo` object; a result of a call to [hotspot_cluster()].
+#' @param type character; type of the plot; one of "def" (default),
+#'                        "timeline" (timeline) and "mov" (fire movement).
+#' @param cluster character/integer; if "all", plot all clusters. if a integer
+#'                vector is given, plot corresponding clusters; unavailable in
+#'                [plot_timeline()].
+#' @param ignition logical; if `TRUE`, plot the ignition points; only used in
+#'                          [plot_def()].
+#' @param hotspot logical; if `TRUE`, plot the hotspots; unavailable in
+#'                         [plot_timeline()].
+#' @param noise logical; if `TRUE`, plot the noise; only used in
+#'                       [plot_def()].
+#' @param from **OPTIONAL**; date/datetime/numeric; start time; the data type
+#'                           needs to be the same as the provided observed time.
+#' @param to **OPTIONAL**; date/datetime/numeric; end time; the data type
+#'                         needs to be the same as the provided observed time.
+#' @param step integer (>=0); step size used in the calculation of the
+#'                            fire movement; only used in [plot_fire_mov()].
+#' @param mainBreak **OPTIONAL**; character/numeric; a string/value giving the
+#'                                     distance between major breaks; if the
+#'                                     observed time is in date/datetime format,
+#'                                     this value will pass to
+#'                                     [ggplot2::scale_x_date()] or
+#'                                     [ggplot2::scale_x_datetime()] as
+#'                                     `date_breaks`; only used in
+#'                                     [plot_timeline()].
+#' @param minorBreak **OPTIONAL**; character/numeric; a string/value giving the
+#'                                     distance between minor breaks; if the
+#'                                     observed time is in date/datetime format,
+#'                                     this value will pass to
+#'                                     [ggplot2::scale_x_date()] or
+#'                                     [ggplot2::scale_x_datetime()] as
+#'                                     `date_breaks`. only used in
+#'                                     [plot_timeline()].
+#' @param dateLabel **OPTIONAL**; character; a string giving the formatting
+#'                                specification for the labels; if the observed
+#'                                time is in date/datetime format,
+#'                                this value will pass to
+#'                                [ggplot2::scale_x_date()] or
+#'                                [ggplot2::scale_x_datetime()] as
+#'                                `date_labels`; unavailable if the observed
+#'                                time is in numeric format; only used in
+#'                                [plot_timeline()].
+#' @param bg **OPTIONAL**; `ggplot` object; if specified, plot onto this object;
+#'                         unavailable in [plot_timeline()].
+#' @return `ggplot` object; the plot of the clustering results.
 #' @examples
 #' data("hotspots500")
 #' result <- hotspot_cluster(hotspots500,

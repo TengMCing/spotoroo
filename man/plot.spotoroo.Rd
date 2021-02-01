@@ -13,7 +13,7 @@ a result of a call to \code{\link[=hotspot_cluster]{hotspot_cluster()}}.}
 \item{\dots}{additional arguments pass to \code{\link[=plot_spotoroo]{plot_spotoroo()}}}
 }
 \description{
-\code{\link[=plot.spotoroo]{plot.spotoroo()}} is the \code{plot} method of the class \code{spotoroo}.
+\code{plot.spotoroo()} is the \code{plot} method of the class \code{spotoroo}.
 It is a simple wrapper of \code{\link[=plot_spotoroo]{plot_spotoroo()}}.
 }
 \examples{

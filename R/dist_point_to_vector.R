@@ -1,4 +1,4 @@
-#' Calculating the geodesic of a point to multiple points
+#' Calculation of the geodesic of a point to multiple points
 #'
 #' `dist_point_to_vector()` calculates the geodesic of a point to multiple
 #' points given the coordinate information.

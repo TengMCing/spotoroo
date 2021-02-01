@@ -1,3 +1,37 @@
+#' Plotting the fire movement
+#'
+#' `plot_fire_mov()` plots the fire movement. The fire movement is calculated
+#' from [get_fire_mov()].
+#'
+#' @param result `spotoroo` object; a result of a call to [hotspot_cluster()].
+#' @param cluster character/integer; if "all", plot all clusters. if a integer
+#'                vector is given, plot corresponding clusters.
+#' @param hotspot logical; if `TRUE`, plot the hotspots.
+#' @param from **OPTIONAL**; date/datetime/numeric; start time; the data type
+#'                           needs to be the same as the provided observed time.
+#' @param to **OPTIONAL**; date/datetime/numeric; end time; the data type
+#'                         needs to be the same as the provided observed time.
+#' @param step integer (>=0); step size used in the calculation of the
+#'                            fire movement.
+#' @param bg **OPTIONAL**; `ggplot` object; if specified, plot onto this object.
+#' @return `ggplot` object; the plot of the clustering results.
+#' @examples
+#' result <- hotspot_cluster(hotspots_fin,
+#'                           lon = "lon",
+#'                           lat = "lat",
+#'                           obsTime = "obsTime",
+#'                           activeTime = 24,
+#'                           adjDist = 3000,
+#'                           minPts = 4,
+#'                           minTime = 3,
+#'                           ignitionCenter = "mean",
+#'                           timeUnit = "h",
+#'                           timeStep = 1)
+#'
+#' plot_fire_mov(result, cluster = 1:4)
+#' plot_fire_mov(result, cluster = 1:4, step = 6)
+#' plot_fire_mov(result, cluster = "all")
+#'
 #' @export
 plot_fire_mov <- function(result,
                           cluster = "all",
@@ -24,18 +58,22 @@ plot_fire_mov <- function(result,
   labs <- ggplot2::labs
   scale_color_brewer <- ggplot2::scale_color_brewer
 
-  #define dplyr function
+  # define dplyr function
   mutate <- dplyr::mutate
   filter <- dplyr::filter
   bind_rows <- dplyr::bind_rows
   group_by <- dplyr::group_by
+  summarise <- dplyr::summarise
+  arrange <- dplyr::arrange
+  desc <- dplyr::desc
+  ungroup <- dplyr::ungroup
   `%>%` <- dplyr::`%>%`
 
 
 
   # safety check
   check_type_bundle("logical", hotspot)
-  is_length_one_bundle(hotspot)
+  is_length_one_bundle(hotspot, step)
 
 
   # extract corresponding clusters
@@ -51,10 +89,16 @@ plot_fire_mov <- function(result,
     result$hotspots <- result$hotspots[indexes, ]
   }
 
+  # delete noise
+  result$hotspots <- filter(result$hotspots, !noise)
+  if (nrow(result$hotspots) == 0) {
+    stop("No hotspots (exculding noise) observed.")
+  }
+
 
   # if plot all clusters
   if (identical("all", cluster)) {
-    cluster <- 1:max(result$hotspots$membership)
+    cluster <- unique(result$hotspots$membership)
   }
 
   # get fire mov
@@ -78,6 +122,9 @@ plot_fire_mov <- function(result,
 
     indexes <- result$hotspots$obsTime >= from
     result$hotspots <- result$hotspots[indexes, ]
+    if (nrow(result$hotspots) == 0) {
+      stop(paste("No hotspots observed later than", from))
+    }
 
     indexes <- fire_mov_record$obsTime >= from
     fire_mov_record <- fire_mov_record[indexes, ]
@@ -93,6 +140,9 @@ plot_fire_mov <- function(result,
 
     indexes <- result$hotspots$obsTime <= to
     result$hotspots <- result$hotspots[indexes, ]
+    if (nrow(result$hotspots) == 0) {
+      stop(paste("No hotspots observed ealier than", to))
+    }
 
     indexes <- fire_mov_record$obsTime <= to
     fire_mov_record <- fire_mov_record[indexes, ]
@@ -116,66 +166,75 @@ plot_fire_mov <- function(result,
           legend.justification = c(0, 0),
           legend.position = "none")
 
+  # select the most important clusters if more than 9
+  result$hotspots$include <- TRUE
+  fire_mov_record$include <- TRUE
+
+  if (length(unique(result$hotspots$membership)) > 9) {
+    include_cluster <- group_by(result$hotspots, membership) %>%
+      summarise(num = dplyr::n()) %>%
+      arrange(desc(num)) %>%
+      .[['membership']]
+
+    include_cluster <- include_cluster[1:9]
+
+    result$hotspots <- mutate(result$hotspots,
+                              include = membership %in% include_cluster)
+
+    fire_mov_record <- mutate(fire_mov_record,
+                              include = membership %in% include_cluster)
+  }
+
 
   # draw hotspots
   if (hotspot) {
 
-    mutate(filter(result$hotspots, !noise),
-           lon_jit = jitter(lon, factor = 1),
-           lat_jit = jitter(lat, factor = 1)) -> temp_data
+    temp_data <- filter(result$hotspots, include) %>%
+      mutate(lon_jit = jitter(lon, factor = 1),
+             lat_jit = jitter(lat, factor = 1))
 
-    # color if less than 10
-    if (length(unique(temp_data$membership)) <= 9) {
 
-      p <- p + geom_point(data = temp_data,
-                          aes(lon_jit,
-                              lat_jit,
-                              col = as.character(membership)),
-                          alpha = 0.2) +
+    p <- p + geom_point(data = temp_data,
+                        aes(lon_jit,
+                            lat_jit,
+                            col = as.character(membership)),
+                        alpha = 0.2) +
         theme(legend.position = "none") +
         scale_color_brewer(palette = "Set1")
-
-    } else {
-
-      p <- p + geom_point(data = temp_data,
-                          aes(lon_jit,
-                              lat_jit),
-                          col = "black",
-                          alpha = 0.2)
-    }
-
-    rm(temp_data)
 
   }
 
 
-  # draw fire mov
+
+  # plot fire movement
   # draw start point
-  temp_data <- group_by(fire_mov_record, membership) %>%
+  temp_data <- filter(fire_mov_record, include) %>%
+    group_by(membership) %>%
     filter(timeID == min(timeID))
 
   p <- p + geom_point(data = temp_data,
                       aes(lon, lat),
                       col = "black",
                       shape = 21,
-                      size = 3
-                      )
-  rm(temp_data)
+                      size = 3)
 
   # draw line
-  data2 <- group_by(fire_mov_record, membership) %>%
+  temp_data <- filter(fire_mov_record, include) %>%
+    group_by(membership) %>%
     mutate(mov_count = dplyr::n()) %>%
-    filter(mov_count > 1)
+    filter(mov_count > 1) %>%
+    ungroup()
 
-  if (nrow(data2) > 0) {
-    p <- p + geom_path(data = data2,
+  if (nrow(temp_data) > 0) {
+    p <- p + geom_path(data = temp_data,
                        aes(lon, lat),
-                       col = "blue",
+                       col = "black",
                        linetype = 2)
   }
 
   # draw end point
-  temp_data <- group_by(fire_mov_record, membership) %>%
+  temp_data <- filter(fire_mov_record, include) %>%
+    group_by(membership) %>%
     filter(timeID == max(timeID))
 
   p <- p + geom_point(data = temp_data,
@@ -183,16 +242,18 @@ plot_fire_mov <- function(result,
                       col = "black",
                       shape = 24,
                       size = 2.5)
-  rm(temp_data)
+
 
 
   # facet
-  p <- p + ggplot2::facet_wrap(~membership,
-                        scales = "free")
+  p <- p + ggplot2::facet_wrap(~membership, scales = "free")
 
 
-  # add title
-  subtitle <- paste("Fires Selected:", nrow(result$ignition), "\n")
+  # edit subtitle
+  subtitle <- paste("Fires Selected:", length(cluster), "\n")
+  if (length(unique(result$hotspots$membership)) > 9) {
+    subtitle <- paste0(subtitle, "(Only display top 9 largest fires) \n")
+  }
   left <- min(result$hotspots$obsTime)
   right <- max(result$hotspots$obsTime)
 
@@ -204,40 +265,48 @@ plot_fire_mov <- function(result,
 
   # add left plot
   if (ggplot2::is.ggplot(bg)) {
-    if (length(unique(result$hotspots$membership)) <= 10) {
 
-      bg <- bg + geom_point(data = filter(result$hotspots,
-                                          !noise),
-                            aes(lon,
-                                lat,
-                                col = as.character(membership)),
-                            alpha = 0.2)
-    } else {
+    # other clusters
+    bg <- bg + geom_point(data = filter(result$hotspots, !include),
+                          aes(lon, lat),
+                          col = "black",
+                          alpha = 0.2)
 
-      bg <- bg + geom_point(data = filter(result$hotspots,
-                                          !noise),
-                            aes(lon,
-                                lat),
-                            col = "black",
-                            alpha = 0.2)
-    }
+    # display clusters
+    bg <- bg + geom_point(data = filter(result$hotspots, include),
+                          aes(lon,
+                              lat,
+                              col = as.character(membership)),
+                          alpha = 0.2)
 
-    bg <- bg + ggrepel::geom_text_repel(data = result$ignition,
+    temp_data <- filter(result$hotspots, include) %>%
+      group_by(membership) %>%
+      filter(obsTime == min(obsTime)) %>%
+      group_by(membership) %>%
+      summarise(lon = dplyr::first(lon), lat = dplyr::first(lat)) %>%
+      ungroup()
+
+    # add floating text
+    bg <- bg + ggrepel::geom_text_repel(data = temp_data,
                                         aes(lon,
                                             lat,
-                                            label = membership)) +
+                                            label = membership))
+
+    # add title
+    bg <- bg +
       labs(title = bquote(Fire~Movement~(Delta:Start*" | "*Omicron:End)),
            subtitle = subtitle,
            col = "") +
       theme(legend.position = "none") +
       scale_color_brewer(palette = "Set1")
 
-    p <- patchwork:::`|.ggplot`(bg, p)
+    p <- patchwork::wrap_plots(bg, p)
 
   } else {
 
-    p <- p + labs(title = "Fire Movement (Rectangle: Start point | Triangle: End Point)",
-                  subtitle = subtitle)
+    p <- p +
+      labs(title = bquote(Fire~Movement~(Delta:Start*" | "*Omicron:End)),
+           subtitle = subtitle)
 
   }
 

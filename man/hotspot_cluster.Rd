@@ -54,7 +54,32 @@ either "mean" or "median".}
 a time step.}
 }
 \value{
-A \code{spotoroo} object; the clustering result.
+A \code{spotoroo} object; the clustering result; it is also a list:
+\itemize{
+\item \code{hotspots} : a data frame contains information of hotspots.
+\itemize{
+\item \code{lon} : longitude.
+\item \code{lat} : latitude.
+\item \code{obsTime} : observed time.
+\item \code{timeID} : time index.
+\item \code{membership} : membership label.
+\item \code{noise} : whether it is noise.
+\item \code{distToIgnition} : distance to ignition.
+\item \code{distToIgnitionUnit} : unit of distance to ignition.
+\item \code{timeFromIgnition} : time from ignition.
+}
+\item \code{ignition} : a data frame contains information of ignition
+points.
+\itemize{
+\item \code{lon} : longitude.
+\item \code{lat} : latitude.
+\item \code{obsTime} : observed time.
+\item \code{timeID} : time index.
+\item \code{obsInCluster} : number of observations in the cluster.
+\item \code{clusterTimeLen} : length of time of the cluster.
+}
+\item \code{setting} : a list contains the clustering settings.
+}
 }
 \description{
 \code{hotspot_cluster()} cluster hotspots into fires. It can be used to
@@ -118,7 +143,7 @@ of the ignition point. This needs to be specified in parameter
 }
 \examples{
 
-hotspot_cluster(hotspots_fin,
+result <- hotspot_cluster(hotspots_fin,
                 lon = "lon",
                 lat = "lat",
                 obsTime = "obsTime",
@@ -129,6 +154,8 @@ hotspot_cluster(hotspots_fin,
                 ignitionCenter = "mean",
                 timeUnit = "h",
                 timeStep = 1)
+
+plot(result)
 
 
 }

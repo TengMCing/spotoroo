@@ -20,7 +20,7 @@ unit is time index.}
 integer; a vector of membership labels.
 }
 \description{
-\verb{handle_noise()`` finds noise from the clustering results and label it with }-1`.
+\verb{handle_noise() finds noise from the clustering results and label it with }-1`.
 }
 \details{
 For more details about the clustering algorithm and the parameter

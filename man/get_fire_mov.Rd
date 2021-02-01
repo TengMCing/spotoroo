@@ -2,32 +2,37 @@
 % Please edit documentation in R/get_fire_mov.R
 \name{get_fire_mov}
 \alias{get_fire_mov}
-\title{Calculate fire movement}
+\title{Calculation of the fire movement}
 \usage{
 get_fire_mov(result, cluster, step = 1, method = "mean")
 }
 \arguments{
-\item{result}{spotoroo result object; get from \code{\link{hotspot_cluster}}.}
+\item{result}{\code{spotoroo} object; a result of a call to \code{\link[=hotspot_cluster]{hotspot_cluster()}}.}
 
-\item{cluster}{integer; the membership lable of the fire.}
+\item{cluster}{integer; the membership label of the cluster.}
 
-\item{step}{integer; step size.}
+\item{step}{integer (>=0); step size used in the calculation of the
+fire movement.}
 
-\item{method}{character; "mean" or "median", method of centre calculation.}
+\item{method}{character; "mean" or "median", method of the calculation of
+the centre of the fire.}
 }
 \value{
-a data frame of fire movement
+data.frame; the fire movement
 \itemize{
 \item \code{membership} : membership labels.
-\item \code{lon} : longitude of fire centre.
-\item \code{lat} : latitude of fire centre.
+\item \code{lon} : longitude of the centre of the fire.
+\item \code{lat} : latitude of the centre of the fire.
 \item \code{timeID} : time indexes.
 \item \code{obsTime} : observed time (approximated).
 \item \code{ignition} : whether or not it is a ignition point.
 }
 }
 \description{
-Calculate the movement of a single fire per a given timestamps.
+\code{get_fire_mov()} calculates the movement of a single fire per \code{step} time
+indexes. It collects hotspots per \code{step} time indexes, then
+takes the mean or median of the longitude and latitude as the centre of the
+fire.
 }
 \examples{
 result <- hotspot_cluster(hotspots_fin,

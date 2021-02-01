@@ -1,4 +1,4 @@
-#' Calculating ignition points
+#' Calculation of the ignition points
 #'
 #' `ignition_point()` calculates ignition points using membership labels.
 #'
