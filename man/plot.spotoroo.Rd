@@ -35,6 +35,5 @@ plot(results)
 # three different types of plots
 plot(results, "def")
 plot(results, "mov")
-plot(results, "timeline")
 
 }

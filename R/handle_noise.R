@@ -32,7 +32,8 @@ handle_noise <- function(global_membership, timeID, minPts, minTime) {
                             span.side = list(color = "grey")))
   cli::cli_h3("{.field minPts} = {.val {minPts}} {.unit hotspot{?s}} | {.field minTime} = {.val {minTime}} {.unit time index{?es}}")
 
-  n <- NULL
+  # pass CMD CHECK variables
+  n <- timelen <- NULL
   `%>%` <- dplyr::`%>%`
 
   # count every membership

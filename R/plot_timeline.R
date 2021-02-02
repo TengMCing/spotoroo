@@ -57,6 +57,9 @@ plot_timeline <- function(result,
                           minorBreak = NULL,
                           dateLabel = NULL) {
 
+  # pass CMD CHECK variables
+  noise <- membership <- obsTime <- startt <- endt <- ..scaled.. <- NULL
+
   if (!"spotoroo" %in% class(result)) {
     stop('Needs a "spotoroo" object as input.')
   }

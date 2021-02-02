@@ -69,6 +69,10 @@ plot_fire_mov <- function(result,
   ungroup <- dplyr::ungroup
   `%>%` <- dplyr::`%>%`
 
+  # pass CMD CHECK variables
+  noise <- membership <- num <- include <- lon <- lat <- lon_jit <- lat_jit <-
+    timeID <- mov_count <- obsTime <- NULL
+
 
 
   # safety check
@@ -173,8 +177,9 @@ plot_fire_mov <- function(result,
   if (length(unique(result$hotspots$membership)) > 9) {
     include_cluster <- group_by(result$hotspots, membership) %>%
       summarise(num = dplyr::n()) %>%
-      arrange(desc(num)) %>%
-      .[['membership']]
+      arrange(desc(num))
+
+    include_cluster <- include_cluster[['membership']]
 
     include_cluster <- include_cluster[1:9]
 

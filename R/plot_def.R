@@ -58,6 +58,9 @@ plot_def <- function(result,
   # define dplyr function
   filter <- dplyr::filter
 
+  # pass CMD CHECK variables
+  lon <- lat <- membership <- NULL
+
 
 
   # safety check

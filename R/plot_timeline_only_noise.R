@@ -6,6 +6,9 @@ plot_timeline_only_noise <- function(result,
                                      minorBreak = NULL,
                                      dateLabel = NULL) {
 
+  # pass CMD CHECK variables
+  obsTime <- membership <- ..scaled.. <- NULL
+
   noise_num <- nrow(result$hotspots)
   result$hotspots$membership <- result$hotspots$membership + 1
 

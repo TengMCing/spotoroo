@@ -1,0 +1,28 @@
+reference:
+- title: "Spatiotemporal clustering of hot spot"
+  desc: >
+    Functions for clustering satellite hot spots into fires
+- contents:
+  - hotspot_cluster
+  - global_clustering
+  - local_clustering
+  - handle_noise
+  - ignition_point
+- title: "Exploring spatiotemporal clustering results"
+  desc: >
+    Functions for accessing and visualizing clustering results
+- contents:
+  - get_fire_mov
+  - starts_with("plot")
+- title: "Tools"
+  desc: >
+    Functions for converting time and computing distance
+- contents:
+  - transform_time_id
+  - dist_point_to_vector
+- title: "Datasets"
+  desc: >
+    Built-in datasets
+- contents:
+  - starts_with("hotspots")
+  - vic_map

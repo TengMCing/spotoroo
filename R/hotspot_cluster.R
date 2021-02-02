@@ -293,7 +293,6 @@ hotspot_cluster <- function(hotspots,
 #' # three different types of plots
 #' plot(results, "def")
 #' plot(results, "mov")
-#' plot(results, "timeline")
 #'
 #' @export
 plot.spotoroo <- function(x, ...) {
