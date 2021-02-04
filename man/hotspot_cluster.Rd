@@ -14,8 +14,8 @@ hotspot_cluster(
   minPts = 4,
   minTime = 3,
   ignitionCenter = "mean",
-  timeUnit = NULL,
-  timeStep = NULL
+  timeUnit = "n",
+  timeStep = 1
 )
 }
 \arguments{
@@ -30,9 +30,7 @@ numeric latitude values.}
 
 \item{obsTime}{character; the name of the column of the list which contains
 the observed time of hotspots in date, datetime or
-numeric. Only if this column is a positive
-integer vector, \code{timeUnit} and \code{timeStep}
-do not need to be specified.}
+numeric.}
 
 \item{activeTime}{numeric (>=0); time tolerance; unit is time index.}
 
@@ -46,12 +44,11 @@ unit is time index.}
 \item{ignitionCenter}{character; method to calculate ignition points,
 either "mean" or "median".}
 
-\item{timeUnit}{\strong{OPTIONAL}; character; one of "s" (seconds),
+\item{timeUnit}{character; one of "s" (seconds),
 "m" (minutes), "h" (hours),
 "d" (days) and "n" (numeric).}
 
-\item{timeStep}{\strong{OPTIONAL}; numeric (>0); number of units of \code{timeUnit} in
-a time step.}
+\item{timeStep}{numeric (>0); number of units of \code{timeUnit} in a time step.}
 }
 \value{
 A \code{spotoroo} object; the clustering result; it is also a list:
@@ -86,8 +83,7 @@ points.
 reconstruct fire history and detect fire ignition points.
 }
 \details{
-If the observed time of the hotspot is given and it is not a postive
-integer vector, parameter \code{timeUnit} and \code{timeStep} need to be
+Arguments \code{timeUnit} and \code{timeStep} need to be
 specified to convert date/datetime/numeric to time index.
 More details can be found in \code{\link[=transform_time_id]{transform_time_id()}}.
 \cr\cr
@@ -96,13 +92,13 @@ This clustering algorithm is consist of \strong{5 steps}:
 In \strong{step 1}, it defines \eqn{T} intervals using the time index
 \deqn{St = [max(1, t - activeTime),t]}
 where \eqn{t = 1, 2, ..., T}, and \eqn{T} is the maximum time index.
-\code{activeTime} is a parameter that needs to be specified. It represents
+\code{activeTime} is an argument that needs to be specified. It represents
 the maximum time difference between two hotspots in the same local
 cluster. Please notice that a local cluster is different with a cluster
 in the final result. More details will be given in the next part.
 \cr\cr
 In \strong{step 2}, the algorithm performs spatial clustering on each interval.
-A local cluster is a cluster found in an interval. Parameter \code{adjDist}
+A local cluster is a cluster found in an interval. Argument \code{adjDist}
 is used to control the spatial clustering. If the distance between two
 hotspots is smaller or equal to \code{adjDist}, they are directly-connected. If
 hotspot \code{A} is directly-connected with hotspot \code{B} and hotspot \code{B} is
@@ -132,13 +128,13 @@ than \code{minPts} hotspots, or lasts shorter than \code{minTime}, it will not b
 considered to be a cluster any more, and their hotspots will be
 assigned with \code{-1} as their membership labels. A hotspot with membership
 label \code{-1} is noise.
-Parameter \code{minPts} and \code{minTime} needs to be specified.
+Arguments \code{minPts} and \code{minTime} needs to be specified.
 \cr\cr
 In \strong{step 5}, the algorithm finds the earliest observed hotspots in each
 cluster and records them as ignition points. If there are multiple
 earliest observed hotspots in a cluster, the mean or median of the
 longitude values and the latitude values will be used as the coordinate
-of the ignition point. This needs to be specified in parameter
+of the ignition point. This needs to be specified in argument
 \code{ignitionCenter}.
 }
 \examples{

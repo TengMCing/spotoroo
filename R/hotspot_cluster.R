@@ -3,8 +3,7 @@
 #' `hotspot_cluster()` cluster hotspots into fires. It can be used to
 #' reconstruct fire history and detect fire ignition points.
 #'
-#' If the observed time of the hotspot is given and it is not a postive
-#' integer vector, parameter `timeUnit` and `timeStep` need to be
+#' Arguments `timeUnit` and `timeStep` need to be
 #' specified to convert date/datetime/numeric to time index.
 #' More details can be found in [transform_time_id()].
 #' \cr\cr
@@ -13,13 +12,13 @@
 #' In **step 1**, it defines \eqn{T} intervals using the time index
 #' \deqn{St = [max(1, t - activeTime),t]}
 #' where \eqn{t = 1, 2, ..., T}, and \eqn{T} is the maximum time index.
-#' `activeTime` is a parameter that needs to be specified. It represents
+#' `activeTime` is an argument that needs to be specified. It represents
 #' the maximum time difference between two hotspots in the same local
 #' cluster. Please notice that a local cluster is different with a cluster
 #' in the final result. More details will be given in the next part.
 #' \cr\cr
 #' In **step 2**, the algorithm performs spatial clustering on each interval.
-#' A local cluster is a cluster found in an interval. Parameter `adjDist`
+#' A local cluster is a cluster found in an interval. Argument `adjDist`
 #' is used to control the spatial clustering. If the distance between two
 #' hotspots is smaller or equal to `adjDist`, they are directly-connected. If
 #' hotspot `A` is directly-connected with hotspot `B` and hotspot `B` is
@@ -49,13 +48,13 @@
 #' considered to be a cluster any more, and their hotspots will be
 #' assigned with `-1` as their membership labels. A hotspot with membership
 #' label `-1` is noise.
-#' Parameter `minPts` and `minTime` needs to be specified.
+#' Arguments `minPts` and `minTime` needs to be specified.
 #' \cr\cr
 #' In **step 5**, the algorithm finds the earliest observed hotspots in each
 #' cluster and records them as ignition points. If there are multiple
 #' earliest observed hotspots in a cluster, the mean or median of the
 #' longitude values and the latitude values will be used as the coordinate
-#' of the ignition point. This needs to be specified in parameter
+#' of the ignition point. This needs to be specified in argument
 #' `ignitionCenter`.
 #'
 #'
@@ -68,9 +67,7 @@
 #'                       numeric latitude values.
 #' @param obsTime character; the name of the column of the list which contains
 #'                           the observed time of hotspots in date, datetime or
-#'                           numeric. Only if this column is a positive
-#'                           integer vector, `timeUnit` and `timeStep`
-#'                           do not need to be specified.
+#'                           numeric.
 #' @param activeTime numeric (>=0); time tolerance; unit is time index.
 #' @param adjDist numeric (>0); distance tolerance; unit is metre.
 #' @param minPts numeric (>0); minimum number of hotspots in a cluster.
@@ -78,11 +75,10 @@
 #'                               unit is time index.
 #' @param ignitionCenter character; method to calculate ignition points,
 #'                                  either "mean" or "median".
-#' @param timeUnit **OPTIONAL**; character; one of "s" (seconds),
+#' @param timeUnit character; one of "s" (seconds),
 #'                                      "m" (minutes), "h" (hours),
 #'                                      "d" (days) and "n" (numeric).
-#' @param timeStep **OPTIONAL**; numeric (>0); number of units of `timeUnit` in
-#'                                             a time step.
+#' @param timeStep numeric (>0); number of units of `timeUnit` in a time step.
 #' @return A `spotoroo` object; the clustering result; it is also a list:
 #' \itemize{
 #'   \item \code{hotspots} : a data frame contains information of hotspots.
@@ -136,8 +132,8 @@ hotspot_cluster <- function(hotspots,
                             minPts = 4,
                             minTime = 3,
                             ignitionCenter = "mean",
-                            timeUnit = NULL,
-                            timeStep = NULL) {
+                            timeUnit = "n",
+                            timeStep = 1) {
 
   # safe checks
   is_length_one_bundle(lon,
@@ -147,14 +143,16 @@ hotspot_cluster <- function(hotspots,
                        adjDist,
                        minPts,
                        minTime,
-                       ignitionCenter)
+                       ignitionCenter,
+                       timeUnit,
+                       timeStep)
   check_type("list", hotspots)
-  check_type_bundle("numeric", activeTime, adjDist, minPts, minTime)
+  check_type_bundle("numeric", activeTime, adjDist, minPts, minTime, timeStep)
   is_non_negative_bundle(activeTime, minTime)
-  is_positive_bundle(adjDist, minPts)
-  check_type_bundle("character", lon, lat, obsTime, ignitionCenter)
+  is_positive_bundle(adjDist, minPts, timeStep)
+  check_type_bundle("character", lon, lat, obsTime, ignitionCenter, timeUnit)
+  check_in(c("s", "m", "h", "d", "n"), timeUnit)
   check_in(c("mean", "median"), ignitionCenter)
-
 
 
   # access cols
@@ -167,6 +165,7 @@ hotspot_cluster <- function(hotspots,
                             span.unit = list(color = "magenta"),
                             span.side = list(color = "grey"),
                             span.def = list(color = "black"),
+                            .val = list(digits = 3),
                             rule = list("font-weight" = "bold",
                                         "margin-top" = 1,
                                         "margin-bottom" = 0,
@@ -208,7 +207,7 @@ hotspot_cluster <- function(hotspots,
                                      ignition)
 
 
-  # bind results
+  # bind result
   result <- list(hotspots =
                    data.frame(lon,
                               lat,
@@ -256,26 +255,16 @@ hotspot_cluster <- function(hotspots,
 }
 
 
-
-# summary.spotoroo <- function(object, ...) {
-#
-#
-# }
-
-
-
-
-
-#' Plotting spatiotemporal clustering results
+#' Summarizing spatiotemporal clustering result
 #'
-#' `plot.spotoroo()` is the `plot` method of the class `spotoroo`.
-#' It is a simple wrapper of [plot_spotoroo()].
+#' `summary.spotoroo()` is the `summary` method of the class `spotoroo`.
+#' It is a simple wrapper of [summary_spotoroo()].
 #'
-#' @param x `spotoroo` object;
+#' @param object `spotoroo` object;
 #' a result of a call to [hotspot_cluster()].
-#' @param \dots additional arguments pass to [plot_spotoroo()]
+#' @param \dots additional arguments pass to [summary_spotoroo()]
 #' @examples
-#' results <- hotspot_cluster(hotspots_fin,
+#' result <- hotspot_cluster(hotspots_fin,
 #'                            lon = "lon",
 #'                            lat = "lat",
 #'                            obsTime = "obsTime",
@@ -287,15 +276,136 @@ hotspot_cluster <- function(hotspots,
 #'                            timeUnit = "h",
 #'                            timeStep = 1)
 #'
-#' # default plot
-#' plot(results)
 #'
-#' # three different types of plots
-#' plot(results, "def")
-#' plot(results, "mov")
+#'
+#' summary(result)
+#'
+#'
+#' @export
+summary.spotoroo <- function(object, ...) {
+  summary_spotoroo(object, ...)
+}
+
+
+#' Printing spatiotemporal clustering result
+#'
+#' `print.spotoroo()` is the `print` method of the class `spotoroo`.
+#'
+#' @param x `spotoroo` object;
+#' a result of a call to [hotspot_cluster()].
+#' @param \dots additional arguments will be ignored.
+#' @examples
+#' result <- hotspot_cluster(hotspots_fin,
+#'                            lon = "lon",
+#'                            lat = "lat",
+#'                            obsTime = "obsTime",
+#'                            activeTime = 24,
+#'                            adjDist = 3000,
+#'                            minPts = 4,
+#'                            minTime = 3,
+#'                            ignitionCenter = "mean",
+#'                            timeUnit = "h",
+#'                            timeStep = 1)
+#'
+#'
+#'
+#' print(result)
+#'
+#'
+#' @export
+print.spotoroo <- function(x, ...) {
+  num_cluster <- nrow(x$ignition)
+  num_hotspot <- nrow(x$hotspots)
+  cli::cli_div(theme = list(span.vrb = list(color = "yellow"),
+                            span.unit = list(color = "magenta"),
+                            span.side = list(color = "grey"),
+                            span.def = list(color = "cyan",
+                                            `font-weight` = "bold")))
+  cli::cli_alert_info("{.def spotoroo} {.vrb object}: {.val {num_cluster}} {.unit clusters} {.side |} {.val {num_hotspot}} {.unit hotspots}")
+  cli::cli_end()
+}
+
+
+
+
+
+#' Plotting spatiotemporal clustering result
+#'
+#' `plot.spotoroo()` is the `plot` method of the class `spotoroo`.
+#' It is a simple wrapper of [plot_spotoroo()].
+#'
+#' @param x `spotoroo` object;
+#' a result of a call to [hotspot_cluster()].
+#' @param \dots additional arguments pass to [plot_spotoroo()]
+#' @examples
+#' result <- hotspot_cluster(hotspots_fin,
+#'                            lon = "lon",
+#'                            lat = "lat",
+#'                            obsTime = "obsTime",
+#'                            activeTime = 24,
+#'                            adjDist = 3000,
+#'                            minPts = 4,
+#'                            minTime = 3,
+#'                            ignitionCenter = "mean",
+#'                            timeUnit = "h",
+#'                            timeStep = 1)
+#'
+#'
+#'
+#' # different types of plots
+#'
+#'
+#' plot(result, "def")
+#'
+#'
+#' plot(result, "mov")
+#'
 #'
 #' @export
 plot.spotoroo <- function(x, ...) {
   plot_spotoroo(x, ...)
 }
 
+
+#' spotoroo: spatiotemporal clustering in R of hot spot
+#'
+#' A package for clustering satellite hot spots and detecting
+#' fire ignition points.
+#'
+#' @section Authors:
+#' \itemize{
+#'   \item{Weihao Li \url{weihao.li@monash.edu}}
+#'   \item{Dianne Cook \url{dicook@monash.edu}}
+#'   \item{Emily Dodwell \url{emdodwell@gmail.com}}
+#' }
+#'
+#'
+#' @section Functions:
+#' The spotoroo package provides 13 important functions:
+#' \itemize{
+#'  \item{[hotspot_cluster()]}
+#'  \item{[global_clustering()]}
+#'  \item{[local_clustering()]}
+#'  \item{[handle_noise()]}
+#'  \item{[ignition_point()]}
+#'  \item{[get_fire_mov()]}
+#'  \item{[plot.spotoroo()]}
+#'  \item{[plot_spotoroo()]}
+#'  \item{[plot_def()]}
+#'  \item{[plot_fire_mov()]}
+#'  \item{[plot_timeline()]}
+#'  \item{[transform_time_id()]}
+#'  \item{[dist_point_to_vector()]}
+#'  }
+#'
+#'
+#'
+#' The spotoroo package provides 2 external data objects:
+#' \itemize{
+#'   \item{[hotspots]}
+#'   \item{[vic_map]}
+#' }
+#'
+#' @docType package
+#' @name spotoroo
+NULL

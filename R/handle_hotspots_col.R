@@ -25,20 +25,10 @@ handle_hotspots_col <- function(lon, lat, obsTime, timeUnit, timeStep) {
 
   # safety checks
   is_not_null_bundle(lon, lat, obsTime)
-  if (!all_null_bool(timeUnit, timeStep)) {
-    any_null_warning(timeUnit, timeStep)
-  }
 
+  # transform time col
+  timeID <- transform_time_id(obsTime, timeUnit, timeStep)
 
-  if (!any_null_bool(timeUnit, timeStep)) {
-    check_type("character", timeUnit)
-    check_type("numeric", timeStep)
-    is_positive(timeStep)
-    check_in(c("s", "m", "h", "d", "n"), timeUnit)
-
-    # transform time col
-    timeID <- transform_time_id(obsTime, timeUnit, timeStep)
-  }
 
   equal_length(lon, lat, obsTime, timeID)
   check_numeric_column_bundle(lon, lat)

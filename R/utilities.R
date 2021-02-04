@@ -134,18 +134,6 @@ check_integer_timeID <- function(timeID) {
   }
 }
 
-################################  WARNING  #####################################
-
-# WARNING; warn if any variable is null
-any_null_warning <- function(...) {
-  vars <- list(...)
-  var_names <- as.character(sys.call())[2:(length(vars) + 1)]
-  bool_vec <- unlist(lapply(vars, is.null))
-  if (any(bool_vec)) {
-    varname <- var_names[bool_vec][1]
-    cli::cli_alert_warning("Formal argument `{varname}` is missing, formal argument `{paste0(var_names[!bool_vec], collapse = '` ')}` will be ignored")
-  }
-}
 ################################  BOOL  ########################################
 
 # BOOL; check if any variable is null

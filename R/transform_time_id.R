@@ -54,8 +54,10 @@ transform_time_id <- function(obsTime, timeUnit, timeStep) {
     timeID <- as.integer(floor(as.numeric(timeID))) + 1L
   }
 
-  cli::cli_div(theme = list(span.vrb = list(color = "yellow"),
+  cli::cli_div(theme = list(span.vrb = list(color = "yellow",
+                                            `font-weight` = "bold"),
                             span.unit = list(color = "magenta"),
+                            .val = list(digits = 3),
                             span.side = list(color = "grey")))
   cli::cli_h3("{.val 1} {.unit time index} = {.val {timeStep}} {.unit {timeUnit}}")
   cli::cli_alert_success("{.vrb Transform} {.field observed time} {cli::symbol$arrow_right} {.field time indexes}")

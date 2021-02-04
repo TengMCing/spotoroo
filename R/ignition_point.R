@@ -54,8 +54,10 @@ ignition_point <- function(lon,
                            membership,
                            ignitionCenter) {
 
-  cli::cli_div(theme = list(span.vrb = list(color = "yellow"),
+  cli::cli_div(theme = list(span.vrb = list(color = "yellow",
+                                            `font-weight` = "bold"),
                             span.unit = list(color = "magenta"),
+                            .val = list(digits = 3),
                             span.side = list(color = "grey")))
   cli::cli_h3("{.field ignitionCenter} = {.val {ignitionCenter}}")
 

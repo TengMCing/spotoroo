@@ -13,7 +13,9 @@ reference:
     Functions for accessing and visualizing clustering results
 - contents:
   - get_fire_mov
+  - extract_fire
   - starts_with("plot")
+  - starts_with("summary")
 - title: "Tools"
   desc: >
     Functions for converting time and computing distance
@@ -26,3 +28,8 @@ reference:
 - contents:
   - starts_with("hotspots")
   - vic_map
+- title: "Package Information"
+  desc: >
+    Authors and functions
+- contents:
+  - spotoroo

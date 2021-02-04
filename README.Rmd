@@ -20,7 +20,7 @@ Sys.setlocale("LC_ALL","English")
 [![R-CMD-check](https://github.com/TengMCing/spotoroo/workflows/R-CMD-check/badge.svg)](https://github.com/TengMCing/spotoroo/actions)
 <!-- badges: end -->
 
-The goal of spotoroo is to ...
+spotoroo stands for spatiotemporal clustering in R of hot spot
 
 ## Installation
 
@@ -62,7 +62,7 @@ hotspots_fin[1:10,]
 
 ```{r echo = TRUE, warning=FALSE, message=FALSE, error=FALSE, out.width = "70%", out.height="70%"}
 library(tidyverse)
-vic_map +
+plot_vic_map() +
   geom_point(data = hotspots_fin, aes(lon, lat), alpha = 0.3) +
   ggtitle("Raw Hotspots")
 ```
@@ -84,23 +84,21 @@ result <- hotspot_cluster(hotspots_fin,
                           timeStep = 1)
 ```
 
-The ignition points of the bushfires.
-
 ```{r}
-result$ignition
+result
 ```
 
-The memberships of the first 10 hotspots.
 
 ```{r}
-result$hotspots[1:10,]
+summary(result)
 ```
 
-<!-- Summary of the clustering result. -->
 
-<!-- ```{r} -->
-<!-- summary(results) -->
-<!-- ``` -->
+Extract fires
+
+```{r}
+extract_fire(result, 1:2)[1:10,]
+```
 
 
 

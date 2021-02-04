@@ -27,8 +27,10 @@
 #' @export
 handle_noise <- function(global_membership, timeID, minPts, minTime) {
 
-  cli::cli_div(theme = list(span.vrb = list(color = "yellow"),
+  cli::cli_div(theme = list(span.vrb = list(color = "yellow",
+                                            `font-weight` = "bold"),
                             span.unit = list(color = "magenta"),
+                            .val = list(digits = 3),
                             span.side = list(color = "grey")))
   cli::cli_h3("{.field minPts} = {.val {minPts}} {.unit hotspot{?s}} | {.field minTime} = {.val {minTime}} {.unit time index{?es}}")
 

@@ -14,15 +14,17 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Depends: 
-    R (>= 2.10)
+    R (>= 3.2)
 Imports: 
-    geodist (>= 0.0.6),
-    progress (>= 1.2.0),
-    dplyr (>= 1.0.0),
-    cli (>= 2.2.0),
+    geodist,
+    progress,
+    dplyr,
+    cli,
     stats,
-    patchwork (>= 1.1.0),
-    ggrepel (>= 0.9.0),
+    patchwork,
+    ggrepel,
     ggExtra,
     ggbeeswarm,
     ggplot2
+Suggests:
+    sf (>= 0.7-3)

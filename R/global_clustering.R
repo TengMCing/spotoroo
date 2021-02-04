@@ -27,8 +27,10 @@
 #' @export
 global_clustering <- function(lon, lat, timeID, activeTime, adjDist) {
 
-  cli::cli_div(theme = list(span.vrb = list(color = "yellow"),
+  cli::cli_div(theme = list(span.vrb = list(color = "yellow",
+                                            `font-weight` = "bold"),
                             span.unit = list(color = "magenta"),
+                            .val = list(digits = 3),
                             span.side = list(color = "grey")))
   cli::cli_h3("{.field activeTime} = {.val {activeTime}} {.unit time indexes} | {.field adjDist} = {.val {adjDist}} {.unit meters}")
 
