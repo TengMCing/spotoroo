@@ -1,7 +1,4 @@
-test_that("multiplication works", {
-  expect_error(summary_spotoroo(123),
-               'Needs a "spotoroo" object as input.')
-
+test_that("plot_fire_mov() works", {
   result <- hotspot_cluster(hotspots_fin,
                             lon = "lon",
                             lat = "lat",
@@ -14,6 +11,10 @@ test_that("multiplication works", {
                             timeUnit = "h",
                             timeStep = 1)
 
-  expect_invisible(summary_spotoroo(result, cluster = c(1,3)))
-  expect_invisible(summary_spotoroo(result))
+  expect_s3_class(plot_fire_mov(result), "ggplot")
+  expect_s3_class(plot_fire_mov(result,
+                                cluster = c(1,2),
+                                bg = plot_vic_map()), "ggplot")
+
 })
+

@@ -10,7 +10,7 @@
 #' @return integer; a vector of indexes of nearby hotspots. If there is no
 #'                  nearby hotspots, return `NULL`.
 #' @noRd
-nearby_hotspots <- function(hotspot_list, pointer, lon, lat, adjDist) {
+nearby_hotspot <- function(hotspot_list, pointer, lon, lat, adjDist) {
 
   if (length(lon) == 1) return(NULL)
 

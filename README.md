@@ -67,7 +67,7 @@ plot_vic_map() +
   ggtitle("Raw Hotspots")
 ```
 
-<img src="man/figures/README-unnamed-chunk-6-1.png" width="70%" height="70%" />
+<img src="man/figures/README-unnamed-chunk-5-1.png" width="70%" height="70%" />
 
 Perform spatiotemporal clustering on this dataset. You need to provide
 the data, here it is “hotspots\_fin”, specify which columns correspond
@@ -114,7 +114,7 @@ result <- hotspot_cluster(hotspots_fin,
 #> i average duration : 131.9 hours
 #> 
 #> -- Time taken = 0 mins 4 secs for 1070 hotspots
-#> i 0.004 secs per hotspot
+#> i 0.003 secs per hotspot
 #> 
 #> --------------------------------------------------------------------------------
 ```
@@ -208,7 +208,7 @@ all can be displayed.
 plot(result, bg = vic_map)
 ```
 
-<img src="man/figures/README-unnamed-chunk-10-1.png" width="70%" height="70%" />
+<img src="man/figures/README-unnamed-chunk-9-1.png" width="70%" height="70%" />
 
 You can also choose a subset of clusters, and this will plot withou a
 map, so that you can see a zoomed in view of the hotspot clusters and
@@ -218,7 +218,7 @@ their ignition points.
 plot(result, cluster = c(1,2,3,4))
 ```
 
-<img src="man/figures/README-unnamed-chunk-11-1.png" width="70%" height="70%" />
+<img src="man/figures/README-unnamed-chunk-10-1.png" width="70%" height="70%" />
 
 To examine the fire movements, use the option “mov”, and the movement
 will be shown as connected lines between centroids at each time step,
@@ -233,7 +233,7 @@ plot(result,
      bg = vic_map)
 ```
 
-<img src="man/figures/README-unnamed-chunk-12-1.png" width="70%" height="70%" />
+<img src="man/figures/README-unnamed-chunk-11-1.png" width="70%" height="70%" />
 
 To examine the time line of clusters, to learn about intensity of fire
 periods use the option “timeline”.
@@ -244,4 +244,4 @@ plot(result, "timeline",
      mainBreak = "1 week")
 ```
 
-<img src="man/figures/README-unnamed-chunk-13-1.png" width="70%" height="70%" />
+<img src="man/figures/README-unnamed-chunk-12-1.png" width="70%" height="70%" />

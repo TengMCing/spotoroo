@@ -111,7 +111,7 @@
 <span class="fu"><a href="reference/plot_vic_map.html">plot_vic_map</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">geom_point</span><span class="op">(</span>data <span class="op">=</span> <span class="va">hotspots_fin</span>, <span class="fu">aes</span><span class="op">(</span><span class="va">lon</span>, <span class="va">lat</span><span class="op">)</span>, alpha <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">ggtitle</span><span class="op">(</span><span class="st">"Raw Hotspots"</span><span class="op">)</span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-6-1.png" width="70%" height="70%"></p>
+<p><img src="reference/figures/README-unnamed-chunk-5-1.png" width="70%" height="70%"></p>
 <p>Perform spatiotemporal clustering on this dataset. You need to provide the data, here it is “hotspots_fin”, specify which columns correspond to the spatial variables (lon, lat), and which to time steps (obsTime). There is a choice of options for the algorithm. “activeTime” sets the time to consider that a fire can be active, and longer than this between hotspots will create a new cluster. “adjDist” sets the maximum spatial distance between hotspots beyond which they would be considered part of a different cluster.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/hotspot_cluster.html">hotspot_cluster</a></span><span class="op">(</span><span class="va">hotspots_fin</span>,
@@ -148,7 +148,7 @@
 <span class="co">#&gt; i average hotspots : 176.7</span>
 <span class="co">#&gt; i average duration : 131.9 hours</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; -- Time taken = 0 mins 3 secs for 1070 hotspots</span>
+<span class="co">#&gt; -- Time taken = 0 mins 4 secs for 1070 hotspots</span>
 <span class="co">#&gt; i 0.003 secs per hotspot</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; --------------------------------------------------------------------------------</span></code></pre></div>
@@ -230,11 +230,11 @@
 <p>Plot of the result. In this example, there is a total of 6 clusters, so all can be displayed.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span><span class="op">(</span><span class="va">result</span>, bg <span class="op">=</span> <span class="va">vic_map</span><span class="op">)</span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-10-1.png" width="70%" height="70%"></p>
+<p><img src="reference/figures/README-unnamed-chunk-9-1.png" width="70%" height="70%"></p>
 <p>You can also choose a subset of clusters, and this will plot withou a map, so that you can see a zoomed in view of the hotspot clusters and their ignition points.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span><span class="op">(</span><span class="va">result</span>, cluster <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-11-1.png" width="70%" height="70%"></p>
+<p><img src="reference/figures/README-unnamed-chunk-10-1.png" width="70%" height="70%"></p>
 <p>To examine the fire movements, use the option “mov”, and the movement will be shown as connected lines between centroids at each time step, for each cluster.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span><span class="op">(</span><span class="va">result</span>,
@@ -243,13 +243,13 @@
      step <span class="op">=</span> <span class="fl">3</span>,
      hotspot <span class="op">=</span> <span class="cn">TRUE</span>,
      bg <span class="op">=</span> <span class="va">vic_map</span><span class="op">)</span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-12-1.png" width="70%" height="70%"></p>
+<p><img src="reference/figures/README-unnamed-chunk-11-1.png" width="70%" height="70%"></p>
 <p>To examine the time line of clusters, to learn about intensity of fire periods use the option “timeline”.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span><span class="op">(</span><span class="va">result</span>, <span class="st">"timeline"</span>, 
      dateLabel <span class="op">=</span> <span class="st">"%b %d"</span>, 
      mainBreak <span class="op">=</span> <span class="st">"1 week"</span><span class="op">)</span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-13-1.png" width="70%" height="70%"></p>
+<p><img src="reference/figures/README-unnamed-chunk-12-1.png" width="70%" height="70%"></p>
 </div>
 </div>
   </div>
@@ -273,6 +273,7 @@
 <h2>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://github.com/TengMCing/spotoroo/actions"><img src="https://github.com/TengMCing/spotoroo/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://codecov.io/gh/TengMCing/spotoroo?branch=master"><img src="https://codecov.io/gh/TengMCing/spotoroo/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
 </ul>
 </div>
 </div>

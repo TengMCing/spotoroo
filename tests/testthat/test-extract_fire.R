@@ -1,7 +1,4 @@
-test_that("multiplication works", {
-  expect_error(summary_spotoroo(123),
-               'Needs a "spotoroo" object as input.')
-
+test_that("extract_fire() works", {
   result <- hotspot_cluster(hotspots_fin,
                             lon = "lon",
                             lat = "lat",
@@ -14,6 +11,12 @@ test_that("multiplication works", {
                             timeUnit = "h",
                             timeStep = 1)
 
-  expect_invisible(summary_spotoroo(result, cluster = c(1,3)))
-  expect_invisible(summary_spotoroo(result))
+  expect_equal(nrow(extract_fire(result)),
+               1066)
+
+  expect_equal(nrow(extract_fire(result, noise = TRUE)),
+               1076)
+
+  expect_equal(nrow(extract_fire(result, 1:3)),
+               440)
 })

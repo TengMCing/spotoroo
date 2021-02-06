@@ -209,7 +209,7 @@ plot_timeline <- function(result,
 
   }
 
-  if ("numeric" %in% class(result$hotspots$obsTime)) {
+  if (is.numeric(result$hotspots$obsTime)) {
 
     minid <- min(result$hotspots$obsTime)
     maxid <- max(result$hotspots$obsTime)

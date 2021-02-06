@@ -41,11 +41,6 @@ devtools::install_github("TengMCing/spotoroo")
 
 This is a basic example which shows you how to solve a common problem:
 
-```{r echo = FALSE, message=FALSE, warning=FALSE, error=FALSE}
-library(devtools)
-load_all()
-```
-
 ```{r}
 library(spotoroo)
 ```
