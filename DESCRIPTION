@@ -28,5 +28,6 @@ Imports:
     ggplot2
 Suggests:
     sf (>= 0.7-3),
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    covr
 Config/testthat/edition: 3

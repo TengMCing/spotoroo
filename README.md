@@ -6,6 +6,8 @@
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/TengMCing/spotoroo/workflows/R-CMD-check/badge.svg)](https://github.com/TengMCing/spotoroo/actions)
+[![Codecov test
+coverage](https://codecov.io/gh/TengMCing/spotoroo/branch/master/graph/badge.svg)](https://codecov.io/gh/TengMCing/spotoroo?branch=master)
 <!-- badges: end -->
 
 spotoroo stands for spatiotemporal clustering in R of hot spot
@@ -111,8 +113,8 @@ result <- hotspot_cluster(hotspots_fin,
 #> i average hotspots : 176.7
 #> i average duration : 131.9 hours
 #> 
-#> -- Time taken = 0 mins 3 secs for 1070 hotspots
-#> i 0.003 secs per hotspot
+#> -- Time taken = 0 mins 4 secs for 1070 hotspots
+#> i 0.004 secs per hotspot
 #> 
 #> --------------------------------------------------------------------------------
 ```
