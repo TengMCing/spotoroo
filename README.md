@@ -113,7 +113,7 @@ result <- hotspot_cluster(hotspots_fin,
 #> i average hotspots : 176.7
 #> i average duration : 131.9 hours
 #> 
-#> -- Time taken = 0 mins 4 secs for 1070 hotspots
+#> -- Time taken = 0 mins 3 secs for 1070 hotspots
 #> i 0.003 secs per hotspot
 #> 
 #> --------------------------------------------------------------------------------
@@ -165,47 +165,32 @@ summary(result)
 Extract fires
 
 ``` r
-extract_fire(result, 1:2)[1:10,]
-#>       lon       lat             obsTime timeID membership noise distToIgnition
-#> 1  149.30 -37.75999 2019-12-29 13:10:00      1          1 FALSE       1111.885
-#> 2  149.30 -37.78000 2019-12-29 13:10:00      1          1 FALSE       1111.885
-#> 3  149.32 -37.78000 2019-12-29 13:30:00      1          1 FALSE       2080.914
-#> 4  149.30 -37.75999 2019-12-29 14:50:00      2          1 FALSE       1111.885
-#> 5  149.30 -37.78000 2019-12-29 14:50:00      2          1 FALSE       1111.885
-#> 6  149.32 -37.78000 2019-12-29 14:50:00      2          1 FALSE       2080.914
-#> 7  149.30 -37.75999 2019-12-29 15:00:00      2          1 FALSE       1111.885
-#> 8  149.30 -37.78000 2019-12-29 15:00:00      2          1 FALSE       1111.885
-#> 9  149.32 -37.78000 2019-12-29 15:00:00      2          1 FALSE       2080.914
-#> 10 149.28 -37.80000 2019-12-29 16:00:00      3          1 FALSE       3768.797
-#>    distToIgnitionUnit timeFromIgnition timeFromIgnitionUnit    type
-#> 1                   m  0.0000000 hours                    h hotspot
-#> 2                   m  0.0000000 hours                    h hotspot
-#> 3                   m  0.3333333 hours                    h hotspot
-#> 4                   m  1.6666667 hours                    h hotspot
-#> 5                   m  1.6666667 hours                    h hotspot
-#> 6                   m  1.6666667 hours                    h hotspot
-#> 7                   m  1.8333333 hours                    h hotspot
-#> 8                   m  1.8333333 hours                    h hotspot
-#> 9                   m  1.8333333 hours                    h hotspot
-#> 10                  m  2.8333333 hours                    h hotspot
-#>    obsInCluster clusterTimeLen clusterTimeLenUnit
-#> 1           146 116.1667 hours                  h
-#> 2           146 116.1667 hours                  h
-#> 3           146 116.1667 hours                  h
-#> 4           146 116.1667 hours                  h
-#> 5           146 116.1667 hours                  h
-#> 6           146 116.1667 hours                  h
-#> 7           146 116.1667 hours                  h
-#> 8           146 116.1667 hours                  h
-#> 9           146 116.1667 hours                  h
-#> 10          146 116.1667 hours                  h
+extract_fire(result, 1:2)[1:5,]
+#>      lon       lat             obsTime timeID membership noise distToIgnition
+#> 1 149.30 -37.75999 2019-12-29 13:10:00      1          1 FALSE       1111.885
+#> 2 149.30 -37.78000 2019-12-29 13:10:00      1          1 FALSE       1111.885
+#> 3 149.32 -37.78000 2019-12-29 13:30:00      1          1 FALSE       2080.914
+#> 4 149.30 -37.75999 2019-12-29 14:50:00      2          1 FALSE       1111.885
+#> 5 149.30 -37.78000 2019-12-29 14:50:00      2          1 FALSE       1111.885
+#>   distToIgnitionUnit timeFromIgnition timeFromIgnitionUnit    type obsInCluster
+#> 1                  m  0.0000000 hours                    h hotspot          146
+#> 2                  m  0.0000000 hours                    h hotspot          146
+#> 3                  m  0.3333333 hours                    h hotspot          146
+#> 4                  m  1.6666667 hours                    h hotspot          146
+#> 5                  m  1.6666667 hours                    h hotspot          146
+#>   clusterTimeLen clusterTimeLenUnit
+#> 1 116.1667 hours                  h
+#> 2 116.1667 hours                  h
+#> 3 116.1667 hours                  h
+#> 4 116.1667 hours                  h
+#> 5 116.1667 hours                  h
 ```
 
 Plot of the result. In this example, there is a total of 6 clusters, so
 all can be displayed.
 
 ``` r
-plot(result, bg = vic_map)
+plot(result, bg = plot_vic_map())
 ```
 
 <img src="man/figures/README-unnamed-chunk-9-1.png" width="70%" height="70%" />
@@ -227,10 +212,9 @@ for each cluster.
 ``` r
 plot(result,
      type = "mov",
-     cluster = 1:6,
+     cluster = 1:3,
      step = 3,
-     hotspot = TRUE,
-     bg = vic_map)
+     bg = plot_vic_map())
 ```
 
 <img src="man/figures/README-unnamed-chunk-11-1.png" width="70%" height="70%" />
@@ -241,7 +225,7 @@ periods use the option “timeline”.
 ``` r
 plot(result, "timeline", 
      dateLabel = "%b %d", 
-     mainBreak = "1 week")
+     mainBreak = "1 month")
 ```
 
 <img src="man/figures/README-unnamed-chunk-12-1.png" width="70%" height="70%" />

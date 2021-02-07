@@ -1,0 +1,73 @@
+---
+title: "Clustering satellite hot spots"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Clustering satellite hot spots}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+This vignette shows you how to cluster satellite hot spots, detect ignition points and reconstruct fire movement via the `spotoroo` package. Notice that in this vignette, the word "hot spot data" refers to the Moderate Resolution Imaging Spectroradiometer (MODIS) hot spot data. An example of this kind of data is the [*Himawari-8 Wild Fire product*](https://www.eorc.jaxa.jp/ptree/documents/README_H08_L2WLF.txt) provided by the Japan Aerospace Exploration Agency (JAXA). 
+
+```{r setup}
+library(spotoroo)
+```
+
+
+# Data requirements
+
+In order to use the spatiotemporal clustering algorithm provided by the `spotoroo` package, the satellite hot spot data needs to be a `list` which have at least three fields: the observed time, the longitude and the latitude. 
+
+The observed time needs to be either a `Date` object, a `POSIXlt` object, a `POSIXct` object or a `numeric` object. Besides, the longitude and latitude needs to be in `numeric`.
+
+Using the built-in dataset `hotspots_fin` as an example, it is a `data.frame` with two `numeric` columns and a `POSIXct` column which are `lon` (longitude), `lat` (latitude) and `obsTime` (observed time) respectively. `hotspots_fin` contains the selected hot spot data in Victoria (Australia) during the 2019-2020 Australian bushfire season.
+
+More details about this dataset can be found by using the function `help(hotspots_fin)`
+
+
+```{r}
+str(hotspots_fin)
+```
+
+# Overview of the hot spot data
+
+To provide a better understanding of the hot spots in Victoria, the package has a function `plot_vic_map()` to make a map of Victoria. It returns a `ggplot` object so you could add a new layer onto it. In the map, every black dot is an observed hot spot. Our goal is to cluster these hot spots into fires.
+
+```{r}
+library(ggplot2)
+
+plot_vic_map() +
+  geom_point(data = hotspots_fin, aes(lon, lat))
+```
+
+
+# Spatiotemporal clustering of hot spot data
+
+```{r}
+result <- hotspot_cluster(hotspots = hotspots_fin,
+                          lon = "lon",
+                          lat = "lat",
+                          obsTime = "obsTime",
+                          activeTime = 24,
+                          adjDist = 3000,
+                          minPts = 4,
+                          minTime = 3,
+                          ignitionCenter = "mean",
+                          timeUnit = "h",
+                          timeStep = 1)
+```
+
+
+```{r}
+result
+```
+
+
+

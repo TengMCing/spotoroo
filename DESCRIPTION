@@ -9,6 +9,8 @@ Authors@R:
            comment = c(ORCID = "0000-0003-4959-106X"))
 Description: What the package does (one paragraph).
 License: MIT + file LICENSE
+URL: https://tengmcing.github.io/spotoroo/
+BugReports: https://github.com/TengMCing/spotoroo/issues
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
@@ -29,5 +31,8 @@ Imports:
 Suggests:
     sf (>= 0.7-3),
     testthat (>= 3.0.0),
-    covr
+    covr,
+    knitr,
+    rmarkdown
 Config/testthat/edition: 3
+VignetteBuilder: knitr
