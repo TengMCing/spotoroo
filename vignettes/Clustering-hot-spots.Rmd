@@ -14,7 +14,11 @@ knitr::opts_chunk$set(
 )
 ```
 
-This vignette shows you how to cluster satellite hot spots, detect ignition points and reconstruct fire movement via the `spotoroo` package. Notice that in this vignette, the word "hot spot data" refers to the Moderate Resolution Imaging Spectroradiometer (MODIS) hot spot data. An example of this kind of data is the [*Himawari-8 Wild Fire product*](https://www.eorc.jaxa.jp/ptree/documents/README_H08_L2WLF.txt) provided by the Japan Aerospace Exploration Agency (JAXA). 
+The hot spot data, or the Moderate Resolution Imaging Spectroradiometer (MODIS) hot spot data, is one of the data taken from satellite to detect burning fire. An example is the [*Himawari-8 Wild Fire product*](https://www.eorc.jaxa.jp/ptree/documents/README_H08_L2WLF.txt) provided by the Japan Aerospace Exploration Agency (JAXA). 
+
+This vignette shows you how to cluster satellite hot spots, detect ignition points and reconstruct fire movement using the `spotoroo` package. 
+
+
 
 ```{r setup}
 library(spotoroo)
@@ -38,17 +42,92 @@ str(hotspots_fin)
 
 # Overview of the hot spot data
 
-To provide a better understanding of the hot spots in Victoria, the package has a function `plot_vic_map()` to make a map of Victoria. It returns a `ggplot` object so you could add a new layer onto it. In the map, every black dot is an observed hot spot. Our goal is to cluster these hot spots into fires.
+To provide a better understanding of the hot spots in Victoria, the package has a function `plot_vic_map()` to draw the map of Victoria. It returns a `ggplot` object so you could add a new layer onto it. On the map, every red mark is an observed hot spot. Our goal is to cluster these hot spots into fires.
 
 ```{r}
 library(ggplot2)
 
 plot_vic_map() +
-  geom_point(data = hotspots_fin, aes(lon, lat))
+  geom_point(data = hotspots_fin, aes(lon, lat), col = "red")
 ```
 
 
-# Spatiotemporal clustering of hot spot data
+# Spatiotemporal clustering of the hot spot data
+
+`hotspot_cluster()` is the core function of the package. In most of the cases, you only need to use this function to perform the spatiotemporal clustering algorithm.  
+
+## Arguments
+
+This function has 11 arguments, which can be divided into four categories:
+
+### 1. specifications of the dataset
+
+```{r echo = FALSE}
+tab <- data.frame(Arguments = c("`hotspots`", "`lon`", "`lat`", "`obsTime`"),
+                  Description = c("the object that contains the dataset",
+                                  "the name of the longitude column",
+                                  "the name of the latitude column",
+                                  "the name of the observed time column"))
+knitr::kable(tab)
+```
+    
+The first four arguments are pretty straight forward, you only need to provide the dataset object and its corresponding column names.
+
+
+### 2. specifications of the parameters of the clustering algorithm
+
+```{r echo = FALSE}
+tab <- data.frame(Arguments = c("`activeTime`", "`adjDist`", "`minPts`", "`minTime`"),
+                  Description = c("the time tolerance",
+                                  "the distance tolerance",
+                                  "the minimum number of hotspots",
+                                  "the minimum length of time"))
+knitr::kable(tab)
+```
+
+These four arguments are highly influential to the clustering results. 
+
+- `activeTime` could be interpreted as the time a fire can stay smouldering but undetectable by satellite before flaring up again. For example, if `activeTime` $= 24$, then the time tolerance is $24$ time indexes. 
+
+- `adjDist` could be interpreted as the maximum intra-cluster distance between a hotspot and its nearest hotspot. For example, if `adjDist` $= 3$, then the distance tolerance is $3$ km. However, in some very special cases, the intra-cluster distance between a hotspot and its nearest hotspot will exceed this threshold. You can learn more about this parameter and the algorithm by using `help(hotspot_cluster)`.
+
+- `minPts` is the minimum number of hotspots in a cluster. For example, if `minPts` is $4$, then any cluster with less than $4$ hotspots will be treated as noise.
+
+- `minTime` is the minimum length of time of a cluster. For example, if `minTime` is $3$, then any cluster lasts shorter than $3$ time indexes will be treated as noise.
+
+In practice, we usually don't have knowledge about the parameters `activeTime` and `adjDist`. Comparing the clustering results under different settings is a sensible method to determine the parameters. We will show how to do this in the section [Choice of parameters].
+
+In terms of `minPts` and `minTime`, they are totally depend on your personal preference on noise reduction. Usually, a sensible choice will be `minPts` $\in [3,10]$ and `minTime` $\in [1~hour, 12~hours]$ 
+
+
+
+### 3. specification of the calculation of the ignition points
+
+```{r echo = FALSE}
+tab <- data.frame(Arguments = c("`ignitionCenter`"),
+                  Description = c("method of the calculation of the ignition points"))
+knitr::kable(tab)
+```
+
+For a cluster, if `ignitionCenter` is "mean", the centroid of the earliest hotspots will be used as the ignition point, if `ignitionCenter` is "median", median longitude and median latitude of these hotspots will be used to calculate the ignition points.
+    
+### 4. specifications of the transformation of the observed time
+
+```{r echo = FALSE}
+tab <- data.frame(Arguments = c("`timeUnit`", "`timeStep`"),
+                  Description = c("the unit of time", "the length of time with respect to the unit of time"))
+knitr::kable(tab)
+```
+    
+Due to the design of the spatiotemporal clustering algorithm, the observed time needs to be transformed to discrete time index.  Available time units are "d" (days), "h" (hours), "m" (minutes), "s" (seconds) and "n" (numeric). `timeUnit` $=$ "numeric" will only be accepted when the observed time is already a numeric vector.
+
+For example, if `timeUnit` is "h" and `timeStep` is $2$, then $1$ time index is $2$ hours. 
+
+## Usage
+
+With specifications of the arguments introduced above, the `hotspot_cluster()` can be used in the following ways. 
+
+The messages will tell you some important information such as the number of discrete time indexes, the number of clusters and the proportion of noise.
 
 ```{r}
 result <- hotspot_cluster(hotspots = hotspots_fin,
@@ -64,10 +143,164 @@ result <- hotspot_cluster(hotspots = hotspots_fin,
                           timeStep = 1)
 ```
 
+It returns a `spotoroo` object, which is actually a `list` with two datasets and one list. 
+
+The `hotspots` dataset contains information of each hotspot. Particularly, the `membership` field is its membership label. $-1$ represents noise. 
+
+The `ignition` dataset contains information of each cluster. Similarly, the `membership` field is its membership label. And the `lon` and `lat` is the coordinate of its ignition point. 
 
 ```{r}
 result
+
+head(result$hotspots, 3)
+
+head(result$ignition, 3)
+
 ```
+
+If you would like to extract a subset of clusters from the results, `extract_fire()` could be useful.
+
+You could choose to extract all clusters along with noise points.
+
+```{r eval = FALSE}
+extract_fire(result, cluster = "all", noise = TRUE)
+```
+
+Or only a subset of clusters without any noise by providing a vector of membership labels to the argument `cluster`.
+
+```{r eval = FALSE}
+extract_fire(result, cluster = c(2, 3), noise = FALSE)
+```
+
+## Choice of parameters
+
+```
+# NOT RUN
+noise_prop <- c()
+
+for (adjDist in seq(1000, 4000, 500)) {
+  for (activeTime in seq(12, 36, 6)) {
+    result <- suppressMessages(hotspot_cluster(hotspots = hotspots_fin,
+                                               lon = "lon",
+                                               lat = "lat",
+                                               obsTime = "obsTime",
+                                               activeTime = activeTime,
+                                               adjDist = adjDist,
+                                               minPts = 4,
+                                               minTime = 3,
+                                               ignitionCenter = "mean",
+                                               timeUnit = "h",
+                                               timeStep = 1))
+    
+    noise_prop <- c(noise_prop, mean(result$hotspots$noise))
+  }
+}
+```
+
+```{r}
+tab <- expand.grid(activeTime = seq(12, 36, 6),
+                   adjDist = seq(1000, 4000, 500))
+
+
+
+tab$noise_prop <- c(0.282242991, 0.235514019, 0.133644860, 0.129906542,
+                    0.129906542, 0.282242991, 0.235514019, 0.133644860,
+                    0.129906542, 0.129906542, 0.134579439, 0.109345794,
+                    0.026168224, 0.026168224, 0.026168224, 0.075700935,
+                    0.055140187, 0.011214953, 0.011214953, 0.011214953,
+                    0.070093458, 0.049532710, 0.009345794, 0.009345794,
+                    0.009345794, 0.070093458, 0.049532710, 0.009345794,
+                    0.009345794, 0.009345794, 0.061682243, 0.049532710,
+                    0.009345794, 0.009345794, 0.009345794)
+```
+
+
+```{r}
+ggplot(tab) +
+  geom_line(aes(adjDist, noise_prop, color = as.factor(activeTime))) +
+  ylab("Noise Propotion") +
+  labs(col = "activeTime") +
+  theme_minimal() +
+  scale_x_continuous(breaks = seq(1000, 4000, 500))
+```
+
+```{r}
+ggplot(tab) +
+  geom_line(aes(activeTime, noise_prop, color = as.factor(adjDist))) +
+  ylab("Noise Propotion") +
+  labs(col = "adjDist") +
+  theme_minimal() +
+  scale_x_continuous(breaks = seq(12, 36, 6))
+```
+
+# Exploring the spatiotemporal clustering results
+
+The package provides some useful functions to explore the clustering results.
+
+## Summary
+
+You could make a brief summary of the clustering results.
+
+```{r}
+summary_spotoroo(result)
+```
+
+Or make a brief summary of a subset of clusters by providing a vector of membership labels to the `cluster` argument.
+
+```{r eval = FALSE}
+summary_spotoroo(result, cluster = c(1, 3, 4))
+```
+
+For convenience, the `summary_spotoroo()` can be called in the following ways.
+
+```{r eval = FALSE}
+summary(result)
+summary(result, cluster = c(1, 3, 4))
+```
+
+
+## Plot
+
+You could produce a plot of the clustering results.
+
+```{r}
+plot_spotoroo(result)
+```
+
+There are three types of plots, which are "def" (default), "mov" (fire movement) and "timeline" (timeline). The default plot has shown above.
+
+```{r}
+plot_spotoroo(result, type = "timeline")
+```
+
+The fire movement is calculated from the `get_fire_mov()` function.
+
+```{r}
+plot_spotoroo(result, type = "mov")
+```
+
+
+If you have a background `ggplot` object, you can let the function plots onto it.
+
+```{r}
+plot_spotoroo(result, bg = plot_vic_map())
+plot_spotoroo(result, type = "mov", bg = plot_vic_map())
+```
+
+More details about the usage of this function can be found by using `help(plot_spotoroo)`.
+
+For convenience, the `plot_spotoroo()` can be called in the following ways.
+
+```{r eval = FALSE}
+plot(result)
+plot(result, type = "timeline")
+plot(result, type = "mov")
+plot(result, bg = plot_vic_map())
+plot(result, type = "mov", bg = plot_vic_map())
+```
+
+
+
 
 
 
