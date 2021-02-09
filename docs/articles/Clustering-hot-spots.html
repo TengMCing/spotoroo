@@ -5,13 +5,13 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Clustering satellite hot spots • spotoroo</title>
+<title>Guide to spotoroo • spotoroo</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Clustering satellite hot spots">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Guide to spotoroo">
 <meta property="og:description" content="spotoroo">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -54,7 +54,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/Clustering-hot-spots.html">Clustering satellite hot spots</a>
+      <a href="../articles/Clustering-hot-spots.html">Guide to spotoroo</a>
     </li>
   </ul>
 </li>
@@ -82,7 +82,7 @@
       </header><script src="Clustering-hot-spots_files/header-attrs-2.6/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Clustering satellite hot spots</h1>
+      <h1 data-toc-skip>Guide to spotoroo</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/TengMCing/spotoroo/blob/master/vignettes/Clustering-hot-spots.Rmd"><code>vignettes/Clustering-hot-spots.Rmd</code></a></small>
@@ -92,43 +92,60 @@
 
     
     
-<p>The hot spot data, or the Moderate Resolution Imaging Spectroradiometer (MODIS) hot spot data, is one of the data taken from satellite to detect burning fire. An example is the <a href="https://www.eorc.jaxa.jp/ptree/documents/README_H08_L2WLF.txt"><em>Himawari-8 Wild Fire product</em></a> provided by the Japan Aerospace Exploration Agency (JAXA).</p>
+<p>The hot spot data, or the Moderate Resolution Imaging Spectroradiometer (MODIS) hot spot data, is usually taken from satellite for burning fire detection. An example of this kind of data is the <a href="https://www.eorc.jaxa.jp/ptree/documents/README_H08_L2WLF.txt"><em>Himawari-8 Wild Fire product</em></a> provided by the Japan Aerospace Exploration Agency (JAXA).</p>
 <p>This vignette shows you how to cluster satellite hot spots, detect ignition points and reconstruct fire movement using the <code>spotoroo</code> package.</p>
+<p>Load the <code>spotoroo</code> package using the <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> function.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tengmcing.github.io/spotoroo/">spotoroo</a></span><span class="op">)</span></code></pre></div>
 <div id="data-requirements" class="section level1">
 <h1 class="hasAnchor">
 <a href="#data-requirements" class="anchor"></a>Data requirements</h1>
-<p>In order to use the spatiotemporal clustering algorithm provided by the <code>spotoroo</code> package, the satellite hot spot data needs to be a <code>list</code> which have at least three fields: the observed time, the longitude and the latitude.</p>
-<p>The observed time needs to be either a <code>Date</code> object, a <code>POSIXlt</code> object, a <code>POSIXct</code> object or a <code>numeric</code> object. Besides, the longitude and latitude needs to be in <code>numeric</code>.</p>
-<p>Using the built-in dataset <code>hotspots_fin</code> as an example, it is a <code>data.frame</code> with two <code>numeric</code> columns and a <code>POSIXct</code> column which are <code>lon</code> (longitude), <code>lat</code> (latitude) and <code>obsTime</code> (observed time) respectively. <code>hotspots_fin</code> contains the selected hot spot data in Victoria (Australia) during the 2019-2020 Australian bushfire season.</p>
-<p>More details about this dataset can be found by using the function <code><a href="../reference/hotspots_fin.html">help(hotspots_fin)</a></code></p>
+<p>In order to use the spatiotemporal clustering algorithm provided by the <code>spotoroo</code> package, the satellite hot spot data needs to be a <code>list</code> which have at least three fields: the <strong>observed time</strong>, the <strong>longitude</strong> and the <strong>latitude</strong>.</p>
+<p>The <strong>observed time</strong> needs to be an object inherited from one of these classes:</p>
+<ul>
+<li><code>Date</code></li>
+<li><code>POSIXlt</code></li>
+<li><code>POSIXct</code></li>
+<li><code>numeric</code></li>
+</ul>
+<p>Besides, the <strong>longitude</strong> and <strong>latitude</strong> needs to be in <code>numeric</code>.</p>
+<p>Using the built-in dataset <code>hotspots_fin</code> as an example, it is a <code>data.frame</code> with a <code>lon</code> (<strong>longitude</strong>) column in <code>numeric</code>, a <code>lat</code> (<strong>latitude</strong>) column in <code>numeric</code> and a <code>obsTime</code> (<strong>observed time</strong>) column in <code>POSIXct</code>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">hotspots_fin</span><span class="op">)</span>
 <span class="co">#&gt; 'data.frame':    1070 obs. of  3 variables:</span>
 <span class="co">#&gt;  $ lon    : num  147 146 143 149 142 ...</span>
 <span class="co">#&gt;  $ lat    : num  -37.5 -37.9 -37.8 -37.4 -37.1 ...</span>
 <span class="co">#&gt;  $ obsTime: POSIXct, format: "2020-02-01 05:20:00" "2020-01-02 06:30:00" ...</span></code></pre></div>
+<p>This dataset contains 1070 selected hot spots in Victoria (Australia) during the 2019-2020 Australian bushfire season. More details about this dataset including the data source can be found by using the function <code><a href="../reference/hotspots_fin.html">help(hotspots_fin)</a></code></p>
 </div>
 <div id="overview-of-the-hot-spot-data" class="section level1">
 <h1 class="hasAnchor">
 <a href="#overview-of-the-hot-spot-data" class="anchor"></a>Overview of the hot spot data</h1>
-<p>To provide a better understanding of the hot spots in Victoria, the package has a function <code><a href="../reference/plot_vic_map.html">plot_vic_map()</a></code> to draw the map of Victoria. It returns a <code>ggplot</code> object so you could add a new layer onto it. On the map, every red mark is an observed hot spot. Our goal is to cluster these hot spots into fires.</p>
+<p>A common way to get a better understanding of the hot spot data is to visualize it. This package provides a function <code><a href="../reference/plot_vic_map.html">plot_vic_map()</a></code> to draw a map of Victoria. It returns a <code>ggplot</code> object, so we could add a new layer onto it. Here we use <code><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point()</a></code> to draw red dots for hot spots.</p>
+<p>From the map, we could find approximately <span class="math inline">\(4\)</span> clusters, but we don’t know if they can be further broken down into more clusters. Our goal is to cluster these hot spots into fires in a temporal and spatial manner.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
 
 <span class="fu"><a href="../reference/plot_vic_map.html">plot_vic_map</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">hotspots_fin</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">lon</span>, <span class="va">lat</span><span class="op">)</span>, col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></code></pre></div>
 <p><img src="Clustering-hot-spots_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
+<p>If you would like to visualize the hot spots in other areas, you might be able to find the spatial data from the <code>rnaturalearth</code> package and make a similar map using the <code><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf()</a></code> function and <code><a href="https://rdrr.io/pkg/ggthemes/man/theme_map.html">ggthemes::theme_map()</a></code> function. An example code is given below.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># NOT RUN</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">your_map</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>geometry <span class="op">=</span> <span class="va">geometry</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">your_hotspots</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">lon</span>, <span class="va">lat</span><span class="op">)</span>, col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">ggthemes</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggthemes/man/theme_map.html">theme_map</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="spatiotemporal-clustering-of-the-hot-spot-data" class="section level1">
+<div id="spatiotemporal-clustering-of-hot-spot" class="section level1">
 <h1 class="hasAnchor">
-<a href="#spatiotemporal-clustering-of-the-hot-spot-data" class="anchor"></a>Spatiotemporal clustering of the hot spot data</h1>
-<p><code><a href="../reference/hotspot_cluster.html">hotspot_cluster()</a></code> is the core function of the package. In most of the cases, you only need to use this function to perform the spatiotemporal clustering algorithm.</p>
+<a href="#spatiotemporal-clustering-of-hot-spot" class="anchor"></a>Spatiotemporal clustering of hot spot</h1>
+<p><br></p>
+<p><strong><code><a href="../reference/hotspot_cluster.html">hotspot_cluster()</a></code> is the core function of this package. In most of the cases, you only need to use this function to perform the spatiotemporal clustering algorithm.</strong></p>
 <div id="arguments" class="section level2">
 <h2 class="hasAnchor">
 <a href="#arguments" class="anchor"></a>Arguments</h2>
-<p>This function has 11 arguments, which can be divided into four categories:</p>
+<p>This function has <span class="math inline">\(11\)</span> arguments, which can be divided into four categories:</p>
 <div id="specifications-of-the-dataset" class="section level3">
 <h3 class="hasAnchor">
 <a href="#specifications-of-the-dataset" class="anchor"></a>1. specifications of the dataset</h3>
@@ -177,7 +194,7 @@
 </tr>
 <tr class="odd">
 <td align="left"><code>minPts</code></td>
-<td align="left">the minimum number of hotspots</td>
+<td align="left">the minimum number of hot spots</td>
 </tr>
 <tr class="even">
 <td align="left"><code>minTime</code></td>
@@ -185,15 +202,17 @@
 </tr>
 </tbody>
 </table>
-<p>These four arguments are highly influential to the clustering results.</p>
+<p>These four arguments controls the clustering process.</p>
 <ul>
-<li><p><code>activeTime</code> could be interpreted as the time a fire can stay smouldering but undetectable by satellite before flaring up again. For example, if <code>activeTime</code> <span class="math inline">\(= 24\)</span>, then the time tolerance is <span class="math inline">\(24\)</span> time indexes.</p></li>
-<li><p><code>adjDist</code> could be interpreted as the maximum intra-cluster distance between a hotspot and its nearest hotspot. For example, if <code>adjDist</code> <span class="math inline">\(= 3\)</span>, then the distance tolerance is <span class="math inline">\(3\)</span> km. However, in some very special cases, the intra-cluster distance between a hotspot and its nearest hotspot will exceed this threshold. You can learn more about this parameter and the algorithm by using <code><a href="../reference/hotspot_cluster.html">help(hotspot_cluster)</a></code>.</p></li>
-<li><p><code>minPts</code> is the minimum number of hotspots in a cluster. For example, if <code>minPts</code> is <span class="math inline">\(4\)</span>, then any cluster with less than <span class="math inline">\(4\)</span> hotspots will be treated as noise.</p></li>
-<li><p><code>minTime</code> is the minimum length of time of a cluster. For example, if <code>minTime</code> is <span class="math inline">\(3\)</span>, then any cluster lasts shorter than <span class="math inline">\(3\)</span> time indexes will be treated as noise.</p></li>
+<li><p><code>activeTime</code> could be interpreted as <strong>the time a fire can stay smouldering but undetectable by satellite before flaring up again</strong>. For example, if <code>activeTime</code> <span class="math inline">\(= 24\)</span>, then the time tolerance is <span class="math inline">\(24\)</span> time indexes.</p></li>
+<li><p><code>adjDist</code> could be interpreted as <strong>the maximum intra-cluster distance between a hot spot and its nearest hot spot</strong>. For example, if <code>adjDist</code> <span class="math inline">\(= 3\)</span>, then the distance tolerance is <span class="math inline">\(3\)</span> km. <em>However, in some very special cases, the intra-cluster distance between a hot spot and its nearest hot spot will exceed this threshold</em>. You can learn more about this parameter and the algorithm by using the <code><a href="../reference/hotspot_cluster.html">help(hotspot_cluster)</a></code> function.</p></li>
+<li><p><code>minPts</code> is <strong>the minimum number of hot spots in a cluster</strong>. For example, if <code>minPts</code> is <span class="math inline">\(4\)</span>, then any cluster with less than <span class="math inline">\(4\)</span> hot spots will be treated as noise.</p></li>
+<li><p><code>minTime</code> is <strong>the minimum length of time of a cluster</strong>. For example, if <code>minTime</code> is <span class="math inline">\(3\)</span>, then any cluster lasts shorter than <span class="math inline">\(3\)</span> time indexes will be treated as noise.</p></li>
 </ul>
-<p>In practice, we usually don’t have knowledge about the parameters <code>activeTime</code> and <code>adjDist</code>. Comparing the clustering results under different settings is a sensible method to determine the parameters. We will show how to do this in the section <a href="#choice-of-parameters">Choice of parameters</a>.</p>
-<p>In terms of <code>minPts</code> and <code>minTime</code>, they are totally depend on your personal preference on noise reduction. Usually, a sensible choice will be <code>minPts</code> <span class="math inline">\(\in [3,10]\)</span> and <code>minTime</code> <span class="math inline">\(\in [1~hour, 12~hours]\)</span></p>
+<p>In practice, we usually don’t have knowledge about the parameters <code>activeTime</code> and <code>adjDist</code>. And, the number of clusters will generally decrease when you increase these two parameters.</p>
+<p>Comparing the clustering results under different settings is an available method to determine these two parameters. We will show how to do this in the section <a href="#additional-topic-choice-of-parameters">Additional topic: Choice of parameters</a>.</p>
+<p>In terms of <code>minPts</code> and <code>minTime</code>, they depend on your personal preference of noise reduction. And, the number of clusters will often decrease when you increase these two parameters.</p>
+<p>A sensible choice of these two parameters is <code>minPts</code> <span class="math inline">\(\in [3,10]\)</span> and <code>minTime</code> <span class="math inline">\(\in [1~hour, 12~hours]\)</span></p>
 </div>
 <div id="specification-of-the-calculation-of-the-ignition-points" class="section level3">
 <h3 class="hasAnchor">
@@ -208,7 +227,8 @@
 <td align="left">method of the calculation of the ignition points</td>
 </tr></tbody>
 </table>
-<p>For a cluster, if <code>ignitionCenter</code> is “mean”, the centroid of the earliest hotspots will be used as the ignition point, if <code>ignitionCenter</code> is “median”, median longitude and median latitude of these hotspots will be used to calculate the ignition points.</p>
+<p>For a cluster, if <code>ignitionCenter</code> is “mean”, the centroid of the earliest hot spots will be used as the ignition point, if <code>ignitionCenter</code> is “median”, the median longitude and the median latitude of these hot spots will be used as the ignition point.</p>
+<p>In usual, there is no significant difference between these two methods, so we recommend to set <code>ignitionCenter = "mean"</code>.</p>
 </div>
 <div id="specifications-of-the-transformation-of-the-observed-time" class="section level3">
 <h3 class="hasAnchor">
@@ -229,16 +249,15 @@
 </tr>
 </tbody>
 </table>
-<p>Due to the design of the spatiotemporal clustering algorithm, the observed time needs to be transformed to discrete time index. Available time units are “d” (days), “h” (hours), “m” (minutes), “s” (seconds) and “n” (numeric). <code>timeUnit</code> <span class="math inline">\(=\)</span> “numeric” will only be accepted when the observed time is already a numeric vector.</p>
+<p>Due to the design of the algorithm, the observed time needs to be transformed to discrete time index. Available time units are “d” (days), “h” (hours), “m” (minutes), “s” (seconds) and “n” (numeric). <code>timeUnit = "n"</code> will only be accepted when the observed time is already a vector in <code>numeric</code>.</p>
 <p>For example, if <code>timeUnit</code> is “h” and <code>timeStep</code> is <span class="math inline">\(2\)</span>, then <span class="math inline">\(1\)</span> time index is <span class="math inline">\(2\)</span> hours.</p>
 </div>
 </div>
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
 <a href="#usage" class="anchor"></a>Usage</h2>
-<p>With specifications of the arguments introduced above, the <code><a href="../reference/hotspot_cluster.html">hotspot_cluster()</a></code> can be used in the following ways.</p>
-<p>The messages will tell you some important information such as the number of discrete time indexes, the number of clusters and the proportion of noise.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<p>With specifications of all the arguments, the <code><a href="../reference/hotspot_cluster.html">hotspot_cluster()</a></code> can be used as below.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/hotspot_cluster.html">hotspot_cluster</a></span><span class="op">(</span>hotspots <span class="op">=</span> <span class="va">hotspots_fin</span>,
                           lon <span class="op">=</span> <span class="st">"lon"</span>,
                           lat <span class="op">=</span> <span class="st">"lat"</span>,
@@ -273,98 +292,109 @@
 <span class="co">#&gt; i average hotspots : 176.7</span>
 <span class="co">#&gt; i average duration : 131.9 hours</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; -- Time taken = 0 mins 4 secs for 1070 hotspots</span>
+<span class="co">#&gt; -- Time taken = 0 mins 5 secs for 1070 hotspots</span>
 <span class="co">#&gt; i 0.004 secs per hotspot</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; --------------------------------------------------------------------------------</span></code></pre></div>
-<p>It returns a <code>spotoroo</code> object, which is actually a <code>list</code> with two datasets and one list.</p>
-<p>The <code>hotspots</code> dataset contains information of each hotspot. Particularly, the <code>membership</code> field is its membership label. <span class="math inline">\(-1\)</span> represents noise.</p>
-<p>The <code>ignition</code> dataset contains information of each cluster. Similarly, the <code>membership</code> field is its membership label. And the <code>lon</code> and <code>lat</code> is the coordinate of its ignition point.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<p>The function produces messages to tell you some important information of the clustering results such as the number of discrete time indexes, the number of clusters and the proportion of noise. If you would like to silent this function, you could wrap this function with <code><a href="https://rdrr.io/r/base/message.html">suppressMessages()</a></code> function like the example given below.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># NOT RUN</span>
+<span class="fu"><a href="https://rdrr.io/r/base/message.html">suppressMessages</a></span><span class="op">(</span><span class="fu"><a href="../reference/hotspot_cluster.html">hotspot_cluster</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="returns" class="section level2">
+<h2 class="hasAnchor">
+<a href="#returns" class="anchor"></a>Returns</h2>
+<p>The <code><a href="../reference/hotspot_cluster.html">hotspot_cluster()</a></code> function returns a <code>spotoroo</code> object, which is actually a <code>list</code> contains a <code>data.frame</code> called <code>hotpsots</code>, a <code>data.frame</code> called <code>ignition</code> and a <code>list</code> called <code>setting</code>.</p>
+<p>From the <code>result</code>, we know there are <span class="math inline">\(6\)</span> clusters in the clustering results.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">result</span>
-<span class="co">#&gt; i spotoroo object: 6 clusters | 1070 hotspots</span>
-
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">result</span><span class="op">$</span><span class="va">hotspots</span>, <span class="fl">3</span><span class="op">)</span>
+<span class="co">#&gt; i spotoroo object: 6 clusters | 1070 hotspots</span></code></pre></div>
+<p>You can access these two <code>data.frame</code>s in the usual way.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">result</span><span class="op">$</span><span class="va">hotspots</span>, <span class="fl">2</span><span class="op">)</span>
 <span class="co">#&gt;      lon       lat             obsTime timeID membership noise distToIgnition</span>
 <span class="co">#&gt; 1 147.46 -37.46000 2020-02-01 05:20:00    809         -1  TRUE              0</span>
 <span class="co">#&gt; 2 146.48 -37.93999 2020-01-02 06:30:00     90         -1  TRUE              0</span>
-<span class="co">#&gt; 3 143.44 -37.82000 2020-01-03 07:20:00    115         -1  TRUE              0</span>
 <span class="co">#&gt;   distToIgnitionUnit timeFromIgnition timeFromIgnitionUnit</span>
 <span class="co">#&gt; 1                  m   718.8333 hours                    h</span>
 <span class="co">#&gt; 2                  m   718.8333 hours                    h</span>
-<span class="co">#&gt; 3                  m   718.8333 hours                    h</span>
 
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">result</span><span class="op">$</span><span class="va">ignition</span>, <span class="fl">3</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">result</span><span class="op">$</span><span class="va">ignition</span>, <span class="fl">2</span><span class="op">)</span>
 <span class="co">#&gt;   membership    lon    lat             obsTime timeID obsInCluster</span>
 <span class="co">#&gt; 1          1 149.30 -37.77 2019-12-29 13:10:00      1          146</span>
 <span class="co">#&gt; 2          2 146.72 -36.84 2020-01-08 01:40:00    229          165</span>
-<span class="co">#&gt; 3          3 149.02 -37.42 2020-01-09 06:10:00    258          126</span>
 <span class="co">#&gt;   clusterTimeLen clusterTimeLenUnit</span>
 <span class="co">#&gt; 1 116.1667 hours                  h</span>
-<span class="co">#&gt; 2 148.3333 hours                  h</span>
-<span class="co">#&gt; 3 146.3333 hours                  h</span></code></pre></div>
+<span class="co">#&gt; 2 148.3333 hours                  h</span></code></pre></div>
+<p>The <code>hotspots</code> dataset contains information of each hot spot. Particularly, the <code>membership</code> column is the membership labels. <span class="math inline">\(-1\)</span> represents noise.</p>
+<p>The <code>ignition</code> dataset contains information of each cluster. Similarly, the <code>membership</code> column is the membership labels. And the <code>lon</code> and <code>lat</code> are the coordinate information of the ignition points.</p>
+<div id="extract-a-subset-of-clusters" class="section level3">
+<h3 class="hasAnchor">
+<a href="#extract-a-subset-of-clusters" class="anchor"></a>Extract a subset of clusters</h3>
 <p>If you would like to extract a subset of clusters from the results, <code><a href="../reference/extract_fire.html">extract_fire()</a></code> could be useful.</p>
-<p>You could choose to extract all clusters along with noise points.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<p>You could choose to extract all clusters along with noise points by setting <code>cluster = "all"</code> and <code>noise = TRUE</code>.</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/extract_fire.html">extract_fire</a></span><span class="op">(</span><span class="va">result</span>, cluster <span class="op">=</span> <span class="st">"all"</span>, noise <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
-<p>Or only a subset of clusters without any noise by providing a vector of membership labels to the argument <code>cluster</code>.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<p>Or only a subset of clusters without any noise by providing a vector of membership labels to the argument <code>cluster</code> and set <code>noise = FALSE</code>.</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/extract_fire.html">extract_fire</a></span><span class="op">(</span><span class="va">result</span>, cluster <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>, noise <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="choice-of-parameters" class="section level2">
+</div>
+<div id="additional-topic-choice-of-parameters" class="section level2">
 <h2 class="hasAnchor">
-<a href="#choice-of-parameters" class="anchor"></a>Choice of parameters</h2>
-<pre><code># NOT RUN
-noise_prop &lt;- c()
+<a href="#additional-topic-choice-of-parameters" class="anchor"></a>Additional topic: Choice of parameters</h2>
+<p>In principal, the parameters <code>activeTime</code> and <code>adjDist</code> are determined by the professional knowledge of fire behaviour, but in practice, we generally don’t know much about them.</p>
+<p>In the rest of the section, we will show one of the methods to choose proper values for these two parameters.</p>
+<p>We first set <code>minPts = 4</code> and <code>minTime = 3</code>. You could set different values for <code>minPts</code> and <code>minTime</code>.</p>
+<p>We then could do a grid search for <code>activeTime</code> and <code>adjDist</code> in a sensible range. Here, we set <code>adjDist</code> <span class="math inline">\(\in\)</span> <code>[500,1000,1500,2000,2500,3000,3500,4000]</code> and <code>activeTime</code> <span class="math inline">\(\in\)</span> <code>[6,12,18,24,30,36,42,48]</code>. For each pair of <code>activeTime</code> and <code>adjDist</code>, we record its proportion of noise as the metric for comparison.</p>
+<p>The following code records the proportion of noise. It may takes around 10 minutes to run. You could have a try if you like.</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># NOT RUN</span>
+<span class="co"># NOTICE: MAY TAKE AROUND 10 MINS TO RUN THIS CODE BLOCK</span>
+<span class="va">noise_prop</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">)</span>
 
-for (adjDist in seq(1000, 4000, 500)) {
-  for (activeTime in seq(12, 36, 6)) {
-    result &lt;- suppressMessages(hotspot_cluster(hotspots = hotspots_fin,
-                                               lon = "lon",
-                                               lat = "lat",
-                                               obsTime = "obsTime",
-                                               activeTime = activeTime,
-                                               adjDist = adjDist,
-                                               minPts = 4,
-                                               minTime = 3,
-                                               ignitionCenter = "mean",
-                                               timeUnit = "h",
-                                               timeStep = 1))
+<span class="kw">for</span> <span class="op">(</span><span class="va">adjDist</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">500</span>, <span class="fl">4000</span>, <span class="fl">500</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+  <span class="kw">for</span> <span class="op">(</span><span class="va">activeTime</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fl">48</span>, <span class="fl">6</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/message.html">suppressMessages</a></span><span class="op">(</span><span class="fu"><a href="../reference/hotspot_cluster.html">hotspot_cluster</a></span><span class="op">(</span>hotspots <span class="op">=</span> <span class="va">hotspots_fin</span>,
+                                               lon <span class="op">=</span> <span class="st">"lon"</span>,
+                                               lat <span class="op">=</span> <span class="st">"lat"</span>,
+                                               obsTime <span class="op">=</span> <span class="st">"obsTime"</span>,
+                                               activeTime <span class="op">=</span> <span class="va">activeTime</span>,
+                                               adjDist <span class="op">=</span> <span class="va">adjDist</span>,
+                                               minPts <span class="op">=</span> <span class="fl">4</span>,
+                                               minTime <span class="op">=</span> <span class="fl">3</span>,
+                                               ignitionCenter <span class="op">=</span> <span class="st">"mean"</span>,
+                                               timeUnit <span class="op">=</span> <span class="st">"h"</span>,
+                                               timeStep <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span>
     
-    noise_prop &lt;- c(noise_prop, mean(result$hotspots$noise))
-  }
-}</code></pre>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tab</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/expand.grid.html">expand.grid</a></span><span class="op">(</span>activeTime <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">12</span>, <span class="fl">36</span>, <span class="fl">6</span><span class="op">)</span>,
-                   adjDist <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="fl">4000</span>, <span class="fl">500</span><span class="op">)</span><span class="op">)</span>
+    <span class="va">noise_prop</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">noise_prop</span>, <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">result</span><span class="op">$</span><span class="va">hotspots</span><span class="op">$</span><span class="va">noise</span><span class="op">)</span><span class="op">)</span>
+  <span class="op">}</span>
+<span class="op">}</span>
 
+<span class="va">tab</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/expand.grid.html">expand.grid</a></span><span class="op">(</span>activeTime <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fl">48</span>, <span class="fl">6</span><span class="op">)</span>,
+                   adjDist <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">500</span>, <span class="fl">4000</span>, <span class="fl">500</span><span class="op">)</span><span class="op">)</span>
 
-
-<span class="va">tab</span><span class="op">$</span><span class="va">noise_prop</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.282242991</span>, <span class="fl">0.235514019</span>, <span class="fl">0.133644860</span>, <span class="fl">0.129906542</span>,
-                    <span class="fl">0.129906542</span>, <span class="fl">0.282242991</span>, <span class="fl">0.235514019</span>, <span class="fl">0.133644860</span>,
-                    <span class="fl">0.129906542</span>, <span class="fl">0.129906542</span>, <span class="fl">0.134579439</span>, <span class="fl">0.109345794</span>,
-                    <span class="fl">0.026168224</span>, <span class="fl">0.026168224</span>, <span class="fl">0.026168224</span>, <span class="fl">0.075700935</span>,
-                    <span class="fl">0.055140187</span>, <span class="fl">0.011214953</span>, <span class="fl">0.011214953</span>, <span class="fl">0.011214953</span>,
-                    <span class="fl">0.070093458</span>, <span class="fl">0.049532710</span>, <span class="fl">0.009345794</span>, <span class="fl">0.009345794</span>,
-                    <span class="fl">0.009345794</span>, <span class="fl">0.070093458</span>, <span class="fl">0.049532710</span>, <span class="fl">0.009345794</span>,
-                    <span class="fl">0.009345794</span>, <span class="fl">0.009345794</span>, <span class="fl">0.061682243</span>, <span class="fl">0.049532710</span>,
-                    <span class="fl">0.009345794</span>, <span class="fl">0.009345794</span>, <span class="fl">0.009345794</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<span class="va">tab</span><span class="op">$</span><span class="va">noise_prop</span> <span class="op">&lt;-</span> <span class="va">noise_prop</span></code></pre></div>
+<p>With the proportion of noise, we could make two line plots to reveal the relationships between proportion of noise, <code>adjDist</code> and <code>activeTime</code>.</p>
+<p>It works like the <a href="https://en.wikipedia.org/wiki/Scree_plot">scree plot</a> used in principal component analysis.</p>
+<p>In the first plot, most of the significant drops of proportion of noise are observed when <code>adjDist</code> less than 2500 metres. Therefore, <code>adjDist = 2500</code> is a reasonable choice.</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">tab</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">adjDist</span>, <span class="va">noise_prop</span>, color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">activeTime</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"Noise Propotion"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>col <span class="op">=</span> <span class="st">"activeTime"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="fl">4000</span>, <span class="fl">500</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<p><img src="Clustering-hot-spots_files/figure-html/unnamed-chunk-13-1.png" width="700"></p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">500</span>, <span class="fl">4000</span>, <span class="fl">500</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<p><img src="Clustering-hot-spots_files/figure-html/unnamed-chunk-14-1.png" width="700"></p>
+<p>In the second plot, most of the significant drops of proportion of noise are observed when <code>activeTime</code> less than 24 hours. Therefore, <code>activeTime = 24</code> is a reasonable choice.</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">tab</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">activeTime</span>, <span class="va">noise_prop</span>, color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">adjDist</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"Noise Propotion"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>col <span class="op">=</span> <span class="st">"adjDist"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">12</span>, <span class="fl">36</span>, <span class="fl">6</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<p><img src="Clustering-hot-spots_files/figure-html/unnamed-chunk-14-1.png" width="700"></p>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fl">48</span>, <span class="fl">6</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<p><img src="Clustering-hot-spots_files/figure-html/unnamed-chunk-15-1.png" width="700"></p>
 </div>
 </div>
 <div id="exploring-the-spatiotemporal-clustering-results" class="section level1">
@@ -375,7 +405,7 @@ for (adjDist in seq(1000, 4000, 500)) {
 <h2 class="hasAnchor">
 <a href="#summary" class="anchor"></a>Summary</h2>
 <p>You could make a brief summary of the clustering results.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/summary_spotoroo.html">summary_spotoroo</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; ------------------------------ SPOTOROO 0.0.0.9000 -----------------------------</span>
@@ -412,43 +442,68 @@ for (adjDist in seq(1000, 4000, 500)) {
 <span class="co">#&gt; </span>
 <span class="co">#&gt; --------------------------------------------------------------------------------</span></code></pre></div>
 <p>Or make a brief summary of a subset of clusters by providing a vector of membership labels to the <code>cluster</code> argument.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/summary_spotoroo.html">summary_spotoroo</a></span><span class="op">(</span><span class="va">result</span>, cluster <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<p>For convenience, the <code><a href="../reference/summary_spotoroo.html">summary_spotoroo()</a></code> can be called in the following ways.</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div id="called-by-summary" class="section level3">
+<h3 class="hasAnchor">
+<a href="#called-by-summary" class="anchor"></a>Called by <code>summary()</code>
+</h3>
+<p>For convenience, the <code><a href="../reference/summary_spotoroo.html">summary_spotoroo()</a></code> can be called by the <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> function.</p>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">result</span>, cluster <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+</div>
 </div>
 <div id="plot" class="section level2">
 <h2 class="hasAnchor">
 <a href="#plot" class="anchor"></a>Plot</h2>
-<p>You could produce a plot of the clustering results.</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/plot_spotoroo.html">plot_spotoroo</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></code></pre></div>
-<p><img src="Clustering-hot-spots_files/figure-html/unnamed-chunk-18-1.png" width="700"></p>
-<p>There are three types of plots, which are “def” (default), “mov” (fire movement) and “timeline” (timeline). The default plot has shown above.</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/plot_spotoroo.html">plot_spotoroo</a></span><span class="op">(</span><span class="va">result</span>, type <span class="op">=</span> <span class="st">"timeline"</span><span class="op">)</span></code></pre></div>
-<p><img src="Clustering-hot-spots_files/figure-html/unnamed-chunk-19-1.png" width="700"></p>
-<p>The fire movement is calculated from the <code><a href="../reference/get_fire_mov.html">get_fire_mov()</a></code> function.</p>
+<p>You could produce a plot of the clustering results. There are three types of plots, which are “def” (default), “mov” (fire movement) and “timeline” (timeline). T</p>
+<div id="default" class="section level3">
+<h3 class="hasAnchor">
+<a href="#default" class="anchor"></a>Default</h3>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/plot_spotoroo.html">plot_spotoroo</a></span><span class="op">(</span><span class="va">result</span>, type <span class="op">=</span> <span class="st">"mov"</span><span class="op">)</span></code></pre></div>
-<p><img src="Clustering-hot-spots_files/figure-html/unnamed-chunk-20-1.png" width="700"></p>
-<p>If you have a background <code>ggplot</code> object, you can let the function plots onto it.</p>
+<code class="sourceCode R"><span class="fu"><a href="../reference/plot_spotoroo.html">plot_spotoroo</a></span><span class="op">(</span><span class="va">result</span>, type <span class="op">=</span> <span class="st">"def"</span><span class="op">)</span></code></pre></div>
+<p><img src="Clustering-hot-spots_files/figure-html/unnamed-chunk-19-1.png" width="700"></p>
+</div>
+<div id="timeline" class="section level3">
+<h3 class="hasAnchor">
+<a href="#timeline" class="anchor"></a>Timeline</h3>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/plot_spotoroo.html">plot_spotoroo</a></span><span class="op">(</span><span class="va">result</span>, bg <span class="op">=</span> <span class="fu"><a href="../reference/plot_vic_map.html">plot_vic_map</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<p><img src="Clustering-hot-spots_files/figure-html/unnamed-chunk-21-1.png" width="700"></p>
+<code class="sourceCode R"><span class="fu"><a href="../reference/plot_spotoroo.html">plot_spotoroo</a></span><span class="op">(</span><span class="va">result</span>, type <span class="op">=</span> <span class="st">"timeline"</span><span class="op">)</span></code></pre></div>
+<p><img src="Clustering-hot-spots_files/figure-html/unnamed-chunk-20-1.png" width="700"></p>
+</div>
+<div id="fire-movement" class="section level3">
+<h3 class="hasAnchor">
+<a href="#fire-movement" class="anchor"></a>Fire movement</h3>
+<p>The fire movement is calculated from the <code><a href="../reference/get_fire_mov.html">get_fire_mov()</a></code> function.</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/plot_spotoroo.html">plot_spotoroo</a></span><span class="op">(</span><span class="va">result</span>, type <span class="op">=</span> <span class="st">"mov"</span>, bg <span class="op">=</span> <span class="fu"><a href="../reference/plot_vic_map.html">plot_vic_map</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<p><img src="Clustering-hot-spots_files/figure-html/unnamed-chunk-21-2.png" width="700"></p>
-<p>More details about the usage of this function can be found by using <code><a href="../reference/plot_spotoroo.html">help(plot_spotoroo)</a></code>.</p>
-<p>For convenience, the <code><a href="../reference/plot_spotoroo.html">plot_spotoroo()</a></code> can be called in the following ways.</p>
+<code class="sourceCode R"><span class="fu"><a href="../reference/plot_spotoroo.html">plot_spotoroo</a></span><span class="op">(</span><span class="va">result</span>, type <span class="op">=</span> <span class="st">"mov"</span><span class="op">)</span></code></pre></div>
+<p><img src="Clustering-hot-spots_files/figure-html/unnamed-chunk-21-1.png" width="700"></p>
+</div>
+<div id="add-a-background" class="section level3">
+<h3 class="hasAnchor">
+<a href="#add-a-background" class="anchor"></a>Add a background</h3>
+<p>If you have a background <code>ggplot</code> object, you can let the function plots onto it.</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/plot_spotoroo.html">plot_spotoroo</a></span><span class="op">(</span><span class="va">result</span>, bg <span class="op">=</span> <span class="fu"><a href="../reference/plot_vic_map.html">plot_vic_map</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<p><img src="Clustering-hot-spots_files/figure-html/unnamed-chunk-22-1.png" width="700"></p>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/plot_spotoroo.html">plot_spotoroo</a></span><span class="op">(</span><span class="va">result</span>, type <span class="op">=</span> <span class="st">"mov"</span>, bg <span class="op">=</span> <span class="fu"><a href="../reference/plot_vic_map.html">plot_vic_map</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<p><img src="Clustering-hot-spots_files/figure-html/unnamed-chunk-22-2.png" width="700"></p>
+<p>More details about the usage of this function can be found by using the <code><a href="../reference/plot_spotoroo.html">help(plot_spotoroo)</a></code> function.</p>
+</div>
+<div id="called-by-plot" class="section level3">
+<h3 class="hasAnchor">
+<a href="#called-by-plot" class="anchor"></a>Called by <code>plot()</code>
+</h3>
+<p>For convenience, the <code><a href="../reference/plot_spotoroo.html">plot_spotoroo()</a></code> can be called by the <code><a href="https://rdrr.io/r/graphics/plot.html">plot()</a></code> function.</p>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span><span class="op">(</span><span class="va">result</span>, type <span class="op">=</span> <span class="st">"timeline"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span><span class="op">(</span><span class="va">result</span>, type <span class="op">=</span> <span class="st">"mov"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span><span class="op">(</span><span class="va">result</span>, bg <span class="op">=</span> <span class="fu"><a href="../reference/plot_vic_map.html">plot_vic_map</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span><span class="op">(</span><span class="va">result</span>, type <span class="op">=</span> <span class="st">"mov"</span>, bg <span class="op">=</span> <span class="fu"><a href="../reference/plot_vic_map.html">plot_vic_map</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+</div>
 </div>
 </div>
   </div>

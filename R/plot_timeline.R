@@ -101,6 +101,7 @@ plot_timeline <- function(result,
   power10 <- trunc(log10(max_index))
   base10 <- 10^power10
   max_lab <- (max_index %/% base10 + (max_index %% base10 != 0)) * base10
+  if (base10 == max_lab) base10 <- max(base10 %/% 10, 1)
   y_values <- seq(-base10, max_lab, base10)
   y_labs <- as.character(y_values)
   y_labs[1] <- "noise"
