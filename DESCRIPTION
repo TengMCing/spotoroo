@@ -1,12 +1,19 @@
 Package: spotoroo
-Title: What the Package Does (One Line, Title Case)
+Title: Spatiotemporal clustering of satellite hotspot data
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "Weihao",
+    c(person(given = "Weihao",
            family = "Li",
            role = c("aut", "cre"),
            email = "llreczx@gmail.com",
-           comment = c(ORCID = "0000-0003-4959-106X"))
+           comment = c(ORCID = "0000-0003-4959-106X")),
+      person("Di", "Cook", 
+             email = "dicook@monash.edu", 
+             role = "ctb", 
+             comment = c(ORCID = "0000-0002-3813-7155")),
+      person("Emily", "Dodwell",
+             email = "emdodwell@gmail.com",
+             role = "ctb"))
 Description: What the package does (one paragraph).
 License: MIT + file LICENSE
 URL: https://tengmcing.github.io/spotoroo/
