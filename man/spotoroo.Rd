@@ -32,6 +32,10 @@ The spotoroo package provides 13 important functions:
 \item{\code{\link[=plot_def]{plot_def()}}}
 \item{\code{\link[=plot_fire_mov]{plot_fire_mov()}}}
 \item{\code{\link[=plot_timeline]{plot_timeline()}}}
+\item{\code{\link[=plot_vic_map]{plot_vic_map()}}}
+\item{\code{\link[=summary.spotoroo]{summary.spotoroo()}}}
+\item{\code{\link[=summary_spotoroo]{summary_spotoroo()}}}
+\item{\code{\link[=print.spotoroo]{print.spotoroo()}}}
 \item{\code{\link[=transform_time_id]{transform_time_id()}}}
 \item{\code{\link[=dist_point_to_vector]{dist_point_to_vector()}}}
 }

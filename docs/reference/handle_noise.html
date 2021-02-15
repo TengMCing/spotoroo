@@ -40,7 +40,8 @@
 
 
 <meta property="og:title" content="Handling noise in the clustering results — handle_noise" />
-<meta property="og:description" content="handle_noise() finds noise from the clustering results and label it with -1`." />
+<meta property="og:description" content="This function finds noise from the clustering results and label it with
+-1." />
 
 
 
@@ -72,7 +73,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">spotoroo</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -129,7 +130,8 @@
     </div>
 
     <div class="ref-description">
-    <p><code>handle_noise() finds noise from the clustering results and label it with </code>-1`.</p>
+    <p>This function finds noise from the clustering results and label it with
+<code>-1</code>.</p>
     </div>
 
     <pre class="usage"><span class='fu'>handle_noise</span><span class='op'>(</span><span class='va'>global_membership</span>, <span class='va'>timeID</span>, <span class='va'>minPts</span>, <span class='va'>minTime</span><span class='op'>)</span></pre>
@@ -147,7 +149,7 @@
     </tr>
     <tr>
       <th>minPts</th>
-      <td><p>numeric (&gt;0); minimum number of hotspots in a cluster.</p></td>
+      <td><p>numeric (&gt;0); minimum number of hot spots in a cluster.</p></td>
     </tr>
     <tr>
       <th>minTime</th>
@@ -161,21 +163,23 @@ unit is time index.</p></td>
     <p>integer; a vector of membership labels.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>For more details about the clustering algorithm and the parameter
+    <p>For more details about the clustering algorithm and the arguments
 <code>minPts</code> and <code>minTime</code>, please check the documentation
 of <code><a href='hotspot_cluster.html'>hotspot_cluster()</a></code>.
 This function performs the <strong>step 4</strong> of the clustering algorithm. It uses a
-given threshold (minimum number of points and minimum existing time) to find
-noise and label it with <code>-1</code>.</p>
+given threshold (minimum number of points and minimum length of time) to
+find noise and label it with <code>-1</code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>global_membership</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>1</span>,<span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>2</span>,<span class='fl'>2</span>,<span class='fl'>2</span>,<span class='fl'>2</span>,<span class='fl'>2</span>,<span class='fl'>3</span>,<span class='fl'>3</span>,<span class='fl'>3</span>,<span class='fl'>3</span>,<span class='fl'>3</span>,<span class='fl'>3</span><span class='op'>)</span>
+    <pre class="examples"><div class='input'><span class='co'># define membership labels and timeID for 10 observations</span>
+<span class='va'>global_membership</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>1</span>,<span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>2</span>,<span class='fl'>2</span>,<span class='fl'>2</span>,<span class='fl'>2</span>,<span class='fl'>2</span>,<span class='fl'>3</span>,<span class='fl'>3</span>,<span class='fl'>3</span>,<span class='fl'>3</span>,<span class='fl'>3</span>,<span class='fl'>3</span><span class='op'>)</span>
 <span class='va'>timeID</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>3</span>,<span class='fl'>2</span>,<span class='fl'>3</span>,<span class='fl'>3</span>,<span class='fl'>4</span>,<span class='fl'>5</span>,<span class='fl'>6</span>,<span class='fl'>3</span>,<span class='fl'>3</span>,<span class='fl'>3</span>,<span class='fl'>3</span>,<span class='fl'>3</span>,<span class='fl'>3</span><span class='op'>)</span>
 
+<span class='co'># handle noise with different values of minPts and minTime</span>
 <span class='fu'>handle_noise</span><span class='op'>(</span><span class='va'>global_membership</span>, <span class='va'>timeID</span>, <span class='fl'>4</span>, <span class='fl'>0</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>-- <span style='color: #00BB00;'>minPts</span><span> = </span><span style='color: #0000BB;'>4</span><span> </span><span style='color: #BB00BB;'>hotspots</span><span> | </span><span style='color: #00BB00;'>minTime</span><span> = </span><span style='color: #0000BB;'>0</span><span> </span><span style='color: #BB00BB;'>time indexes</span><span> </span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>√</span><span> </span><span style='color: #BBBB00;font-weight: bold;'>Handle</span><span> </span><span style='color: #00BB00;'>noise</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> </span><span style='color: #0000BB;'>2</span><span> clusters </span><span style='color: #555555;'>left</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> noise </span><span style='color: #555555;'>proportion</span><span> : </span><span style='color: #0000BB;'>20 %</span><span> </span></div><div class='output co'>#&gt;  [1] -1 -1 -1  1  1  1  1  1  1  2  2  2  2  2  2</div><div class='input'><span class='fu'>handle_noise</span><span class='op'>(</span><span class='va'>global_membership</span>, <span class='va'>timeID</span>, <span class='fl'>4</span>, <span class='fl'>1</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>-- </span><span style='color: #00BB00;'>minPts</span><span> = </span><span style='color: #0000BB;'>4</span><span> </span><span style='color: #BB00BB;'>hotspots</span><span> | </span><span style='color: #00BB00;'>minTime</span><span> = </span><span style='color: #0000BB;'>1</span><span> </span><span style='color: #BB00BB;'>time index</span><span> </span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>√</span><span> </span><span style='color: #BBBB00;font-weight: bold;'>Handle</span><span> </span><span style='color: #00BB00;'>noise</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> </span><span style='color: #0000BB;'>1</span><span> cluster </span><span style='color: #555555;'>left</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> noise </span><span style='color: #555555;'>proportion</span><span> : </span><span style='color: #0000BB;'>60 %</span><span> </span></div><div class='output co'>#&gt;  [1] -1 -1 -1  1  1  1  1  1  1 -1 -1 -1 -1 -1 -1</div><div class='input'><span class='fu'>handle_noise</span><span class='op'>(</span><span class='va'>global_membership</span>, <span class='va'>timeID</span>, <span class='fl'>3</span>, <span class='fl'>3</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>-- </span><span style='color: #00BB00;'>minPts</span><span> = </span><span style='color: #0000BB;'>3</span><span> </span><span style='color: #BB00BB;'>hotspots</span><span> | </span><span style='color: #00BB00;'>minTime</span><span> = </span><span style='color: #0000BB;'>3</span><span> </span><span style='color: #BB00BB;'>time indexes</span><span> </span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>√</span><span> </span><span style='color: #BBBB00;font-weight: bold;'>Handle</span><span> </span><span style='color: #00BB00;'>noise</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> </span><span style='color: #0000BB;'>1</span><span> cluster </span><span style='color: #555555;'>left</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> noise </span><span style='color: #555555;'>proportion</span><span> : </span><span style='color: #0000BB;'>60 %</span><span> </span></div><div class='output co'>#&gt;  [1] -1 -1 -1  1  1  1  1  1  1 -1 -1 -1 -1 -1 -1</div><div class='input'>
+</div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>-- <span style='color: #00BB00;'>minPts</span><span> = </span><span style='color: #0000BB;'>4</span><span> </span><span style='color: #BB00BB;'>hot spots</span><span> | </span><span style='color: #00BB00;'>minTime</span><span> = </span><span style='color: #0000BB;'>0</span><span> </span><span style='color: #BB00BB;'>time indexes</span><span> </span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #BBBB00;font-weight: bold;'>Handle</span><span> </span><span style='color: #00BB00;'>noise</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> </span><span style='color: #0000BB;'>2</span><span> clusters </span><span style='color: #555555;'>left</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> noise </span><span style='color: #555555;'>proportion</span><span> : </span><span style='color: #0000BB;'>20 %</span><span> </span></div><div class='output co'>#&gt;  [1] -1 -1 -1  1  1  1  1  1  1  2  2  2  2  2  2</div><div class='input'><span class='fu'>handle_noise</span><span class='op'>(</span><span class='va'>global_membership</span>, <span class='va'>timeID</span>, <span class='fl'>4</span>, <span class='fl'>1</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>-- </span><span style='color: #00BB00;'>minPts</span><span> = </span><span style='color: #0000BB;'>4</span><span> </span><span style='color: #BB00BB;'>hot spots</span><span> | </span><span style='color: #00BB00;'>minTime</span><span> = </span><span style='color: #0000BB;'>1</span><span> </span><span style='color: #BB00BB;'>time index</span><span> </span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #BBBB00;font-weight: bold;'>Handle</span><span> </span><span style='color: #00BB00;'>noise</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> </span><span style='color: #0000BB;'>1</span><span> cluster </span><span style='color: #555555;'>left</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> noise </span><span style='color: #555555;'>proportion</span><span> : </span><span style='color: #0000BB;'>60 %</span><span> </span></div><div class='output co'>#&gt;  [1] -1 -1 -1  1  1  1  1  1  1 -1 -1 -1 -1 -1 -1</div><div class='input'><span class='fu'>handle_noise</span><span class='op'>(</span><span class='va'>global_membership</span>, <span class='va'>timeID</span>, <span class='fl'>3</span>, <span class='fl'>3</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>-- </span><span style='color: #00BB00;'>minPts</span><span> = </span><span style='color: #0000BB;'>3</span><span> </span><span style='color: #BB00BB;'>hot spots</span><span> | </span><span style='color: #00BB00;'>minTime</span><span> = </span><span style='color: #0000BB;'>3</span><span> </span><span style='color: #BB00BB;'>time indexes</span><span> </span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #BBBB00;font-weight: bold;'>Handle</span><span> </span><span style='color: #00BB00;'>noise</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> </span><span style='color: #0000BB;'>1</span><span> cluster </span><span style='color: #555555;'>left</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> noise </span><span style='color: #555555;'>proportion</span><span> : </span><span style='color: #0000BB;'>60 %</span><span> </span></div><div class='output co'>#&gt;  [1] -1 -1 -1  1  1  1  1  1  1 -1 -1 -1 -1 -1 -1</div><div class='input'>
 </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

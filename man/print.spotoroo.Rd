@@ -16,7 +16,8 @@ a result of a call to \code{\link[=hotspot_cluster]{hotspot_cluster()}}.}
 \code{print.spotoroo()} is the \code{print} method of the class \code{spotoroo}.
 }
 \examples{
-result <- hotspot_cluster(hotspots_fin,
+# get clustering results
+result <- hotspot_cluster(hotspots,
                            lon = "lon",
                            lat = "lat",
                            obsTime = "obsTime",
@@ -29,7 +30,7 @@ result <- hotspot_cluster(hotspots_fin,
                            timeStep = 1)
 
 
-
+# print the results
 print(result)
 
 

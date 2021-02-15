@@ -40,7 +40,7 @@
 
 
 <meta property="og:title" content="Calculation of the ignition points — ignition_point" />
-<meta property="og:description" content="ignition_point() calculates ignition points using membership labels." />
+<meta property="og:description" content="This function calculates ignition points using membership labels." />
 
 
 
@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">spotoroo</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -129,7 +129,7 @@
     </div>
 
     <div class="ref-description">
-    <p><code>ignition_point()</code> calculates ignition points using membership labels.</p>
+    <p>This function calculates ignition points using membership labels.</p>
     </div>
 
     <pre class="usage"><span class='fu'>ignition_point</span><span class='op'>(</span><span class='va'>lon</span>, <span class='va'>lat</span>, <span class='va'>obsTime</span>, <span class='va'>timeUnit</span>, <span class='va'>timeID</span>, <span class='va'>membership</span>, <span class='va'>ignitionCenter</span><span class='op'>)</span></pre>
@@ -151,7 +151,7 @@
     </tr>
     <tr>
       <th>timeUnit</th>
-      <td><p>character; one of "s" (secs), "m"(mins),
+      <td><p>character; one of "s" (seconds), "m"(minutes),
 "h"(hours), "d"(days) and "n"(numeric).</p></td>
     </tr>
     <tr>
@@ -179,23 +179,24 @@ one of "mean" and "median".</p></td>
 <li><p><code>timeID</code> : time indexes.</p></li>
 <li><p><code>obsInCluster</code> : number of observations in the cluster.</p></li>
 <li><p><code>clusterTimeLen</code> : length of time of the cluster.</p></li>
-<li><p><code>clusterTimeLenUnit</code> : unit of length of time.</p></li>
+<li><p><code>clusterTimeLenUnit</code> : unit of length of time of the cluster.</p></li>
 </ul>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>For more details about the clustering algorithm and the parameter
+    <p>For more details about the clustering algorithm and the argument
 <code>timeUnit</code>, <code>timeID</code> and <code>ignitionCenter</code>,
 please check the documentation of <code><a href='hotspot_cluster.html'>hotspot_cluster()</a></code>.
 This function performs the <strong>step 5</strong> of the clustering algorithm. It
 calculates ignition points.
-For a cluster, when there are multiple earliest hotspots, if
-<code>ignitionCenter</code> is "mean", the centroid of these hotspots will be used
-as the ignition point, if <code>ignitionCenter</code> is "median", median longitude
-and median latitude of these hotspots will be used.</p>
+For a cluster, when there are multiple earliest hot spots, if
+<code>ignitionCenter</code> is "mean", the centroid of these hot spots will be used
+as the ignition point. If <code>ignitionCenter</code> is "median", median longitude
+and median latitude of these hot spots will be used.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>lon</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>141.1</span>, <span class='fl'>141.14</span>, <span class='fl'>141.12</span>, <span class='fl'>141.14</span>, <span class='fl'>141.16</span>, <span class='fl'>141.12</span>, <span class='fl'>141.14</span>,
+    <pre class="examples"><div class='input'><span class='co'># define lon, lat, obsTime, timeID and membership for 10 observations</span>
+<span class='va'>lon</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>141.1</span>, <span class='fl'>141.14</span>, <span class='fl'>141.12</span>, <span class='fl'>141.14</span>, <span class='fl'>141.16</span>, <span class='fl'>141.12</span>, <span class='fl'>141.14</span>,
           <span class='fl'>141.16</span>, <span class='fl'>141.12</span>, <span class='fl'>141.14</span><span class='op'>)</span>
 <span class='va'>lat</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>37.10</span>, <span class='op'>-</span><span class='fl'>37.10</span>, <span class='op'>-</span><span class='fl'>37.12</span>, <span class='op'>-</span><span class='fl'>37.12</span>, <span class='op'>-</span><span class='fl'>37.12</span>, <span class='op'>-</span><span class='fl'>37.14</span>, <span class='op'>-</span><span class='fl'>37.14</span>,
          <span class='op'>-</span><span class='fl'>37.14</span>, <span class='op'>-</span><span class='fl'>37.16</span>, <span class='op'>-</span><span class='fl'>37.16</span><span class='op'>)</span>
@@ -204,14 +205,15 @@ and median latitude of these hotspots will be used.</p>
 <span class='va'>timeID</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>5</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>26</span>, <span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span>
 <span class='va'>membership</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>2</span>, <span class='fl'>2</span>, <span class='fl'>2</span>, <span class='fl'>2</span><span class='op'>)</span>
 
+<span class='co'># calculate the ignition points using different methods</span>
 <span class='fu'>ignition_point</span><span class='op'>(</span><span class='va'>lon</span>, <span class='va'>lat</span>, <span class='va'>obsTime</span>, <span class='va'>timeUnit</span>, <span class='va'>timeID</span>, <span class='va'>membership</span>, <span class='st'>"mean"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>-- <span style='color: #00BB00;'>ignitionCenter</span><span> = </span><span style='color: #0000BB;'>'mean'</span><span> </span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>√</span><span> </span><span style='color: #BBBB00;font-weight: bold;'>Compute</span><span> </span><span style='color: #00BB00;'>ignition points</span><span> </span><span style='color: #555555;'>for</span><span> clusters</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> </span><span style='color: #555555;'>average</span><span> hotspots : 5</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> </span><span style='color: #555555;'>average</span><span> duration : 0 </span><span style='color: #BB00BB;'>numeric</span><span></span></div><div class='output co'>#&gt;   membership     lon     lat obsTime timeID obsInCluster clusterTimeLen
+</div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>-- <span style='color: #00BB00;'>ignitionCenter</span><span> = </span><span style='color: #0000BB;'>'mean'</span><span> </span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #BBBB00;font-weight: bold;'>Compute</span><span> </span><span style='color: #00BB00;'>ignition points</span><span> </span><span style='color: #555555;'>for</span><span> clusters</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> </span><span style='color: #555555;'>average</span><span> hot spots : 5</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> </span><span style='color: #555555;'>average</span><span> duration : 0 </span><span style='color: #BB00BB;'>numeric</span><span></span></div><div class='output co'>#&gt;   membership     lon     lat obsTime timeID obsInCluster clusterTimeLen
 #&gt; 1          1 141.132 -37.112       1      1            5              0
 #&gt; 2          2 141.136 -37.148      26     26            5              0
 #&gt;   clusterTimeLenUnit
 #&gt; 1                  n
 #&gt; 2                  n</div><div class='input'><span class='fu'>ignition_point</span><span class='op'>(</span><span class='va'>lon</span>, <span class='va'>lat</span>, <span class='va'>obsTime</span>, <span class='va'>timeUnit</span>, <span class='va'>timeID</span>, <span class='va'>membership</span>, <span class='st'>"median"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>-- </span><span style='color: #00BB00;'>ignitionCenter</span><span> = </span><span style='color: #0000BB;'>'median'</span><span> </span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>√</span><span> </span><span style='color: #BBBB00;font-weight: bold;'>Compute</span><span> </span><span style='color: #00BB00;'>ignition points</span><span> </span><span style='color: #555555;'>for</span><span> clusters</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> </span><span style='color: #555555;'>average</span><span> hotspots : 5</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> </span><span style='color: #555555;'>average</span><span> duration : 0 </span><span style='color: #BB00BB;'>numeric</span><span></span></div><div class='output co'>#&gt;   membership    lon    lat obsTime timeID obsInCluster clusterTimeLen
+</div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>-- </span><span style='color: #00BB00;'>ignitionCenter</span><span> = </span><span style='color: #0000BB;'>'median'</span><span> </span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #BBBB00;font-weight: bold;'>Compute</span><span> </span><span style='color: #00BB00;'>ignition points</span><span> </span><span style='color: #555555;'>for</span><span> clusters</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> </span><span style='color: #555555;'>average</span><span> hot spots : 5</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> </span><span style='color: #555555;'>average</span><span> duration : 0 </span><span style='color: #BB00BB;'>numeric</span><span></span></div><div class='output co'>#&gt;   membership    lon    lat obsTime timeID obsInCluster clusterTimeLen
 #&gt; 1          1 141.14 -37.12       1      1            5              0
 #&gt; 2          2 141.14 -37.14      26     26            5              0
 #&gt;   clusterTimeLenUnit

@@ -1,22 +1,23 @@
 #' Plotting the fire movement
 #'
-#' `plot_fire_mov()` plots the fire movement. The fire movement is calculated
+#' This function plots the fire movement. The fire movement is calculated
 #' from [get_fire_mov()].
 #'
 #' @param result `spotoroo` object; a result of a call to [hotspot_cluster()].
 #' @param cluster character/integer; if "all", plot all clusters. if a integer
 #'                vector is given, plot corresponding clusters.
-#' @param hotspot logical; if `TRUE`, plot the hotspots.
+#' @param hotspot logical; if `TRUE`, plot the hot spots.
 #' @param from **OPTIONAL**; date/datetime/numeric; start time; the data type
 #'                           needs to be the same as the provided observed time.
 #' @param to **OPTIONAL**; date/datetime/numeric; end time; the data type
 #'                         needs to be the same as the provided observed time.
-#' @param step integer (>=0); step size used in the calculation of the
+#' @param step integer (>0); step size used in the calculation of the
 #'                            fire movement.
 #' @param bg **OPTIONAL**; `ggplot` object; if specified, plot onto this object.
 #' @return `ggplot` object; the plot of the clustering results.
 #' @examples
-#' result <- hotspot_cluster(hotspots_fin,
+#' # get clustering results
+#' result <- hotspot_cluster(hotspots,
 #'                           lon = "lon",
 #'                           lat = "lat",
 #'                           obsTime = "obsTime",
@@ -28,9 +29,12 @@
 #'                           timeUnit = "h",
 #'                           timeStep = 1)
 #'
+#' # plot cluster 1 to 4
 #' plot_fire_mov(result, cluster = 1:4)
+#'
+#' # plot cluster 1 to 4, set step = 6
 #' plot_fire_mov(result, cluster = 1:4, step = 6)
-#' plot_fire_mov(result, cluster = "all")
+#'
 #'
 #' @export
 plot_fire_mov <- function(result,
@@ -96,7 +100,7 @@ plot_fire_mov <- function(result,
   # delete noise
   result$hotspots <- filter(result$hotspots, !noise)
   if (nrow(result$hotspots) == 0) {
-    stop("No hotspots (exculding noise) observed.")
+    stop("No hot spots (exculding noise) observed.")
   }
 
 
@@ -127,7 +131,7 @@ plot_fire_mov <- function(result,
     indexes <- result$hotspots$obsTime >= from
     result$hotspots <- result$hotspots[indexes, ]
     if (nrow(result$hotspots) == 0) {
-      stop(paste("No hotspots observed later than", from))
+      stop(paste("No hot spots observed later than", from))
     }
 
     indexes <- fire_mov_record$obsTime >= from
@@ -145,7 +149,7 @@ plot_fire_mov <- function(result,
     indexes <- result$hotspots$obsTime <= to
     result$hotspots <- result$hotspots[indexes, ]
     if (nrow(result$hotspots) == 0) {
-      stop(paste("No hotspots observed ealier than", to))
+      stop(paste("No hot spots observed ealier than", to))
     }
 
     indexes <- fire_mov_record$obsTime <= to
@@ -191,7 +195,7 @@ plot_fire_mov <- function(result,
   }
 
 
-  # draw hotspots
+  # draw hot spots
   if (hotspot) {
 
     temp_data <- filter(result$hotspots, include) %>%

@@ -40,7 +40,7 @@
 
 
 <meta property="og:title" content="Calculation of the geodesic of a point to multiple points — dist_point_to_vector" />
-<meta property="og:description" content="dist_point_to_vector() calculates the geodesic of a point to multiple
+<meta property="og:description" content="This function calculates the geodesic of a point to multiple
 points given the coordinate information.
 The calculation of the geodesic uses the mapbox cheap ruler.
 See also geodist::geodist_vec() for more details." />
@@ -75,7 +75,7 @@ See also geodist::geodist_vec() for more details." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">spotoroo</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -132,7 +132,7 @@ See also geodist::geodist_vec() for more details." />
     </div>
 
     <div class="ref-description">
-    <p><code>dist_point_to_vector()</code> calculates the geodesic of a point to multiple
+    <p>This function calculates the geodesic of a point to multiple
 points given the coordinate information.
 The calculation of the geodesic uses the mapbox cheap ruler.
 See also <code><a href='https://rdrr.io/pkg/geodist/man/geodist_vec.html'>geodist::geodist_vec()</a></code> for more details.</p>
@@ -166,9 +166,11 @@ See also <code><a href='https://rdrr.io/pkg/geodist/man/geodist_vec.html'>geodis
     <p>numeric; the geodesic of a point to multiple points in meters.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>vlon</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>141.12</span>, <span class='fl'>141.13</span><span class='op'>)</span>
+    <pre class="examples"><div class='input'><span class='co'># define vlon and vlat</span>
+<span class='va'>vlon</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>141.12</span>, <span class='fl'>141.13</span><span class='op'>)</span>
 <span class='va'>vlat</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>37.1</span>, <span class='op'>-</span><span class='fl'>37.0</span><span class='op'>)</span>
 
+<span class='co'># calculate the geodesic</span>
 <span class='fu'>dist_point_to_vector</span><span class='op'>(</span><span class='fl'>141.12</span>, <span class='op'>-</span><span class='fl'>37.1</span>, <span class='va'>vlon</span>, <span class='va'>vlat</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; [1]     0.00 11148.63</div><div class='input'>
 </div></pre>

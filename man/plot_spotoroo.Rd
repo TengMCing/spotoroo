@@ -30,7 +30,7 @@ plot_spotoroo(
 vector is given, plot corresponding clusters; unavailable in
 \code{\link[=plot_timeline]{plot_timeline()}}.}
 
-\item{hotspot}{logical; if \code{TRUE}, plot the hotspots; unavailable in
+\item{hotspot}{logical; if \code{TRUE}, plot the hot spots; unavailable in
 \code{\link[=plot_timeline]{plot_timeline()}}.}
 
 \item{noise}{logical; if \code{TRUE}, plot the noise; only used in
@@ -49,8 +49,9 @@ needs to be the same as the provided observed time.}
 fire movement; only used in \code{\link[=plot_fire_mov]{plot_fire_mov()}}.}
 
 \item{mainBreak}{\strong{OPTIONAL}; character/numeric; a string/value giving the
-distance between major breaks; if the
-observed time is in date/datetime format,
+difference between major breaks; if the
+observed time is in date/datetime
+format,
 this value will pass to
 \code{\link[ggplot2:scale_date]{ggplot2::scale_x_date()}} or
 \code{\link[ggplot2:scale_date]{ggplot2::scale_x_datetime()}} as
@@ -58,8 +59,9 @@ this value will pass to
 \code{\link[=plot_timeline]{plot_timeline()}}.}
 
 \item{minorBreak}{\strong{OPTIONAL}; character/numeric; a string/value giving the
-distance between minor breaks; if the
-observed time is in date/datetime format,
+difference between minor breaks; if the
+observed time is in date/datetime
+format,
 this value will pass to
 \code{\link[ggplot2:scale_date]{ggplot2::scale_x_date()}} or
 \code{\link[ggplot2:scale_date]{ggplot2::scale_x_datetime()}} as
@@ -67,7 +69,8 @@ this value will pass to
 \code{\link[=plot_timeline]{plot_timeline()}}.}
 
 \item{dateLabel}{\strong{OPTIONAL}; character; a string giving the formatting
-specification for the labels; if the observed
+specification for the labels; if the
+observed
 time is in date/datetime format,
 this value will pass to
 \code{\link[ggplot2:scale_date]{ggplot2::scale_x_date()}} or
@@ -83,12 +86,12 @@ unavailable in \code{\link[=plot_timeline]{plot_timeline()}}.}
 \code{ggplot} object; the plot of the clustering results.
 }
 \description{
-\code{plot_spotoroo()} takes a \code{spotoroo} object to produce plots of the
+This function takes a \code{spotoroo} object to produce a plot of the
 clustering results. It can be called by \code{\link[=plot.spotoroo]{plot.spotoroo()}}.
 }
 \details{
 if \code{type} is "def", the clustering results will be plotted spatially.
-See also \code{\link[=plot_def]{plot_def()}}. Available parameters:
+See also \code{\link[=plot_def]{plot_def()}}. Available arguments:
 \itemize{
 \item \code{result}
 \item \code{type}
@@ -102,7 +105,7 @@ See also \code{\link[=plot_def]{plot_def()}}. Available parameters:
 }
 
 if \code{type} is "mov", plot of the fire movement will be made.
-See also \code{\link[=plot_fire_mov]{plot_fire_mov()}}. Available parameters:
+See also \code{\link[=plot_fire_mov]{plot_fire_mov()}}. Available arguments:
 \itemize{
 \item \code{result}
 \item \code{type}
@@ -115,7 +118,7 @@ See also \code{\link[=plot_fire_mov]{plot_fire_mov()}}. Available parameters:
 }
 
 if \code{type} is "timeline", plot of the timeline will be made.
-See also \code{\link[=plot_timeline]{plot_timeline()}}. Available parameters:
+See also \code{\link[=plot_timeline]{plot_timeline()}}. Available arguments:
 \itemize{
 \item \code{result}
 \item \code{type}
@@ -127,8 +130,8 @@ See also \code{\link[=plot_timeline]{plot_timeline()}}. Available parameters:
 }
 }
 \examples{
-data("hotspots500")
-result <- hotspot_cluster(hotspots500,
+# get clustering result
+result <- hotspot_cluster(hotspots,
                           lon = "lon",
                           lat = "lat",
                           obsTime = "obsTime",
@@ -140,5 +143,13 @@ result <- hotspot_cluster(hotspots500,
                           timeUnit = "h",
                           timeStep = 1)
 
-plot_spotoroo(result)
+# different types of plots
+
+# default plot
+plot_spotoroo(result, "def", bg = plot_vic_map())
+
+
+# fire movement plot
+plot_spotoroo(result, "mov", cluster = 1:3, step = 3, bg = plot_vic_map())
+
 }

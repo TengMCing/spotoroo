@@ -1,12 +1,12 @@
 #' Default method of plotting the clustering results
 #'
-#' `plot_def()` plots the clustering result spatially as a scatter plot.
+#' This function plots the clustering result spatially as a scatter plot.
 #'
 #' @param result `spotoroo` object; a result of a call to [hotspot_cluster()].
 #' @param cluster character/integer; if "all", plot all clusters. if a integer
 #'                vector is given, plot corresponding clusters.
-#' @param hotspot logical; if `TRUE`, plot the hotspots.
-#' @param noise logical; if `TRUE`, plot the noise.
+#' @param hotspot logical; if `TRUE`, plot the hot spots.
+#' @param noise logical; if `TRUE`, plot the noise points.
 #' @param ignition logical; if `TRUE`, plot the ignition points.
 #' @param from **OPTIONAL**; date/datetime/numeric; start time; the data type
 #'                           needs to be the same as the provided observed time.
@@ -15,7 +15,8 @@
 #' @param bg **OPTIONAL**; `ggplot` object; if specified, plot onto this object.
 #' @return `ggplot` object; the plot of the clustering results.
 #' @examples
-#' result <- hotspot_cluster(hotspots_fin,
+#' # get clustering results
+#' result <- hotspot_cluster(hotspots,
 #'                           lon = "lon",
 #'                           lat = "lat",
 #'                           obsTime = "obsTime",
@@ -27,7 +28,10 @@
 #'                           timeUnit = "h",
 #'                           timeStep = 1)
 #'
+#' # plot a subset of clusters
 #' plot_def(result, cluster = 1:3)
+#'
+#' # plot all clusters
 #' plot_def(result, cluster = "all")
 #'
 #' @export
@@ -90,7 +94,7 @@ plot_def <- function(result,
     result$hotspots <- result$hotspots[indexes, ]
 
     if (nrow(result$hotspots) == 0) {
-      stop(paste("No hotspots/noise observed later than", from))
+      stop(paste("No hot spots/noise observed later than", from))
     }
   }
 
@@ -104,7 +108,7 @@ plot_def <- function(result,
     result$hotspots <- result$hotspots[indexes, ]
 
     if (nrow(result$hotspots) == 0) {
-      stop(paste("No hotspots/noise observed ealier than", from))
+      stop(paste("No hot spots/noise observed ealier than", from))
     }
   }
 
@@ -130,7 +134,7 @@ plot_def <- function(result,
 
   if (length(unique(result$hotspots$membership)) <= 9) {
 
-    # draw hotspots
+    # draw hot spots
     if (hotspot) {
 
       p <- p + geom_point(data = filter(result$hotspots,
@@ -173,7 +177,7 @@ plot_def <- function(result,
 
   } else {
     # too many clusters
-    # draw hotspots
+    # draw hot spots
     if (hotspot) {
 
       p <- p + geom_point(data = filter(result$hotspots,

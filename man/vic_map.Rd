@@ -3,7 +3,7 @@
 \docType{data}
 \name{vic_map}
 \alias{vic_map}
-\title{simple features map of Victoria.}
+\title{simple features map of Victoria}
 \format{
 A "\code{sf}" object with 1 row
 }

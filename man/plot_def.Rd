@@ -21,9 +21,9 @@ plot_def(
 \item{cluster}{character/integer; if "all", plot all clusters. if a integer
 vector is given, plot corresponding clusters.}
 
-\item{hotspot}{logical; if \code{TRUE}, plot the hotspots.}
+\item{hotspot}{logical; if \code{TRUE}, plot the hot spots.}
 
-\item{noise}{logical; if \code{TRUE}, plot the noise.}
+\item{noise}{logical; if \code{TRUE}, plot the noise points.}
 
 \item{ignition}{logical; if \code{TRUE}, plot the ignition points.}
 
@@ -39,10 +39,11 @@ needs to be the same as the provided observed time.}
 \code{ggplot} object; the plot of the clustering results.
 }
 \description{
-\code{plot_def()} plots the clustering result spatially as a scatter plot.
+This function plots the clustering result spatially as a scatter plot.
 }
 \examples{
-result <- hotspot_cluster(hotspots_fin,
+# get clustering results
+result <- hotspot_cluster(hotspots,
                           lon = "lon",
                           lat = "lat",
                           obsTime = "obsTime",
@@ -54,7 +55,10 @@ result <- hotspot_cluster(hotspots_fin,
                           timeUnit = "h",
                           timeStep = 1)
 
+# plot a subset of clusters
 plot_def(result, cluster = 1:3)
+
+# plot all clusters
 plot_def(result, cluster = "all")
 
 }

@@ -1,22 +1,24 @@
-#' Clustering hotspots spatially
+#' Clustering hot spots spatially
 #'
-#' `local_clustering()` clusters hotspots spatially.
+#' This function clusters hot spots spatially.
 #'
-#' For more details about the clustering algorithm and the parameter `adjDist`,
+#' For more details about the clustering algorithm and the argument `adjDist`,
 #' please check the documentation of [hotspot_cluster()].
 #' This function performs the **step 2** of the clustering algorithm. It
-#' clusters hotspots in a given interval.
+#' clusters hot spots in a given interval.
 #'
 #' @param lon numeric; a vector of longitude values.
 #' @param lat numeric; a vector of latitude values.
 #' @param adjDist numeric (>0); distance tolerance; unit is metre.
 #' @return integer; a vector of membership labels
 #' @examples
+#' # define lon and lat for 10 observations
 #' lon <- c(141.1, 141.14, 141.12, 141.14, 141.16, 141.12, 141.14,
 #'           141.16, 141.12, 141.14)
 #' lat <- c(-37.10, -37.10, -37.12, -37.12, -37.12, -37.14, -37.14,
 #'          -37.14, -37.16, -37.16)
 #'
+#' # cluster 10 hot spots with different values of adjDist
 #' local_clustering(lon, lat, 2000)
 #' local_clustering(lon, lat, 3000)
 #' local_clustering(lon, lat, 4000)
@@ -24,7 +26,7 @@
 #' @export
 local_clustering <- function(lon, lat, adjDist) {
 
-  # only one hotspots
+  # only one hot spot
   if (length(lon) == 1) return(c(1))
 
   hotspots_list <- c(1)
@@ -40,7 +42,7 @@ local_clustering <- function(lon, lat, adjDist) {
     # find a cluster
     while (TRUE) {
 
-      # push nearby hotspots into list
+      # push nearby hot spots into list
       nearby_points <- nearby_hotspot(hotspots_list,
                                        pointer,
                                        lon,

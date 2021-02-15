@@ -23,23 +23,26 @@ needs to be the same as the provided observed time.}
 needs to be the same as the provided observed time.}
 
 \item{mainBreak}{\strong{OPTIONAL}; character/numeric; a string/value giving the
-distance between major breaks; if the
-observed time is in date/datetime format,
+difference between major breaks; if the
+observed time is in date/datetime
+format,
 this value will pass to
 \code{\link[ggplot2:scale_date]{ggplot2::scale_x_date()}} or
 \code{\link[ggplot2:scale_date]{ggplot2::scale_x_datetime()}} as
 \code{date_breaks}.}
 
 \item{minorBreak}{\strong{OPTIONAL}; character/numeric; a string/value giving the
-distance between minor breaks; if the
-observed time is in date/datetime format,
+difference between minor breaks; if the
+observed time is in date/datetime
+format,
 this value will pass to
 \code{\link[ggplot2:scale_date]{ggplot2::scale_x_date()}} or
 \code{\link[ggplot2:scale_date]{ggplot2::scale_x_datetime()}} as
 \code{date_breaks}.}
 
 \item{dateLabel}{\strong{OPTIONAL}; character; a string giving the formatting
-specification for the labels; if the observed
+specification for the labels; if the
+observed
 time is in date/datetime format,
 this value will pass to
 \code{\link[ggplot2:scale_date]{ggplot2::scale_x_date()}} or
@@ -51,10 +54,11 @@ time is in numeric format.}
 \code{ggplot} object; the plot of the clustering results.
 }
 \description{
-\code{plot_timeline()} plots the timeline of the fire and the noise.
+This function plots the timeline of the fires and the noise points.
 }
 \examples{
-result <- hotspot_cluster(hotspots_fin,
+# get clustering results
+result <- hotspot_cluster(hotspots,
                           lon = "lon",
                           lat = "lat",
                           obsTime = "obsTime",
@@ -66,7 +70,7 @@ result <- hotspot_cluster(hotspots_fin,
                           timeUnit = "h",
                           timeStep = 1)
 
-plot_timeline(result)
+# plot timeline
 plot_timeline(result,
               mainBreak = "1 week",
               minorBreak = "1 day",

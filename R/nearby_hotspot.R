@@ -1,14 +1,14 @@
-#' Find nearby hotspots
+#' Find nearby hot spots
 #'
-#' Find nearby hotspots that are not included in the list.
+#' Find nearby hot spots that are not included in the list.
 #'
-#' @param hotspot_list integer; a vector of hotspot indexes.
+#' @param hotspot_list integer; a vector of hot spot indexes.
 #' @param pointer integer; the current working position.
 #' @param lon numeric; a vector of longitude values.
 #' @param lat numeric; a vector of latitude values.
 #' @param adjDist numeric (>0); distance tolerance; unit is metre.
-#' @return integer; a vector of indexes of nearby hotspots. If there is no
-#'                  nearby hotspots, return `NULL`.
+#' @return integer; a vector of indexes of nearby hot spots. If there is no
+#'                  nearby hot spots, return `NULL`.
 #' @noRd
 nearby_hotspot <- function(hotspot_list, pointer, lon, lat, adjDist) {
 

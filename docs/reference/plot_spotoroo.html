@@ -40,7 +40,7 @@
 
 
 <meta property="og:title" content="Plotting spatiotemporal clustering result — plot_spotoroo" />
-<meta property="og:description" content="plot_spotoroo() takes a spotoroo object to produce plots of the
+<meta property="og:description" content="This function takes a spotoroo object to produce a plot of the
 clustering results. It can be called by plot.spotoroo()." />
 
 
@@ -73,7 +73,7 @@ clustering results. It can be called by plot.spotoroo()." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">spotoroo</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -130,7 +130,7 @@ clustering results. It can be called by plot.spotoroo()." />
     </div>
 
     <div class="ref-description">
-    <p><code>plot_spotoroo()</code> takes a <code>spotoroo</code> object to produce plots of the
+    <p>This function takes a <code>spotoroo</code> object to produce a plot of the
 clustering results. It can be called by <code><a href='plot.spotoroo.html'>plot.spotoroo()</a></code>.</p>
     </div>
 
@@ -170,7 +170,7 @@ vector is given, plot corresponding clusters; unavailable in
     </tr>
     <tr>
       <th>hotspot</th>
-      <td><p>logical; if <code>TRUE</code>, plot the hotspots; unavailable in
+      <td><p>logical; if <code>TRUE</code>, plot the hot spots; unavailable in
 <code><a href='plot_timeline.html'>plot_timeline()</a></code>.</p></td>
     </tr>
     <tr>
@@ -201,8 +201,9 @@ fire movement; only used in <code><a href='plot_fire_mov.html'>plot_fire_mov()</
     <tr>
       <th>mainBreak</th>
       <td><p><strong>OPTIONAL</strong>; character/numeric; a string/value giving the
-distance between major breaks; if the
-observed time is in date/datetime format,
+difference between major breaks; if the
+observed time is in date/datetime
+format,
 this value will pass to
 <code><a href='https://ggplot2.tidyverse.org/reference/scale_date.html'>ggplot2::scale_x_date()</a></code> or
 <code><a href='https://ggplot2.tidyverse.org/reference/scale_date.html'>ggplot2::scale_x_datetime()</a></code> as
@@ -212,8 +213,9 @@ this value will pass to
     <tr>
       <th>minorBreak</th>
       <td><p><strong>OPTIONAL</strong>; character/numeric; a string/value giving the
-distance between minor breaks; if the
-observed time is in date/datetime format,
+difference between minor breaks; if the
+observed time is in date/datetime
+format,
 this value will pass to
 <code><a href='https://ggplot2.tidyverse.org/reference/scale_date.html'>ggplot2::scale_x_date()</a></code> or
 <code><a href='https://ggplot2.tidyverse.org/reference/scale_date.html'>ggplot2::scale_x_datetime()</a></code> as
@@ -223,7 +225,8 @@ this value will pass to
     <tr>
       <th>dateLabel</th>
       <td><p><strong>OPTIONAL</strong>; character; a string giving the formatting
-specification for the labels; if the observed
+specification for the labels; if the
+observed
 time is in date/datetime format,
 this value will pass to
 <code><a href='https://ggplot2.tidyverse.org/reference/scale_date.html'>ggplot2::scale_x_date()</a></code> or
@@ -245,7 +248,7 @@ unavailable in <code><a href='plot_timeline.html'>plot_timeline()</a></code>.</p
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>if <code>type</code> is "def", the clustering results will be plotted spatially.
-See also <code><a href='plot_def.html'>plot_def()</a></code>. Available parameters:</p><ul>
+See also <code><a href='plot_def.html'>plot_def()</a></code>. Available arguments:</p><ul>
 <li><p><code>result</code></p></li>
 <li><p><code>type</code></p></li>
 <li><p><code>cluster</code></p></li>
@@ -258,7 +261,7 @@ See also <code><a href='plot_def.html'>plot_def()</a></code>. Available paramete
 </ul>
 
 <p>if <code>type</code> is "mov", plot of the fire movement will be made.
-See also <code><a href='plot_fire_mov.html'>plot_fire_mov()</a></code>. Available parameters:</p><ul>
+See also <code><a href='plot_fire_mov.html'>plot_fire_mov()</a></code>. Available arguments:</p><ul>
 <li><p><code>result</code></p></li>
 <li><p><code>type</code></p></li>
 <li><p><code>cluster</code></p></li>
@@ -270,7 +273,7 @@ See also <code><a href='plot_fire_mov.html'>plot_fire_mov()</a></code>. Availabl
 </ul>
 
 <p>if <code>type</code> is "timeline", plot of the timeline will be made.
-See also <code><a href='plot_timeline.html'>plot_timeline()</a></code>. Available parameters:</p><ul>
+See also <code><a href='plot_timeline.html'>plot_timeline()</a></code>. Available arguments:</p><ul>
 <li><p><code>result</code></p></li>
 <li><p><code>type</code></p></li>
 <li><p><code>from</code> (<strong>OPTIONAL</strong>)</p></li>
@@ -282,8 +285,8 @@ See also <code><a href='plot_timeline.html'>plot_timeline()</a></code>. Availabl
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"hotspots500"</span><span class='op'>)</span>
-<span class='va'>result</span> <span class='op'>&lt;-</span> <span class='fu'><a href='hotspot_cluster.html'>hotspot_cluster</a></span><span class='op'>(</span><span class='va'>hotspots500</span>,
+    <pre class="examples"><div class='input'><span class='co'># get clustering result</span>
+<span class='va'>result</span> <span class='op'>&lt;-</span> <span class='fu'><a href='hotspot_cluster.html'>hotspot_cluster</a></span><span class='op'>(</span><span class='va'>hotspots</span>,
                           lon <span class='op'>=</span> <span class='st'>"lon"</span>,
                           lat <span class='op'>=</span> <span class='st'>"lat"</span>,
                           obsTime <span class='op'>=</span> <span class='st'>"obsTime"</span>,
@@ -294,9 +297,17 @@ See also <code><a href='plot_timeline.html'>plot_timeline()</a></code>. Availabl
                           ignitionCenter <span class='op'>=</span> <span class='st'>"mean"</span>,
                           timeUnit <span class='op'>=</span> <span class='st'>"h"</span>,
                           timeStep <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'><span style='color: #00BBBB;font-weight: bold;'>------------------------------ </span><span style='color: #000000;font-weight: bold;'>SPOTOROO 0.0.0.9000</span><span style='color: #00BBBB;font-weight: bold;'> -----------------------------</span><span></span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>-- </span><span style='font-weight: bold;'>Calling Core Function : </span><span style='color: #000000;background-color: #BBBBBB;font-weight: bold;'>`hotspot_cluster()`</span><span> --</span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>-- </span><span style='color: #0000BB;'>1</span><span> </span><span style='color: #BB00BB;'>time index</span><span> = </span><span style='color: #0000BB;'>1</span><span> </span><span style='color: #BB00BB;'>hours</span><span> </span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>√</span><span> </span><span style='color: #BBBB00;font-weight: bold;'>Transform</span><span> </span><span style='color: #00BB00;'>observed time</span><span> &gt; </span><span style='color: #00BB00;'>time indexes</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> </span><span style='color: #0000BB;'>1226</span><span> </span><span style='color: #BB00BB;'>time indexes</span><span> </span><span style='color: #555555;'>found</span><span></span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>-- </span><span style='color: #00BB00;'>activeTime</span><span> = </span><span style='color: #0000BB;'>24</span><span> </span><span style='color: #BB00BB;'>time indexes</span><span> | </span><span style='color: #00BB00;'>adjDist</span><span> = </span><span style='color: #0000BB;'>3000</span><span> </span><span style='color: #BB00BB;'>meters</span><span> </span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>√</span><span> </span><span style='color: #BBBB00;font-weight: bold;'>Cluster</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> </span><span style='color: #0000BB;'>68</span><span> clusters </span><span style='color: #555555;'>found (including noise)</span><span></span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>-- </span><span style='color: #00BB00;'>minPts</span><span> = </span><span style='color: #0000BB;'>4</span><span> </span><span style='color: #BB00BB;'>hotspots</span><span> | </span><span style='color: #00BB00;'>minTime</span><span> = </span><span style='color: #0000BB;'>3</span><span> </span><span style='color: #BB00BB;'>time indexes</span><span> </span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>√</span><span> </span><span style='color: #BBBB00;font-weight: bold;'>Handle</span><span> </span><span style='color: #00BB00;'>noise</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> </span><span style='color: #0000BB;'>5</span><span> clusters </span><span style='color: #555555;'>left</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> noise </span><span style='color: #555555;'>proportion</span><span> : </span><span style='color: #0000BB;'>78.2 %</span><span> </span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>-- </span><span style='color: #00BB00;'>ignitionCenter</span><span> = </span><span style='color: #0000BB;'>'mean'</span><span> </span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>√</span><span> </span><span style='color: #BBBB00;font-weight: bold;'>Compute</span><span> </span><span style='color: #00BB00;'>ignition points</span><span> </span><span style='color: #555555;'>for</span><span> clusters</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> </span><span style='color: #555555;'>average</span><span> hotspots : 21.8</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> </span><span style='color: #555555;'>average</span><span> duration : 9.1 </span><span style='color: #BB00BB;'>hours</span><span></span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>-- </span><span style='color: #00BB00;'>Time taken</span><span> = </span><span style='color: #0000BB;'>0</span><span> </span><span style='color: #BB00BB;'>mins</span><span> </span><span style='color: #0000BB;'>1</span><span> </span><span style='color: #BB00BB;'>sec</span><span> </span><span style='color: #555555;'>for</span><span> </span><span style='color: #0000BB;'>500</span><span> hotspots </span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> </span><span style='color: #0000BB;'>0.002</span><span> </span><span style='color: #BB00BB;'>secs</span><span> </span><span style='color: #555555;'>per</span><span> hotspot</span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;font-weight: bold;'>--------------------------------------------------------------------------------</span><span></span></div><div class='input'>
-<span class='fu'>plot_spotoroo</span><span class='op'>(</span><span class='va'>result</span><span class='op'>)</span>
-</div><div class='img'><img src='plot_spotoroo-1.png' alt='' width='700' height='433' /></div></span></pre>
+</div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'><span style='color: #00BBBB;font-weight: bold;'>-------------------------------- </span><span style='color: #000000;font-weight: bold;'>SPOTOROO 0.1.0</span><span style='color: #00BBBB;font-weight: bold;'> --------------------------------</span><span></span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>-- </span><span style='font-weight: bold;'>Calling Core Function : </span><span style='color: #000000;background-color: #BBBBBB;font-weight: bold;'>`hotspot_cluster()`</span><span> --</span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>-- </span><span style='color: #0000BB;'>1</span><span> </span><span style='color: #BB00BB;'>time index</span><span> = </span><span style='color: #0000BB;'>1</span><span> </span><span style='color: #BB00BB;'>hours</span><span> </span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #BBBB00;font-weight: bold;'>Transform</span><span> </span><span style='color: #00BB00;'>observed time</span><span> &gt; </span><span style='color: #00BB00;'>time indexes</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> </span><span style='color: #0000BB;'>970</span><span> </span><span style='color: #BB00BB;'>time indexes</span><span> </span><span style='color: #555555;'>found</span><span></span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>-- </span><span style='color: #00BB00;'>activeTime</span><span> = </span><span style='color: #0000BB;'>24</span><span> </span><span style='color: #BB00BB;'>time indexes</span><span> | </span><span style='color: #00BB00;'>adjDist</span><span> = </span><span style='color: #0000BB;'>3000</span><span> </span><span style='color: #BB00BB;'>meters</span><span> </span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #BBBB00;font-weight: bold;'>Cluster</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> </span><span style='color: #0000BB;'>16</span><span> clusters </span><span style='color: #555555;'>found (including noise)</span><span></span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>-- </span><span style='color: #00BB00;'>minPts</span><span> = </span><span style='color: #0000BB;'>4</span><span> </span><span style='color: #BB00BB;'>hot spots</span><span> | </span><span style='color: #00BB00;'>minTime</span><span> = </span><span style='color: #0000BB;'>3</span><span> </span><span style='color: #BB00BB;'>time indexes</span><span> </span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #BBBB00;font-weight: bold;'>Handle</span><span> </span><span style='color: #00BB00;'>noise</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> </span><span style='color: #0000BB;'>6</span><span> clusters </span><span style='color: #555555;'>left</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> noise </span><span style='color: #555555;'>proportion</span><span> : </span><span style='color: #0000BB;'>0.935 %</span><span> </span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>-- </span><span style='color: #00BB00;'>ignitionCenter</span><span> = </span><span style='color: #0000BB;'>'mean'</span><span> </span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #BBBB00;font-weight: bold;'>Compute</span><span> </span><span style='color: #00BB00;'>ignition points</span><span> </span><span style='color: #555555;'>for</span><span> clusters</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> </span><span style='color: #555555;'>average</span><span> hot spots : 176.7</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> </span><span style='color: #555555;'>average</span><span> duration : 131.9 </span><span style='color: #BB00BB;'>hours</span><span></span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>-- </span><span style='color: #00BB00;'>Time taken</span><span> = </span><span style='color: #0000BB;'>0</span><span> </span><span style='color: #BB00BB;'>mins</span><span> </span><span style='color: #0000BB;'>4</span><span> </span><span style='color: #BB00BB;'>secs</span><span> </span><span style='color: #555555;'>for</span><span> </span><span style='color: #0000BB;'>1070</span><span> hot spots </span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> </span><span style='color: #0000BB;'>0.004</span><span> </span><span style='color: #BB00BB;'>secs</span><span> </span><span style='color: #555555;'>per</span><span> hot spot</span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;font-weight: bold;'>--------------------------------------------------------------------------------</span><span></span></div><div class='input'>
+<span class='co'># different types of plots</span>
+
+<span class='co'># default plot</span>
+<span class='fu'>plot_spotoroo</span><span class='op'>(</span><span class='va'>result</span>, <span class='st'>"def"</span>, bg <span class='op'>=</span> <span class='fu'><a href='plot_vic_map.html'>plot_vic_map</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='img'><img src='plot_spotoroo-1.png' alt='' width='700' height='433' /></div><div class='input'>
+
+<span class='co'># fire movement plot</span>
+<span class='fu'>plot_spotoroo</span><span class='op'>(</span><span class='va'>result</span>, <span class='st'>"mov"</span>, cluster <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>, step <span class='op'>=</span> <span class='fl'>3</span>, bg <span class='op'>=</span> <span class='fu'><a href='plot_vic_map.html'>plot_vic_map</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='img'><img src='plot_spotoroo-2.png' alt='' width='700' height='433' /></div><div class='input'>
+</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

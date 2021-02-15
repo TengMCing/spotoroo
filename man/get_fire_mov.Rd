@@ -11,7 +11,7 @@ get_fire_mov(result, cluster, step = 1, method = "mean")
 
 \item{cluster}{integer; the membership label of the cluster.}
 
-\item{step}{integer (>=0); step size used in the calculation of the
+\item{step}{integer (>0); step size used in the calculation of the
 fire movement.}
 
 \item{method}{character; "mean" or "median", method of the calculation of
@@ -29,13 +29,14 @@ data.frame; the fire movement
 }
 }
 \description{
-\code{get_fire_mov()} calculates the movement of a single fire per \code{step} time
-indexes. It collects hotspots per \code{step} time indexes, then
+This function calculates the movement of a single fire per \code{step} time
+indexes. It collects hot spots per \code{step} time indexes, then
 takes the mean or median of the longitude and latitude as the centre of the
 fire.
 }
 \examples{
-result <- hotspot_cluster(hotspots_fin,
+# get clustering results
+result <- hotspot_cluster(hotspots,
                           lon = "lon",
                           lat = "lat",
                           obsTime = "obsTime",
@@ -47,7 +48,12 @@ result <- hotspot_cluster(hotspots_fin,
                           timeUnit = "h",
                           timeStep = 1)
 
-get_fire_mov(result, cluster = 1, step = 1, method = "mean")
-get_fire_mov(result, cluster = 2, step = 3, method = "median")
+# get fire movement of the first cluster
+mov1 <- get_fire_mov(result, cluster = 1, step = 3, method = "mean")
+mov1
+
+# get fire movement of the second cluster
+mov2 <- get_fire_mov(result, cluster = 2, step = 6, method = "median")
+mov2
 
 }

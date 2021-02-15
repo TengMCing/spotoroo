@@ -11,7 +11,7 @@ handle_noise(global_membership, timeID, minPts, minTime)
 
 \item{timeID}{integer; a vector of time indexes.}
 
-\item{minPts}{numeric (>0); minimum number of hotspots in a cluster.}
+\item{minPts}{numeric (>0); minimum number of hot spots in a cluster.}
 
 \item{minTime}{numeric (>=0); minimum length of time of a cluster;
 unit is time index.}
@@ -20,20 +20,23 @@ unit is time index.}
 integer; a vector of membership labels.
 }
 \description{
-\verb{handle_noise() finds noise from the clustering results and label it with }-1`.
+This function finds noise from the clustering results and label it with
+\code{-1}.
 }
 \details{
-For more details about the clustering algorithm and the parameter
+For more details about the clustering algorithm and the arguments
 \code{minPts} and \code{minTime}, please check the documentation
 of \code{\link[=hotspot_cluster]{hotspot_cluster()}}.
 This function performs the \strong{step 4} of the clustering algorithm. It uses a
-given threshold (minimum number of points and minimum existing time) to find
-noise and label it with \code{-1}.
+given threshold (minimum number of points and minimum length of time) to
+find noise and label it with \code{-1}.
 }
 \examples{
+# define membership labels and timeID for 10 observations
 global_membership <- c(1,1,1,2,2,2,2,2,2,3,3,3,3,3,3)
 timeID <- c(1,2,3,2,3,3,4,5,6,3,3,3,3,3,3)
 
+# handle noise with different values of minPts and minTime
 handle_noise(global_membership, timeID, 4, 0)
 handle_noise(global_membership, timeID, 4, 1)
 handle_noise(global_membership, timeID, 3, 3)

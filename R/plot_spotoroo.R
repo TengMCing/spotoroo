@@ -1,10 +1,10 @@
 #' Plotting spatiotemporal clustering result
 #'
-#' `plot_spotoroo()` takes a `spotoroo` object to produce plots of the
+#' This function takes a `spotoroo` object to produce a plot of the
 #' clustering results. It can be called by [plot.spotoroo()].
 #'
 #' if `type` is "def", the clustering results will be plotted spatially.
-#' See also [plot_def()]. Available parameters:
+#' See also [plot_def()]. Available arguments:
 #' - `result`
 #' - `type`
 #' - `cluster`
@@ -16,7 +16,7 @@
 #' - `bg` (**OPTIONAL**)
 #'
 #' if `type` is "mov", plot of the fire movement will be made.
-#' See also [plot_fire_mov()]. Available parameters:
+#' See also [plot_fire_mov()]. Available arguments:
 #' - `result`
 #' - `type`
 #' - `cluster`
@@ -27,7 +27,7 @@
 #' - `bg` (**OPTIONAL**)
 #'
 #' if `type` is "timeline", plot of the timeline will be made.
-#' See also [plot_timeline()]. Available parameters:
+#' See also [plot_timeline()]. Available arguments:
 #' - `result`
 #' - `type`
 #' - `from` (**OPTIONAL**)
@@ -44,7 +44,7 @@
 #'                [plot_timeline()].
 #' @param ignition logical; if `TRUE`, plot the ignition points; only used in
 #'                          [plot_def()].
-#' @param hotspot logical; if `TRUE`, plot the hotspots; unavailable in
+#' @param hotspot logical; if `TRUE`, plot the hot spots; unavailable in
 #'                         [plot_timeline()].
 #' @param noise logical; if `TRUE`, plot the noise; only used in
 #'                       [plot_def()].
@@ -55,23 +55,26 @@
 #' @param step integer (>=0); step size used in the calculation of the
 #'                            fire movement; only used in [plot_fire_mov()].
 #' @param mainBreak **OPTIONAL**; character/numeric; a string/value giving the
-#'                                     distance between major breaks; if the
-#'                                     observed time is in date/datetime format,
+#'                                     difference between major breaks; if the
+#'                                     observed time is in date/datetime
+#'                                     format,
 #'                                     this value will pass to
 #'                                     [ggplot2::scale_x_date()] or
 #'                                     [ggplot2::scale_x_datetime()] as
 #'                                     `date_breaks`; only used in
 #'                                     [plot_timeline()].
 #' @param minorBreak **OPTIONAL**; character/numeric; a string/value giving the
-#'                                     distance between minor breaks; if the
-#'                                     observed time is in date/datetime format,
+#'                                     difference between minor breaks; if the
+#'                                     observed time is in date/datetime
+#'                                     format,
 #'                                     this value will pass to
 #'                                     [ggplot2::scale_x_date()] or
 #'                                     [ggplot2::scale_x_datetime()] as
 #'                                     `date_breaks`. only used in
 #'                                     [plot_timeline()].
 #' @param dateLabel **OPTIONAL**; character; a string giving the formatting
-#'                                specification for the labels; if the observed
+#'                                specification for the labels; if the
+#'                                observed
 #'                                time is in date/datetime format,
 #'                                this value will pass to
 #'                                [ggplot2::scale_x_date()] or
@@ -83,8 +86,8 @@
 #'                         unavailable in [plot_timeline()].
 #' @return `ggplot` object; the plot of the clustering results.
 #' @examples
-#' data("hotspots500")
-#' result <- hotspot_cluster(hotspots500,
+#' # get clustering result
+#' result <- hotspot_cluster(hotspots,
 #'                           lon = "lon",
 #'                           lat = "lat",
 #'                           obsTime = "obsTime",
@@ -96,7 +99,16 @@
 #'                           timeUnit = "h",
 #'                           timeStep = 1)
 #'
-#' plot_spotoroo(result)
+#' # different types of plots
+#'
+#' # default plot
+#' plot_spotoroo(result, "def", bg = plot_vic_map())
+#'
+#'
+#' # fire movement plot
+#' plot_spotoroo(result, "mov", cluster = 1:3, step = 3, bg = plot_vic_map())
+#'
+
 #' @export
 plot_spotoroo <- function(result,
                           type = "def",

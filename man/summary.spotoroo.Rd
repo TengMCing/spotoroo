@@ -17,7 +17,8 @@ a result of a call to \code{\link[=hotspot_cluster]{hotspot_cluster()}}.}
 It is a simple wrapper of \code{\link[=summary_spotoroo]{summary_spotoroo()}}.
 }
 \examples{
-result <- hotspot_cluster(hotspots_fin,
+# get clustering results
+result <- hotspot_cluster(hotspots,
                            lon = "lon",
                            lat = "lat",
                            obsTime = "obsTime",
@@ -30,7 +31,7 @@ result <- hotspot_cluster(hotspots_fin,
                            timeStep = 1)
 
 
-
+# make a summary
 summary(result)
 
 

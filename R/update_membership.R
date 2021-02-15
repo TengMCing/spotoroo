@@ -6,11 +6,11 @@
 #' @param lon numeric; a vector of longitude value.
 #' @param lat numeric; a vector of latitude value.
 #' @param global_membership integer; a vector of the membership labels of
-#'                                   all hotspots.
+#'                                   all hot spots.
 #' @param local_membership integer; a vector of membership labels of the
-#'                                  hotspots in the current interval.
-#' @param indexes integer; indexes of hotspots in the current interval.
-#' @return integer; a vector of membership labels of all hotspots.
+#'                                  hot spots in the current interval.
+#' @param indexes integer; indexes of hot spots in the current interval.
+#' @return integer; a vector of membership labels of all hot spots.
 #' @noRd
 update_membership <- function(lon,
                               lat,
@@ -18,14 +18,14 @@ update_membership <- function(lon,
                               local_membership,
                               indexes) {
 
-  # if all new hotspots
+  # if all new hot spots
   if (sum(global_membership[indexes]) == 0) {
     global_membership[indexes] <- adjust_membership(local_membership,
                                                     max(global_membership))
     return(global_membership)
   }
 
-  # if all old hotspots
+  # if all old hot spots
   if (all(global_membership[indexes] != 0)) {
     return(global_membership)
   }

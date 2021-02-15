@@ -1,21 +1,21 @@
 #' Calculation of the ignition points
 #'
-#' `ignition_point()` calculates ignition points using membership labels.
+#' This function calculates ignition points using membership labels.
 #'
-#' For more details about the clustering algorithm and the parameter
+#' For more details about the clustering algorithm and the argument
 #' `timeUnit`, `timeID` and `ignitionCenter`,
 #' please check the documentation of [hotspot_cluster()].
 #' This function performs the **step 5** of the clustering algorithm. It
 #' calculates ignition points.
-#' For a cluster, when there are multiple earliest hotspots, if
-#' `ignitionCenter` is "mean", the centroid of these hotspots will be used
-#' as the ignition point, if `ignitionCenter` is "median", median longitude
-#' and median latitude of these hotspots will be used.
+#' For a cluster, when there are multiple earliest hot spots, if
+#' `ignitionCenter` is "mean", the centroid of these hot spots will be used
+#' as the ignition point. If `ignitionCenter` is "median", median longitude
+#' and median latitude of these hot spots will be used.
 #'
 #' @param lon numeric; a vector of longitude values.
 #' @param lat numeric; a vector of latitude values.
 #' @param obsTime date/datetime/numeric; a vector of observed time.
-#' @param timeUnit character; one of "s" (secs), "m"(mins),
+#' @param timeUnit character; one of "s" (seconds), "m"(minutes),
 #'                            "h"(hours), "d"(days) and "n"(numeric).
 #' @param timeID integer (>=1); a vector of time indexes.
 #' @param membership integer; a vector of membership labels.
@@ -30,9 +30,10 @@
 #'   \item \code{timeID} : time indexes.
 #'   \item \code{obsInCluster} : number of observations in the cluster.
 #'   \item \code{clusterTimeLen} : length of time of the cluster.
-#'   \item \code{clusterTimeLenUnit} : unit of length of time.
+#'   \item \code{clusterTimeLenUnit} : unit of length of time of the cluster.
 #' }
 #' @examples
+#' # define lon, lat, obsTime, timeID and membership for 10 observations
 #' lon <- c(141.1, 141.14, 141.12, 141.14, 141.16, 141.12, 141.14,
 #'           141.16, 141.12, 141.14)
 #' lat <- c(-37.10, -37.10, -37.12, -37.12, -37.12, -37.14, -37.14,
@@ -42,6 +43,7 @@
 #' timeID <- c(rep(1, 5), rep(26, 5))
 #' membership <- c(1, 1, 1, 1, 1, 2, 2, 2, 2, 2)
 #'
+#' # calculate the ignition points using different methods
 #' ignition_point(lon, lat, obsTime, timeUnit, timeID, membership, "mean")
 #' ignition_point(lon, lat, obsTime, timeUnit, timeID, membership, "median")
 #'
@@ -107,7 +109,7 @@ ignition_point <- function(lon,
     }
 
 
-    # extract earliest observed hotspots
+    # extract earliest observed hot spots
     indexes <- (obsTime == earliest_time) & (membership == i)
     if (ignitionCenter == "mean") {
       ignition_lon[i] <- mean(lon[indexes])
@@ -121,7 +123,7 @@ ignition_point <- function(lon,
 
 
   cli::cli_alert_success("{.vrb Compute} {.field ignition points} {.side for} clusters")
-  cli::cli_alert_info("{.side average} hotspots : {round(mean(obs),1)}")
+  cli::cli_alert_info("{.side average} hot spots : {round(mean(obs),1)}")
   cli::cli_alert_info("{.side average} duration : {round(mean(timeLen),1)} {.unit {timeUnit}}")
   cli::cli_end()
 

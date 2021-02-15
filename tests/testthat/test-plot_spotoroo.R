@@ -1,5 +1,5 @@
 test_that("plot_spotoroo() works", {
-  result <- hotspot_cluster(hotspots_fin,
+  result <- hotspot_cluster(hotspots,
                             lon = "lon",
                             lat = "lat",
                             obsTime = "obsTime",
@@ -34,7 +34,7 @@ test_that("plot_spotoroo() works", {
                               dateLabel = "%b %d"))
 
 
-  temp_hotspots <- hotspots_fin
+  temp_hotspots <- hotspots
   temp_hotspots$obsTime <- transform_time_id(temp_hotspots$obsTime, "h", 1)
 
   result <- hotspot_cluster(temp_hotspots,

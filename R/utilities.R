@@ -150,7 +150,7 @@ all_null_bool <- function(...) {
   all(bool_vec)
 }
 
-# BOOL; check if all hotspots are noise
+# BOOL; check if all hot spots are noise
 all_noise_bool <- function(global_membership) {
   all(global_membership == -1)
 }

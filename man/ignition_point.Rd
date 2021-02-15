@@ -13,7 +13,7 @@ ignition_point(lon, lat, obsTime, timeUnit, timeID, membership, ignitionCenter)
 
 \item{obsTime}{date/datetime/numeric; a vector of observed time.}
 
-\item{timeUnit}{character; one of "s" (secs), "m"(mins),
+\item{timeUnit}{character; one of "s" (seconds), "m"(minutes),
 "h"(hours), "d"(days) and "n"(numeric).}
 
 \item{timeID}{integer (>=1); a vector of time indexes.}
@@ -33,24 +33,25 @@ a data frame of ignition points
 \item \code{timeID} : time indexes.
 \item \code{obsInCluster} : number of observations in the cluster.
 \item \code{clusterTimeLen} : length of time of the cluster.
-\item \code{clusterTimeLenUnit} : unit of length of time.
+\item \code{clusterTimeLenUnit} : unit of length of time of the cluster.
 }
 }
 \description{
-\code{ignition_point()} calculates ignition points using membership labels.
+This function calculates ignition points using membership labels.
 }
 \details{
-For more details about the clustering algorithm and the parameter
+For more details about the clustering algorithm and the argument
 \code{timeUnit}, \code{timeID} and \code{ignitionCenter},
 please check the documentation of \code{\link[=hotspot_cluster]{hotspot_cluster()}}.
 This function performs the \strong{step 5} of the clustering algorithm. It
 calculates ignition points.
-For a cluster, when there are multiple earliest hotspots, if
-\code{ignitionCenter} is "mean", the centroid of these hotspots will be used
-as the ignition point, if \code{ignitionCenter} is "median", median longitude
-and median latitude of these hotspots will be used.
+For a cluster, when there are multiple earliest hot spots, if
+\code{ignitionCenter} is "mean", the centroid of these hot spots will be used
+as the ignition point. If \code{ignitionCenter} is "median", median longitude
+and median latitude of these hot spots will be used.
 }
 \examples{
+# define lon, lat, obsTime, timeID and membership for 10 observations
 lon <- c(141.1, 141.14, 141.12, 141.14, 141.16, 141.12, 141.14,
           141.16, 141.12, 141.14)
 lat <- c(-37.10, -37.10, -37.12, -37.12, -37.12, -37.14, -37.14,
@@ -60,6 +61,7 @@ timeUnit <- "n"
 timeID <- c(rep(1, 5), rep(26, 5))
 membership <- c(1, 1, 1, 1, 1, 2, 2, 2, 2, 2)
 
+# calculate the ignition points using different methods
 ignition_point(lon, lat, obsTime, timeUnit, timeID, membership, "mean")
 ignition_point(lon, lat, obsTime, timeUnit, timeID, membership, "median")
 

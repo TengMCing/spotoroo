@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Clustering hotspots spatially and temporally — global_clustering • spotoroo</title>
+<title>Clustering hot spots spatially and temporally — global_clustering • spotoroo</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Clustering hotspots spatially and temporally — global_clustering" />
-<meta property="og:description" content="`global_clustering()`` clusters hotspots spatially and temporally." />
+<meta property="og:title" content="Clustering hot spots spatially and temporally — global_clustering" />
+<meta property="og:description" content="This function clusters hot spots spatially and temporally." />
 
 
 
@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">spotoroo</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -123,13 +123,13 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Clustering hotspots spatially and temporally</h1>
+    <h1>Clustering hot spots spatially and temporally</h1>
     <small class="dont-index">Source: <a href='https://github.com/TengMCing/spotoroo/blob/master/R/global_clustering.R'><code>R/global_clustering.R</code></a></small>
     <div class="hidden name"><code>global_clustering.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>`global_clustering()`` clusters hotspots spatially and temporally.</p>
+    <p>This function clusters hot spots spatially and temporally.</p>
     </div>
 
     <pre class="usage"><span class='fu'>global_clustering</span><span class='op'>(</span><span class='va'>lon</span>, <span class='va'>lat</span>, <span class='va'>timeID</span>, <span class='va'>activeTime</span>, <span class='va'>adjDist</span><span class='op'>)</span></pre>
@@ -164,22 +164,24 @@
     <p>integer; a vector of membership labels.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>For more details about the clustering algorithm and the parameter
+    <p>For more details about the clustering algorithm and the arguments
 <code>activeTime</code> and <code>adjDist</code>, please check the documentation
 of <code><a href='hotspot_cluster.html'>hotspot_cluster()</a></code>.
 This function performs the <strong>first 3 steps</strong> of the clustering algorithm.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>lon</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>141.1</span>, <span class='fl'>141.14</span>, <span class='fl'>141.12</span>, <span class='fl'>141.14</span>, <span class='fl'>141.16</span>, <span class='fl'>141.12</span>, <span class='fl'>141.14</span>,
+    <pre class="examples"><div class='input'><span class='co'># define lon, lat and timeID for 10 observations</span>
+<span class='va'>lon</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>141.1</span>, <span class='fl'>141.14</span>, <span class='fl'>141.12</span>, <span class='fl'>141.14</span>, <span class='fl'>141.16</span>, <span class='fl'>141.12</span>, <span class='fl'>141.14</span>,
           <span class='fl'>141.16</span>, <span class='fl'>141.12</span>, <span class='fl'>141.14</span><span class='op'>)</span>
 <span class='va'>lat</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>37.10</span>, <span class='op'>-</span><span class='fl'>37.10</span>, <span class='op'>-</span><span class='fl'>37.12</span>, <span class='op'>-</span><span class='fl'>37.12</span>, <span class='op'>-</span><span class='fl'>37.12</span>, <span class='op'>-</span><span class='fl'>37.14</span>, <span class='op'>-</span><span class='fl'>37.14</span>,
          <span class='op'>-</span><span class='fl'>37.14</span>, <span class='op'>-</span><span class='fl'>37.16</span>, <span class='op'>-</span><span class='fl'>37.16</span><span class='op'>)</span>
 <span class='va'>timeID</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>5</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>26</span>, <span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span>
 
+<span class='co'># cluster 10 hot spots with different values of activeTime and adjDist</span>
 <span class='fu'>global_clustering</span><span class='op'>(</span><span class='va'>lon</span>, <span class='va'>lat</span>, <span class='va'>timeID</span>, <span class='fl'>12</span>, <span class='fl'>1500</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>-- <span style='color: #00BB00;'>activeTime</span><span> = </span><span style='color: #0000BB;'>12</span><span> </span><span style='color: #BB00BB;'>time indexes</span><span> | </span><span style='color: #00BB00;'>adjDist</span><span> = </span><span style='color: #0000BB;'>1500</span><span> </span><span style='color: #BB00BB;'>meters</span><span> </span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>√</span><span> </span><span style='color: #BBBB00;font-weight: bold;'>Cluster</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> </span><span style='color: #0000BB;'>10</span><span> clusters </span><span style='color: #555555;'>found (including noise)</span><span></span></div><div class='output co'>#&gt;  [1]  1  2  3  4  5  6  7  8  9 10</div><div class='input'><span class='fu'>global_clustering</span><span class='op'>(</span><span class='va'>lon</span>, <span class='va'>lat</span>, <span class='va'>timeID</span>, <span class='fl'>24</span>, <span class='fl'>3000</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>-- </span><span style='color: #00BB00;'>activeTime</span><span> = </span><span style='color: #0000BB;'>24</span><span> </span><span style='color: #BB00BB;'>time indexes</span><span> | </span><span style='color: #00BB00;'>adjDist</span><span> = </span><span style='color: #0000BB;'>3000</span><span> </span><span style='color: #BB00BB;'>meters</span><span> </span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>√</span><span> </span><span style='color: #BBBB00;font-weight: bold;'>Cluster</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> </span><span style='color: #0000BB;'>2</span><span> clusters </span><span style='color: #555555;'>found (including noise)</span><span></span></div><div class='output co'>#&gt;  [1] 1 1 1 1 1 2 2 2 2 2</div><div class='input'><span class='fu'>global_clustering</span><span class='op'>(</span><span class='va'>lon</span>, <span class='va'>lat</span>, <span class='va'>timeID</span>, <span class='fl'>36</span>, <span class='fl'>6000</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>-- </span><span style='color: #00BB00;'>activeTime</span><span> = </span><span style='color: #0000BB;'>36</span><span> </span><span style='color: #BB00BB;'>time indexes</span><span> | </span><span style='color: #00BB00;'>adjDist</span><span> = </span><span style='color: #0000BB;'>6000</span><span> </span><span style='color: #BB00BB;'>meters</span><span> </span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>√</span><span> </span><span style='color: #BBBB00;font-weight: bold;'>Cluster</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> </span><span style='color: #0000BB;'>1</span><span> cluster </span><span style='color: #555555;'>found (including noise)</span><span></span></div><div class='output co'>#&gt;  [1] 1 1 1 1 1 1 1 1 1 1</div><div class='input'>
+</div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>-- <span style='color: #00BB00;'>activeTime</span><span> = </span><span style='color: #0000BB;'>12</span><span> </span><span style='color: #BB00BB;'>time indexes</span><span> | </span><span style='color: #00BB00;'>adjDist</span><span> = </span><span style='color: #0000BB;'>1500</span><span> </span><span style='color: #BB00BB;'>meters</span><span> </span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #BBBB00;font-weight: bold;'>Cluster</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> </span><span style='color: #0000BB;'>10</span><span> clusters </span><span style='color: #555555;'>found (including noise)</span><span></span></div><div class='output co'>#&gt;  [1]  1  2  3  4  5  6  7  8  9 10</div><div class='input'><span class='fu'>global_clustering</span><span class='op'>(</span><span class='va'>lon</span>, <span class='va'>lat</span>, <span class='va'>timeID</span>, <span class='fl'>24</span>, <span class='fl'>3000</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>-- </span><span style='color: #00BB00;'>activeTime</span><span> = </span><span style='color: #0000BB;'>24</span><span> </span><span style='color: #BB00BB;'>time indexes</span><span> | </span><span style='color: #00BB00;'>adjDist</span><span> = </span><span style='color: #0000BB;'>3000</span><span> </span><span style='color: #BB00BB;'>meters</span><span> </span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #BBBB00;font-weight: bold;'>Cluster</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> </span><span style='color: #0000BB;'>2</span><span> clusters </span><span style='color: #555555;'>found (including noise)</span><span></span></div><div class='output co'>#&gt;  [1] 1 1 1 1 1 2 2 2 2 2</div><div class='input'><span class='fu'>global_clustering</span><span class='op'>(</span><span class='va'>lon</span>, <span class='va'>lat</span>, <span class='va'>timeID</span>, <span class='fl'>36</span>, <span class='fl'>6000</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>-- </span><span style='color: #00BB00;'>activeTime</span><span> = </span><span style='color: #0000BB;'>36</span><span> </span><span style='color: #BB00BB;'>time indexes</span><span> | </span><span style='color: #00BB00;'>adjDist</span><span> = </span><span style='color: #0000BB;'>6000</span><span> </span><span style='color: #BB00BB;'>meters</span><span> </span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #BBBB00;font-weight: bold;'>Cluster</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> </span><span style='color: #0000BB;'>1</span><span> cluster </span><span style='color: #555555;'>found (including noise)</span><span></span></div><div class='output co'>#&gt;  [1] 1 1 1 1 1 1 1 1 1 1</div><div class='input'>
 </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

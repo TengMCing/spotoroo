@@ -1,4 +1,4 @@
-#' Calculation of spatiotemporal information between hotspots and
+#' Calculation of spatiotemporal information between hot spots and
 #' ignition points
 #'
 #' compute distance to ignition points; compute time from ignition.

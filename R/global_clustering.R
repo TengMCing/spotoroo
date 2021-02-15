@@ -1,8 +1,8 @@
-#' Clustering hotspots spatially and temporally
+#' Clustering hot spots spatially and temporally
 #'
-#' `global_clustering()`` clusters hotspots spatially and temporally.
+#' This function clusters hot spots spatially and temporally.
 #'
-#' For more details about the clustering algorithm and the parameter
+#' For more details about the clustering algorithm and the arguments
 #' `activeTime` and `adjDist`, please check the documentation
 #' of [hotspot_cluster()].
 #' This function performs the **first 3 steps** of the clustering algorithm.
@@ -14,12 +14,14 @@
 #' @param adjDist numeric (>0); distance tolerance; unit is metre.
 #' @return integer; a vector of membership labels.
 #' @examples
+#' # define lon, lat and timeID for 10 observations
 #' lon <- c(141.1, 141.14, 141.12, 141.14, 141.16, 141.12, 141.14,
 #'           141.16, 141.12, 141.14)
 #' lat <- c(-37.10, -37.10, -37.12, -37.12, -37.12, -37.14, -37.14,
 #'          -37.14, -37.16, -37.16)
 #' timeID <- c(rep(1, 5), rep(26, 5))
 #'
+#' # cluster 10 hot spots with different values of activeTime and adjDist
 #' global_clustering(lon, lat, timeID, 12, 1500)
 #' global_clustering(lon, lat, timeID, 24, 3000)
 #' global_clustering(lon, lat, timeID, 36, 6000)
@@ -47,7 +49,7 @@ global_clustering <- function(lon, lat, timeID, activeTime, adjDist) {
 
     pb$tick(1)
 
-    # find hotspots in the current interval
+    # find hot spots in the current interval
     indexes <- define_interval(timeID, t, activeTime)
 
     # safety checks

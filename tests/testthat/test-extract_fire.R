@@ -1,5 +1,5 @@
 test_that("extract_fire() works", {
-  result <- hotspot_cluster(hotspots_fin,
+  result <- hotspot_cluster(hotspots,
                             lon = "lon",
                             lat = "lat",
                             obsTime = "obsTime",

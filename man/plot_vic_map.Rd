@@ -10,7 +10,7 @@ plot_vic_map()
 \code{ggplot} object; the map of Victoria, Australia.
 }
 \description{
-\code{plot_vic_map()} plots the map of Victoria, Australia.
+This function plots the map of Victoria, Australia.
 }
 \details{
 Require package \code{sf} installed.

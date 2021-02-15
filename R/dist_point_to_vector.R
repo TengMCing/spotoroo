@@ -1,6 +1,6 @@
 #' Calculation of the geodesic of a point to multiple points
 #'
-#' `dist_point_to_vector()` calculates the geodesic of a point to multiple
+#' This function calculates the geodesic of a point to multiple
 #' points given the coordinate information.
 #' The calculation of the geodesic uses the mapbox cheap ruler.
 #' See also [geodist::geodist_vec()] for more details.
@@ -11,9 +11,11 @@
 #' @param vlat numeric; a vector of latitude values.
 #' @return numeric; the geodesic of a point to multiple points in meters.
 #' @examples
+#' # define vlon and vlat
 #' vlon <- c(141.12, 141.13)
 #' vlat <- c(-37.1, -37.0)
 #'
+#' # calculate the geodesic
 #' dist_point_to_vector(141.12, -37.1, vlon, vlat)
 #'
 #' @export

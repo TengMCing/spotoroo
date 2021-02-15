@@ -1,5 +1,8 @@
 ---
-output: github_document
+output: 
+  github_document:
+    html_preview: FALSE
+    keep_html: FALSE
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -11,7 +14,6 @@ knitr::opts_chunk$set(
   fig.path = "man/figures/README-",
   out.width = "100%"
 )
-Sys.setlocale("LC_ALL","English")
 ```
 
 # spotoroo
@@ -21,7 +23,9 @@ Sys.setlocale("LC_ALL","English")
 [![Codecov test coverage](https://codecov.io/gh/TengMCing/spotoroo/branch/master/graph/badge.svg)](https://codecov.io/gh/TengMCing/spotoroo?branch=master)
 <!-- badges: end -->
 
-spotoroo stands for spatiotemporal clustering in R of hot spot
+## Overview 
+
+"spotoroo" stands for spatiotemporal clustering in R of hot spot. It is an algorithm to cluster satellite hot spots, detect ignition points and reconstruct fire movement.
 
 ## Installation
 
@@ -31,44 +35,44 @@ spotoroo stands for spatiotemporal clustering in R of hot spot
 <!-- install.packages("spotoroo") -->
 <!-- ``` -->
 
-You can install the development version from [GitHub](https://github.com/) with:
+
 
 ``` r
-install.packages("devtools")
+# You can install the development version from GitHub with:
+# install.packages("devtools")
 devtools::install_github("TengMCing/spotoroo")
 ```
-## Example
-
-This is a basic example which shows you how to solve a common problem:
+## Usage
 
 ```{r}
 library(spotoroo)
 ```
 
 
-The built-in dataset `hotspots_fin`.
+Using the built-in dataset `hotspots` as an example. The hot spot data needs to has at least three columns: the longitude, the latitude, and the observed time.
 
 ```{r}
-str(hotspots_fin)
+str(hotspots)
 ```
 
-```{r}
-hotspots_fin[1:10,]
-```
+Perform spatiotemporal clustering on this dataset. You need to provide the data, here it is "hotspots", specify which columns correspond to the spatial variables ("lon", "lat"), and which to observed time ("obsTime"). 
 
-```{r echo = TRUE, warning=FALSE, message=FALSE, error=FALSE, out.width = "70%", out.height="70%"}
-library(ggplot2)
+There is a choice of options for the algorithm. 
 
-plot_vic_map() +
-  geom_point(data = hotspots_fin, aes(lon, lat), alpha = 0.3) +
-  ggtitle("Raw Hotspots")
-```
+- "activeTime" sets the time to consider that a fire can be active, and longer than this between hot spots will create a new cluster 
 
+- "adjDist" sets the maximum intra-cluster spatial distance between hot spots beyond which they would be considered part of a different cluster 
 
-Perform spatiotemporal clustering on this dataset. You need to provide the data, here it is "hotspots_fin", specify which columns correspond to the spatial variables (lon, lat), and which to time steps (obsTime). There is a choice of options for the algorithm. "activeTime" sets the time to consider that a fire can be active, and longer than this between hotspots will create a new cluster. "adjDist" sets the maximum spatial distance between hotspots beyond which they would be considered part of a different cluster. 
+- "minPts" sets the minimum number of hot spots in a cluster
+
+- "minTime" sets the minimum length of time of a cluster
+
+- "ignitionCenter" sets the method to calculate the ignition points
+
+- "timeUnit" and "timeStep" set the length of time between successive time indexes
 
 ```{r example}
-result <- hotspot_cluster(hotspots_fin,
+result <- hotspot_cluster(hotspots,
                           lon = "lon",
                           lat = "lat",
                           obsTime = "obsTime",
@@ -79,24 +83,24 @@ result <- hotspot_cluster(hotspots_fin,
                           ignitionCenter = "mean",
                           timeUnit = "h",
                           timeStep = 1)
-```
 
-```{r}
+
 result
 ```
 
+
+You can make a summary of the clustering results.
 
 ```{r}
 summary(result)
 ```
 
-
-Extract fires
+You can extract a subset of clusters from the results.
 
 ```{r}
-extract_fire(result, 1:2)[1:5,]
+fire_1_and_2 <- extract_fire(result, 1:2)
+head(fire_1_and_2, 2)
 ```
-
 
 
 Plot of the result. In this example, there is a total of 6 clusters, so all can be displayed. 
@@ -105,7 +109,7 @@ Plot of the result. In this example, there is a total of 6 clusters, so all can 
 plot(result, bg = plot_vic_map())
 ```
 
-You can also choose a subset of clusters, and this will plot withou a map, so that you can see a zoomed in view of the hotspot clusters and their ignition points. 
+You can also choose a subset of clusters, and this will plot without a map, so that you can see a zoomed in view of the hot spot clusters and their ignition points. 
 
 ```{r out.width = "70%", out.height="70%"}
 plot(result, cluster = c(1,2,3,4))
@@ -122,11 +126,11 @@ plot(result,
 ```
 
 
-To examine the time line of clusters, to learn about intensity of fire periods use the option "timeline".
+To examine the time line of clusters and learn about the intensity of fire periods, use the option "timeline".
 
 ```{r out.width = "70%", out.height="70%"}
 plot(result, "timeline", 
      dateLabel = "%b %d", 
-     mainBreak = "1 month")
+     mainBreak = "1 week")
 ```
 

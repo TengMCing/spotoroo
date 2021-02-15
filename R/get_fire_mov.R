@@ -1,13 +1,13 @@
 #' Calculation of the fire movement
 #'
-#' `get_fire_mov()` calculates the movement of a single fire per `step` time
-#' indexes. It collects hotspots per `step` time indexes, then
+#' This function calculates the movement of a single fire per `step` time
+#' indexes. It collects hot spots per `step` time indexes, then
 #' takes the mean or median of the longitude and latitude as the centre of the
 #' fire.
 #'
 #' @param result `spotoroo` object; a result of a call to [hotspot_cluster()].
 #' @param cluster integer; the membership label of the cluster.
-#' @param step integer (>=0); step size used in the calculation of the
+#' @param step integer (>0); step size used in the calculation of the
 #'                            fire movement.
 #' @param method character; "mean" or "median", method of the calculation of
 #'                          the centre of the fire.
@@ -21,7 +21,8 @@
 #'   \item \code{ignition} : whether or not it is a ignition point.
 #' }
 #' @examples
-#' result <- hotspot_cluster(hotspots_fin,
+#' # get clustering results
+#' result <- hotspot_cluster(hotspots,
 #'                           lon = "lon",
 #'                           lat = "lat",
 #'                           obsTime = "obsTime",
@@ -33,8 +34,13 @@
 #'                           timeUnit = "h",
 #'                           timeStep = 1)
 #'
-#' get_fire_mov(result, cluster = 1, step = 1, method = "mean")
-#' get_fire_mov(result, cluster = 2, step = 3, method = "median")
+#' # get fire movement of the first cluster
+#' mov1 <- get_fire_mov(result, cluster = 1, step = 3, method = "mean")
+#' mov1
+#'
+#' # get fire movement of the second cluster
+#' mov2 <- get_fire_mov(result, cluster = 2, step = 6, method = "median")
+#' mov2
 #'
 #' @export
 get_fire_mov <- function(result, cluster, step = 1, method = "mean"){
@@ -60,7 +66,7 @@ get_fire_mov <- function(result, cluster, step = 1, method = "mean"){
     stop(paste("Cluster", cluster, "does not exist!"))
   }
 
-  # extract hotspots from this cluster
+  # extract hot spots from this cluster
   indexes <- result$hotspots$membership == cluster
   all_hotspots <- result$hotspots[indexes, ]
 
@@ -81,7 +87,7 @@ get_fire_mov <- function(result, cluster, step = 1, method = "mean"){
 
       j <- j + 1
 
-      # if no hotspots in this time ID
+      # if no hot spots in this time ID
       if (sum(all_hotspots$timeID == i) == 0) next
 
       # extract hotspots in this time ID

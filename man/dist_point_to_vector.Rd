@@ -19,15 +19,17 @@ dist_point_to_vector(plon, plat, vlon, vlat)
 numeric; the geodesic of a point to multiple points in meters.
 }
 \description{
-\code{dist_point_to_vector()} calculates the geodesic of a point to multiple
+This function calculates the geodesic of a point to multiple
 points given the coordinate information.
 The calculation of the geodesic uses the mapbox cheap ruler.
 See also \code{\link[geodist:geodist_vec]{geodist::geodist_vec()}} for more details.
 }
 \examples{
+# define vlon and vlat
 vlon <- c(141.12, 141.13)
 vlat <- c(-37.1, -37.0)
 
+# calculate the geodesic
 dist_point_to_vector(141.12, -37.1, vlon, vlat)
 
 }

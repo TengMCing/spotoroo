@@ -20,7 +20,7 @@ plot_fire_mov(
 \item{cluster}{character/integer; if "all", plot all clusters. if a integer
 vector is given, plot corresponding clusters.}
 
-\item{hotspot}{logical; if \code{TRUE}, plot the hotspots.}
+\item{hotspot}{logical; if \code{TRUE}, plot the hot spots.}
 
 \item{from}{\strong{OPTIONAL}; date/datetime/numeric; start time; the data type
 needs to be the same as the provided observed time.}
@@ -28,7 +28,7 @@ needs to be the same as the provided observed time.}
 \item{to}{\strong{OPTIONAL}; date/datetime/numeric; end time; the data type
 needs to be the same as the provided observed time.}
 
-\item{step}{integer (>=0); step size used in the calculation of the
+\item{step}{integer (>0); step size used in the calculation of the
 fire movement.}
 
 \item{bg}{\strong{OPTIONAL}; \code{ggplot} object; if specified, plot onto this object.}
@@ -37,11 +37,12 @@ fire movement.}
 \code{ggplot} object; the plot of the clustering results.
 }
 \description{
-\code{plot_fire_mov()} plots the fire movement. The fire movement is calculated
+This function plots the fire movement. The fire movement is calculated
 from \code{\link[=get_fire_mov]{get_fire_mov()}}.
 }
 \examples{
-result <- hotspot_cluster(hotspots_fin,
+# get clustering results
+result <- hotspot_cluster(hotspots,
                           lon = "lon",
                           lat = "lat",
                           obsTime = "obsTime",
@@ -53,8 +54,11 @@ result <- hotspot_cluster(hotspots_fin,
                           timeUnit = "h",
                           timeStep = 1)
 
+# plot cluster 1 to 4
 plot_fire_mov(result, cluster = 1:4)
+
+# plot cluster 1 to 4, set step = 6
 plot_fire_mov(result, cluster = 1:4, step = 6)
-plot_fire_mov(result, cluster = "all")
+
 
 }

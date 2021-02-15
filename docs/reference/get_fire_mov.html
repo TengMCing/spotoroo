@@ -40,8 +40,8 @@
 
 
 <meta property="og:title" content="Calculation of the fire movement — get_fire_mov" />
-<meta property="og:description" content="get_fire_mov() calculates the movement of a single fire per step time
-indexes. It collects hotspots per step time indexes, then
+<meta property="og:description" content="This function calculates the movement of a single fire per step time
+indexes. It collects hot spots per step time indexes, then
 takes the mean or median of the longitude and latitude as the centre of the
 fire." />
 
@@ -75,7 +75,7 @@ fire." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">spotoroo</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -132,8 +132,8 @@ fire." />
     </div>
 
     <div class="ref-description">
-    <p><code>get_fire_mov()</code> calculates the movement of a single fire per <code>step</code> time
-indexes. It collects hotspots per <code>step</code> time indexes, then
+    <p>This function calculates the movement of a single fire per <code>step</code> time
+indexes. It collects hot spots per <code>step</code> time indexes, then
 takes the mean or median of the longitude and latitude as the centre of the
 fire.</p>
     </div>
@@ -153,7 +153,7 @@ fire.</p>
     </tr>
     <tr>
       <th>step</th>
-      <td><p>integer (&gt;=0); step size used in the calculation of the
+      <td><p>integer (&gt;0); step size used in the calculation of the
 fire movement.</p></td>
     </tr>
     <tr>
@@ -176,7 +176,8 @@ the centre of the fire.</p></td>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>result</span> <span class='op'>&lt;-</span> <span class='fu'><a href='hotspot_cluster.html'>hotspot_cluster</a></span><span class='op'>(</span><span class='va'>hotspots_fin</span>,
+    <pre class="examples"><div class='input'><span class='co'># get clustering results</span>
+<span class='va'>result</span> <span class='op'>&lt;-</span> <span class='fu'><a href='hotspot_cluster.html'>hotspot_cluster</a></span><span class='op'>(</span><span class='va'>hotspots</span>,
                           lon <span class='op'>=</span> <span class='st'>"lon"</span>,
                           lat <span class='op'>=</span> <span class='st'>"lat"</span>,
                           obsTime <span class='op'>=</span> <span class='st'>"obsTime"</span>,
@@ -187,79 +188,48 @@ the centre of the fire.</p></td>
                           ignitionCenter <span class='op'>=</span> <span class='st'>"mean"</span>,
                           timeUnit <span class='op'>=</span> <span class='st'>"h"</span>,
                           timeStep <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'><span style='color: #00BBBB;font-weight: bold;'>------------------------------ </span><span style='color: #000000;font-weight: bold;'>SPOTOROO 0.0.0.9000</span><span style='color: #00BBBB;font-weight: bold;'> -----------------------------</span><span></span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>-- </span><span style='font-weight: bold;'>Calling Core Function : </span><span style='color: #000000;background-color: #BBBBBB;font-weight: bold;'>`hotspot_cluster()`</span><span> --</span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>-- </span><span style='color: #0000BB;'>1</span><span> </span><span style='color: #BB00BB;'>time index</span><span> = </span><span style='color: #0000BB;'>1</span><span> </span><span style='color: #BB00BB;'>hours</span><span> </span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>√</span><span> </span><span style='color: #BBBB00;font-weight: bold;'>Transform</span><span> </span><span style='color: #00BB00;'>observed time</span><span> &gt; </span><span style='color: #00BB00;'>time indexes</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> </span><span style='color: #0000BB;'>970</span><span> </span><span style='color: #BB00BB;'>time indexes</span><span> </span><span style='color: #555555;'>found</span><span></span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>-- </span><span style='color: #00BB00;'>activeTime</span><span> = </span><span style='color: #0000BB;'>24</span><span> </span><span style='color: #BB00BB;'>time indexes</span><span> | </span><span style='color: #00BB00;'>adjDist</span><span> = </span><span style='color: #0000BB;'>3000</span><span> </span><span style='color: #BB00BB;'>meters</span><span> </span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>√</span><span> </span><span style='color: #BBBB00;font-weight: bold;'>Cluster</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> </span><span style='color: #0000BB;'>16</span><span> clusters </span><span style='color: #555555;'>found (including noise)</span><span></span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>-- </span><span style='color: #00BB00;'>minPts</span><span> = </span><span style='color: #0000BB;'>4</span><span> </span><span style='color: #BB00BB;'>hotspots</span><span> | </span><span style='color: #00BB00;'>minTime</span><span> = </span><span style='color: #0000BB;'>3</span><span> </span><span style='color: #BB00BB;'>time indexes</span><span> </span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>√</span><span> </span><span style='color: #BBBB00;font-weight: bold;'>Handle</span><span> </span><span style='color: #00BB00;'>noise</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> </span><span style='color: #0000BB;'>6</span><span> clusters </span><span style='color: #555555;'>left</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> noise </span><span style='color: #555555;'>proportion</span><span> : </span><span style='color: #0000BB;'>0.935 %</span><span> </span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>-- </span><span style='color: #00BB00;'>ignitionCenter</span><span> = </span><span style='color: #0000BB;'>'mean'</span><span> </span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>√</span><span> </span><span style='color: #BBBB00;font-weight: bold;'>Compute</span><span> </span><span style='color: #00BB00;'>ignition points</span><span> </span><span style='color: #555555;'>for</span><span> clusters</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> </span><span style='color: #555555;'>average</span><span> hotspots : 176.7</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> </span><span style='color: #555555;'>average</span><span> duration : 131.9 </span><span style='color: #BB00BB;'>hours</span><span></span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>-- </span><span style='color: #00BB00;'>Time taken</span><span> = </span><span style='color: #0000BB;'>0</span><span> </span><span style='color: #BB00BB;'>mins</span><span> </span><span style='color: #0000BB;'>8</span><span> </span><span style='color: #BB00BB;'>secs</span><span> </span><span style='color: #555555;'>for</span><span> </span><span style='color: #0000BB;'>1070</span><span> hotspots </span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> </span><span style='color: #0000BB;'>0.008</span><span> </span><span style='color: #BB00BB;'>secs</span><span> </span><span style='color: #555555;'>per</span><span> hotspot</span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;font-weight: bold;'>--------------------------------------------------------------------------------</span><span></span></div><div class='input'>
-<span class='fu'>get_fire_mov</span><span class='op'>(</span><span class='va'>result</span>, cluster <span class='op'>=</span> <span class='fl'>1</span>, step <span class='op'>=</span> <span class='fl'>1</span>, method <span class='op'>=</span> <span class='st'>"mean"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'><span style='color: #00BBBB;font-weight: bold;'>-------------------------------- </span><span style='color: #000000;font-weight: bold;'>SPOTOROO 0.1.0</span><span style='color: #00BBBB;font-weight: bold;'> --------------------------------</span><span></span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>-- </span><span style='font-weight: bold;'>Calling Core Function : </span><span style='color: #000000;background-color: #BBBBBB;font-weight: bold;'>`hotspot_cluster()`</span><span> --</span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>-- </span><span style='color: #0000BB;'>1</span><span> </span><span style='color: #BB00BB;'>time index</span><span> = </span><span style='color: #0000BB;'>1</span><span> </span><span style='color: #BB00BB;'>hours</span><span> </span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #BBBB00;font-weight: bold;'>Transform</span><span> </span><span style='color: #00BB00;'>observed time</span><span> &gt; </span><span style='color: #00BB00;'>time indexes</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> </span><span style='color: #0000BB;'>970</span><span> </span><span style='color: #BB00BB;'>time indexes</span><span> </span><span style='color: #555555;'>found</span><span></span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>-- </span><span style='color: #00BB00;'>activeTime</span><span> = </span><span style='color: #0000BB;'>24</span><span> </span><span style='color: #BB00BB;'>time indexes</span><span> | </span><span style='color: #00BB00;'>adjDist</span><span> = </span><span style='color: #0000BB;'>3000</span><span> </span><span style='color: #BB00BB;'>meters</span><span> </span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #BBBB00;font-weight: bold;'>Cluster</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> </span><span style='color: #0000BB;'>16</span><span> clusters </span><span style='color: #555555;'>found (including noise)</span><span></span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>-- </span><span style='color: #00BB00;'>minPts</span><span> = </span><span style='color: #0000BB;'>4</span><span> </span><span style='color: #BB00BB;'>hot spots</span><span> | </span><span style='color: #00BB00;'>minTime</span><span> = </span><span style='color: #0000BB;'>3</span><span> </span><span style='color: #BB00BB;'>time indexes</span><span> </span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #BBBB00;font-weight: bold;'>Handle</span><span> </span><span style='color: #00BB00;'>noise</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> </span><span style='color: #0000BB;'>6</span><span> clusters </span><span style='color: #555555;'>left</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> noise </span><span style='color: #555555;'>proportion</span><span> : </span><span style='color: #0000BB;'>0.935 %</span><span> </span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>-- </span><span style='color: #00BB00;'>ignitionCenter</span><span> = </span><span style='color: #0000BB;'>'mean'</span><span> </span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #BBBB00;font-weight: bold;'>Compute</span><span> </span><span style='color: #00BB00;'>ignition points</span><span> </span><span style='color: #555555;'>for</span><span> clusters</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> </span><span style='color: #555555;'>average</span><span> hot spots : 176.7</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> </span><span style='color: #555555;'>average</span><span> duration : 131.9 </span><span style='color: #BB00BB;'>hours</span><span></span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>-- </span><span style='color: #00BB00;'>Time taken</span><span> = </span><span style='color: #0000BB;'>0</span><span> </span><span style='color: #BB00BB;'>mins</span><span> </span><span style='color: #0000BB;'>3</span><span> </span><span style='color: #BB00BB;'>secs</span><span> </span><span style='color: #555555;'>for</span><span> </span><span style='color: #0000BB;'>1070</span><span> hot spots </span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> </span><span style='color: #0000BB;'>0.003</span><span> </span><span style='color: #BB00BB;'>secs</span><span> </span><span style='color: #555555;'>per</span><span> hot spot</span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;font-weight: bold;'>--------------------------------------------------------------------------------</span><span></span></div><div class='input'>
+<span class='co'># get fire movement of the first cluster</span>
+<span class='va'>mov1</span> <span class='op'>&lt;-</span> <span class='fu'>get_fire_mov</span><span class='op'>(</span><span class='va'>result</span>, cluster <span class='op'>=</span> <span class='fl'>1</span>, step <span class='op'>=</span> <span class='fl'>3</span>, method <span class='op'>=</span> <span class='st'>"mean"</span><span class='op'>)</span>
+<span class='va'>mov1</span>
 </div><div class='output co'>#&gt;    membership      lon       lat timeID             obsTime ignition
 #&gt; 1           1 149.3000 -37.77000      1 2019-12-30 00:10:00     TRUE
-#&gt; 2           1 149.3067 -37.77333      2 2019-12-30 02:00:00    FALSE
-#&gt; 3           1 149.2800 -37.80000      3 2019-12-30 03:00:00    FALSE
-#&gt; 4           1 149.3200 -37.78000      4 2019-12-30 04:00:00    FALSE
-#&gt; 5           1 149.3100 -37.77000      5 2019-12-30 05:00:00    FALSE
-#&gt; 6           1 149.3200 -37.78000      7 2019-12-30 06:20:00    FALSE
-#&gt; 7           1 149.3100 -37.77000     10 2019-12-30 09:50:00    FALSE
-#&gt; 8           1 149.2900 -37.77000     24 2019-12-30 23:40:00    FALSE
-#&gt; 9           1 149.2867 -37.75333     42 2019-12-31 17:50:00    FALSE
-#&gt; 10          1 149.2850 -37.75499     43 2019-12-31 19:00:00    FALSE
-#&gt; 11          1 149.2900 -37.74999     44 2019-12-31 20:00:00    FALSE
-#&gt; 12          1 149.2800 -37.74999     45 2019-12-31 20:10:00    FALSE
-#&gt; 13          1 149.2800 -37.74999     46 2019-12-31 21:40:00    FALSE
-#&gt; 14          1 149.2800 -37.74999     47 2019-12-31 22:50:00    FALSE
-#&gt; 15          1 149.2800 -37.74999     48 2019-12-31 23:40:00    FALSE
-#&gt; 16          1 149.2800 -37.74666     49 2020-01-01 01:00:00    FALSE
-#&gt; 17          1 149.2800 -37.75999     50 2020-01-01 02:00:00    FALSE
-#&gt; 18          1 149.2800 -37.74000     51 2020-01-01 02:50:00    FALSE
-#&gt; 19          1 149.2800 -37.74999     52 2020-01-01 03:10:00    FALSE
-#&gt; 20          1 149.2800 -37.75999     53 2020-01-01 04:50:00    FALSE
-#&gt; 21          1 149.2800 -37.74999     54 2020-01-01 05:10:00    FALSE
-#&gt; 22          1 149.2733 -37.76666     65 2020-01-01 16:50:00    FALSE
-#&gt; 23          1 149.2733 -37.76333     66 2020-01-01 18:00:00    FALSE
-#&gt; 24          1 149.2800 -37.74000     67 2020-01-01 18:50:00    FALSE
-#&gt; 25          1 149.2800 -37.74999     68 2020-01-01 20:00:00    FALSE
-#&gt; 26          1 149.2600 -37.75999     69 2020-01-01 20:40:00    FALSE
-#&gt; 27          1 149.2800 -37.74000     70 2020-01-01 21:50:00    FALSE
-#&gt; 28          1 149.2800 -37.74999     71 2020-01-01 23:00:00    FALSE
-#&gt; 29          1 149.2800 -37.74999     73 2020-01-02 00:40:00    FALSE
-#&gt; 30          1 149.2800 -37.74999     74 2020-01-02 01:50:00    FALSE
-#&gt; 31          1 149.2800 -37.74999     75 2020-01-02 02:30:00    FALSE
-#&gt; 32          1 149.2800 -37.74000     76 2020-01-02 03:30:00    FALSE
-#&gt; 33          1 149.2800 -37.74000     77 2020-01-02 04:20:00    FALSE
-#&gt; 34          1 149.2800 -37.74000     78 2020-01-02 05:30:00    FALSE
-#&gt; 35          1 149.2700 -37.74999     87 2020-01-02 14:20:00    FALSE
-#&gt; 36          1 149.2714 -37.76285     88 2020-01-02 16:00:00    FALSE
-#&gt; 37          1 149.2640 -37.73600     89 2020-01-02 17:00:00    FALSE
-#&gt; 38          1 149.2560 -37.75199     90 2020-01-02 18:00:00    FALSE
-#&gt; 39          1 149.2500 -37.76499     91 2020-01-02 19:00:00    FALSE
-#&gt; 40          1 149.2600 -37.74444     92 2020-01-02 20:00:00    FALSE
-#&gt; 41          1 149.2650 -37.74000     93 2020-01-02 21:00:00    FALSE
-#&gt; 42          1 149.2600 -37.75999     94 2020-01-02 21:30:00    FALSE
-#&gt; 43          1 149.2640 -37.74000     95 2020-01-02 23:00:00    FALSE
-#&gt; 44          1 149.2600 -37.74000     97 2020-01-03 01:00:00    FALSE
-#&gt; 45          1 149.2733 -37.75333     98 2020-01-03 01:30:00    FALSE
-#&gt; 46          1 149.2800 -37.74000     99 2020-01-03 03:00:00    FALSE
-#&gt; 47          1 149.2400 -37.75999    113 2020-01-03 16:40:00    FALSE
-#&gt; 48          1 149.2300 -37.75999    115 2020-01-03 19:00:00    FALSE
-#&gt; 49          1 149.2600 -37.75999    116 2020-01-03 19:50:00    FALSE
-#&gt; 50          1 149.2400 -37.75999    117 2020-01-03 20:20:00    FALSE</div><div class='input'><span class='fu'>get_fire_mov</span><span class='op'>(</span><span class='va'>result</span>, cluster <span class='op'>=</span> <span class='fl'>2</span>, step <span class='op'>=</span> <span class='fl'>3</span>, method <span class='op'>=</span> <span class='st'>"median"</span><span class='op'>)</span>
+#&gt; 2           1 149.3067 -37.77778      4 2019-12-30 04:00:00    FALSE
+#&gt; 3           1 149.3133 -37.77333      7 2019-12-30 06:20:00    FALSE
+#&gt; 4           1 149.3100 -37.77000     10 2019-12-30 09:50:00    FALSE
+#&gt; 5           1 149.2900 -37.77000     24 2019-12-30 23:40:00    FALSE
+#&gt; 6           1 149.2867 -37.75333     42 2019-12-31 17:50:00    FALSE
+#&gt; 7           1 149.2850 -37.75249     45 2019-12-31 20:10:00    FALSE
+#&gt; 8           1 149.2800 -37.74999     48 2019-12-31 23:40:00    FALSE
+#&gt; 9           1 149.2800 -37.74999     51 2020-01-01 02:50:00    FALSE
+#&gt; 10          1 149.2800 -37.75199     54 2020-01-01 05:10:00    FALSE
+#&gt; 11          1 149.2733 -37.76666     65 2020-01-01 16:50:00    FALSE
+#&gt; 12          1 149.2767 -37.75500     68 2020-01-01 20:00:00    FALSE
+#&gt; 13          1 149.2767 -37.74999     71 2020-01-01 23:00:00    FALSE
+#&gt; 14          1 149.2800 -37.74999     74 2020-01-02 01:50:00    FALSE
+#&gt; 15          1 149.2800 -37.74500     77 2020-01-02 04:20:00    FALSE
+#&gt; 16          1 149.2720 -37.74800     87 2020-01-02 14:20:00    FALSE
+#&gt; 17          1 149.2627 -37.75181     90 2020-01-02 18:00:00    FALSE
+#&gt; 18          1 149.2588 -37.74823     93 2020-01-02 21:00:00    FALSE
+#&gt; 19          1 149.2617 -37.74333     97 2020-01-03 01:00:00    FALSE
+#&gt; 20          1 149.2625 -37.75249    113 2020-01-03 16:40:00    FALSE
+#&gt; 21          1 149.2400 -37.75999    116 2020-01-03 19:50:00    FALSE</div><div class='input'>
+<span class='co'># get fire movement of the second cluster</span>
+<span class='va'>mov2</span> <span class='op'>&lt;-</span> <span class='fu'>get_fire_mov</span><span class='op'>(</span><span class='va'>result</span>, cluster <span class='op'>=</span> <span class='fl'>2</span>, step <span class='op'>=</span> <span class='fl'>6</span>, method <span class='op'>=</span> <span class='st'>"median"</span><span class='op'>)</span>
+<span class='va'>mov2</span>
 </div><div class='output co'>#&gt;    membership    lon    lat timeID             obsTime ignition
 #&gt; 1           2 146.72 -36.84    229 2020-01-08 12:40:00     TRUE
-#&gt; 2           2 146.72 -36.84    232 2020-01-08 15:30:00    FALSE
-#&gt; 3           2 146.72 -36.84    235 2020-01-08 19:00:00    FALSE
-#&gt; 4           2 146.72 -36.82    238 2020-01-08 22:00:00    FALSE
-#&gt; 5           2 146.72 -36.82    241 2020-01-09 01:00:00    FALSE
-#&gt; 6           2 146.72 -36.82    244 2020-01-09 03:40:00    FALSE
-#&gt; 7           2 146.72 -36.84    254 2020-01-09 14:00:00    FALSE
-#&gt; 8           2 146.72 -36.80    258 2020-01-09 18:00:00    FALSE
-#&gt; 9           2 146.72 -36.82    261 2020-01-09 20:40:00    FALSE
-#&gt; 10          2 146.74 -36.83    282 2020-01-10 17:10:00    FALSE
-#&gt; 11          2 146.76 -36.86    304 2020-01-11 16:00:00    FALSE
-#&gt; 12          2 146.76 -36.86    307 2020-01-11 18:50:00    FALSE
-#&gt; 13          2 146.76 -36.87    310 2020-01-11 22:00:00    FALSE
-#&gt; 14          2 146.78 -36.90    327 2020-01-12 15:00:00    FALSE
-#&gt; 15          2 146.78 -36.90    330 2020-01-12 17:30:00    FALSE
-#&gt; 16          2 146.78 -36.90    334 2020-01-12 21:10:00    FALSE
-#&gt; 17          2 146.78 -36.90    337 2020-01-13 00:10:00    FALSE
-#&gt; 18          2 146.80 -36.88    359 2020-01-13 22:30:00    FALSE
-#&gt; 19          2 146.82 -36.86    377 2020-01-14 17:00:00    FALSE</div><div class='input'>
+#&gt; 2           2 146.72 -36.84    235 2020-01-08 19:00:00    FALSE
+#&gt; 3           2 146.72 -36.82    241 2020-01-09 01:00:00    FALSE
+#&gt; 4           2 146.72 -36.82    254 2020-01-09 14:00:00    FALSE
+#&gt; 5           2 146.72 -36.80    260 2020-01-09 19:20:00    FALSE
+#&gt; 6           2 146.72 -36.84    282 2020-01-10 17:10:00    FALSE
+#&gt; 7           2 146.76 -36.86    304 2020-01-11 16:00:00    FALSE
+#&gt; 8           2 146.76 -36.86    310 2020-01-11 22:00:00    FALSE
+#&gt; 9           2 146.78 -36.90    327 2020-01-12 15:00:00    FALSE
+#&gt; 10          2 146.78 -36.90    334 2020-01-12 21:10:00    FALSE
+#&gt; 11          2 146.78 -36.89    359 2020-01-13 22:30:00    FALSE
+#&gt; 12          2 146.82 -36.86    377 2020-01-14 17:00:00    FALSE</div><div class='input'>
 </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

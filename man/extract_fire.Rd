@@ -16,12 +16,35 @@ clusters.}
 
 \item{noise}{logical; whether or not to include noise.}
 }
+\value{
+data.frame; the fire information
+\itemize{
+\item \code{lon} : longitude.
+\item \code{lat} : latitude.
+\item \code{obsTime} : observed time.
+\item \code{timeID} : time indexes.
+\item \code{membership} : membership labels.
+\item \code{noise} : whether it is a noise point.
+\item \code{distToIgnition} : distance to the ignition location.
+\item \code{distToIgnitionUnit} : unit of distance to the ignition
+location.
+\item \code{timeFromIgnition} : time from ignition.
+\item \code{timeFromIgnitionUnit} : unit of time from ignition.
+\item \code{type} : type of the entry, either "hotspot", "noise" or
+"ignition"
+\item \code{obsInCluster} : number of observations in the cluster.
+\item \code{clusterTimeLen} : length of time of the cluster.
+\item \code{clusterTimeLenUnit} : unit of length of time of the
+cluster.
+}
+}
 \description{
-\code{extract_fire()} takes a \code{spotoroo} object to produce a data frame which
+This function takes a \code{spotoroo} object to produce a data frame which
 contains information about the fire.
 }
 \examples{
-result <- hotspot_cluster(hotspots_fin,
+# get clustering results
+result <- hotspot_cluster(hotspots,
                           lon = "lon",
                           lat = "lat",
                           obsTime = "obsTime",
@@ -34,13 +57,13 @@ result <- hotspot_cluster(hotspots_fin,
                           timeStep = 1)
 
 
+# extract all fires
+all_fires <- extract_fire(result)
+head(all_fires, 3)
 
-a <- extract_fire(result)
-a[1:10, ]
 
-
-a <- extract_fire(result, 4)
-a[1:10, ]
+fire_4 <- extract_fire(result, 4)
+head(fire_4, 3)
 
 
 }

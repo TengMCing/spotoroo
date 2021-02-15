@@ -1,6 +1,6 @@
 #' Summarizing spatiotemporal clustering results
 #'
-#' `summary_spotoroo()` takes a `spotoroo` object to produce a summary of the
+#' This function takes a `spotoroo` object to produce a summary of the
 #' clustering results. It can be called by [summary.spotoroo()].
 #'
 #' @param result `spotoroo` object;
@@ -9,7 +9,8 @@
 #'                if a integer vector is given, summarize corresponding
 #'                clusters.
 #' @examples
-#' result <- hotspot_cluster(hotspots_fin,
+#' # get clustering results
+#' result <- hotspot_cluster(hotspots,
 #'                            lon = "lon",
 #'                            lat = "lat",
 #'                            obsTime = "obsTime",
@@ -22,10 +23,10 @@
 #'                            timeStep = 1)
 #'
 #'
-#'
+#' # make a summary of all clusters
 #' summary_spotoroo(result)
 #'
-#'
+#' # make a summary of cluster 1 to 3
 #' summary_spotoroo(result, 1:3)
 #'
 #'
@@ -74,7 +75,7 @@ summary_spotoroo <- function(result, cluster = "all"){
                             .val = list(digits = 2,
                                         `font-weight` = "bold")))
 
-  cli::cli_rule(center = "{.def SPOTOROO 0.0.0.9000}")
+  cli::cli_rule(center = "{.def SPOTOROO 0.1.0}")
   cli::cli_h2("Calling Core Function : {.fn summary_spotoroo}")
   cluster_str <- as.character(cluster)
   if (identical(cluster_str, "all")) cluster_str <- "ALL"
@@ -127,8 +128,8 @@ summary_spotoroo <- function(result, cluster = "all"){
   cli::cat_line(five_names, col = "green")
   cli::cat_line(vals, col = "blue")
 
-  cli::cli_h3("{.type Hotspots (excluding noise)}")
-  cli::cli_alert_info("{.bi Number of hotspots: {.val {num_hotspots}}}")
+  cli::cli_h3("{.type Hot spots (excluding noise)}")
+  cli::cli_alert_info("{.bi Number of hot spots: {.val {num_hotspots}}}")
   cli::cli_text()
 
   # third 5 summary

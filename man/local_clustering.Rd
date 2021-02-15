@@ -2,7 +2,7 @@
 % Please edit documentation in R/local_clustering.R
 \name{local_clustering}
 \alias{local_clustering}
-\title{Clustering hotspots spatially}
+\title{Clustering hot spots spatially}
 \usage{
 local_clustering(lon, lat, adjDist)
 }
@@ -17,20 +17,22 @@ local_clustering(lon, lat, adjDist)
 integer; a vector of membership labels
 }
 \description{
-\code{local_clustering()} clusters hotspots spatially.
+This function clusters hot spots spatially.
 }
 \details{
-For more details about the clustering algorithm and the parameter \code{adjDist},
+For more details about the clustering algorithm and the argument \code{adjDist},
 please check the documentation of \code{\link[=hotspot_cluster]{hotspot_cluster()}}.
 This function performs the \strong{step 2} of the clustering algorithm. It
-clusters hotspots in a given interval.
+clusters hot spots in a given interval.
 }
 \examples{
+# define lon and lat for 10 observations
 lon <- c(141.1, 141.14, 141.12, 141.14, 141.16, 141.12, 141.14,
           141.16, 141.12, 141.14)
 lat <- c(-37.10, -37.10, -37.12, -37.12, -37.12, -37.14, -37.14,
          -37.14, -37.16, -37.16)
 
+# cluster 10 hot spots with different values of adjDist
 local_clustering(lon, lat, 2000)
 local_clustering(lon, lat, 3000)
 local_clustering(lon, lat, 4000)

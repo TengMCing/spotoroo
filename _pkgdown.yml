@@ -16,6 +16,7 @@ reference:
   - extract_fire
   - starts_with("plot")
   - starts_with("summary")
+  - starts_with("print")
 - title: "Tools"
   desc: >
     Functions for converting time and computing distance

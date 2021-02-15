@@ -1,6 +1,6 @@
 #' Plotting map of Victoria, Australia
 #'
-#' `plot_vic_map()` plots the map of Victoria, Australia.
+#' This function plots the map of Victoria, Australia.
 #'
 #' Require package `sf` installed.
 #'

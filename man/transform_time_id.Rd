@@ -7,13 +7,15 @@
 transform_time_id(obsTime, timeUnit, timeStep)
 }
 \arguments{
-\item{obsTime}{date/datetime/numeric; a vector of observed time of hotspots.
+\item{obsTime}{date/datetime/numeric; a vector of observed time of
+hot spots.
 If \code{timeUnit} is "n", \code{obsTime}
 needs to be a numeric vector,
 otherwise, it needs to be in
 date or datetime format.}
 
-\item{timeUnit}{character; the unit of time, one of "s" (secs), "m"(mins),
+\item{timeUnit}{character; the unit of time, one of "s" (seconds),
+"m"(minutes),
 "h"(hours), "d"(days) and "n"(numeric).}
 
 \item{timeStep}{numeric (>0); number of units of \code{timeUnit} in a time step.}
@@ -22,7 +24,7 @@ date or datetime format.}
 integer; a vector of time indexes.
 }
 \description{
-\code{\link[=transform_time_id]{transform_time_id()}} transforms a series of time or datetime to
+This function transforms a series of time or datetime to
 time indexes.
 }
 \details{
@@ -33,19 +35,23 @@ by the \code{timeStep}. These differences are floored to integer and
 used as the time indexes.
 }
 \examples{
+# define obsTime
 obsTime <- as.Date(c("2020-01-01",
                      "2020-01-02",
                      "2020-01-04"))
 
+# transform it to time index under different settings
 transform_time_id(obsTime, "h", 1)
 transform_time_id(obsTime, "m", 60)
 transform_time_id(obsTime, "s", 3600)
 
+# define numeric obsTime
 obsTime <- c(1,
              1.5,
              4.5,
              6)
 
+# transform it to time index under different settings
 transform_time_id(obsTime, "n", 1)
 transform_time_id(obsTime, "n", 1.5)
 

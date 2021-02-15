@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Spatiotemporal clustering of hotspots — hotspot_cluster • spotoroo</title>
+<title>Spatiotemporal clustering of hot spot — hotspot_cluster • spotoroo</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,10 @@
 
 
 
-<meta property="og:title" content="Spatiotemporal clustering of hotspots — hotspot_cluster" />
-<meta property="og:description" content="hotspot_cluster() cluster hotspots into fires. It can be used to
+<meta property="og:title" content="Spatiotemporal clustering of hot spot — hotspot_cluster" />
+<meta property="og:description" content="This is the main function of the package.
+
+This function clusters hot spots into fires. It can be used to
 reconstruct fire history and detect fire ignition points." />
 
 
@@ -73,7 +75,7 @@ reconstruct fire history and detect fire ignition points." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">spotoroo</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -124,13 +126,15 @@ reconstruct fire history and detect fire ignition points." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Spatiotemporal clustering of hotspots</h1>
+    <h1>Spatiotemporal clustering of hot spot</h1>
     <small class="dont-index">Source: <a href='https://github.com/TengMCing/spotoroo/blob/master/R/hotspot_cluster.R'><code>R/hotspot_cluster.R</code></a></small>
     <div class="hidden name"><code>hotspot_cluster.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><code>hotspot_cluster()</code> cluster hotspots into fires. It can be used to
+    <p><strong>This is the main function of the package.</strong>
+<br />
+This function clusters hot spots into fires. It can be used to
 reconstruct fire history and detect fire ignition points.</p>
     </div>
 
@@ -153,8 +157,8 @@ reconstruct fire history and detect fire ignition points.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>hotspots</th>
-      <td><p>list/data frame; a list or data frame which
-contains information of hotspots.</p></td>
+      <td><p>list/data frame; a list or a data frame which
+contains information of hot spots.</p></td>
     </tr>
     <tr>
       <th>lon</th>
@@ -169,8 +173,8 @@ numeric latitude values.</p></td>
     <tr>
       <th>obsTime</th>
       <td><p>character; the name of the column of the list which contains
-the observed time of hotspots in date, datetime or
-numeric.</p></td>
+the observed time of hot spots; the observed time
+has to be in date, datetime or numeric.</p></td>
     </tr>
     <tr>
       <th>activeTime</th>
@@ -182,7 +186,7 @@ numeric.</p></td>
     </tr>
     <tr>
       <th>minPts</th>
-      <td><p>numeric (&gt;0); minimum number of hotspots in a cluster.</p></td>
+      <td><p>numeric (&gt;0); minimum number of hot spots in a cluster.</p></td>
     </tr>
     <tr>
       <th>minTime</th>
@@ -208,17 +212,19 @@ either "mean" or "median".</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A <code>spotoroo</code> object; the clustering result; it is also a list:</p><ul>
-<li><p><code>hotspots</code> : a data frame contains information of hotspots.</p><ul>
+    <p>A <code>spotoroo</code> object; the clustering results; it is also a list:</p><ul>
+<li><p><code>hotspots</code> : a data frame contains information of hot spots.</p><ul>
 <li><p><code>lon</code> : longitude.</p></li>
 <li><p><code>lat</code> : latitude.</p></li>
 <li><p><code>obsTime</code> : observed time.</p></li>
 <li><p><code>timeID</code> : time index.</p></li>
 <li><p><code>membership</code> : membership label.</p></li>
-<li><p><code>noise</code> : whether it is noise.</p></li>
-<li><p><code>distToIgnition</code> : distance to ignition.</p></li>
-<li><p><code>distToIgnitionUnit</code> : unit of distance to ignition.</p></li>
+<li><p><code>noise</code> : whether it is a noise point.</p></li>
+<li><p><code>distToIgnition</code> : distance to the ignition location.</p></li>
+<li><p><code>distToIgnitionUnit</code> : unit of distance to the ignition
+location.</p></li>
 <li><p><code>timeFromIgnition</code> : time from ignition.</p></li>
+<li><p><code>timeFromIgnitionUnit</code> : unit of time from ignition.</p></li>
 </ul></li>
 <li><p><code>ignition</code> : a data frame contains information of ignition
 points.</p><ul>
@@ -228,6 +234,8 @@ points.</p><ul>
 <li><p><code>timeID</code> : time index.</p></li>
 <li><p><code>obsInCluster</code> : number of observations in the cluster.</p></li>
 <li><p><code>clusterTimeLen</code> : length of time of the cluster.</p></li>
+<li><p><code>clusterTimeLenUnit</code> : unit of length of time of the
+cluster.</p></li>
 </ul></li>
 <li><p><code>setting</code> : a list contains the clustering settings.</p></li>
 </ul>
@@ -238,59 +246,60 @@ points.</p><ul>
 specified to convert date/datetime/numeric to time index.
 More details can be found in <code><a href='transform_time_id.html'>transform_time_id()</a></code>.
 <br /><br />
-This clustering algorithm is consist of <strong>5 steps</strong>:
+This clustering algorithm consisted of <strong>5 steps</strong>:
 <br /><br />
 In <strong>step 1</strong>, it defines \(T\) intervals using the time index
 $$St = [max(1, t - activeTime),t]$$
 where \(t = 1, 2, ..., T\), and \(T\) is the maximum time index.
 <code>activeTime</code> is an argument that needs to be specified. It represents
-the maximum time difference between two hotspots in the same local
+the maximum time difference between two hot spots in the same local
 cluster. Please notice that a local cluster is different with a cluster
 in the final result. More details will be given in the next part.
 <br /><br />
 In <strong>step 2</strong>, the algorithm performs spatial clustering on each interval.
 A local cluster is a cluster found in an interval. Argument <code>adjDist</code>
 is used to control the spatial clustering. If the distance between two
-hotspots is smaller or equal to <code>adjDist</code>, they are directly-connected. If
-hotspot <code>A</code> is directly-connected with hotspot <code>B</code> and hotspot <code>B</code> is
-directly-connected with hotspot <code>C</code>, hotspot <code>A</code>, <code>B</code> and <code>C</code> are
-connected. All connected hotspots become a local cluster.
+hot spots is smaller or equal to <code>adjDist</code>, they are directly-connected. If
+hot spot <code>A</code> is directly-connected with hot spot <code>B</code> and hot spot <code>B</code> is
+directly-connected with hot spot <code>C</code>, hot spot <code>A</code>, <code>B</code> and <code>C</code> are
+connected. All connected hot spots become a local cluster.
 <br /><br />
-In <strong>step 3</strong>, the algorithm starts from interval \(1\). It flags all
-hotspots in this interval and records their membership labels.
-Then it moves on to interval \(2\). Due to a hotspot could exist in
-multiple intervals, it checks whether any hotspot in interval \(2\)
-has been flagged. If there is any, their membership labels will be
-carried over from the record. Unflagged hotspots in interval \(2\),
-which share the same local cluster with flagged hotspots, their
-membership labels are carried over from flagged hotspots. If a unflagged
-hotspot shares the same local cluster with multiple flagged hotspots, the
+In <strong>step 3</strong>, the algorithm starts from interval \(1\). It marks all
+hot spots in this interval and records their membership labels.
+Then it moves on to interval \(2\). Due to a hot spot could exist in
+multiple intervals, it checks whether any hot spot in interval \(2\)
+has been marked. If there is any, their membership labels will be
+carried over from the record. Unmarked hot spots in interval \(2\),
+which share the same local cluster with marked hot spots, their
+membership labels are carried over from marked hot spots. If a unmarked
+hot spot shares the same local cluster with multiple marked hot spots, the
 algorithm will carry over the membership label from the nearest one. All
-other unflagged hotspots in interval \(2\) that do not share the same
-cluster with any flagged hotspot, their membership labels will be adjusted.
-The clusters they belong to are considered to be new clusters. Finally, all
-hotspots in interval \(2\) are flagged and their membership labels are
+other unmarked hot spots in interval \(2\) that do not share the same
+cluster with any marked hot spot, their membership labels will be adjusted
+such that the clusters they belong to are considered to be new clusters.
+Finally, all
+hot spots in interval \(2\) are marked and their membership labels are
 recorded. This process continues for interval \(3\), \(4\), ...,
-\(T\). After finishing step 3, all hotspots are flagged and their
+\(T\). After finishing step 3, all hot spots are marked and their
 membership labels are recorded.
 <br /><br />
 In <strong>step 4</strong>, it checks each cluster. If there is any cluster contains less
-than <code>minPts</code> hotspots, or lasts shorter than <code>minTime</code>, it will not be
-considered to be a cluster any more, and their hotspots will be
-assigned with <code>-1</code> as their membership labels. A hotspot with membership
+than <code>minPts</code> hot spots, or lasts shorter than <code>minTime</code>, it will not be
+considered to be a cluster any more, and their hot spots will be
+assigned with <code>-1</code> as their membership labels. A hot spot with membership
 label <code>-1</code> is noise.
-Arguments <code>minPts</code> and <code>minTime</code> needs to be specified.
+Arguments <code>minPts</code> and <code>minTime</code> need to be specified.
 <br /><br />
-In <strong>step 5</strong>, the algorithm finds the earliest observed hotspots in each
+In <strong>step 5</strong>, the algorithm finds the earliest observed hot spots in each
 cluster and records them as ignition points. If there are multiple
-earliest observed hotspots in a cluster, the mean or median of the
+earliest observed hot spots in a cluster, the mean or median of the
 longitude values and the latitude values will be used as the coordinate
 of the ignition point. This needs to be specified in argument
 <code>ignitionCenter</code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='va'>result</span> <span class='op'>&lt;-</span> <span class='fu'>hotspot_cluster</span><span class='op'>(</span><span class='va'>hotspots_fin</span>,
+<span class='va'>result</span> <span class='op'>&lt;-</span> <span class='fu'>hotspot_cluster</span><span class='op'>(</span><span class='va'>hotspots</span>,
                 lon <span class='op'>=</span> <span class='st'>"lon"</span>,
                 lat <span class='op'>=</span> <span class='st'>"lat"</span>,
                 obsTime <span class='op'>=</span> <span class='st'>"obsTime"</span>,
@@ -301,8 +310,19 @@ of the ignition point. This needs to be specified in argument
                 ignitionCenter <span class='op'>=</span> <span class='st'>"mean"</span>,
                 timeUnit <span class='op'>=</span> <span class='st'>"h"</span>,
                 timeStep <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'><span style='color: #00BBBB;font-weight: bold;'>------------------------------ </span><span style='color: #000000;font-weight: bold;'>SPOTOROO 0.0.0.9000</span><span style='color: #00BBBB;font-weight: bold;'> -----------------------------</span><span></span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>-- </span><span style='font-weight: bold;'>Calling Core Function : </span><span style='color: #000000;background-color: #BBBBBB;font-weight: bold;'>`hotspot_cluster()`</span><span> --</span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>-- </span><span style='color: #0000BB;'>1</span><span> </span><span style='color: #BB00BB;'>time index</span><span> = </span><span style='color: #0000BB;'>1</span><span> </span><span style='color: #BB00BB;'>hours</span><span> </span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>√</span><span> </span><span style='color: #BBBB00;font-weight: bold;'>Transform</span><span> </span><span style='color: #00BB00;'>observed time</span><span> &gt; </span><span style='color: #00BB00;'>time indexes</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> </span><span style='color: #0000BB;'>970</span><span> </span><span style='color: #BB00BB;'>time indexes</span><span> </span><span style='color: #555555;'>found</span><span></span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>-- </span><span style='color: #00BB00;'>activeTime</span><span> = </span><span style='color: #0000BB;'>24</span><span> </span><span style='color: #BB00BB;'>time indexes</span><span> | </span><span style='color: #00BB00;'>adjDist</span><span> = </span><span style='color: #0000BB;'>3000</span><span> </span><span style='color: #BB00BB;'>meters</span><span> </span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>√</span><span> </span><span style='color: #BBBB00;font-weight: bold;'>Cluster</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> </span><span style='color: #0000BB;'>16</span><span> clusters </span><span style='color: #555555;'>found (including noise)</span><span></span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>-- </span><span style='color: #00BB00;'>minPts</span><span> = </span><span style='color: #0000BB;'>4</span><span> </span><span style='color: #BB00BB;'>hotspots</span><span> | </span><span style='color: #00BB00;'>minTime</span><span> = </span><span style='color: #0000BB;'>3</span><span> </span><span style='color: #BB00BB;'>time indexes</span><span> </span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>√</span><span> </span><span style='color: #BBBB00;font-weight: bold;'>Handle</span><span> </span><span style='color: #00BB00;'>noise</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> </span><span style='color: #0000BB;'>6</span><span> clusters </span><span style='color: #555555;'>left</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> noise </span><span style='color: #555555;'>proportion</span><span> : </span><span style='color: #0000BB;'>0.935 %</span><span> </span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>-- </span><span style='color: #00BB00;'>ignitionCenter</span><span> = </span><span style='color: #0000BB;'>'mean'</span><span> </span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>√</span><span> </span><span style='color: #BBBB00;font-weight: bold;'>Compute</span><span> </span><span style='color: #00BB00;'>ignition points</span><span> </span><span style='color: #555555;'>for</span><span> clusters</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> </span><span style='color: #555555;'>average</span><span> hotspots : 176.7</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> </span><span style='color: #555555;'>average</span><span> duration : 131.9 </span><span style='color: #BB00BB;'>hours</span><span></span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>-- </span><span style='color: #00BB00;'>Time taken</span><span> = </span><span style='color: #0000BB;'>0</span><span> </span><span style='color: #BB00BB;'>mins</span><span> </span><span style='color: #0000BB;'>5</span><span> </span><span style='color: #BB00BB;'>secs</span><span> </span><span style='color: #555555;'>for</span><span> </span><span style='color: #0000BB;'>1070</span><span> hotspots </span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> </span><span style='color: #0000BB;'>0.005</span><span> </span><span style='color: #BB00BB;'>secs</span><span> </span><span style='color: #555555;'>per</span><span> hotspot</span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;font-weight: bold;'>--------------------------------------------------------------------------------</span><span></span></div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span><span class='op'>(</span><span class='va'>result</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'><span style='color: #00BBBB;font-weight: bold;'>-------------------------------- </span><span style='color: #000000;font-weight: bold;'>SPOTOROO 0.1.0</span><span style='color: #00BBBB;font-weight: bold;'> --------------------------------</span><span></span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>-- </span><span style='font-weight: bold;'>Calling Core Function : </span><span style='color: #000000;background-color: #BBBBBB;font-weight: bold;'>`hotspot_cluster()`</span><span> --</span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>-- </span><span style='color: #0000BB;'>1</span><span> </span><span style='color: #BB00BB;'>time index</span><span> = </span><span style='color: #0000BB;'>1</span><span> </span><span style='color: #BB00BB;'>hours</span><span> </span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #BBBB00;font-weight: bold;'>Transform</span><span> </span><span style='color: #00BB00;'>observed time</span><span> &gt; </span><span style='color: #00BB00;'>time indexes</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> </span><span style='color: #0000BB;'>970</span><span> </span><span style='color: #BB00BB;'>time indexes</span><span> </span><span style='color: #555555;'>found</span><span></span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>-- </span><span style='color: #00BB00;'>activeTime</span><span> = </span><span style='color: #0000BB;'>24</span><span> </span><span style='color: #BB00BB;'>time indexes</span><span> | </span><span style='color: #00BB00;'>adjDist</span><span> = </span><span style='color: #0000BB;'>3000</span><span> </span><span style='color: #BB00BB;'>meters</span><span> </span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #BBBB00;font-weight: bold;'>Cluster</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> </span><span style='color: #0000BB;'>16</span><span> clusters </span><span style='color: #555555;'>found (including noise)</span><span></span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>-- </span><span style='color: #00BB00;'>minPts</span><span> = </span><span style='color: #0000BB;'>4</span><span> </span><span style='color: #BB00BB;'>hot spots</span><span> | </span><span style='color: #00BB00;'>minTime</span><span> = </span><span style='color: #0000BB;'>3</span><span> </span><span style='color: #BB00BB;'>time indexes</span><span> </span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #BBBB00;font-weight: bold;'>Handle</span><span> </span><span style='color: #00BB00;'>noise</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> </span><span style='color: #0000BB;'>6</span><span> clusters </span><span style='color: #555555;'>left</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> noise </span><span style='color: #555555;'>proportion</span><span> : </span><span style='color: #0000BB;'>0.935 %</span><span> </span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>-- </span><span style='color: #00BB00;'>ignitionCenter</span><span> = </span><span style='color: #0000BB;'>'mean'</span><span> </span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #BBBB00;font-weight: bold;'>Compute</span><span> </span><span style='color: #00BB00;'>ignition points</span><span> </span><span style='color: #555555;'>for</span><span> clusters</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> </span><span style='color: #555555;'>average</span><span> hot spots : 176.7</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> </span><span style='color: #555555;'>average</span><span> duration : 131.9 </span><span style='color: #BB00BB;'>hours</span><span></span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>-- </span><span style='color: #00BB00;'>Time taken</span><span> = </span><span style='color: #0000BB;'>0</span><span> </span><span style='color: #BB00BB;'>mins</span><span> </span><span style='color: #0000BB;'>4</span><span> </span><span style='color: #BB00BB;'>secs</span><span> </span><span style='color: #555555;'>for</span><span> </span><span style='color: #0000BB;'>1070</span><span> hot spots </span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> </span><span style='color: #0000BB;'>0.004</span><span> </span><span style='color: #BB00BB;'>secs</span><span> </span><span style='color: #555555;'>per</span><span> hot spot</span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;font-weight: bold;'>--------------------------------------------------------------------------------</span><span></span></div><div class='input'>
+<span class='co'># Make a summary of the clustering results</span>
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>result</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;font-weight: bold;'>-------------------------------- SPOTOROO 0.1.0 --------------------------------</span><span></span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>-- </span><span style='font-weight: bold;'>Calling Core Function : </span><span style='color: #000000;background-color: #BBBBBB;font-weight: bold;'>`summary_spotoroo()`</span><span> --</span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; CLUSTERS: ALL
+#&gt; OBSERVATIONS: 1070
+#&gt; FROM: 2019-12-29 13:10:00
+#&gt; TO:   2020-02-07 22:50:00</div><div class='output co'>#&gt; </div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>-- </span><span style='color: #BB0000;font-weight: bold;font-style: italic;text-decoration: underline;'>Clusters</span><span> </span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> </span><span style='font-weight: bold;'>Number of clusters: </span><span style='color: #0000BB;font-weight: bold;'>6</span><span></span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BB0000;font-weight: bold;'>Observations in cluster</span><span></span></div><div class='output co'>#&gt; </span><span style='color: #00BB00;'>        Min.     1st Qu.        Mean     3rd Qu.        Max.</span><span>
+#&gt; </span><span style='color: #0000BB;'>       111.0       131.0       176.7       233.2       256.0</span><span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BB0000;font-weight: bold;'>Duration of cluster (</span><span style='color: #BB00BB;font-weight: bold;'>hours</span><span style='color: #BB0000;font-weight: bold;'>)</span><span></span></div><div class='output co'>#&gt; </span><span style='color: #00BB00;'>        Min.     1st Qu.        Mean     3rd Qu.        Max.</span><span>
+#&gt; </span><span style='color: #0000BB;'>       111.2       118.2       131.9       146.1       148.3</span><span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>-- </span><span style='color: #BB0000;font-weight: bold;font-style: italic;text-decoration: underline;'>Hot spots (excluding noise)</span><span> </span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> </span><span style='font-weight: bold;'>Number of hot spots: </span><span style='color: #0000BB;font-weight: bold;'>1060</span><span></span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BB0000;font-weight: bold;'>Distance to ignition points (</span><span style='color: #BB00BB;font-weight: bold;'>m</span><span style='color: #BB0000;font-weight: bold;'>)</span><span></span></div><div class='output co'>#&gt; </span><span style='color: #00BB00;'>        Min.     1st Qu.        Mean     3rd Qu.        Max.</span><span>
+#&gt; </span><span style='color: #0000BB;'>         0.0      2840.3      5058.2      6981.6     13452.7</span><span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BB0000;font-weight: bold;'>Time from ignition (</span><span style='color: #BB00BB;font-weight: bold;'>hours</span><span style='color: #BB0000;font-weight: bold;'>)</span><span></span></div><div class='output co'>#&gt; </span><span style='color: #00BB00;'>        Min.     1st Qu.        Mean     3rd Qu.        Max.</span><span>
+#&gt; </span><span style='color: #0000BB;'>         0.0        25.2        62.5        98.2       148.3</span><span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>-- </span><span style='color: #BB0000;font-weight: bold;font-style: italic;text-decoration: underline;'>Noise</span><span> </span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> </span><span style='font-weight: bold;'>Number of noise points: </span><span style='color: #0000BB;font-weight: bold;'>10</span><span> (</span><span style='color: #0000BB;font-weight: bold;'>0.93 %</span><span>)</span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;font-weight: bold;'>--------------------------------------------------------------------------------</span><span></span></div><div class='input'>
+<span class='co'># Make a plot of the clustering results</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span><span class='op'>(</span><span class='va'>result</span>, bg <span class='op'>=</span> <span class='fu'><a href='plot_vic_map.html'>plot_vic_map</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='img'><img src='hotspot_cluster-1.png' alt='' width='700' height='433' /></div><div class='input'>
 
 </div></span></pre>

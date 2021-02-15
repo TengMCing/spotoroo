@@ -3,11 +3,10 @@
 \docType{data}
 \name{hotspots}
 \alias{hotspots}
-\title{75936 observations of satellite hotspots.}
+\title{1070 observations of satellite hot spots}
 \format{
-A data frame with 75936 rows and 4 variables:
+A data frame with 1070 rows and 3 variables:
 \describe{
-\item{id}{unique identifier}
 \item{lon}{longitude}
 \item{lat}{latitude}
 \item{obsTime}{observed time}
@@ -20,7 +19,7 @@ A data frame with 75936 rows and 4 variables:
 hotspots
 }
 \description{
-A dataset containing the 75936 observations of satellite hotspots in
+A dataset containing the 1070 observations of satellite hot spots in
 Victoria, Australia during the 2019-2020 Australian bushfire season.
 }
 \keyword{datasets}

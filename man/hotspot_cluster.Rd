@@ -2,7 +2,7 @@
 % Please edit documentation in R/hotspot_cluster.R
 \name{hotspot_cluster}
 \alias{hotspot_cluster}
-\title{Spatiotemporal clustering of hotspots}
+\title{Spatiotemporal clustering of hot spot}
 \usage{
 hotspot_cluster(
   hotspots,
@@ -19,8 +19,8 @@ hotspot_cluster(
 )
 }
 \arguments{
-\item{hotspots}{list/data frame; a list or data frame which
-contains information of hotspots.}
+\item{hotspots}{list/data frame; a list or a data frame which
+contains information of hot spots.}
 
 \item{lon}{character; the name of the column of the list which contains
 numeric longitude values.}
@@ -29,14 +29,14 @@ numeric longitude values.}
 numeric latitude values.}
 
 \item{obsTime}{character; the name of the column of the list which contains
-the observed time of hotspots in date, datetime or
-numeric.}
+the observed time of hot spots; the observed time
+has to be in date, datetime or numeric.}
 
 \item{activeTime}{numeric (>=0); time tolerance; unit is time index.}
 
 \item{adjDist}{numeric (>0); distance tolerance; unit is metre.}
 
-\item{minPts}{numeric (>0); minimum number of hotspots in a cluster.}
+\item{minPts}{numeric (>0); minimum number of hot spots in a cluster.}
 
 \item{minTime}{numeric (>=0); minimum length of time of a cluster;
 unit is time index.}
@@ -51,19 +51,21 @@ either "mean" or "median".}
 \item{timeStep}{numeric (>0); number of units of \code{timeUnit} in a time step.}
 }
 \value{
-A \code{spotoroo} object; the clustering result; it is also a list:
+A \code{spotoroo} object; the clustering results; it is also a list:
 \itemize{
-\item \code{hotspots} : a data frame contains information of hotspots.
+\item \code{hotspots} : a data frame contains information of hot spots.
 \itemize{
 \item \code{lon} : longitude.
 \item \code{lat} : latitude.
 \item \code{obsTime} : observed time.
 \item \code{timeID} : time index.
 \item \code{membership} : membership label.
-\item \code{noise} : whether it is noise.
-\item \code{distToIgnition} : distance to ignition.
-\item \code{distToIgnitionUnit} : unit of distance to ignition.
+\item \code{noise} : whether it is a noise point.
+\item \code{distToIgnition} : distance to the ignition location.
+\item \code{distToIgnitionUnit} : unit of distance to the ignition
+location.
 \item \code{timeFromIgnition} : time from ignition.
+\item \code{timeFromIgnitionUnit} : unit of time from ignition.
 }
 \item \code{ignition} : a data frame contains information of ignition
 points.
@@ -74,12 +76,16 @@ points.
 \item \code{timeID} : time index.
 \item \code{obsInCluster} : number of observations in the cluster.
 \item \code{clusterTimeLen} : length of time of the cluster.
+\item \code{clusterTimeLenUnit} : unit of length of time of the
+cluster.
 }
 \item \code{setting} : a list contains the clustering settings.
 }
 }
 \description{
-\code{hotspot_cluster()} cluster hotspots into fires. It can be used to
+\strong{This is the main function of the package.}
+\cr
+This function clusters hot spots into fires. It can be used to
 reconstruct fire history and detect fire ignition points.
 }
 \details{
@@ -87,59 +93,60 @@ Arguments \code{timeUnit} and \code{timeStep} need to be
 specified to convert date/datetime/numeric to time index.
 More details can be found in \code{\link[=transform_time_id]{transform_time_id()}}.
 \cr\cr
-This clustering algorithm is consist of \strong{5 steps}:
+This clustering algorithm consisted of \strong{5 steps}:
 \cr\cr
 In \strong{step 1}, it defines \eqn{T} intervals using the time index
 \deqn{St = [max(1, t - activeTime),t]}
 where \eqn{t = 1, 2, ..., T}, and \eqn{T} is the maximum time index.
 \code{activeTime} is an argument that needs to be specified. It represents
-the maximum time difference between two hotspots in the same local
+the maximum time difference between two hot spots in the same local
 cluster. Please notice that a local cluster is different with a cluster
 in the final result. More details will be given in the next part.
 \cr\cr
 In \strong{step 2}, the algorithm performs spatial clustering on each interval.
 A local cluster is a cluster found in an interval. Argument \code{adjDist}
 is used to control the spatial clustering. If the distance between two
-hotspots is smaller or equal to \code{adjDist}, they are directly-connected. If
-hotspot \code{A} is directly-connected with hotspot \code{B} and hotspot \code{B} is
-directly-connected with hotspot \code{C}, hotspot \code{A}, \code{B} and \code{C} are
-connected. All connected hotspots become a local cluster.
+hot spots is smaller or equal to \code{adjDist}, they are directly-connected. If
+hot spot \code{A} is directly-connected with hot spot \code{B} and hot spot \code{B} is
+directly-connected with hot spot \code{C}, hot spot \code{A}, \code{B} and \code{C} are
+connected. All connected hot spots become a local cluster.
 \cr\cr
-In \strong{step 3}, the algorithm starts from interval \eqn{1}. It flags all
-hotspots in this interval and records their membership labels.
-Then it moves on to interval \eqn{2}. Due to a hotspot could exist in
-multiple intervals, it checks whether any hotspot in interval \eqn{2}
-has been flagged. If there is any, their membership labels will be
-carried over from the record. Unflagged hotspots in interval \eqn{2},
-which share the same local cluster with flagged hotspots, their
-membership labels are carried over from flagged hotspots. If a unflagged
-hotspot shares the same local cluster with multiple flagged hotspots, the
+In \strong{step 3}, the algorithm starts from interval \eqn{1}. It marks all
+hot spots in this interval and records their membership labels.
+Then it moves on to interval \eqn{2}. Due to a hot spot could exist in
+multiple intervals, it checks whether any hot spot in interval \eqn{2}
+has been marked. If there is any, their membership labels will be
+carried over from the record. Unmarked hot spots in interval \eqn{2},
+which share the same local cluster with marked hot spots, their
+membership labels are carried over from marked hot spots. If a unmarked
+hot spot shares the same local cluster with multiple marked hot spots, the
 algorithm will carry over the membership label from the nearest one. All
-other unflagged hotspots in interval \eqn{2} that do not share the same
-cluster with any flagged hotspot, their membership labels will be adjusted.
-The clusters they belong to are considered to be new clusters. Finally, all
-hotspots in interval \eqn{2} are flagged and their membership labels are
+other unmarked hot spots in interval \eqn{2} that do not share the same
+cluster with any marked hot spot, their membership labels will be adjusted
+such that the clusters they belong to are considered to be new clusters.
+Finally, all
+hot spots in interval \eqn{2} are marked and their membership labels are
 recorded. This process continues for interval \eqn{3}, \eqn{4}, ...,
-\eqn{T}. After finishing step 3, all hotspots are flagged and their
+\eqn{T}. After finishing step 3, all hot spots are marked and their
 membership labels are recorded.
 \cr\cr
 In \strong{step 4}, it checks each cluster. If there is any cluster contains less
-than \code{minPts} hotspots, or lasts shorter than \code{minTime}, it will not be
-considered to be a cluster any more, and their hotspots will be
-assigned with \code{-1} as their membership labels. A hotspot with membership
+than \code{minPts} hot spots, or lasts shorter than \code{minTime}, it will not be
+considered to be a cluster any more, and their hot spots will be
+assigned with \code{-1} as their membership labels. A hot spot with membership
 label \code{-1} is noise.
-Arguments \code{minPts} and \code{minTime} needs to be specified.
+Arguments \code{minPts} and \code{minTime} need to be specified.
 \cr\cr
-In \strong{step 5}, the algorithm finds the earliest observed hotspots in each
+In \strong{step 5}, the algorithm finds the earliest observed hot spots in each
 cluster and records them as ignition points. If there are multiple
-earliest observed hotspots in a cluster, the mean or median of the
+earliest observed hot spots in a cluster, the mean or median of the
 longitude values and the latitude values will be used as the coordinate
 of the ignition point. This needs to be specified in argument
 \code{ignitionCenter}.
 }
 \examples{
 
-result <- hotspot_cluster(hotspots_fin,
+result <- hotspot_cluster(hotspots,
                 lon = "lon",
                 lat = "lat",
                 obsTime = "obsTime",
@@ -151,7 +158,11 @@ result <- hotspot_cluster(hotspots_fin,
                 timeUnit = "h",
                 timeStep = 1)
 
-plot(result)
+# Make a summary of the clustering results
+summary(result)
+
+# Make a plot of the clustering results
+plot(result, bg = plot_vic_map())
 
 
 }

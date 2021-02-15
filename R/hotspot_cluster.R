@@ -1,76 +1,79 @@
-#' Spatiotemporal clustering of hotspots
+#' Spatiotemporal clustering of hot spot
 #'
-#' `hotspot_cluster()` cluster hotspots into fires. It can be used to
+#' **This is the main function of the package.**
+#' \cr
+#' This function clusters hot spots into fires. It can be used to
 #' reconstruct fire history and detect fire ignition points.
 #'
 #' Arguments `timeUnit` and `timeStep` need to be
 #' specified to convert date/datetime/numeric to time index.
 #' More details can be found in [transform_time_id()].
 #' \cr\cr
-#' This clustering algorithm is consist of **5 steps**:
+#' This clustering algorithm consisted of **5 steps**:
 #' \cr\cr
 #' In **step 1**, it defines \eqn{T} intervals using the time index
 #' \deqn{St = [max(1, t - activeTime),t]}
 #' where \eqn{t = 1, 2, ..., T}, and \eqn{T} is the maximum time index.
 #' `activeTime` is an argument that needs to be specified. It represents
-#' the maximum time difference between two hotspots in the same local
+#' the maximum time difference between two hot spots in the same local
 #' cluster. Please notice that a local cluster is different with a cluster
 #' in the final result. More details will be given in the next part.
 #' \cr\cr
 #' In **step 2**, the algorithm performs spatial clustering on each interval.
 #' A local cluster is a cluster found in an interval. Argument `adjDist`
 #' is used to control the spatial clustering. If the distance between two
-#' hotspots is smaller or equal to `adjDist`, they are directly-connected. If
-#' hotspot `A` is directly-connected with hotspot `B` and hotspot `B` is
-#' directly-connected with hotspot `C`, hotspot `A`, `B` and `C` are
-#' connected. All connected hotspots become a local cluster.
+#' hot spots is smaller or equal to `adjDist`, they are directly-connected. If
+#' hot spot `A` is directly-connected with hot spot `B` and hot spot `B` is
+#' directly-connected with hot spot `C`, hot spot `A`, `B` and `C` are
+#' connected. All connected hot spots become a local cluster.
 #' \cr\cr
-#' In **step 3**, the algorithm starts from interval \eqn{1}. It flags all
-#' hotspots in this interval and records their membership labels.
-#' Then it moves on to interval \eqn{2}. Due to a hotspot could exist in
-#' multiple intervals, it checks whether any hotspot in interval \eqn{2}
-#' has been flagged. If there is any, their membership labels will be
-#' carried over from the record. Unflagged hotspots in interval \eqn{2},
-#' which share the same local cluster with flagged hotspots, their
-#' membership labels are carried over from flagged hotspots. If a unflagged
-#' hotspot shares the same local cluster with multiple flagged hotspots, the
+#' In **step 3**, the algorithm starts from interval \eqn{1}. It marks all
+#' hot spots in this interval and records their membership labels.
+#' Then it moves on to interval \eqn{2}. Due to a hot spot could exist in
+#' multiple intervals, it checks whether any hot spot in interval \eqn{2}
+#' has been marked. If there is any, their membership labels will be
+#' carried over from the record. Unmarked hot spots in interval \eqn{2},
+#' which share the same local cluster with marked hot spots, their
+#' membership labels are carried over from marked hot spots. If a unmarked
+#' hot spot shares the same local cluster with multiple marked hot spots, the
 #' algorithm will carry over the membership label from the nearest one. All
-#' other unflagged hotspots in interval \eqn{2} that do not share the same
-#' cluster with any flagged hotspot, their membership labels will be adjusted.
-#' The clusters they belong to are considered to be new clusters. Finally, all
-#' hotspots in interval \eqn{2} are flagged and their membership labels are
+#' other unmarked hot spots in interval \eqn{2} that do not share the same
+#' cluster with any marked hot spot, their membership labels will be adjusted
+#' such that the clusters they belong to are considered to be new clusters.
+#' Finally, all
+#' hot spots in interval \eqn{2} are marked and their membership labels are
 #' recorded. This process continues for interval \eqn{3}, \eqn{4}, ...,
-#' \eqn{T}. After finishing step 3, all hotspots are flagged and their
+#' \eqn{T}. After finishing step 3, all hot spots are marked and their
 #' membership labels are recorded.
 #' \cr\cr
 #' In **step 4**, it checks each cluster. If there is any cluster contains less
-#' than `minPts` hotspots, or lasts shorter than `minTime`, it will not be
-#' considered to be a cluster any more, and their hotspots will be
-#' assigned with `-1` as their membership labels. A hotspot with membership
+#' than `minPts` hot spots, or lasts shorter than `minTime`, it will not be
+#' considered to be a cluster any more, and their hot spots will be
+#' assigned with `-1` as their membership labels. A hot spot with membership
 #' label `-1` is noise.
-#' Arguments `minPts` and `minTime` needs to be specified.
+#' Arguments `minPts` and `minTime` need to be specified.
 #' \cr\cr
-#' In **step 5**, the algorithm finds the earliest observed hotspots in each
+#' In **step 5**, the algorithm finds the earliest observed hot spots in each
 #' cluster and records them as ignition points. If there are multiple
-#' earliest observed hotspots in a cluster, the mean or median of the
+#' earliest observed hot spots in a cluster, the mean or median of the
 #' longitude values and the latitude values will be used as the coordinate
 #' of the ignition point. This needs to be specified in argument
 #' `ignitionCenter`.
 #'
 #'
 #'
-#' @param hotspots list/data frame; a list or data frame which
-#'                                  contains information of hotspots.
+#' @param hotspots list/data frame; a list or a data frame which
+#'                                  contains information of hot spots.
 #' @param lon character; the name of the column of the list which contains
 #'                       numeric longitude values.
 #' @param lat character; the name of the column of the list which contains
 #'                       numeric latitude values.
 #' @param obsTime character; the name of the column of the list which contains
-#'                           the observed time of hotspots in date, datetime or
-#'                           numeric.
+#'                           the observed time of hot spots; the observed time
+#'                           has to be in date, datetime or numeric.
 #' @param activeTime numeric (>=0); time tolerance; unit is time index.
 #' @param adjDist numeric (>0); distance tolerance; unit is metre.
-#' @param minPts numeric (>0); minimum number of hotspots in a cluster.
+#' @param minPts numeric (>0); minimum number of hot spots in a cluster.
 #' @param minTime numeric (>=0); minimum length of time of a cluster;
 #'                               unit is time index.
 #' @param ignitionCenter character; method to calculate ignition points,
@@ -79,19 +82,21 @@
 #'                                      "m" (minutes), "h" (hours),
 #'                                      "d" (days) and "n" (numeric).
 #' @param timeStep numeric (>0); number of units of `timeUnit` in a time step.
-#' @return A `spotoroo` object; the clustering result; it is also a list:
+#' @return A `spotoroo` object; the clustering results; it is also a list:
 #' \itemize{
-#'   \item \code{hotspots} : a data frame contains information of hotspots.
+#'   \item \code{hotspots} : a data frame contains information of hot spots.
 #'   \itemize{
 #'     \item \code{lon} : longitude.
 #'     \item \code{lat} : latitude.
 #'     \item \code{obsTime} : observed time.
 #'     \item \code{timeID} : time index.
 #'     \item \code{membership} : membership label.
-#'     \item \code{noise} : whether it is noise.
-#'     \item \code{distToIgnition} : distance to ignition.
-#'     \item \code{distToIgnitionUnit} : unit of distance to ignition.
+#'     \item \code{noise} : whether it is a noise point.
+#'     \item \code{distToIgnition} : distance to the ignition location.
+#'     \item \code{distToIgnitionUnit} : unit of distance to the ignition
+#'                                       location.
 #'     \item \code{timeFromIgnition} : time from ignition.
+#'     \item \code{timeFromIgnitionUnit} : unit of time from ignition.
 #'   }
 #'   \item \code{ignition} : a data frame contains information of ignition
 #'                           points.
@@ -102,12 +107,14 @@
 #'     \item \code{timeID} : time index.
 #'     \item \code{obsInCluster} : number of observations in the cluster.
 #'     \item \code{clusterTimeLen} : length of time of the cluster.
+#'     \item \code{clusterTimeLenUnit} : unit of length of time of the
+#'     cluster.
 #'   }
 #'   \item \code{setting} : a list contains the clustering settings.
 #' }
 #' @examples
 #'
-#' result <- hotspot_cluster(hotspots_fin,
+#' result <- hotspot_cluster(hotspots,
 #'                 lon = "lon",
 #'                 lat = "lat",
 #'                 obsTime = "obsTime",
@@ -119,7 +126,11 @@
 #'                 timeUnit = "h",
 #'                 timeStep = 1)
 #'
-#' plot(result)
+#' # Make a summary of the clustering results
+#' summary(result)
+#'
+#' # Make a plot of the clustering results
+#' plot(result, bg = plot_vic_map())
 #'
 #'
 #' @export
@@ -171,7 +182,7 @@ hotspot_cluster <- function(hotspots,
                                         "margin-bottom" = 0,
                                         color = "cyan",
                                         "font-color" = "black")))
-  cli::cli_rule(center = "{.def SPOTOROO 0.0.0.9000}")
+  cli::cli_rule(center = "{.def SPOTOROO 0.1.0}")
   cli::cli_h2("Calling Core Function : {.fn hotspot_cluster}")
 
   # more safety checks and handle time col
@@ -198,7 +209,7 @@ hotspot_cluster <- function(hotspots,
                                ignitionCenter)
   }
 
-  # get relationship between hotspots and ignition
+  # get relationship between hot spots and ignition
   to_ignition <- hotspot_to_ignition(lon,
                                      lat,
                                      obsTime,
@@ -241,8 +252,8 @@ hotspot_cluster <- function(hotspots,
 
   cli::cli_h3(paste("{.field Time taken} = {.val {taken_mins}} {.unit min{?s}}",
                       "{.val {taken_secs}} {.unit sec{?s}}",
-                      "{.side for} {.val {length(lon)}} hotspots"))
-  cli::cli_alert_info("{.val {round(total_secs/length(lon), 3)}} {.unit sec{?s}} {.side per} hotspot")
+                      "{.side for} {.val {length(lon)}} hot spots"))
+  cli::cli_alert_info("{.val {round(total_secs/length(lon), 3)}} {.unit sec{?s}} {.side per} hot spot")
   cli::cli_rule()
   cli::cli_end()
 
@@ -264,7 +275,8 @@ hotspot_cluster <- function(hotspots,
 #' a result of a call to [hotspot_cluster()].
 #' @param \dots additional arguments pass to [summary_spotoroo()]
 #' @examples
-#' result <- hotspot_cluster(hotspots_fin,
+#' # get clustering results
+#' result <- hotspot_cluster(hotspots,
 #'                            lon = "lon",
 #'                            lat = "lat",
 #'                            obsTime = "obsTime",
@@ -277,7 +289,7 @@ hotspot_cluster <- function(hotspots,
 #'                            timeStep = 1)
 #'
 #'
-#'
+#' # make a summary
 #' summary(result)
 #'
 #'
@@ -295,7 +307,8 @@ summary.spotoroo <- function(object, ...) {
 #' a result of a call to [hotspot_cluster()].
 #' @param \dots additional arguments will be ignored.
 #' @examples
-#' result <- hotspot_cluster(hotspots_fin,
+#' # get clustering results
+#' result <- hotspot_cluster(hotspots,
 #'                            lon = "lon",
 #'                            lat = "lat",
 #'                            obsTime = "obsTime",
@@ -308,7 +321,7 @@ summary.spotoroo <- function(object, ...) {
 #'                            timeStep = 1)
 #'
 #'
-#'
+#' # print the results
 #' print(result)
 #'
 #'
@@ -321,7 +334,7 @@ print.spotoroo <- function(x, ...) {
                             span.side = list(color = "grey"),
                             span.def = list(color = "cyan",
                                             `font-weight` = "bold")))
-  cli::cli_alert_info("{.def spotoroo} {.vrb object}: {.val {num_cluster}} {.unit clusters} {.side |} {.val {num_hotspot}} {.unit hotspots}")
+  cli::cli_alert_info("{.def spotoroo} {.vrb object}: {.val {num_cluster}} {.unit clusters} {.side |} {.val {num_hotspot}} {.unit hot spots (including noise points)}")
   cli::cli_end()
 }
 
@@ -338,7 +351,8 @@ print.spotoroo <- function(x, ...) {
 #' a result of a call to [hotspot_cluster()].
 #' @param \dots additional arguments pass to [plot_spotoroo()]
 #' @examples
-#' result <- hotspot_cluster(hotspots_fin,
+#' # get clustering results
+#' result <- hotspot_cluster(hotspots,
 #'                            lon = "lon",
 #'                            lat = "lat",
 #'                            obsTime = "obsTime",
@@ -354,11 +368,13 @@ print.spotoroo <- function(x, ...) {
 #'
 #' # different types of plots
 #'
+#' # default plot
+#' plot(result, "def", bg = plot_vic_map())
 #'
-#' plot(result, "def")
+#' # fire movement plot
+#' plot(result, "mov", cluster = 1:3, step = 3, bg = plot_vic_map())
 #'
-#'
-#' plot(result, "mov")
+
 #'
 #'
 #' @export
@@ -394,6 +410,10 @@ plot.spotoroo <- function(x, ...) {
 #'  \item{[plot_def()]}
 #'  \item{[plot_fire_mov()]}
 #'  \item{[plot_timeline()]}
+#'  \item{[plot_vic_map()]}
+#'  \item{[summary.spotoroo()]}
+#'  \item{[summary_spotoroo()]}
+#'  \item{[print.spotoroo()]}
 #'  \item{[transform_time_id()]}
 #'  \item{[dist_point_to_vector()]}
 #'  }

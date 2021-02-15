@@ -2,7 +2,7 @@
 % Please edit documentation in R/global_clustering.R
 \name{global_clustering}
 \alias{global_clustering}
-\title{Clustering hotspots spatially and temporally}
+\title{Clustering hot spots spatially and temporally}
 \usage{
 global_clustering(lon, lat, timeID, activeTime, adjDist)
 }
@@ -21,21 +21,23 @@ global_clustering(lon, lat, timeID, activeTime, adjDist)
 integer; a vector of membership labels.
 }
 \description{
-`global_clustering()`` clusters hotspots spatially and temporally.
+This function clusters hot spots spatially and temporally.
 }
 \details{
-For more details about the clustering algorithm and the parameter
+For more details about the clustering algorithm and the arguments
 \code{activeTime} and \code{adjDist}, please check the documentation
 of \code{\link[=hotspot_cluster]{hotspot_cluster()}}.
 This function performs the \strong{first 3 steps} of the clustering algorithm.
 }
 \examples{
+# define lon, lat and timeID for 10 observations
 lon <- c(141.1, 141.14, 141.12, 141.14, 141.16, 141.12, 141.14,
           141.16, 141.12, 141.14)
 lat <- c(-37.10, -37.10, -37.12, -37.12, -37.12, -37.14, -37.14,
          -37.14, -37.16, -37.16)
 timeID <- c(rep(1, 5), rep(26, 5))
 
+# cluster 10 hot spots with different values of activeTime and adjDist
 global_clustering(lon, lat, timeID, 12, 1500)
 global_clustering(lon, lat, timeID, 24, 3000)
 global_clustering(lon, lat, timeID, 36, 6000)

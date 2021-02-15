@@ -10,7 +10,11 @@
 coverage](https://codecov.io/gh/TengMCing/spotoroo/branch/master/graph/badge.svg)](https://codecov.io/gh/TengMCing/spotoroo?branch=master)
 <!-- badges: end -->
 
-spotoroo stands for spatiotemporal clustering in R of hot spot
+## Overview
+
+“spotoroo” stands for spatiotemporal clustering in R of hot spot. It is
+an algorithm to cluster satellite hot spots, detect ignition points and
+reconstruct fire movement.
 
 ## Installation
 
@@ -19,67 +23,54 @@ spotoroo stands for spatiotemporal clustering in R of hot spot
 <!-- install.packages("spotoroo") -->
 <!-- ``` -->
 
-You can install the development version from
-[GitHub](https://github.com/) with:
-
 ``` r
-install.packages("devtools")
+# You can install the development version from GitHub with:
+# install.packages("devtools")
 devtools::install_github("TengMCing/spotoroo")
 ```
 
-## Example
-
-This is a basic example which shows you how to solve a common problem:
+## Usage
 
 ``` r
 library(spotoroo)
 ```
 
-The built-in dataset `hotspots_fin`.
+Using the built-in dataset `hotspots` as an example. The hot spot data
+needs to has at least three columns: the longitude, the latitude, and
+the observed time.
 
 ``` r
-str(hotspots_fin)
+str(hotspots)
 #> 'data.frame':    1070 obs. of  3 variables:
 #>  $ lon    : num  147 146 143 149 142 ...
 #>  $ lat    : num  -37.5 -37.9 -37.8 -37.4 -37.1 ...
 #>  $ obsTime: POSIXct, format: "2020-02-01 05:20:00" "2020-01-02 06:30:00" ...
 ```
 
-``` r
-hotspots_fin[1:10,]
-#>       lon       lat             obsTime
-#> 1  147.46 -37.46000 2020-02-01 05:20:00
-#> 2  146.48 -37.93999 2020-01-02 06:30:00
-#> 3  143.44 -37.82000 2020-01-03 07:20:00
-#> 4  149.30 -37.36000 2020-01-22 05:10:00
-#> 5  142.14 -37.06000 2020-01-18 06:40:00
-#> 6  142.16 -37.50000 2020-01-03 05:40:00
-#> 7  149.42 -37.34000 2020-01-26 04:40:00
-#> 8  147.68 -36.62000 2020-01-04 05:10:00
-#> 9  148.48 -37.40000 2020-01-15 05:20:00
-#> 10 148.04 -36.38000 2020-01-12 08:50:00
-```
-
-``` r
-library(tidyverse)
-plot_vic_map() +
-  geom_point(data = hotspots_fin, aes(lon, lat), alpha = 0.3) +
-  ggtitle("Raw Hotspots")
-```
-
-<img src="man/figures/README-unnamed-chunk-5-1.png" width="70%" height="70%" />
-
 Perform spatiotemporal clustering on this dataset. You need to provide
-the data, here it is “hotspots\_fin”, specify which columns correspond
-to the spatial variables (lon, lat), and which to time steps (obsTime).
-There is a choice of options for the algorithm. “activeTime” sets the
-time to consider that a fire can be active, and longer than this between
-hotspots will create a new cluster. “adjDist” sets the maximum spatial
-distance between hotspots beyond which they would be considered part of
-a different cluster.
+the data, here it is “hotspots”, specify which columns correspond to the
+spatial variables (lon, lat), and which to observed time (obsTime).
+
+There is a choice of options for the algorithm.
+
+-   “activeTime” sets the time to consider that a fire can be active,
+    and longer than this between hot spots will create a new cluster
+
+-   “adjDist” sets the maximum intra-cluster spatial distance between
+    hot spots beyond which they would be considered part of a different
+    cluster
+
+-   “minPts” sets the minimum number of hot spots in a cluster
+
+-   “minTime” sets the minimum length of time of a cluster
+
+-   “ignitionCenter” sets the method to calculate the ignition points
+
+-   “timeUnit” and “timeStep” set the length of time between successive
+    time indexes
 
 ``` r
-result <- hotspot_cluster(hotspots_fin,
+result <- hotspot_cluster(hotspots,
                           lon = "lon",
                           lat = "lat",
                           obsTime = "obsTime",
@@ -91,7 +82,7 @@ result <- hotspot_cluster(hotspots_fin,
                           timeUnit = "h",
                           timeStep = 1)
 #> 
-#> ------------------------------ SPOTOROO 0.0.0.9000 -----------------------------
+#> -------------------------------- SPOTOROO 0.1.0 --------------------------------
 #> 
 #> -- Calling Core Function : `hotspot_cluster()` --
 #> 
@@ -113,21 +104,22 @@ result <- hotspot_cluster(hotspots_fin,
 #> i average hotspots : 176.7
 #> i average duration : 131.9 hours
 #> 
-#> -- Time taken = 0 mins 3 secs for 1070 hotspots
-#> i 0.003 secs per hotspot
+#> -- Time taken = 0 mins 3 secs for 1070 hot spots
+#> i 0.003 secs per hot spot
 #> 
 #> --------------------------------------------------------------------------------
+
+
+result
+#> i spotoroo object: 6 clusters | 1070 hot spots (including noise points)
 ```
 
-``` r
-result
-#> i spotoroo object: 6 clusters | 1070 hotspots
-```
+You can make a summary of the clustering results.
 
 ``` r
 summary(result)
 #> 
-#> ------------------------------ SPOTOROO 0.0.0.9000 -----------------------------
+#> -------------------------------- SPOTOROO 0.1.0 --------------------------------
 #> 
 #> -- Calling Core Function : `summary_spotoroo()` --
 #> 
@@ -162,28 +154,20 @@ summary(result)
 #> --------------------------------------------------------------------------------
 ```
 
-Extract fires
+You can extract a subset of clusters from the results.
 
 ``` r
-extract_fire(result, 1:2)[1:5,]
-#>      lon       lat             obsTime timeID membership noise distToIgnition
-#> 1 149.30 -37.75999 2019-12-29 13:10:00      1          1 FALSE       1111.885
-#> 2 149.30 -37.78000 2019-12-29 13:10:00      1          1 FALSE       1111.885
-#> 3 149.32 -37.78000 2019-12-29 13:30:00      1          1 FALSE       2080.914
-#> 4 149.30 -37.75999 2019-12-29 14:50:00      2          1 FALSE       1111.885
-#> 5 149.30 -37.78000 2019-12-29 14:50:00      2          1 FALSE       1111.885
+fire_1_and_2 <- extract_fire(result, 1:2)
+head(fire_1_and_2, 2)
+#>     lon       lat             obsTime timeID membership noise distToIgnition
+#> 1 149.3 -37.75999 2019-12-29 13:10:00      1          1 FALSE       1111.885
+#> 2 149.3 -37.78000 2019-12-29 13:10:00      1          1 FALSE       1111.885
 #>   distToIgnitionUnit timeFromIgnition timeFromIgnitionUnit    type obsInCluster
-#> 1                  m  0.0000000 hours                    h hotspot          146
-#> 2                  m  0.0000000 hours                    h hotspot          146
-#> 3                  m  0.3333333 hours                    h hotspot          146
-#> 4                  m  1.6666667 hours                    h hotspot          146
-#> 5                  m  1.6666667 hours                    h hotspot          146
+#> 1                  m          0 hours                    h hotspot          146
+#> 2                  m          0 hours                    h hotspot          146
 #>   clusterTimeLen clusterTimeLenUnit
 #> 1 116.1667 hours                  h
 #> 2 116.1667 hours                  h
-#> 3 116.1667 hours                  h
-#> 4 116.1667 hours                  h
-#> 5 116.1667 hours                  h
 ```
 
 Plot of the result. In this example, there is a total of 6 clusters, so
@@ -193,17 +177,17 @@ all can be displayed.
 plot(result, bg = plot_vic_map())
 ```
 
-<img src="man/figures/README-unnamed-chunk-9-1.png" width="70%" height="70%" />
+<img src="man/figures/README-unnamed-chunk-6-1.png" width="70%" height="70%" />
 
-You can also choose a subset of clusters, and this will plot withou a
-map, so that you can see a zoomed in view of the hotspot clusters and
+You can also choose a subset of clusters, and this will plot without a
+map, so that you can see a zoomed in view of the hot spot clusters and
 their ignition points.
 
 ``` r
 plot(result, cluster = c(1,2,3,4))
 ```
 
-<img src="man/figures/README-unnamed-chunk-10-1.png" width="70%" height="70%" />
+<img src="man/figures/README-unnamed-chunk-7-1.png" width="70%" height="70%" />
 
 To examine the fire movements, use the option “mov”, and the movement
 will be shown as connected lines between centroids at each time step,
@@ -217,15 +201,15 @@ plot(result,
      bg = plot_vic_map())
 ```
 
-<img src="man/figures/README-unnamed-chunk-11-1.png" width="70%" height="70%" />
+<img src="man/figures/README-unnamed-chunk-8-1.png" width="70%" height="70%" />
 
-To examine the time line of clusters, to learn about intensity of fire
-periods use the option “timeline”.
+To examine the time line of clusters and learn about the intensity of
+fire periods, use the option “timeline”.
 
 ``` r
 plot(result, "timeline", 
      dateLabel = "%b %d", 
-     mainBreak = "1 month")
+     mainBreak = "1 week")
 ```
 
-<img src="man/figures/README-unnamed-chunk-12-1.png" width="70%" height="70%" />
+<img src="man/figures/README-unnamed-chunk-9-1.png" width="70%" height="70%" />
