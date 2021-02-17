@@ -86,8 +86,9 @@
 #'                         unavailable in [plot_timeline()].
 #' @return `ggplot` object; the plot of the clustering results.
 #' @examples
-#' # get clustering result
-#' result <- hotspot_cluster(hotspots,
+#' if (FALSE) {
+#'   # get clustering result
+#'   result <- hotspot_cluster(hotspots,
 #'                           lon = "lon",
 #'                           lat = "lat",
 #'                           obsTime = "obsTime",
@@ -99,16 +100,18 @@
 #'                           timeUnit = "h",
 #'                           timeStep = 1)
 #'
-#' # different types of plots
+#'   # different types of plots
 #'
-#' # default plot
-#' plot_spotoroo(result, "def", bg = plot_vic_map())
+#'   # default plot
+#'   plot_spotoroo(result, "def", bg = plot_vic_map())
 #'
 #'
-#' # fire movement plot
-#' plot_spotoroo(result, "mov", cluster = 1:3, step = 3, bg = plot_vic_map())
+#'   # fire movement plot
+#'   plot_spotoroo(result, "mov", cluster = 1:3, step = 3,
+#'                 bg = plot_vic_map())
+#' }
 #'
-
+#'
 #' @export
 plot_spotoroo <- function(result,
                           type = "def",

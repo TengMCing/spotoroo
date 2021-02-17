@@ -30,8 +30,9 @@
 #'     cluster.
 #' }
 #' @examples
-#' # get clustering results
-#' result <- hotspot_cluster(hotspots,
+#' if (FALSE) {
+#'   # get clustering results
+#'   result <- hotspot_cluster(hotspots,
 #'                           lon = "lon",
 #'                           lat = "lat",
 #'                           obsTime = "obsTime",
@@ -44,14 +45,14 @@
 #'                           timeStep = 1)
 #'
 #'
-#' # extract all fires
-#' all_fires <- extract_fire(result)
-#' head(all_fires, 3)
+#'   # extract all fires
+#'   all_fires <- extract_fire(result)
+#'   head(all_fires, 3)
 #'
-#'
-#' fire_4 <- extract_fire(result, 4)
-#' head(fire_4, 3)
-#'
+#'   # extract cluster 4
+#'   fire_4 <- extract_fire(result, 4)
+#'   head(fire_4, 3)
+#' }
 #'
 #' @export
 extract_fire <- function(result, cluster = "all", noise = FALSE) {

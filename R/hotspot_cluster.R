@@ -1,6 +1,6 @@
 #' Spatiotemporal clustering of hot spot
 #'
-#' **This is the main function of the package.**
+#' This is the main function of the package.
 #' \cr
 #' This function clusters hot spots into fires. It can be used to
 #' reconstruct fire history and detect fire ignition points.
@@ -113,8 +113,8 @@
 #'   \item \code{setting} : a list contains the clustering settings.
 #' }
 #' @examples
-#'
-#' result <- hotspot_cluster(hotspots,
+#' if (FALSE) {
+#'   result <- hotspot_cluster(hotspots,
 #'                 lon = "lon",
 #'                 lat = "lat",
 #'                 obsTime = "obsTime",
@@ -126,12 +126,12 @@
 #'                 timeUnit = "h",
 #'                 timeStep = 1)
 #'
-#' # Make a summary of the clustering results
-#' summary(result)
+#'   # Make a summary of the clustering results
+#'   summary(result)
 #'
-#' # Make a plot of the clustering results
-#' plot(result, bg = plot_vic_map())
-#'
+#'   # Make a plot of the clustering results
+#'   plot(result, bg = plot_vic_map())
+#' }
 #'
 #' @export
 hotspot_cluster <- function(hotspots,
@@ -182,7 +182,7 @@ hotspot_cluster <- function(hotspots,
                                         "margin-bottom" = 0,
                                         color = "cyan",
                                         "font-color" = "black")))
-  cli::cli_rule(center = "{.def SPOTOROO 0.1.0}")
+  cli::cli_rule(center = "{.def SPOTOROO 1.0.0}")
   cli::cli_h2("Calling Core Function : {.fn hotspot_cluster}")
 
   # more safety checks and handle time col
@@ -275,8 +275,9 @@ hotspot_cluster <- function(hotspots,
 #' a result of a call to [hotspot_cluster()].
 #' @param \dots additional arguments pass to [summary_spotoroo()]
 #' @examples
-#' # get clustering results
-#' result <- hotspot_cluster(hotspots,
+#' if (FALSE) {
+#'   # get clustering results
+#'   result <- hotspot_cluster(hotspots,
 #'                            lon = "lon",
 #'                            lat = "lat",
 #'                            obsTime = "obsTime",
@@ -289,9 +290,9 @@ hotspot_cluster <- function(hotspots,
 #'                            timeStep = 1)
 #'
 #'
-#' # make a summary
-#' summary(result)
-#'
+#'   # make a summary
+#'   summary(result)
+#' }
 #'
 #' @export
 summary.spotoroo <- function(object, ...) {
@@ -307,8 +308,9 @@ summary.spotoroo <- function(object, ...) {
 #' a result of a call to [hotspot_cluster()].
 #' @param \dots additional arguments will be ignored.
 #' @examples
-#' # get clustering results
-#' result <- hotspot_cluster(hotspots,
+#' if (FALSE) {
+#'   # get clustering results
+#'   result <- hotspot_cluster(hotspots,
 #'                            lon = "lon",
 #'                            lat = "lat",
 #'                            obsTime = "obsTime",
@@ -321,8 +323,10 @@ summary.spotoroo <- function(object, ...) {
 #'                            timeStep = 1)
 #'
 #'
-#' # print the results
-#' print(result)
+#'   # print the results
+#'   print(result)
+#' }
+#'
 #'
 #'
 #' @export
@@ -351,8 +355,9 @@ print.spotoroo <- function(x, ...) {
 #' a result of a call to [hotspot_cluster()].
 #' @param \dots additional arguments pass to [plot_spotoroo()]
 #' @examples
-#' # get clustering results
-#' result <- hotspot_cluster(hotspots,
+#' if (FALSE) {
+#'   # get clustering results
+#'   result <- hotspot_cluster(hotspots,
 #'                            lon = "lon",
 #'                            lat = "lat",
 #'                            obsTime = "obsTime",
@@ -366,16 +371,14 @@ print.spotoroo <- function(x, ...) {
 #'
 #'
 #'
-#' # different types of plots
+#'   # different types of plots
 #'
-#' # default plot
-#' plot(result, "def", bg = plot_vic_map())
+#'   # default plot
+#'   plot(result, "def", bg = plot_vic_map())
 #'
-#' # fire movement plot
-#' plot(result, "mov", cluster = 1:3, step = 3, bg = plot_vic_map())
-#'
-
-#'
+#'   # fire movement plot
+#'   plot(result, "mov", cluster = 1:3, step = 3, bg = plot_vic_map())
+#' }
 #'
 #' @export
 plot.spotoroo <- function(x, ...) {
@@ -390,9 +393,9 @@ plot.spotoroo <- function(x, ...) {
 #'
 #' @section Authors:
 #' \itemize{
-#'   \item{Weihao Li \url{weihao.li@monash.edu}}
-#'   \item{Dianne Cook \url{dicook@monash.edu}}
-#'   \item{Emily Dodwell \url{emdodwell@gmail.com}}
+#'   \item{Weihao Li \email{llreczx@gmail.com}}
+#'   \item{Dianne Cook \email{dicook@monash.edu}}
+#'   \item{Emily Dodwell \email{emdodwell@gmail.com}}
 #' }
 #'
 #'

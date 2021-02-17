@@ -12,9 +12,9 @@ coverage](https://codecov.io/gh/TengMCing/spotoroo/branch/master/graph/badge.svg
 
 ## Overview
 
-“spotoroo” stands for spatiotemporal clustering in R of hot spot. It is
-an algorithm to cluster satellite hot spots, detect ignition points and
-reconstruct fire movement.
+“spotoroo” stands for spatiotemporal clustering in R of hot spot data.
+It is an algorithm to cluster satellite hot spots, detect ignition
+points and reconstruct fire movement.
 
 ## Installation
 
@@ -35,9 +35,9 @@ devtools::install_github("TengMCing/spotoroo")
 library(spotoroo)
 ```
 
-Using the built-in dataset `hotspots` as an example. The hot spot data
-needs to has at least three columns: the longitude, the latitude, and
-the observed time.
+The below examples use the built-in dataset `hotspots`. The hot spot
+data needs to has at least three columns: the longitude, the latitude,
+and the observed time.
 
 ``` r
 str(hotspots)
@@ -47,9 +47,9 @@ str(hotspots)
 #>  $ obsTime: POSIXct, format: "2020-02-01 05:20:00" "2020-01-02 06:30:00" ...
 ```
 
-Perform spatiotemporal clustering on this dataset. You need to provide
-the data, here it is “hotspots”, specify which columns correspond to the
-spatial variables (lon, lat), and which to observed time (obsTime).
+Perform spatiotemporal clustering on this dataset. You need to specify
+which columns correspond to the spatial variables (“lon”, “lat”), and
+which to observed time (“obsTime”).
 
 There is a choice of options for the algorithm.
 
@@ -82,7 +82,7 @@ result <- hotspot_cluster(hotspots,
                           timeUnit = "h",
                           timeStep = 1)
 #> 
-#> -------------------------------- SPOTOROO 0.1.0 --------------------------------
+#> -------------------------------- SPOTOROO 1.0.0 --------------------------------
 #> 
 #> -- Calling Core Function : `hotspot_cluster()` --
 #> 
@@ -94,14 +94,14 @@ result <- hotspot_cluster(hotspots,
 #> v Cluster
 #> i 16 clusters found (including noise)
 #> 
-#> -- minPts = 4 hotspots | minTime = 3 time indexes
+#> -- minPts = 4 hot spots | minTime = 3 time indexes
 #> v Handle noise
 #> i 6 clusters left
 #> i noise proportion : 0.935 %
 #> 
 #> -- ignitionCenter = 'mean'
 #> v Compute ignition points for clusters
-#> i average hotspots : 176.7
+#> i average hot spots : 176.7
 #> i average duration : 131.9 hours
 #> 
 #> -- Time taken = 0 mins 3 secs for 1070 hot spots
@@ -119,7 +119,7 @@ You can make a summary of the clustering results.
 ``` r
 summary(result)
 #> 
-#> -------------------------------- SPOTOROO 0.1.0 --------------------------------
+#> -------------------------------- SPOTOROO 1.0.0 --------------------------------
 #> 
 #> -- Calling Core Function : `summary_spotoroo()` --
 #> 
@@ -138,8 +138,8 @@ summary(result)
 #>         Min.     1st Qu.        Mean     3rd Qu.        Max.
 #>        111.2       118.2       131.9       146.1       148.3
 #> 
-#> -- Hotspots (excluding noise)
-#> i Number of hotspots: 1060
+#> -- Hot spots (excluding noise)
+#> i Number of hot spots: 1060
 #> 
 #> Distance to ignition points (m)
 #>         Min.     1st Qu.        Mean     3rd Qu.        Max.

@@ -35,8 +35,10 @@ takes the mean or median of the longitude and latitude as the centre of the
 fire.
 }
 \examples{
-# get clustering results
-result <- hotspot_cluster(hotspots,
+
+if (FALSE) {
+  # get clustering results
+  result <- hotspot_cluster(hotspots,
                           lon = "lon",
                           lat = "lat",
                           obsTime = "obsTime",
@@ -48,12 +50,14 @@ result <- hotspot_cluster(hotspots,
                           timeUnit = "h",
                           timeStep = 1)
 
-# get fire movement of the first cluster
-mov1 <- get_fire_mov(result, cluster = 1, step = 3, method = "mean")
-mov1
+  # get fire movement of the first cluster
+  mov1 <- get_fire_mov(result, cluster = 1, step = 3, method = "mean")
+  mov1
 
-# get fire movement of the second cluster
-mov2 <- get_fire_mov(result, cluster = 2, step = 6, method = "median")
-mov2
+  # get fire movement of the second cluster
+  mov2 <- get_fire_mov(result, cluster = 2, step = 6, method = "median")
+  mov2
+}
+
 
 }

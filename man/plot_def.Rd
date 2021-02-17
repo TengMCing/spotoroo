@@ -42,8 +42,9 @@ needs to be the same as the provided observed time.}
 This function plots the clustering result spatially as a scatter plot.
 }
 \examples{
-# get clustering results
-result <- hotspot_cluster(hotspots,
+if (FALSE) {
+  # get clustering results
+  result <- hotspot_cluster(hotspots,
                           lon = "lon",
                           lat = "lat",
                           obsTime = "obsTime",
@@ -55,10 +56,12 @@ result <- hotspot_cluster(hotspots,
                           timeUnit = "h",
                           timeStep = 1)
 
-# plot a subset of clusters
-plot_def(result, cluster = 1:3)
+  # plot a subset of clusters
+  plot_def(result, cluster = 1:3)
 
-# plot all clusters
-plot_def(result, cluster = "all")
+  # plot all clusters
+  plot_def(result, cluster = "all")
+}
+
 
 }

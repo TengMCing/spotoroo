@@ -21,8 +21,10 @@
 #'   \item \code{ignition} : whether or not it is a ignition point.
 #' }
 #' @examples
-#' # get clustering results
-#' result <- hotspot_cluster(hotspots,
+#'
+#' if (FALSE) {
+#'   # get clustering results
+#'   result <- hotspot_cluster(hotspots,
 #'                           lon = "lon",
 #'                           lat = "lat",
 #'                           obsTime = "obsTime",
@@ -34,13 +36,15 @@
 #'                           timeUnit = "h",
 #'                           timeStep = 1)
 #'
-#' # get fire movement of the first cluster
-#' mov1 <- get_fire_mov(result, cluster = 1, step = 3, method = "mean")
-#' mov1
+#'   # get fire movement of the first cluster
+#'   mov1 <- get_fire_mov(result, cluster = 1, step = 3, method = "mean")
+#'   mov1
 #'
-#' # get fire movement of the second cluster
-#' mov2 <- get_fire_mov(result, cluster = 2, step = 6, method = "median")
-#' mov2
+#'   # get fire movement of the second cluster
+#'   mov2 <- get_fire_mov(result, cluster = 2, step = 6, method = "median")
+#'   mov2
+#' }
+#'
 #'
 #' @export
 get_fire_mov <- function(result, cluster, step = 1, method = "mean"){

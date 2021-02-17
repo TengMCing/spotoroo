@@ -19,8 +19,9 @@ This function takes a \code{spotoroo} object to produce a summary of the
 clustering results. It can be called by \code{\link[=summary.spotoroo]{summary.spotoroo()}}.
 }
 \examples{
-# get clustering results
-result <- hotspot_cluster(hotspots,
+if (FALSE) {
+  # get clustering results
+  result <- hotspot_cluster(hotspots,
                            lon = "lon",
                            lat = "lat",
                            obsTime = "obsTime",
@@ -33,11 +34,11 @@ result <- hotspot_cluster(hotspots,
                            timeStep = 1)
 
 
-# make a summary of all clusters
-summary_spotoroo(result)
+  # make a summary of all clusters
+  summary_spotoroo(result)
 
-# make a summary of cluster 1 to 3
-summary_spotoroo(result, 1:3)
-
+  # make a summary of cluster 1 to 3
+  summary_spotoroo(result, 1:3)
+}
 
 }

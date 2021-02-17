@@ -43,8 +43,9 @@ This function takes a \code{spotoroo} object to produce a data frame which
 contains information about the fire.
 }
 \examples{
-# get clustering results
-result <- hotspot_cluster(hotspots,
+if (FALSE) {
+  # get clustering results
+  result <- hotspot_cluster(hotspots,
                           lon = "lon",
                           lat = "lat",
                           obsTime = "obsTime",
@@ -57,13 +58,13 @@ result <- hotspot_cluster(hotspots,
                           timeStep = 1)
 
 
-# extract all fires
-all_fires <- extract_fire(result)
-head(all_fires, 3)
+  # extract all fires
+  all_fires <- extract_fire(result)
+  head(all_fires, 3)
 
-
-fire_4 <- extract_fire(result, 4)
-head(fire_4, 3)
-
+  # extract cluster 4
+  fire_4 <- extract_fire(result, 4)
+  head(fire_4, 3)
+}
 
 }

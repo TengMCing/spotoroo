@@ -9,8 +9,9 @@
 #'                if a integer vector is given, summarize corresponding
 #'                clusters.
 #' @examples
-#' # get clustering results
-#' result <- hotspot_cluster(hotspots,
+#' if (FALSE) {
+#'   # get clustering results
+#'   result <- hotspot_cluster(hotspots,
 #'                            lon = "lon",
 #'                            lat = "lat",
 #'                            obsTime = "obsTime",
@@ -23,12 +24,12 @@
 #'                            timeStep = 1)
 #'
 #'
-#' # make a summary of all clusters
-#' summary_spotoroo(result)
+#'   # make a summary of all clusters
+#'   summary_spotoroo(result)
 #'
-#' # make a summary of cluster 1 to 3
-#' summary_spotoroo(result, 1:3)
-#'
+#'   # make a summary of cluster 1 to 3
+#'   summary_spotoroo(result, 1:3)
+#' }
 #'
 #' @export
 summary_spotoroo <- function(result, cluster = "all"){
@@ -75,7 +76,7 @@ summary_spotoroo <- function(result, cluster = "all"){
                             .val = list(digits = 2,
                                         `font-weight` = "bold")))
 
-  cli::cli_rule(center = "{.def SPOTOROO 0.1.0}")
+  cli::cli_rule(center = "{.def SPOTOROO 1.0.0}")
   cli::cli_h2("Calling Core Function : {.fn summary_spotoroo}")
   cluster_str <- as.character(cluster)
   if (identical(cluster_str, "all")) cluster_str <- "ALL"

@@ -1,6 +1,6 @@
 Package: spotoroo
-Title: Spatiotemporal clustering of satellite hot spot data
-Version: 0.1.0
+Title: Spatiotemporal Clustering of Satellite Hot Spot Data
+Version: 1.0.0
 Authors@R: 
     c(person(given = "Weihao",
            family = "Li",
@@ -14,7 +14,7 @@ Authors@R:
       person("Emily", "Dodwell",
              email = "emdodwell@gmail.com",
              role = "ctb"))
-Description: This package provides an algorithm to cluster satellite hot spots spatially and temporarily and detect ignition points.
+Description: An algorithm to cluster satellite hot spot data spatially and temporally.
 License: MIT + file LICENSE
 URL: https://tengmcing.github.io/spotoroo/, https://github.com/TengMCing/spotoroo/
 BugReports: https://github.com/TengMCing/spotoroo/issues

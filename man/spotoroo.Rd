@@ -11,9 +11,9 @@ fire ignition points.
 \section{Authors}{
 
 \itemize{
-\item{Weihao Li \url{weihao.li@monash.edu}}
-\item{Dianne Cook \url{dicook@monash.edu}}
-\item{Emily Dodwell \url{emdodwell@gmail.com}}
+\item{Weihao Li \email{llreczx@gmail.com}}
+\item{Dianne Cook \email{dicook@monash.edu}}
+\item{Emily Dodwell \email{emdodwell@gmail.com}}
 }
 }
 

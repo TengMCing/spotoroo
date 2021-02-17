@@ -17,8 +17,9 @@ a result of a call to \code{\link[=hotspot_cluster]{hotspot_cluster()}}.}
 It is a simple wrapper of \code{\link[=plot_spotoroo]{plot_spotoroo()}}.
 }
 \examples{
-# get clustering results
-result <- hotspot_cluster(hotspots,
+if (FALSE) {
+  # get clustering results
+  result <- hotspot_cluster(hotspots,
                            lon = "lon",
                            lat = "lat",
                            obsTime = "obsTime",
@@ -32,14 +33,13 @@ result <- hotspot_cluster(hotspots,
 
 
 
-# different types of plots
+  # different types of plots
 
-# default plot
-plot(result, "def", bg = plot_vic_map())
+  # default plot
+  plot(result, "def", bg = plot_vic_map())
 
-# fire movement plot
-plot(result, "mov", cluster = 1:3, step = 3, bg = plot_vic_map())
-
-
+  # fire movement plot
+  plot(result, "mov", cluster = 1:3, step = 3, bg = plot_vic_map())
+}
 
 }

@@ -57,8 +57,9 @@ time is in numeric format.}
 This function plots the timeline of the fires and the noise points.
 }
 \examples{
-# get clustering results
-result <- hotspot_cluster(hotspots,
+if (FALSE) {
+  # get clustering results
+  result <- hotspot_cluster(hotspots,
                           lon = "lon",
                           lat = "lat",
                           obsTime = "obsTime",
@@ -70,10 +71,12 @@ result <- hotspot_cluster(hotspots,
                           timeUnit = "h",
                           timeStep = 1)
 
-# plot timeline
-plot_timeline(result,
+  # plot timeline
+  plot_timeline(result,
               mainBreak = "1 week",
               minorBreak = "1 day",
               dateLabel = "\%b \%d")
+}
+
 
 }

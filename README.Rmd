@@ -25,7 +25,7 @@ knitr::opts_chunk$set(
 
 ## Overview 
 
-"spotoroo" stands for spatiotemporal clustering in R of hot spot. It is an algorithm to cluster satellite hot spots, detect ignition points and reconstruct fire movement.
+"spotoroo" stands for spatiotemporal clustering in R of hot spot data. It is an algorithm to cluster satellite hot spots, detect ignition points and reconstruct fire movement.
 
 ## Installation
 
@@ -48,14 +48,13 @@ devtools::install_github("TengMCing/spotoroo")
 library(spotoroo)
 ```
 
-
-Using the built-in dataset `hotspots` as an example. The hot spot data needs to has at least three columns: the longitude, the latitude, and the observed time.
+The below examples use the built-in dataset `hotspots`. The hot spot data needs to has at least three columns: the longitude, the latitude, and the observed time.
 
 ```{r}
 str(hotspots)
 ```
 
-Perform spatiotemporal clustering on this dataset. You need to provide the data, here it is "hotspots", specify which columns correspond to the spatial variables ("lon", "lat"), and which to observed time ("obsTime"). 
+Perform spatiotemporal clustering on this dataset. You need to specify which columns correspond to the spatial variables ("lon", "lat"), and which to observed time ("obsTime"). 
 
 There is a choice of options for the algorithm. 
 

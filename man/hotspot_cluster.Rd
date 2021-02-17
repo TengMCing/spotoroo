@@ -83,7 +83,7 @@ cluster.
 }
 }
 \description{
-\strong{This is the main function of the package.}
+This is the main function of the package.
 \cr
 This function clusters hot spots into fires. It can be used to
 reconstruct fire history and detect fire ignition points.
@@ -145,8 +145,8 @@ of the ignition point. This needs to be specified in argument
 \code{ignitionCenter}.
 }
 \examples{
-
-result <- hotspot_cluster(hotspots,
+if (FALSE) {
+  result <- hotspot_cluster(hotspots,
                 lon = "lon",
                 lat = "lat",
                 obsTime = "obsTime",
@@ -158,11 +158,11 @@ result <- hotspot_cluster(hotspots,
                 timeUnit = "h",
                 timeStep = 1)
 
-# Make a summary of the clustering results
-summary(result)
+  # Make a summary of the clustering results
+  summary(result)
 
-# Make a plot of the clustering results
-plot(result, bg = plot_vic_map())
-
+  # Make a plot of the clustering results
+  plot(result, bg = plot_vic_map())
+}
 
 }

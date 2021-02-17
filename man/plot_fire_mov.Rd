@@ -41,8 +41,9 @@ This function plots the fire movement. The fire movement is calculated
 from \code{\link[=get_fire_mov]{get_fire_mov()}}.
 }
 \examples{
-# get clustering results
-result <- hotspot_cluster(hotspots,
+if (FALSE) {
+  # get clustering results
+  result <- hotspot_cluster(hotspots,
                           lon = "lon",
                           lat = "lat",
                           obsTime = "obsTime",
@@ -54,11 +55,11 @@ result <- hotspot_cluster(hotspots,
                           timeUnit = "h",
                           timeStep = 1)
 
-# plot cluster 1 to 4
-plot_fire_mov(result, cluster = 1:4)
+  # plot cluster 1 to 4
+  plot_fire_mov(result, cluster = 1:4)
 
-# plot cluster 1 to 4, set step = 6
-plot_fire_mov(result, cluster = 1:4, step = 6)
-
+  # plot cluster 1 to 4, set step = 6
+  plot_fire_mov(result, cluster = 1:4, step = 6)
+}
 
 }

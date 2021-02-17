@@ -15,8 +15,9 @@
 #' @param bg **OPTIONAL**; `ggplot` object; if specified, plot onto this object.
 #' @return `ggplot` object; the plot of the clustering results.
 #' @examples
-#' # get clustering results
-#' result <- hotspot_cluster(hotspots,
+#' if (FALSE) {
+#'   # get clustering results
+#'   result <- hotspot_cluster(hotspots,
 #'                           lon = "lon",
 #'                           lat = "lat",
 #'                           obsTime = "obsTime",
@@ -28,11 +29,13 @@
 #'                           timeUnit = "h",
 #'                           timeStep = 1)
 #'
-#' # plot a subset of clusters
-#' plot_def(result, cluster = 1:3)
+#'   # plot a subset of clusters
+#'   plot_def(result, cluster = 1:3)
 #'
-#' # plot all clusters
-#' plot_def(result, cluster = "all")
+#'   # plot all clusters
+#'   plot_def(result, cluster = "all")
+#' }
+#'
 #'
 #' @export
 plot_def <- function(result,
