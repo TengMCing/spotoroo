@@ -53,15 +53,13 @@ test_that("plot_spotoroo() works", {
                               cluster = 1:3,
                               from = 500,
                               to = 800,
-                              noise = TRUE,
-                              bg = plot_vic_map()))
+                              noise = TRUE))
 
   expect_silent(plot_spotoroo(result, type = "mov"))
   expect_silent(plot_spotoroo(result, type = "mov",
                               cluster = 1:3,
                               from = 1,
-                              to = 800,
-                              bg = plot_vic_map()))
+                              to = 800))
 
   expect_silent(plot_spotoroo(result, type = "timeline"))
   expect_silent(plot_spotoroo(result, type = "timeline",

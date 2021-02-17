@@ -121,13 +121,15 @@
 <div id="overview-of-the-hot-spot-data" class="section level1">
 <h1 class="hasAnchor">
 <a href="#overview-of-the-hot-spot-data" class="anchor"></a>Overview of the hot spot data</h1>
-<p>A common way to get a better understanding of the hot spot data is to visualize it. This package provides a function <code><a href="../reference/plot_vic_map.html">plot_vic_map()</a></code> to draw a map of Victoria. It returns a <code>ggplot</code> object, so new layers could be added onto it. Here we use <code><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point()</a></code> to draw red dots for hot spots.</p>
+<p>A common way to get a better understanding of the hot spot data is to visualize it. This package provides a function <code><a href="../reference/plot_vic_map.html">plot_vic_map()</a></code> (package <code>sf</code> needs to be installed) to draw a map of Victoria. It returns a <code>ggplot</code> object, so new layers could be added onto it. Here we use <code><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point()</a></code> to draw red dots for hot spots.</p>
 <p>From the map, we observe that there are approximately <span class="math inline">\(4\)</span> clusters, but we don’t know if they can be further broken down into more clusters. Our goal is to cluster these hot spots into fires in a temporal and spatial manner.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
 
-<span class="fu"><a href="../reference/plot_vic_map.html">plot_vic_map</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">hotspots</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">lon</span>, <span class="va">lat</span><span class="op">)</span>, col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></code></pre></div>
+<span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"sf"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+    <span class="fu"><a href="../reference/plot_vic_map.html">plot_vic_map</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">hotspots</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">lon</span>, <span class="va">lat</span><span class="op">)</span>, col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span>
+<span class="op">}</span></code></pre></div>
 <p><img src="Clustering-hot-spots_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
 <p>If you would like to visualize the hot spots in other areas, you might be able to find the spatial data from the <code>rnaturalearth</code> package and make a similar map using the <code><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf()</a></code> and <code><a href="https://rdrr.io/pkg/ggthemes/man/theme_map.html">ggthemes::theme_map()</a></code> function. An example is given below.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
@@ -488,11 +490,11 @@
 <a href="#add-a-background" class="anchor"></a>Add a background</h3>
 <p>If you have a background <code>ggplot</code> object, you can let the function plots onto it.</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/plot_spotoroo.html">plot_spotoroo</a></span><span class="op">(</span><span class="va">result</span>, bg <span class="op">=</span> <span class="fu"><a href="../reference/plot_vic_map.html">plot_vic_map</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"sf"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+    <span class="fu"><a href="../reference/plot_spotoroo.html">plot_spotoroo</a></span><span class="op">(</span><span class="va">result</span>, bg <span class="op">=</span> <span class="fu"><a href="../reference/plot_vic_map.html">plot_vic_map</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
+    <span class="fu"><a href="../reference/plot_spotoroo.html">plot_spotoroo</a></span><span class="op">(</span><span class="va">result</span>, type <span class="op">=</span> <span class="st">"mov"</span>, bg <span class="op">=</span> <span class="fu"><a href="../reference/plot_vic_map.html">plot_vic_map</a></span><span class="op">(</span><span class="op">)</span>, step <span class="op">=</span> <span class="fl">6</span><span class="op">)</span>
+<span class="op">}</span></code></pre></div>
 <p><img src="Clustering-hot-spots_files/figure-html/unnamed-chunk-22-1.png" width="700"></p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/plot_spotoroo.html">plot_spotoroo</a></span><span class="op">(</span><span class="va">result</span>, type <span class="op">=</span> <span class="st">"mov"</span>, bg <span class="op">=</span> <span class="fu"><a href="../reference/plot_vic_map.html">plot_vic_map</a></span><span class="op">(</span><span class="op">)</span>, step <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></code></pre></div>
-<p><img src="Clustering-hot-spots_files/figure-html/unnamed-chunk-22-2.png" width="700"></p>
 <p>More details about the usage of this function can be found by using the <code><a href="../reference/plot_spotoroo.html">help(plot_spotoroo)</a></code> function.</p>
 </div>
 <div id="called-by-plot" class="section level3">
@@ -500,7 +502,7 @@
 <a href="#called-by-plot" class="anchor"></a>Called by <code>plot()</code>
 </h3>
 <p>For convenience, the <code><a href="../reference/plot_spotoroo.html">plot_spotoroo()</a></code> can be called by the <code><a href="https://rdrr.io/r/graphics/plot.html">plot()</a></code> function.</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span><span class="op">(</span><span class="va">result</span>, type <span class="op">=</span> <span class="st">"timeline"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span><span class="op">(</span><span class="va">result</span>, type <span class="op">=</span> <span class="st">"mov"</span><span class="op">)</span>

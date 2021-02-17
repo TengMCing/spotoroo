@@ -118,10 +118,10 @@ To examine the fire movements, use the option "mov", and the movement will be sh
 
 ```{r out.width = "70%", out.height="70%"}
 plot(result,
-     type = "mov",
-     cluster = 1:3,
-     step = 3,
-     bg = plot_vic_map())
+   type = "mov",
+   cluster = 1:3,
+   step = 3,
+   bg = plot_vic_map())
 ```
 
 

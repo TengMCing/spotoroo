@@ -52,7 +52,7 @@ This dataset contains 1070 selected hot spots in Victoria (Australia) during the
 
 # Overview of the hot spot data
 
-A common way to get a better understanding of the hot spot data is to visualize it. This package provides a function `plot_vic_map()` to draw a map of Victoria. It returns a `ggplot` object, so new layers could be added onto it. Here we use `geom_point()` to draw red dots for hot spots.
+A common way to get a better understanding of the hot spot data is to visualize it. This package provides a function `plot_vic_map()` (package `sf` needs to be installed) to draw a map of Victoria. It returns a `ggplot` object, so new layers could be added onto it. Here we use `geom_point()` to draw red dots for hot spots.
 
 
 From the map, we observe that there are approximately $4$ clusters, but we don't know if they can be further broken down into more clusters. Our goal is to cluster these hot spots into fires in a temporal and spatial manner.
@@ -60,8 +60,10 @@ From the map, we observe that there are approximately $4$ clusters, but we don't
 ```{r}
 library(ggplot2)
 
-plot_vic_map() +
-  geom_point(data = hotspots, aes(lon, lat), col = "red")
+if (requireNamespace("sf", quietly = TRUE)) {
+    plot_vic_map() +
+    geom_point(data = hotspots, aes(lon, lat), col = "red")
+}
 ```
 
 
@@ -372,8 +374,10 @@ plot_spotoroo(result, type = "mov", step = 6)
 If you have a background `ggplot` object, you can let the function plots onto it.
 
 ```{r}
-plot_spotoroo(result, bg = plot_vic_map())
-plot_spotoroo(result, type = "mov", bg = plot_vic_map(), step = 6)
+if (requireNamespace("sf", quietly = TRUE)) {
+    plot_spotoroo(result, bg = plot_vic_map())
+    plot_spotoroo(result, type = "mov", bg = plot_vic_map(), step = 6)
+}
 ```
 
 More details about the usage of this function can be found by using the `help(plot_spotoroo)` function.

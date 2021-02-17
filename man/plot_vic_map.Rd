@@ -16,6 +16,8 @@ This function plots the map of Victoria, Australia.
 Require package \code{sf} installed.
 }
 \examples{
-plot_vic_map()
+if (requireNamespace("sf", quietly = TRUE)) {
+  plot_vic_map()
+}
 
 }

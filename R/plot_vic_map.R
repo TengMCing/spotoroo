@@ -6,7 +6,9 @@
 #'
 #' @return `ggplot` object; the map of Victoria, Australia.
 #' @examples
-#' plot_vic_map()
+#' if (requireNamespace("sf", quietly = TRUE)) {
+#'   plot_vic_map()
+#' }
 #'
 #' @export
 plot_vic_map <- function() {
