@@ -76,7 +76,7 @@ summary_spotoroo <- function(result, cluster = "all"){
                             .val = list(digits = 2,
                                         `font-weight` = "bold")))
 
-  cli::cli_rule(center = "{.def SPOTOROO 1.0.0}")
+  cli::cli_rule(center = "{.def SPOTOROO 0.1.0}")
   cli::cli_h2("Calling Core Function : {.fn summary_spotoroo}")
   cluster_str <- as.character(cluster)
   if (identical(cluster_str, "all")) cluster_str <- "ALL"

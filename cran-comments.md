@@ -2,8 +2,8 @@
 * local Windows 10 installation: R 3.6.3
 * Github Actions (Mac OS X): release
 * win-builder: devel, release, oldrel
-* Rhub (Ubuntu Linux): release
-* Rhub (Debian Linux): devel
+* R-hub (Ubuntu Linux): release
+* R-hub (Debian Linux): devel
 
 ## R CMD check results
 

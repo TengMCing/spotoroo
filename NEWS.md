@@ -1,4 +1,4 @@
-# spotoroo 1.0.0
+# spotoroo 0.1.0
 
 **First release**
 

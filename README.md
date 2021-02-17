@@ -82,7 +82,7 @@ result <- hotspot_cluster(hotspots,
                           timeUnit = "h",
                           timeStep = 1)
 #> 
-#> -------------------------------- SPOTOROO 1.0.0 --------------------------------
+#> -------------------------------- SPOTOROO 0.1.0 --------------------------------
 #> 
 #> -- Calling Core Function : `hotspot_cluster()` --
 #> 
@@ -104,7 +104,7 @@ result <- hotspot_cluster(hotspots,
 #> i average hot spots : 176.7
 #> i average duration : 131.9 hours
 #> 
-#> -- Time taken = 0 mins 4 secs for 1070 hot spots
+#> -- Time taken = 0 mins 3 secs for 1070 hot spots
 #> i 0.003 secs per hot spot
 #> 
 #> --------------------------------------------------------------------------------
@@ -119,7 +119,7 @@ You can make a summary of the clustering results.
 ``` r
 summary(result)
 #> 
-#> -------------------------------- SPOTOROO 1.0.0 --------------------------------
+#> -------------------------------- SPOTOROO 0.1.0 --------------------------------
 #> 
 #> -- Calling Core Function : `summary_spotoroo()` --
 #> 
