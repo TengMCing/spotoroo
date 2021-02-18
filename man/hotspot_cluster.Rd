@@ -2,7 +2,7 @@
 % Please edit documentation in R/hotspot_cluster.R
 \name{hotspot_cluster}
 \alias{hotspot_cluster}
-\title{Spatiotemporal clustering of hot spot}
+\title{Spatiotemporal clustering of hot spot data}
 \usage{
 hotspot_cluster(
   hotspots,
@@ -96,7 +96,7 @@ More details can be found in \code{\link[=transform_time_id]{transform_time_id()
 This clustering algorithm consisted of \strong{5 steps}:
 \cr\cr
 In \strong{step 1}, it defines \eqn{T} intervals using the time index
-\deqn{St = [max(1, t - activeTime),t]}
+\deqn{Interval(t) = [max(1, t - activeTime),t]}
 where \eqn{t = 1, 2, ..., T}, and \eqn{T} is the maximum time index.
 \code{activeTime} is an argument that needs to be specified. It represents
 the maximum time difference between two hot spots in the same local

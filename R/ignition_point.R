@@ -1,6 +1,6 @@
 #' Calculation of the ignition points
 #'
-#' This function calculates ignition points using membership labels.
+#' This function calculates ignition points for all clusters.
 #'
 #' For more details about the clustering algorithm and the argument
 #' `timeUnit`, `timeID` and `ignitionCenter`,

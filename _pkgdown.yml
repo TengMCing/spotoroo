@@ -1,5 +1,5 @@
 reference:
-- title: "Spatiotemporal clustering of hot spot"
+- title: "Spatiotemporal clustering of hot spot data"
   desc: >
     Functions for clustering satellite hot spots into fires
 - contents:
@@ -10,7 +10,7 @@ reference:
   - ignition_point
 - title: "Exploring spatiotemporal clustering results"
   desc: >
-    Functions for accessing and visualizing clustering results
+    Functions for accessing, summarizing and visualizing clustering results
 - contents:
   - get_fire_mov
   - extract_fire
@@ -19,7 +19,7 @@ reference:
   - starts_with("print")
 - title: "Tools"
   desc: >
-    Functions for converting time and computing distance
+    Functions for converting time and computing geodesic
 - contents:
   - transform_time_id
   - dist_point_to_vector
@@ -29,7 +29,7 @@ reference:
 - contents:
   - starts_with("hotspots")
   - vic_map
-- title: "Package Information"
+- title: "Package metadata"
   desc: >
     Authors and functions
 - contents:

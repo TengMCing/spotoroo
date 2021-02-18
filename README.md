@@ -57,8 +57,8 @@ There is a choice of options for the algorithm.
     and longer than this between hot spots will create a new cluster
 
 -   “adjDist” sets the maximum intra-cluster spatial distance between
-    hot spots beyond which they would be considered part of a different
-    cluster
+    nearest hot spots beyond which they would be considered part of a
+    different cluster
 
 -   “minPts” sets the minimum number of hot spots in a cluster
 
@@ -197,7 +197,7 @@ for each cluster.
 plot(result,
    type = "mov",
    cluster = 1:3,
-   step = 3,
+   step = 6,
    bg = plot_vic_map())
 ```
 

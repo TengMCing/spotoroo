@@ -60,7 +60,7 @@ There is a choice of options for the algorithm.
 
 - "activeTime" sets the time to consider that a fire can be active, and longer than this between hot spots will create a new cluster 
 
-- "adjDist" sets the maximum intra-cluster spatial distance between hot spots beyond which they would be considered part of a different cluster 
+- "adjDist" sets the maximum intra-cluster spatial distance between nearest hot spots beyond which they would be considered part of a different cluster 
 
 - "minPts" sets the minimum number of hot spots in a cluster
 
@@ -120,7 +120,7 @@ To examine the fire movements, use the option "mov", and the movement will be sh
 plot(result,
    type = "mov",
    cluster = 1:3,
-   step = 3,
+   step = 6,
    bg = plot_vic_map())
 ```
 

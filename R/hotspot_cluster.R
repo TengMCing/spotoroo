@@ -1,4 +1,4 @@
-#' Spatiotemporal clustering of hot spot
+#' Spatiotemporal clustering of hot spot data
 #'
 #' This is the main function of the package.
 #' \cr
@@ -12,7 +12,7 @@
 #' This clustering algorithm consisted of **5 steps**:
 #' \cr\cr
 #' In **step 1**, it defines \eqn{T} intervals using the time index
-#' \deqn{St = [max(1, t - activeTime),t]}
+#' \deqn{Interval(t) = [max(1, t - activeTime),t]}
 #' where \eqn{t = 1, 2, ..., T}, and \eqn{T} is the maximum time index.
 #' `activeTime` is an argument that needs to be specified. It represents
 #' the maximum time difference between two hot spots in the same local

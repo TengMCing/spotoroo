@@ -119,7 +119,7 @@
 <p>There is a choice of options for the algorithm.</p>
 <ul>
 <li><p>“activeTime” sets the time to consider that a fire can be active, and longer than this between hot spots will create a new cluster</p></li>
-<li><p>“adjDist” sets the maximum intra-cluster spatial distance between hot spots beyond which they would be considered part of a different cluster</p></li>
+<li><p>“adjDist” sets the maximum intra-cluster spatial distance between nearest hot spots beyond which they would be considered part of a different cluster</p></li>
 <li><p>“minPts” sets the minimum number of hot spots in a cluster</p></li>
 <li><p>“minTime” sets the minimum length of time of a cluster</p></li>
 <li><p>“ignitionCenter” sets the method to calculate the ignition points</p></li>
@@ -231,7 +231,7 @@
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span><span class="op">(</span><span class="va">result</span>,
    type <span class="op">=</span> <span class="st">"mov"</span>,
    cluster <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>,
-   step <span class="op">=</span> <span class="fl">3</span>,
+   step <span class="op">=</span> <span class="fl">6</span>,
    bg <span class="op">=</span> <span class="fu"><a href="reference/plot_vic_map.html">plot_vic_map</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-8-1.png" width="70%" height="70%"></p>
 <p>To examine the time line of clusters and learn about the intensity of fire periods, use the option “timeline”.</p>

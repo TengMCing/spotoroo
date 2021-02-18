@@ -37,7 +37,7 @@ a data frame of ignition points
 }
 }
 \description{
-This function calculates ignition points using membership labels.
+This function calculates ignition points for all clusters.
 }
 \details{
 For more details about the clustering algorithm and the argument
