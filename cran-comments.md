@@ -4,6 +4,7 @@
 * win-builder: devel, release, oldrel
 * R-hub (Ubuntu Linux): devel, release
 * R-hub (Debian Linux): devel, release
+* R-hub (Fedora Linux): devel
 
 ## R CMD check results
 
@@ -17,4 +18,10 @@ There was 1 NOTE:
     
   Spatiotemporal is a correct word. 
   
+## Resubmission
+This is a resubmission. In this version I have:
+
+* Specificed versions of dependencies 
+
+* Tested the pakcage on an additional platfrom: Fedora Linux
   
