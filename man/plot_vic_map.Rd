@@ -4,7 +4,10 @@
 \alias{plot_vic_map}
 \title{Plotting map of Victoria, Australia}
 \usage{
-plot_vic_map()
+plot_vic_map(...)
+}
+\arguments{
+\item{...}{all arguments will be ignored.}
 }
 \value{
 \code{ggplot} object; the map of Victoria, Australia.

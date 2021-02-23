@@ -32,7 +32,7 @@
 #'                                [ggplot2::scale_x_datetime()] as
 #'                                `date_labels`; unavailable if the observed
 #'                                time is in numeric format.
-#' @return `ggplot` object; the plot of the clustering results.
+#' @return `ggplot` object; the plot of the timeline.
 #' @examples
 #' if (FALSE) {
 #'   # get clustering results

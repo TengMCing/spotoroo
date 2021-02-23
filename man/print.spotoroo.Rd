@@ -12,6 +12,9 @@ a result of a call to \code{\link[=hotspot_cluster]{hotspot_cluster()}}.}
 
 \item{\dots}{additional arguments will be ignored.}
 }
+\value{
+No return value, called for side effects
+}
 \description{
 \code{print.spotoroo()} is the \code{print} method of the class \code{spotoroo}.
 }

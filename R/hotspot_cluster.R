@@ -274,6 +274,7 @@ hotspot_cluster <- function(hotspots,
 #' @param object `spotoroo` object;
 #' a result of a call to [hotspot_cluster()].
 #' @param \dots additional arguments pass to [summary_spotoroo()]
+#' @return No return value, called for side effects
 #' @examples
 #' if (FALSE) {
 #'   # get clustering results
@@ -307,6 +308,7 @@ summary.spotoroo <- function(object, ...) {
 #' @param x `spotoroo` object;
 #' a result of a call to [hotspot_cluster()].
 #' @param \dots additional arguments will be ignored.
+#' @return No return value, called for side effects
 #' @examples
 #' if (FALSE) {
 #'   # get clustering results
@@ -354,6 +356,7 @@ print.spotoroo <- function(x, ...) {
 #' @param x `spotoroo` object;
 #' a result of a call to [hotspot_cluster()].
 #' @param \dots additional arguments pass to [plot_spotoroo()]
+#' @return `ggplot` object; the plot of the clustering results.
 #' @examples
 #' if (FALSE) {
 #'   # get clustering results

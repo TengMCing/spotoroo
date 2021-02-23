@@ -16,12 +16,12 @@ There was 1 NOTE:
   Possibly mis-spelled words in DESCRIPTION:
     Spatiotemporal (2:8)
     
-  Spatiotemporal is a correct word. 
+  Spatiotemporal is the correct word. 
   
 ## Resubmission
 This is a resubmission. In this version I have:
 
-* Specificed versions of dependencies 
+* Specified version numbers for dependencies 
 
-* Tested the pakcage on an additional platfrom: Fedora Linux
+* Tested the package on an additional platform: Fedora Linux
   

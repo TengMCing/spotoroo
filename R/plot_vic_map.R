@@ -4,6 +4,7 @@
 #'
 #' Require package `sf` installed.
 #'
+#' @param ... all arguments will be ignored.
 #' @return `ggplot` object; the map of Victoria, Australia.
 #' @examples
 #' if (requireNamespace("sf", quietly = TRUE)) {
@@ -11,7 +12,7 @@
 #' }
 #'
 #' @export
-plot_vic_map <- function() {
+plot_vic_map <- function(...) {
 
   if (!requireNamespace("sf", quietly = TRUE)) {
     cli::cli_alert_danger("Package {.pkg sf} needed for {.fn plot_vic_map} to work")

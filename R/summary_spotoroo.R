@@ -8,6 +8,7 @@
 #' @param cluster character/integer; if "all", summarize all clusters.
 #'                if a integer vector is given, summarize corresponding
 #'                clusters.
+#' @return No return value, called for side effects
 #' @examples
 #' if (FALSE) {
 #'   # get clustering results

@@ -12,6 +12,9 @@ a result of a call to \code{\link[=hotspot_cluster]{hotspot_cluster()}}.}
 
 \item{\dots}{additional arguments pass to \code{\link[=summary_spotoroo]{summary_spotoroo()}}}
 }
+\value{
+No return value, called for side effects
+}
 \description{
 \code{summary.spotoroo()} is the \code{summary} method of the class \code{spotoroo}.
 It is a simple wrapper of \code{\link[=summary_spotoroo]{summary_spotoroo()}}.
