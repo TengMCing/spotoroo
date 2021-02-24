@@ -51,7 +51,7 @@ this value will pass to
 time is in numeric format.}
 }
 \value{
-\code{ggplot} object; the plot of the clustering results.
+A \code{ggplot} object; the plot of the timeline.
 }
 \description{
 This function plots the timeline of the fires and the noise points.

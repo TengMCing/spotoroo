@@ -15,7 +15,7 @@
 #' @param minPts numeric (>0); minimum number of hot spots in a cluster.
 #' @param minTime numeric (>=0); minimum length of time of a cluster;
 #'                               unit is time index.
-#' @return integer; a vector of membership labels.
+#' @return Integer; a vector of membership labels.
 #' @examples
 #' # define membership labels and timeID for 10 observations
 #' global_membership <- c(1,1,1,2,2,2,2,2,2,3,3,3,3,3,3)

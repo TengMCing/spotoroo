@@ -17,7 +17,7 @@ handle_noise(global_membership, timeID, minPts, minTime)
 unit is time index.}
 }
 \value{
-integer; a vector of membership labels.
+Integer; a vector of membership labels.
 }
 \description{
 This function finds noise from the clustering results and label it with

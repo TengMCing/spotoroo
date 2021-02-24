@@ -21,7 +21,7 @@ date or datetime format.}
 \item{timeStep}{numeric (>0); number of units of \code{timeUnit} in a time step.}
 }
 \value{
-integer; a vector of time indexes.
+Integer; a vector of time indexes.
 }
 \description{
 This function transforms a series of time or datetime to

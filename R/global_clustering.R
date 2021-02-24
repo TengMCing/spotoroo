@@ -12,7 +12,7 @@
 #' @param timeID integer (>=1); a vector of time indexes.
 #' @param activeTime numeric (>=0); time tolerance; unit is time index.
 #' @param adjDist numeric (>0); distance tolerance; unit is metre.
-#' @return integer; a vector of membership labels.
+#' @return Integer; a vector of membership labels.
 #' @examples
 #' # define lon, lat and timeID for 10 observations
 #' lon <- c(141.1, 141.14, 141.12, 141.14, 141.16, 141.12, 141.14,

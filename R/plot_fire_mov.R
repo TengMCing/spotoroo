@@ -14,7 +14,7 @@
 #' @param step integer (>0); step size used in the calculation of the
 #'                            fire movement.
 #' @param bg **OPTIONAL**; `ggplot` object; if specified, plot onto this object.
-#' @return `ggplot` object; the plot of the fire movements.
+#' @return A `ggplot` object; the plot of the fire movements.
 #' @examples
 #' if (FALSE) {
 #'   # get clustering results

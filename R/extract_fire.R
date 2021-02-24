@@ -9,7 +9,7 @@
 #'                if a integer vector is given, extract corresponding
 #'                clusters.
 #' @param noise logical; whether or not to include noise.
-#' @return data.frame; the fire information
+#' @return A data.frame; the fire information
 #' \itemize{
 #'   \item \code{lon} : longitude.
 #'   \item \code{lat} : latitude.

@@ -17,7 +17,7 @@ clusters.}
 \item{noise}{logical; whether or not to include noise.}
 }
 \value{
-data.frame; the fire information
+A data.frame; the fire information
 \itemize{
 \item \code{lon} : longitude.
 \item \code{lat} : latitude.

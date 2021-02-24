@@ -24,7 +24,7 @@ ignition_point(lon, lat, obsTime, timeUnit, timeID, membership, ignitionCenter)
 one of "mean" and "median".}
 }
 \value{
-a data frame of ignition points
+A data frame of ignition points
 \itemize{
 \item \code{membership} : membership labels.
 \item \code{lon} : longitude of ignition points.

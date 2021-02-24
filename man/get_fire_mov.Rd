@@ -18,7 +18,7 @@ fire movement.}
 the centre of the fire.}
 }
 \value{
-data.frame; the fire movement
+A data.frame; the fire movement
 \itemize{
 \item \code{membership} : membership labels.
 \item \code{lon} : longitude of the centre of the fire.

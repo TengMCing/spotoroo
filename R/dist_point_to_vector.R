@@ -1,15 +1,14 @@
 #' Calculation of the geodesic of a point to multiple points
 #'
 #' This function calculates the geodesic of a point to multiple
-#' points given the coordinate information.
-#' The calculation of the geodesic uses the mapbox cheap ruler.
-#' See also [geodist::geodist_vec()] for more details.
+#' points given the coordinate information. It is a wrapper of
+#' [geodist::geodist_vec()].
 #'
 #' @param plon numeric; the longitude of a point.
 #' @param plat numeric; the latitude of a point.
 #' @param vlon numeric; a vector of longitude values.
 #' @param vlat numeric; a vector of latitude values.
-#' @return numeric; the geodesic of a point to multiple points in meters.
+#' @return Numeric; the geodesic of a point to multiple points in meters.
 #' @examples
 #' # define vlon and vlat
 #' vlon <- c(141.12, 141.13)

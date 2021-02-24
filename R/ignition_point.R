@@ -21,7 +21,7 @@
 #' @param membership integer; a vector of membership labels.
 #' @param ignitionCenter character; method of calculating ignition points,
 #'                       one of "mean" and "median".
-#' @return a data frame of ignition points
+#' @return A data frame of ignition points
 #' \itemize{
 #'   \item \code{membership} : membership labels.
 #'   \item \code{lon} : longitude of ignition points.

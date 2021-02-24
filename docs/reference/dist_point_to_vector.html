@@ -41,9 +41,8 @@
 
 <meta property="og:title" content="Calculation of the geodesic of a point to multiple points — dist_point_to_vector" />
 <meta property="og:description" content="This function calculates the geodesic of a point to multiple
-points given the coordinate information.
-The calculation of the geodesic uses the mapbox cheap ruler.
-See also geodist::geodist_vec() for more details." />
+points given the coordinate information. It is a wrapper of
+geodist::geodist_vec()." />
 
 
 
@@ -133,9 +132,8 @@ See also geodist::geodist_vec() for more details." />
 
     <div class="ref-description">
     <p>This function calculates the geodesic of a point to multiple
-points given the coordinate information.
-The calculation of the geodesic uses the mapbox cheap ruler.
-See also <code><a href='https://rdrr.io/pkg/geodist/man/geodist_vec.html'>geodist::geodist_vec()</a></code> for more details.</p>
+points given the coordinate information. It is a wrapper of
+<code><a href='https://rdrr.io/pkg/geodist/man/geodist_vec.html'>geodist::geodist_vec()</a></code>.</p>
     </div>
 
     <pre class="usage"><span class='fu'>dist_point_to_vector</span><span class='op'>(</span><span class='va'>plon</span>, <span class='va'>plat</span>, <span class='va'>vlon</span>, <span class='va'>vlat</span><span class='op'>)</span></pre>
@@ -163,7 +161,7 @@ See also <code><a href='https://rdrr.io/pkg/geodist/man/geodist_vec.html'>geodis
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>numeric; the geodesic of a point to multiple points in meters.</p>
+    <p>Numeric; the geodesic of a point to multiple points in meters.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># define vlon and vlat</span>

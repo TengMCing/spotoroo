@@ -11,7 +11,7 @@
 #'                            fire movement.
 #' @param method character; "mean" or "median", method of the calculation of
 #'                          the centre of the fire.
-#' @return data.frame; the fire movement
+#' @return A data.frame; the fire movement
 #' \itemize{
 #'   \item \code{membership} : membership labels.
 #'   \item \code{lon} : longitude of the centre of the fire.

@@ -356,7 +356,7 @@ print.spotoroo <- function(x, ...) {
 #' @param x `spotoroo` object;
 #' a result of a call to [hotspot_cluster()].
 #' @param \dots additional arguments pass to [plot_spotoroo()]
-#' @return `ggplot` object; the plot of the clustering results.
+#' @return A `ggplot` object; the plot of the clustering results.
 #' @examples
 #' if (FALSE) {
 #'   # get clustering results

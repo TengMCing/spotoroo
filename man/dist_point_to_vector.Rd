@@ -16,13 +16,12 @@ dist_point_to_vector(plon, plat, vlon, vlat)
 \item{vlat}{numeric; a vector of latitude values.}
 }
 \value{
-numeric; the geodesic of a point to multiple points in meters.
+Numeric; the geodesic of a point to multiple points in meters.
 }
 \description{
 This function calculates the geodesic of a point to multiple
-points given the coordinate information.
-The calculation of the geodesic uses the mapbox cheap ruler.
-See also \code{\link[geodist:geodist_vec]{geodist::geodist_vec()}} for more details.
+points given the coordinate information. It is a wrapper of
+\code{\link[geodist:geodist_vec]{geodist::geodist_vec()}}.
 }
 \examples{
 # define vlon and vlat

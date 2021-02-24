@@ -18,7 +18,7 @@ global_clustering(lon, lat, timeID, activeTime, adjDist)
 \item{adjDist}{numeric (>0); distance tolerance; unit is metre.}
 }
 \value{
-integer; a vector of membership labels.
+Integer; a vector of membership labels.
 }
 \description{
 This function clusters hot spots spatially and temporally.

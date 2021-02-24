@@ -10,7 +10,7 @@
 #' @param lon numeric; a vector of longitude values.
 #' @param lat numeric; a vector of latitude values.
 #' @param adjDist numeric (>0); distance tolerance; unit is metre.
-#' @return integer; a vector of membership labels
+#' @return Integer; a vector of membership labels
 #' @examples
 #' # define lon and lat for 10 observations
 #' lon <- c(141.1, 141.14, 141.12, 141.14, 141.16, 141.12, 141.14,

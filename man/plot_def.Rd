@@ -36,7 +36,7 @@ needs to be the same as the provided observed time.}
 \item{bg}{\strong{OPTIONAL}; \code{ggplot} object; if specified, plot onto this object.}
 }
 \value{
-\code{ggplot} object; the plot of the clustering results.
+A \code{ggplot} object; the plot of the clustering results.
 }
 \description{
 This function plots the clustering result spatially as a scatter plot.

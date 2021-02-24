@@ -34,7 +34,7 @@ fire movement.}
 \item{bg}{\strong{OPTIONAL}; \code{ggplot} object; if specified, plot onto this object.}
 }
 \value{
-\code{ggplot} object; the plot of the clustering results.
+A \code{ggplot} object; the plot of the fire movements.
 }
 \description{
 This function plots the fire movement. The fire movement is calculated

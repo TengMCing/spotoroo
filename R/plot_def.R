@@ -13,7 +13,7 @@
 #' @param to **OPTIONAL**; date/datetime/numeric; end time; the data type
 #'                         needs to be the same as the provided observed time.
 #' @param bg **OPTIONAL**; `ggplot` object; if specified, plot onto this object.
-#' @return `ggplot` object; the plot of the clustering results.
+#' @return A `ggplot` object; the plot of the clustering results.
 #' @examples
 #' if (FALSE) {
 #'   # get clustering results

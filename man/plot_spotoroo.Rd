@@ -83,7 +83,7 @@ time is in numeric format; only used in
 unavailable in \code{\link[=plot_timeline]{plot_timeline()}}.}
 }
 \value{
-\code{ggplot} object; the plot of the clustering results.
+A \code{ggplot} object; the plot of the clustering results.
 }
 \description{
 This function takes a \code{spotoroo} object to produce a plot of the

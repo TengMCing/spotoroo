@@ -10,7 +10,7 @@ plot_vic_map(...)
 \item{...}{all arguments will be ignored.}
 }
 \value{
-\code{ggplot} object; the map of Victoria, Australia.
+A \code{ggplot} object; the map of Victoria, Australia.
 }
 \description{
 This function plots the map of Victoria, Australia.

@@ -19,7 +19,7 @@
 #'                            "m"(minutes),
 #'                            "h"(hours), "d"(days) and "n"(numeric).
 #' @param timeStep numeric (>0); number of units of `timeUnit` in a time step.
-#' @return integer; a vector of time indexes.
+#' @return Integer; a vector of time indexes.
 #' @examples
 #' # define obsTime
 #' obsTime <- as.Date(c("2020-01-01",
