@@ -3,25 +3,25 @@
 #' This function plots the fire movement. The fire movement is calculated
 #' from [get_fire_mov()].
 #'
-#' @param result `spotoroo` object; a result of a call to [hotspot_cluster()].
-#' @param cluster character/integer; if "all", plot all clusters. if a integer
+#' @param result `spotoroo` object. A result of a call to [hotspot_cluster()].
+#' @param cluster Character/Integer. If "all", plot all clusters. If a integer
 #'                vector is given, plot corresponding clusters.
-#' @param hotspot logical; if `TRUE`, plot the hot spots.
-#' @param from **OPTIONAL**; date/datetime/numeric; start time; the data type
+#' @param hotspot Logical. If `TRUE`, plot the hot spots.
+#' @param from **OPTIONAL**. Date/Datetime/Numeric. Start time. The data type
 #'                           needs to be the same as the provided observed time.
-#' @param to **OPTIONAL**; date/datetime/numeric; end time; the data type
+#' @param to **OPTIONAL**. Date/Datetime/Numeric. End time. The data type
 #'                         needs to be the same as the provided observed time.
-#' @param step integer (>0); step size used in the calculation of the
+#' @param step Integer (>0). Step size used in the calculation of the
 #'                            fire movement.
-#' @param bg **OPTIONAL**; `ggplot` object; if specified, plot onto this object.
-#' @return A `ggplot` object; the plot of the fire movements.
+#' @param bg **OPTIONAL**. `ggplot` object. If specified, plot onto this object.
+#' @return A `ggplot` object. The plot of the fire movements.
 #' @examples
 #' \donttest{
 #'
-#'   # time consuming functions (>5 seconds)
+#'   # Time consuming functions (>5 seconds)
 #'
 #'
-#'   # get clustering results
+#'   # Get clustering results
 #'   result <- hotspot_cluster(hotspots,
 #'                           lon = "lon",
 #'                           lat = "lat",
@@ -34,10 +34,10 @@
 #'                           timeUnit = "h",
 #'                           timeStep = 1)
 #'
-#'   # plot cluster 1 to 4
+#'   # Plot cluster 1 to 4
 #'   plot_fire_mov(result, cluster = 1:4)
 #'
-#'   # plot cluster 1 to 4, set step = 6
+#'   # Plot cluster 1 to 4, set step = 6
 #'   plot_fire_mov(result, cluster = 1:4, step = 6)
 #' }
 #'

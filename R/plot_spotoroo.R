@@ -36,62 +36,62 @@
 #' - `minorBreak` (**OPTIONAL**)
 #' - `dateLabel` (**OPTIONAL**)
 #'
-#' @param result `spotoroo` object; a result of a call to [hotspot_cluster()].
-#' @param type character; type of the plot; one of "def" (default),
+#' @param result `spotoroo` object. A result of a call to [hotspot_cluster()].
+#' @param type Character. Type of the plot. One of "def" (default),
 #'                        "timeline" (timeline) and "mov" (fire movement).
-#' @param cluster character/integer; if "all", plot all clusters. if a integer
-#'                vector is given, plot corresponding clusters; unavailable in
+#' @param cluster Character/Integer. If "all", plot all clusters. If a integer
+#'                vector is given, plot corresponding clusters. Unavailable in
 #'                [plot_timeline()].
-#' @param ignition logical; if `TRUE`, plot the ignition points; only used in
+#' @param ignition Logical. If `TRUE`, plot the ignition points. Only used in
 #'                          [plot_def()].
-#' @param hotspot logical; if `TRUE`, plot the hot spots; unavailable in
+#' @param hotspot Logical. If `TRUE`, plot the hot spots. Unavailable in
 #'                         [plot_timeline()].
-#' @param noise logical; if `TRUE`, plot the noise; only used in
+#' @param noise Logical. If `TRUE`, plot the noise. Only used in
 #'                       [plot_def()].
-#' @param from **OPTIONAL**; date/datetime/numeric; start time; the data type
+#' @param from **OPTIONAL**. Date/Datetime/Numeric. Start time. The data type
 #'                           needs to be the same as the provided observed time.
-#' @param to **OPTIONAL**; date/datetime/numeric; end time; the data type
+#' @param to **OPTIONAL**. Date/Datetime/Numeric. End time. The data type
 #'                         needs to be the same as the provided observed time.
-#' @param step integer (>=0); step size used in the calculation of the
-#'                            fire movement; only used in [plot_fire_mov()].
-#' @param mainBreak **OPTIONAL**; character/numeric; a string/value giving the
-#'                                     difference between major breaks; if the
+#' @param step Integer (>=0). Step size used in the calculation of the
+#'                            fire movement. Only used in [plot_fire_mov()].
+#' @param mainBreak **OPTIONAL**. Character/Numeric. A string/value giving the
+#'                                     difference between major breaks. If the
 #'                                     observed time is in date/datetime
 #'                                     format,
-#'                                     this value will pass to
+#'                                     this value will be passed to
 #'                                     [ggplot2::scale_x_date()] or
 #'                                     [ggplot2::scale_x_datetime()] as
-#'                                     `date_breaks`; only used in
+#'                                     `date_breaks`. Only used in
 #'                                     [plot_timeline()].
-#' @param minorBreak **OPTIONAL**; character/numeric; a string/value giving the
-#'                                     difference between minor breaks; if the
+#' @param minorBreak **OPTIONAL**. Character/Numeric. A string/value giving the
+#'                                     difference between minor breaks. If the
 #'                                     observed time is in date/datetime
 #'                                     format,
-#'                                     this value will pass to
+#'                                     this value will be passed to
 #'                                     [ggplot2::scale_x_date()] or
 #'                                     [ggplot2::scale_x_datetime()] as
-#'                                     `date_breaks`. only used in
+#'                                     `date_breaks`. Only used in
 #'                                     [plot_timeline()].
-#' @param dateLabel **OPTIONAL**; character; a string giving the formatting
-#'                                specification for the labels; if the
+#' @param dateLabel **OPTIONAL**. Character. A string giving the formatting
+#'                                specification for the labels. If the
 #'                                observed
 #'                                time is in date/datetime format,
-#'                                this value will pass to
+#'                                this value will be passed to
 #'                                [ggplot2::scale_x_date()] or
 #'                                [ggplot2::scale_x_datetime()] as
-#'                                `date_labels`; unavailable if the observed
-#'                                time is in numeric format; only used in
+#'                                `date_labels`. Unavailable if the observed
+#'                                time is in numeric format. Only used in
 #'                                [plot_timeline()].
-#' @param bg **OPTIONAL**; `ggplot` object; if specified, plot onto this object;
-#'                         unavailable in [plot_timeline()].
-#' @return A `ggplot` object; the plot of the clustering results.
+#' @param bg **OPTIONAL**. `ggplot` object. If specified, plot onto this object.
+#'                         Unavailable in [plot_timeline()].
+#' @return A `ggplot` object. The plot of the clustering results.
 #' @examples
 #' \donttest{
 #'
-#'   # time consuming functions (>5 seconds)
+#'   # Time consuming functions (>5 seconds)
 #'
 #'
-#'   # get clustering result
+#'   # Get clustering result
 #'   result <- hotspot_cluster(hotspots,
 #'                           lon = "lon",
 #'                           lat = "lat",
@@ -104,13 +104,13 @@
 #'                           timeUnit = "h",
 #'                           timeStep = 1)
 #'
-#'   # different types of plots
+#'   # Different types of plots
 #'
-#'   # default plot
+#'   # Default plot
 #'   plot_spotoroo(result, "def", bg = plot_vic_map())
 #'
 #'
-#'   # fire movement plot
+#'   # Fire movement plot
 #'   plot_spotoroo(result, "mov", cluster = 1:3, step = 3,
 #'                 bg = plot_vic_map())
 #' }

@@ -139,32 +139,32 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>lon</th>
-      <td><p>numeric; a vector of longitude values.</p></td>
+      <td><p>Numeric. A vector of longitude values.</p></td>
     </tr>
     <tr>
       <th>lat</th>
-      <td><p>numeric; a vector of latitude values.</p></td>
+      <td><p>Numeric. A vector of latitude values.</p></td>
     </tr>
     <tr>
       <th>obsTime</th>
-      <td><p>date/datetime/numeric; a vector of observed time.</p></td>
+      <td><p>Date/Datetime/Numeric. A vector of observed time.</p></td>
     </tr>
     <tr>
       <th>timeUnit</th>
-      <td><p>character; one of "s" (seconds), "m"(minutes),
+      <td><p>Character. One of "s" (seconds), "m"(minutes),
 "h"(hours), "d"(days) and "n"(numeric).</p></td>
     </tr>
     <tr>
       <th>timeID</th>
-      <td><p>integer (&gt;=1); a vector of time indexes.</p></td>
+      <td><p>Integer (&gt;=1). A vector of time indexes.</p></td>
     </tr>
     <tr>
       <th>membership</th>
-      <td><p>integer; a vector of membership labels.</p></td>
+      <td><p>Integer. A vector of membership labels.</p></td>
     </tr>
     <tr>
       <th>ignitionCenter</th>
-      <td><p>character; method of calculating ignition points,
+      <td><p>Character. Method of calculating ignition points,
 one of "mean" and "median".</p></td>
     </tr>
     </table>
@@ -172,14 +172,14 @@ one of "mean" and "median".</p></td>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A data frame of ignition points</p><ul>
-<li><p><code>membership</code> : membership labels.</p></li>
-<li><p><code>lon</code> : longitude of ignition points.</p></li>
-<li><p><code>lat</code> : latitude of ignition points.</p></li>
-<li><p><code>obsTime</code> : observed time of ignition points.</p></li>
-<li><p><code>timeID</code> : time indexes.</p></li>
-<li><p><code>obsInCluster</code> : number of observations in the cluster.</p></li>
-<li><p><code>clusterTimeLen</code> : length of time of the cluster.</p></li>
-<li><p><code>clusterTimeLenUnit</code> : unit of length of time of the cluster.</p></li>
+<li><p><code>membership</code> : Membership labels.</p></li>
+<li><p><code>lon</code> : Longitude of ignition points.</p></li>
+<li><p><code>lat</code> : Latitude of ignition points.</p></li>
+<li><p><code>obsTime</code> : Observed time of ignition points.</p></li>
+<li><p><code>timeID</code> : Time indexes.</p></li>
+<li><p><code>obsInCluster</code> : Number of observations in the cluster.</p></li>
+<li><p><code>clusterTimeLen</code> : Length of time of the cluster.</p></li>
+<li><p><code>clusterTimeLenUnit</code> : Unit of length of time of the cluster.</p></li>
 </ul>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
@@ -195,7 +195,8 @@ as the ignition point. If <code>ignitionCenter</code> is "median", median longit
 and median latitude of these hot spots will be used.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># define lon, lat, obsTime, timeID and membership for 10 observations</span>
+    <pre class="examples"><div class='input'>
+<span class='co'># Define lon, lat, obsTime, timeID and membership for 10 observations</span>
 <span class='va'>lon</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>141.1</span>, <span class='fl'>141.14</span>, <span class='fl'>141.12</span>, <span class='fl'>141.14</span>, <span class='fl'>141.16</span>, <span class='fl'>141.12</span>, <span class='fl'>141.14</span>,
           <span class='fl'>141.16</span>, <span class='fl'>141.12</span>, <span class='fl'>141.14</span><span class='op'>)</span>
 <span class='va'>lat</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>37.10</span>, <span class='op'>-</span><span class='fl'>37.10</span>, <span class='op'>-</span><span class='fl'>37.12</span>, <span class='op'>-</span><span class='fl'>37.12</span>, <span class='op'>-</span><span class='fl'>37.12</span>, <span class='op'>-</span><span class='fl'>37.14</span>, <span class='op'>-</span><span class='fl'>37.14</span>,
@@ -205,7 +206,7 @@ and median latitude of these hot spots will be used.</p>
 <span class='va'>timeID</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>5</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>26</span>, <span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span>
 <span class='va'>membership</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>2</span>, <span class='fl'>2</span>, <span class='fl'>2</span>, <span class='fl'>2</span><span class='op'>)</span>
 
-<span class='co'># calculate the ignition points using different methods</span>
+<span class='co'># Calculate the ignition points using different methods</span>
 <span class='fu'>ignition_point</span><span class='op'>(</span><span class='va'>lon</span>, <span class='va'>lat</span>, <span class='va'>obsTime</span>, <span class='va'>timeUnit</span>, <span class='va'>timeID</span>, <span class='va'>membership</span>, <span class='st'>"mean"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>-- <span style='color: #00BB00;'>ignitionCenter</span><span> = </span><span style='color: #0000BB;'>'mean'</span><span> </span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #BBBB00;font-weight: bold;'>Compute</span><span> </span><span style='color: #00BB00;'>ignition points</span><span> </span><span style='color: #B2B2B2;'>for</span><span> clusters</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> </span><span style='color: #B2B2B2;'>average</span><span> hot spots : 5</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> </span><span style='color: #B2B2B2;'>average</span><span> duration : 0 </span><span style='color: #BB00BB;'>numeric</span><span></span></div><div class='output co'>#&gt;   membership     lon     lat obsTime timeID obsInCluster clusterTimeLen
 #&gt; 1          1 141.132 -37.112       1      1            5              0

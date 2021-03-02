@@ -7,21 +7,22 @@
 #' of [hotspot_cluster()].
 #' This function performs the **first 3 steps** of the clustering algorithm.
 #'
-#' @param lon numeric; a vector of longitude values.
-#' @param lat numeric; a vector of latitude values.
-#' @param timeID integer (>=1); a vector of time indexes.
-#' @param activeTime numeric (>=0); time tolerance; unit is time index.
-#' @param adjDist numeric (>0); distance tolerance; unit is metre.
-#' @return Integer; a vector of membership labels.
+#' @param lon Numeric. A vector of longitude values.
+#' @param lat Numeric. A vector of latitude values.
+#' @param timeID Integer (>=1). A vector of time indexes.
+#' @param activeTime Numeric (>=0). Time tolerance. Unit is time index.
+#' @param adjDist Numeric (>0). Distance tolerance. Unit is metre.
+#' @return Integer. A vector of membership labels.
 #' @examples
-#' # define lon, lat and timeID for 10 observations
+#'
+#' # Define lon, lat and timeID for 10 observations
 #' lon <- c(141.1, 141.14, 141.12, 141.14, 141.16, 141.12, 141.14,
 #'           141.16, 141.12, 141.14)
 #' lat <- c(-37.10, -37.10, -37.12, -37.12, -37.12, -37.14, -37.14,
 #'          -37.14, -37.16, -37.16)
 #' timeID <- c(rep(1, 5), rep(26, 5))
 #'
-#' # cluster 10 hot spots with different values of activeTime and adjDist
+#' # Cluster 10 hot spots with different values of activeTime and adjDist
 #' global_clustering(lon, lat, timeID, 12, 1500)
 #' global_clustering(lon, lat, timeID, 24, 3000)
 #' global_clustering(lon, lat, timeID, 36, 6000)

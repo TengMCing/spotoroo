@@ -21,69 +21,69 @@ plot_spotoroo(
 )
 }
 \arguments{
-\item{result}{\code{spotoroo} object; a result of a call to \code{\link[=hotspot_cluster]{hotspot_cluster()}}.}
+\item{result}{\code{spotoroo} object. A result of a call to \code{\link[=hotspot_cluster]{hotspot_cluster()}}.}
 
-\item{type}{character; type of the plot; one of "def" (default),
+\item{type}{Character. Type of the plot. One of "def" (default),
 "timeline" (timeline) and "mov" (fire movement).}
 
-\item{cluster}{character/integer; if "all", plot all clusters. if a integer
-vector is given, plot corresponding clusters; unavailable in
+\item{cluster}{Character/Integer. If "all", plot all clusters. If a integer
+vector is given, plot corresponding clusters. Unavailable in
 \code{\link[=plot_timeline]{plot_timeline()}}.}
 
-\item{hotspot}{logical; if \code{TRUE}, plot the hot spots; unavailable in
+\item{hotspot}{Logical. If \code{TRUE}, plot the hot spots. Unavailable in
 \code{\link[=plot_timeline]{plot_timeline()}}.}
 
-\item{noise}{logical; if \code{TRUE}, plot the noise; only used in
+\item{noise}{Logical. If \code{TRUE}, plot the noise. Only used in
 \code{\link[=plot_def]{plot_def()}}.}
 
-\item{ignition}{logical; if \code{TRUE}, plot the ignition points; only used in
+\item{ignition}{Logical. If \code{TRUE}, plot the ignition points. Only used in
 \code{\link[=plot_def]{plot_def()}}.}
 
-\item{from}{\strong{OPTIONAL}; date/datetime/numeric; start time; the data type
+\item{from}{\strong{OPTIONAL}. Date/Datetime/Numeric. Start time. The data type
 needs to be the same as the provided observed time.}
 
-\item{to}{\strong{OPTIONAL}; date/datetime/numeric; end time; the data type
+\item{to}{\strong{OPTIONAL}. Date/Datetime/Numeric. End time. The data type
 needs to be the same as the provided observed time.}
 
-\item{step}{integer (>=0); step size used in the calculation of the
-fire movement; only used in \code{\link[=plot_fire_mov]{plot_fire_mov()}}.}
+\item{step}{Integer (>=0). Step size used in the calculation of the
+fire movement. Only used in \code{\link[=plot_fire_mov]{plot_fire_mov()}}.}
 
-\item{mainBreak}{\strong{OPTIONAL}; character/numeric; a string/value giving the
-difference between major breaks; if the
+\item{mainBreak}{\strong{OPTIONAL}. Character/Numeric. A string/value giving the
+difference between major breaks. If the
 observed time is in date/datetime
 format,
-this value will pass to
+this value will be passed to
 \code{\link[ggplot2:scale_date]{ggplot2::scale_x_date()}} or
 \code{\link[ggplot2:scale_date]{ggplot2::scale_x_datetime()}} as
-\code{date_breaks}; only used in
+\code{date_breaks}. Only used in
 \code{\link[=plot_timeline]{plot_timeline()}}.}
 
-\item{minorBreak}{\strong{OPTIONAL}; character/numeric; a string/value giving the
-difference between minor breaks; if the
+\item{minorBreak}{\strong{OPTIONAL}. Character/Numeric. A string/value giving the
+difference between minor breaks. If the
 observed time is in date/datetime
 format,
-this value will pass to
+this value will be passed to
 \code{\link[ggplot2:scale_date]{ggplot2::scale_x_date()}} or
 \code{\link[ggplot2:scale_date]{ggplot2::scale_x_datetime()}} as
-\code{date_breaks}. only used in
+\code{date_breaks}. Only used in
 \code{\link[=plot_timeline]{plot_timeline()}}.}
 
-\item{dateLabel}{\strong{OPTIONAL}; character; a string giving the formatting
-specification for the labels; if the
+\item{dateLabel}{\strong{OPTIONAL}. Character. A string giving the formatting
+specification for the labels. If the
 observed
 time is in date/datetime format,
-this value will pass to
+this value will be passed to
 \code{\link[ggplot2:scale_date]{ggplot2::scale_x_date()}} or
 \code{\link[ggplot2:scale_date]{ggplot2::scale_x_datetime()}} as
-\code{date_labels}; unavailable if the observed
-time is in numeric format; only used in
+\code{date_labels}. Unavailable if the observed
+time is in numeric format. Only used in
 \code{\link[=plot_timeline]{plot_timeline()}}.}
 
-\item{bg}{\strong{OPTIONAL}; \code{ggplot} object; if specified, plot onto this object;
-unavailable in \code{\link[=plot_timeline]{plot_timeline()}}.}
+\item{bg}{\strong{OPTIONAL}. \code{ggplot} object. If specified, plot onto this object.
+Unavailable in \code{\link[=plot_timeline]{plot_timeline()}}.}
 }
 \value{
-A \code{ggplot} object; the plot of the clustering results.
+A \code{ggplot} object. The plot of the clustering results.
 }
 \description{
 This function takes a \code{spotoroo} object to produce a plot of the
@@ -132,10 +132,10 @@ See also \code{\link[=plot_timeline]{plot_timeline()}}. Available arguments:
 \examples{
 \donttest{
 
-  # time consuming functions (>5 seconds)
+  # Time consuming functions (>5 seconds)
 
 
-  # get clustering result
+  # Get clustering result
   result <- hotspot_cluster(hotspots,
                           lon = "lon",
                           lat = "lat",
@@ -148,13 +148,13 @@ See also \code{\link[=plot_timeline]{plot_timeline()}}. Available arguments:
                           timeUnit = "h",
                           timeStep = 1)
 
-  # different types of plots
+  # Different types of plots
 
-  # default plot
+  # Default plot
   plot_spotoroo(result, "def", bg = plot_vic_map())
 
 
-  # fire movement plot
+  # Fire movement plot
   plot_spotoroo(result, "mov", cluster = 1:3, step = 3,
                 bg = plot_vic_map())
 }

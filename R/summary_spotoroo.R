@@ -3,19 +3,19 @@
 #' This function takes a `spotoroo` object to produce a summary of the
 #' clustering results. It can be called by [summary.spotoroo()].
 #'
-#' @param result `spotoroo` object;
-#' a result of a call to [hotspot_cluster()].
-#' @param cluster character/integer; if "all", summarize all clusters.
-#'                if a integer vector is given, summarize corresponding
+#' @param result `spotoroo` object.
+#' A result of a call to [hotspot_cluster()].
+#' @param cluster Character/Integer. If "all", summarize all clusters.
+#'                If a integer vector is given, summarize corresponding
 #'                clusters.
 #' @return No return value, called for side effects
 #' @examples
 #' \donttest{
 #'
-#'   # time consuming functions (>5 seconds)
+#'   # Time consuming functions (>5 seconds)
 #'
 #'
-#'   # get clustering results
+#'   # Get clustering results
 #'   result <- hotspot_cluster(hotspots,
 #'                            lon = "lon",
 #'                            lat = "lat",
@@ -29,10 +29,10 @@
 #'                            timeStep = 1)
 #'
 #'
-#'   # make a summary of all clusters
+#'   # Make a summary of all clusters
 #'   summary_spotoroo(result)
 #'
-#'   # make a summary of cluster 1 to 3
+#'   # Make a summary of cluster 1 to 3
 #'   summary_spotoroo(result, 1:3)
 #' }
 #'

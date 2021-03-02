@@ -2,25 +2,27 @@
 #'
 #' This function plots the clustering result spatially as a scatter plot.
 #'
-#' @param result `spotoroo` object; a result of a call to [hotspot_cluster()].
-#' @param cluster character/integer; if "all", plot all clusters. if a integer
+#' @param result `spotoroo` object. A result of a call to [hotspot_cluster()].
+#' @param cluster Character/Integer. If "all", plot all clusters. If a integer
 #'                vector is given, plot corresponding clusters.
-#' @param hotspot logical; if `TRUE`, plot the hot spots.
-#' @param noise logical; if `TRUE`, plot the noise points.
-#' @param ignition logical; if `TRUE`, plot the ignition points.
-#' @param from **OPTIONAL**; date/datetime/numeric; start time; the data type
-#'                           needs to be the same as the provided observed time.
-#' @param to **OPTIONAL**; date/datetime/numeric; end time; the data type
+#' @param hotspot Logical. If `TRUE`, plot the hot spots.
+#' @param noise Logical. If `TRUE`, plot the noise points.
+#' @param ignition Logical. If `TRUE`, plot the ignition points.
+#' @param from **OPTIONAL**. Date/Datetime/Numeric. Start time. The data type
+#'                           needs to be the same as the provided
+#'                           observed time.
+#' @param to **OPTIONAL**. Date/Datetime/Numeric. End time. The data type
 #'                         needs to be the same as the provided observed time.
-#' @param bg **OPTIONAL**; `ggplot` object; if specified, plot onto this object.
-#' @return A `ggplot` object; the plot of the clustering results.
+#' @param bg **OPTIONAL**. `ggplot` object. If specified, plot onto
+#'                         this object.
+#' @return A `ggplot` object. The plot of the clustering results.
 #' @examples
 #' \donttest{
 #'
-#'   # time consuming functions (>5 seconds)
+#'   # Time consuming functions (>5 seconds)
 #'
 #'
-#'   # get clustering results
+#'   # Get clustering results
 #'   result <- hotspot_cluster(hotspots,
 #'                           lon = "lon",
 #'                           lat = "lat",
@@ -33,10 +35,10 @@
 #'                           timeUnit = "h",
 #'                           timeStep = 1)
 #'
-#'   # plot a subset of clusters
+#'   # Plot a subset of clusters
 #'   plot_def(result, cluster = 1:3)
 #'
-#'   # plot all clusters
+#'   # Plot all clusters
 #'   plot_def(result, cluster = "all")
 #' }
 #'

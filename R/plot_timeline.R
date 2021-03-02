@@ -2,44 +2,44 @@
 #'
 #' This function plots the timeline of the fires and the noise points.
 #'
-#' @param result `spotoroo` object; a result of a call to [hotspot_cluster()].
-#' @param from **OPTIONAL**; date/datetime/numeric; start time; the data type
+#' @param result `spotoroo` object. A result of a call to [hotspot_cluster()].
+#' @param from **OPTIONAL**. Date/Datetime/Numeric. Start time. The data type
 #'                           needs to be the same as the provided observed time.
-#' @param to **OPTIONAL**; date/datetime/numeric; end time; the data type
+#' @param to **OPTIONAL**. Date/Datetime/Numeric. End time. The data type
 #'                         needs to be the same as the provided observed time.
-#' @param mainBreak **OPTIONAL**; character/numeric; a string/value giving the
-#'                                     difference between major breaks; if the
+#' @param mainBreak **OPTIONAL**. Character/Numeric. A string/value giving the
+#'                                     difference between major breaks. If the
 #'                                     observed time is in date/datetime
 #'                                     format,
-#'                                     this value will pass to
+#'                                     this value will be passed to
 #'                                     [ggplot2::scale_x_date()] or
 #'                                     [ggplot2::scale_x_datetime()] as
 #'                                     `date_breaks`.
-#' @param minorBreak **OPTIONAL**; character/numeric; a string/value giving the
-#'                                     difference between minor breaks; if the
+#' @param minorBreak **OPTIONAL**. Character/Numeric. A string/value giving the
+#'                                     difference between minor breaks. If the
 #'                                     observed time is in date/datetime
 #'                                     format,
-#'                                     this value will pass to
+#'                                     this value will be passed to
 #'                                     [ggplot2::scale_x_date()] or
 #'                                     [ggplot2::scale_x_datetime()] as
 #'                                     `date_breaks`.
-#' @param dateLabel **OPTIONAL**; character; a string giving the formatting
-#'                                specification for the labels; if the
+#' @param dateLabel **OPTIONAL**. Character. A string giving the formatting
+#'                                specification for the labels. If the
 #'                                observed
 #'                                time is in date/datetime format,
-#'                                this value will pass to
+#'                                this value will be passed to
 #'                                [ggplot2::scale_x_date()] or
 #'                                [ggplot2::scale_x_datetime()] as
-#'                                `date_labels`; unavailable if the observed
+#'                                `date_labels`. Unavailable if the observed
 #'                                time is in numeric format.
-#' @return A `ggplot` object; the plot of the timeline.
+#' @return A `ggplot` object. The plot of the timeline.
 #' @examples
 #' \donttest{
 #'
-#'   # time consuming functions (>5 seconds)
+#'   # Time consuming functions (>5 seconds)
 #'
 #'
-#'   # get clustering results
+#'   # Get clustering results
 #'   result <- hotspot_cluster(hotspots,
 #'                           lon = "lon",
 #'                           lat = "lat",
@@ -52,7 +52,7 @@
 #'                           timeUnit = "h",
 #'                           timeStep = 1)
 #'
-#'   # plot timeline
+#'   # Plot timeline
 #'   plot_timeline(result,
 #'               mainBreak = "1 week",
 #'               minorBreak = "1 day",

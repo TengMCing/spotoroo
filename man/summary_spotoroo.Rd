@@ -7,11 +7,11 @@
 summary_spotoroo(result, cluster = "all")
 }
 \arguments{
-\item{result}{\code{spotoroo} object;
-a result of a call to \code{\link[=hotspot_cluster]{hotspot_cluster()}}.}
+\item{result}{\code{spotoroo} object.
+A result of a call to \code{\link[=hotspot_cluster]{hotspot_cluster()}}.}
 
-\item{cluster}{character/integer; if "all", summarize all clusters.
-if a integer vector is given, summarize corresponding
+\item{cluster}{Character/Integer. If "all", summarize all clusters.
+If a integer vector is given, summarize corresponding
 clusters.}
 }
 \value{
@@ -24,10 +24,10 @@ clustering results. It can be called by \code{\link[=summary.spotoroo]{summary.s
 \examples{
 \donttest{
 
-  # time consuming functions (>5 seconds)
+  # Time consuming functions (>5 seconds)
 
 
-  # get clustering results
+  # Get clustering results
   result <- hotspot_cluster(hotspots,
                            lon = "lon",
                            lat = "lat",
@@ -41,10 +41,10 @@ clustering results. It can be called by \code{\link[=summary.spotoroo]{summary.s
                            timeStep = 1)
 
 
-  # make a summary of all clusters
+  # Make a summary of all clusters
   summary_spotoroo(result)
 
-  # make a summary of cluster 1 to 3
+  # Make a summary of cluster 1 to 3
   summary_spotoroo(result, 1:3)
 }
 

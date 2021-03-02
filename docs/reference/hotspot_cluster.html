@@ -157,87 +157,87 @@ reconstruct fire history and detect fire ignition points.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>hotspots</th>
-      <td><p>list/data frame; a list or a data frame which
+      <td><p>List/Data frame. A list or a data frame which
 contains information of hot spots.</p></td>
     </tr>
     <tr>
       <th>lon</th>
-      <td><p>character; the name of the column of the list which contains
+      <td><p>Character. The name of the column of the list which contains
 numeric longitude values.</p></td>
     </tr>
     <tr>
       <th>lat</th>
-      <td><p>character; the name of the column of the list which contains
+      <td><p>Character. The name of the column of the list which contains
 numeric latitude values.</p></td>
     </tr>
     <tr>
       <th>obsTime</th>
-      <td><p>character; the name of the column of the list which contains
-the observed time of hot spots; the observed time
+      <td><p>Character. The name of the column of the list which contains
+the observed time of hot spots. The observed time
 has to be in date, datetime or numeric.</p></td>
     </tr>
     <tr>
       <th>activeTime</th>
-      <td><p>numeric (&gt;=0); time tolerance; unit is time index.</p></td>
+      <td><p>Numeric (&gt;=0). Time tolerance. Unit is time index.</p></td>
     </tr>
     <tr>
       <th>adjDist</th>
-      <td><p>numeric (&gt;0); distance tolerance; unit is metre.</p></td>
+      <td><p>Numeric (&gt;0). Distance tolerance. Unit is metre.</p></td>
     </tr>
     <tr>
       <th>minPts</th>
-      <td><p>numeric (&gt;0); minimum number of hot spots in a cluster.</p></td>
+      <td><p>Numeric (&gt;0). Minimum number of hot spots in a cluster.</p></td>
     </tr>
     <tr>
       <th>minTime</th>
-      <td><p>numeric (&gt;=0); minimum length of time of a cluster;
-unit is time index.</p></td>
+      <td><p>Numeric (&gt;=0). Minimum length of time of a cluster.
+Unit is time index.</p></td>
     </tr>
     <tr>
       <th>ignitionCenter</th>
-      <td><p>character; method to calculate ignition points,
+      <td><p>Character. Method to calculate ignition points,
 either "mean" or "median".</p></td>
     </tr>
     <tr>
       <th>timeUnit</th>
-      <td><p>character; one of "s" (seconds),
+      <td><p>Character. One of "s" (seconds),
 "m" (minutes), "h" (hours),
 "d" (days) and "n" (numeric).</p></td>
     </tr>
     <tr>
       <th>timeStep</th>
-      <td><p>numeric (&gt;0); number of units of <code>timeUnit</code> in a time step.</p></td>
+      <td><p>Numeric (&gt;0). Number of units of <code>timeUnit</code> in a time step.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A <code>spotoroo</code> object; the clustering results; it is also a list:</p><ul>
-<li><p><code>hotspots</code> : a data frame contains information of hot spots.</p><ul>
-<li><p><code>lon</code> : longitude.</p></li>
-<li><p><code>lat</code> : latitude.</p></li>
-<li><p><code>obsTime</code> : observed time.</p></li>
-<li><p><code>timeID</code> : time index.</p></li>
-<li><p><code>membership</code> : membership label.</p></li>
-<li><p><code>noise</code> : whether it is a noise point.</p></li>
-<li><p><code>distToIgnition</code> : distance to the ignition location.</p></li>
-<li><p><code>distToIgnitionUnit</code> : unit of distance to the ignition
+    <p>A <code>spotoroo</code> object. The clustering results. It is also a list:</p><ul>
+<li><p><code>hotspots</code> : A data frame contains information of hot spots.</p><ul>
+<li><p><code>lon</code> : Longitude.</p></li>
+<li><p><code>lat</code> : Latitude.</p></li>
+<li><p><code>obsTime</code> : Observed time.</p></li>
+<li><p><code>timeID</code> : Time index.</p></li>
+<li><p><code>membership</code> : Membership label.</p></li>
+<li><p><code>noise</code> : Whether it is a noise point.</p></li>
+<li><p><code>distToIgnition</code> : Distance to the ignition location.</p></li>
+<li><p><code>distToIgnitionUnit</code> : Unit of distance to the ignition
 location.</p></li>
-<li><p><code>timeFromIgnition</code> : time from ignition.</p></li>
-<li><p><code>timeFromIgnitionUnit</code> : unit of time from ignition.</p></li>
+<li><p><code>timeFromIgnition</code> : Time from ignition.</p></li>
+<li><p><code>timeFromIgnitionUnit</code> : Unit of time from ignition.</p></li>
 </ul></li>
-<li><p><code>ignition</code> : a data frame contains information of ignition
+<li><p><code>ignition</code> : A data frame contains information of ignition
 points.</p><ul>
-<li><p><code>lon</code> : longitude.</p></li>
-<li><p><code>lat</code> : latitude.</p></li>
-<li><p><code>obsTime</code> : observed time.</p></li>
-<li><p><code>timeID</code> : time index.</p></li>
-<li><p><code>obsInCluster</code> : number of observations in the cluster.</p></li>
-<li><p><code>clusterTimeLen</code> : length of time of the cluster.</p></li>
-<li><p><code>clusterTimeLenUnit</code> : unit of length of time of the
+<li><p><code>lon</code> : Longitude.</p></li>
+<li><p><code>lat</code> : Latitude.</p></li>
+<li><p><code>obsTime</code> : Observed time.</p></li>
+<li><p><code>timeID</code> : Time index.</p></li>
+<li><p><code>obsInCluster</code> : Number of observations in the cluster.</p></li>
+<li><p><code>clusterTimeLen</code> : Length of time of the cluster.</p></li>
+<li><p><code>clusterTimeLenUnit</code> : Unit of length of time of the
 cluster.</p></li>
 </ul></li>
-<li><p><code>setting</code> : a list contains the clustering settings.</p></li>
+<li><p><code>setting</code> : A list contains the clustering settings.</p></li>
 </ul>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
@@ -300,10 +300,10 @@ of the ignition point. This needs to be specified in argument
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
 
-  <span class='co'># time consuming functions (&gt;5 seconds)</span>
+  <span class='co'># Time consuming functions (&gt;5 seconds)</span>
 
 
-  <span class='co'># get clustering results</span>
+  <span class='co'># Get clustering results</span>
   <span class='va'>result</span> <span class='op'>&lt;-</span> <span class='fu'>hotspot_cluster</span><span class='op'>(</span><span class='va'>hotspots</span>,
                 lon <span class='op'>=</span> <span class='st'>"lon"</span>,
                 lat <span class='op'>=</span> <span class='st'>"lat"</span>,

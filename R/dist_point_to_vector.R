@@ -4,17 +4,18 @@
 #' points given the coordinate information. It is a wrapper of
 #' [geodist::geodist_vec()].
 #'
-#' @param plon numeric; the longitude of a point.
-#' @param plat numeric; the latitude of a point.
-#' @param vlon numeric; a vector of longitude values.
-#' @param vlat numeric; a vector of latitude values.
-#' @return Numeric; the geodesic of a point to multiple points in meters.
+#' @param plon Numeric. The longitude of a point.
+#' @param plat Numeric. The latitude of a point.
+#' @param vlon Numeric. A vector of longitude values.
+#' @param vlat Numeric. A vector of latitude values.
+#' @return Numeric. The geodesic of a point to multiple points in meters.
 #' @examples
-#' # define vlon and vlat
+#'
+#' # Define vlon and vlat
 #' vlon <- c(141.12, 141.13)
 #' vlat <- c(-37.1, -37.0)
 #'
-#' # calculate the geodesic
+#' # Calculate the geodesic
 #' dist_point_to_vector(141.12, -37.1, vlon, vlat)
 #'
 #' @export

@@ -7,13 +7,13 @@
 \method{plot}{spotoroo}(x, ...)
 }
 \arguments{
-\item{x}{\code{spotoroo} object;
-a result of a call to \code{\link[=hotspot_cluster]{hotspot_cluster()}}.}
+\item{x}{\code{spotoroo} object.
+A result of a call to \code{\link[=hotspot_cluster]{hotspot_cluster()}}.}
 
-\item{\dots}{additional arguments pass to \code{\link[=plot_spotoroo]{plot_spotoroo()}}}
+\item{...}{Additional arguments pass to \code{\link[=plot_spotoroo]{plot_spotoroo()}}}
 }
 \value{
-A \code{ggplot} object; the plot of the clustering results.
+A \code{ggplot} object. The plot of the clustering results.
 }
 \description{
 \code{plot.spotoroo()} is the \code{plot} method of the class \code{spotoroo}.
@@ -23,10 +23,10 @@ It is a simple wrapper of \code{\link[=plot_spotoroo]{plot_spotoroo()}}.
 
 \donttest{
 
-  # time consuming functions (>5 seconds)
+  # Time consuming functions (>5 seconds)
 
 
-  # get clustering results
+  # Get clustering results
   result <- hotspot_cluster(hotspots,
                            lon = "lon",
                            lat = "lat",
@@ -41,12 +41,12 @@ It is a simple wrapper of \code{\link[=plot_spotoroo]{plot_spotoroo()}}.
 
 
 
-  # different types of plots
+  # Different types of plots
 
-  # default plot
+  # Default plot
   plot(result, "def", bg = plot_vic_map())
 
-  # fire movement plot
+  # Fire movement plot
   plot(result, "mov", cluster = 1:3, step = 3, bg = plot_vic_map())
 }
 

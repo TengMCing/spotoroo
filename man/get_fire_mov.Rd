@@ -7,25 +7,26 @@
 get_fire_mov(result, cluster, step = 1, method = "mean")
 }
 \arguments{
-\item{result}{\code{spotoroo} object; a result of a call to \code{\link[=hotspot_cluster]{hotspot_cluster()}}.}
+\item{result}{\code{spotoroo} object. A result of a call to \code{\link[=hotspot_cluster]{hotspot_cluster()}}.}
 
-\item{cluster}{integer; the membership label of the cluster.}
+\item{cluster}{Integer. The membership label of the cluster.}
 
-\item{step}{integer (>0); step size used in the calculation of the
+\item{step}{Integer (>0). Step size used in the calculation of the
 fire movement.}
 
-\item{method}{character; "mean" or "median", method of the calculation of
+\item{method}{Character. Either "mean" or "median",
+method of the calculation of
 the centre of the fire.}
 }
 \value{
-A data.frame; the fire movement
+A data.frame. The fire movement.
 \itemize{
-\item \code{membership} : membership labels.
-\item \code{lon} : longitude of the centre of the fire.
-\item \code{lat} : latitude of the centre of the fire.
-\item \code{timeID} : time indexes.
-\item \code{obsTime} : observed time (approximated).
-\item \code{ignition} : whether or not it is a ignition point.
+\item \code{membership} : Membership labels.
+\item \code{lon} : Longitude of the centre of the fire.
+\item \code{lat} : Latitude of the centre of the fire.
+\item \code{timeID} : Time indexes.
+\item \code{obsTime} : Observed time (approximated).
+\item \code{ignition} : Whether or not it is a ignition point.
 }
 }
 \description{
@@ -38,10 +39,10 @@ fire.
 
 \donttest{
 
-  # time consuming functions (>5 seconds)
+  # Time consuming functions (>5 seconds)
 
 
-  # get clustering results
+  # Get clustering results
   result <- hotspot_cluster(hotspots,
                           lon = "lon",
                           lat = "lat",
@@ -54,11 +55,11 @@ fire.
                           timeUnit = "h",
                           timeStep = 1)
 
-  # get fire movement of the first cluster
+  # Get fire movement of the first cluster
   mov1 <- get_fire_mov(result, cluster = 1, step = 3, method = "mean")
   mov1
 
-  # get fire movement of the second cluster
+  # Get fire movement of the second cluster
   mov2 <- get_fire_mov(result, cluster = 2, step = 6, method = "median")
   mov2
 }

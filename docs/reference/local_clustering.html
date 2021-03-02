@@ -139,21 +139,21 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>lon</th>
-      <td><p>numeric; a vector of longitude values.</p></td>
+      <td><p>Numeric. A vector of longitude values.</p></td>
     </tr>
     <tr>
       <th>lat</th>
-      <td><p>numeric; a vector of latitude values.</p></td>
+      <td><p>Numeric. A vector of latitude values.</p></td>
     </tr>
     <tr>
       <th>adjDist</th>
-      <td><p>numeric (&gt;0); distance tolerance; unit is metre.</p></td>
+      <td><p>Numeric (&gt;0). Distance tolerance. Unit is metre.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Integer; a vector of membership labels</p>
+    <p>Integer. A vector of membership labels</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>For more details about the clustering algorithm and the argument <code>adjDist</code>,
@@ -162,13 +162,14 @@ This function performs the <strong>step 2</strong> of the clustering algorithm. 
 clusters hot spots in a given interval.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># define lon and lat for 10 observations</span>
+    <pre class="examples"><div class='input'>
+<span class='co'># Define lon and lat for 10 observations</span>
 <span class='va'>lon</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>141.1</span>, <span class='fl'>141.14</span>, <span class='fl'>141.12</span>, <span class='fl'>141.14</span>, <span class='fl'>141.16</span>, <span class='fl'>141.12</span>, <span class='fl'>141.14</span>,
           <span class='fl'>141.16</span>, <span class='fl'>141.12</span>, <span class='fl'>141.14</span><span class='op'>)</span>
 <span class='va'>lat</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>37.10</span>, <span class='op'>-</span><span class='fl'>37.10</span>, <span class='op'>-</span><span class='fl'>37.12</span>, <span class='op'>-</span><span class='fl'>37.12</span>, <span class='op'>-</span><span class='fl'>37.12</span>, <span class='op'>-</span><span class='fl'>37.14</span>, <span class='op'>-</span><span class='fl'>37.14</span>,
          <span class='op'>-</span><span class='fl'>37.14</span>, <span class='op'>-</span><span class='fl'>37.16</span>, <span class='op'>-</span><span class='fl'>37.16</span><span class='op'>)</span>
 
-<span class='co'># cluster 10 hot spots with different values of adjDist</span>
+<span class='co'># Cluster 10 hot spots with different values of adjDist</span>
 <span class='fu'>local_clustering</span><span class='op'>(</span><span class='va'>lon</span>, <span class='va'>lat</span>, <span class='fl'>2000</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;  [1] 1 2 3 3 3 4 4 4 5 5</div><div class='input'><span class='fu'>local_clustering</span><span class='op'>(</span><span class='va'>lon</span>, <span class='va'>lat</span>, <span class='fl'>3000</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;  [1] 1 1 1 1 1 1 1 1 1 1</div><div class='input'><span class='fu'>local_clustering</span><span class='op'>(</span><span class='va'>lon</span>, <span class='va'>lat</span>, <span class='fl'>4000</span><span class='op'>)</span>

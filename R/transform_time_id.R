@@ -9,35 +9,36 @@
 #' by the `timeStep`. These differences are floored to integer and
 #' used as the time indexes.
 #'
-#' @param obsTime date/datetime/numeric; a vector of observed time of
+#' @param obsTime Date/Datetime/Numeric. A vector of observed time of
 #' hot spots.
 #'                                       If `timeUnit` is "n", `obsTime`
 #'                                       needs to be a numeric vector,
 #'                                       otherwise, it needs to be in
 #'                                       date or datetime format.
-#' @param timeUnit character; the unit of time, one of "s" (seconds),
+#' @param timeUnit Character. The unit of time, one of "s" (seconds),
 #'                            "m"(minutes),
 #'                            "h"(hours), "d"(days) and "n"(numeric).
-#' @param timeStep numeric (>0); number of units of `timeUnit` in a time step.
-#' @return Integer; a vector of time indexes.
+#' @param timeStep Numeric (>0). Number of units of `timeUnit` in a time step.
+#' @return Integer. A vector of time indexes.
 #' @examples
-#' # define obsTime
+#'
+#' # Define obsTime
 #' obsTime <- as.Date(c("2020-01-01",
 #'                      "2020-01-02",
 #'                      "2020-01-04"))
 #'
-#' # transform it to time index under different settings
+#' # Transform it to time index under different settings
 #' transform_time_id(obsTime, "h", 1)
 #' transform_time_id(obsTime, "m", 60)
 #' transform_time_id(obsTime, "s", 3600)
 #'
-#' # define numeric obsTime
+#' # Define numeric obsTime
 #' obsTime <- c(1,
 #'              1.5,
 #'              4.5,
 #'              6)
 #'
-#' # transform it to time index under different settings
+#' # Transform it to time index under different settings
 #' transform_time_id(obsTime, "n", 1)
 #' transform_time_id(obsTime, "n", 1.5)
 #'

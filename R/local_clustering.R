@@ -7,18 +7,19 @@
 #' This function performs the **step 2** of the clustering algorithm. It
 #' clusters hot spots in a given interval.
 #'
-#' @param lon numeric; a vector of longitude values.
-#' @param lat numeric; a vector of latitude values.
-#' @param adjDist numeric (>0); distance tolerance; unit is metre.
-#' @return Integer; a vector of membership labels
+#' @param lon Numeric. A vector of longitude values.
+#' @param lat Numeric. A vector of latitude values.
+#' @param adjDist Numeric (>0). Distance tolerance. Unit is metre.
+#' @return Integer. A vector of membership labels
 #' @examples
-#' # define lon and lat for 10 observations
+#'
+#' # Define lon and lat for 10 observations
 #' lon <- c(141.1, 141.14, 141.12, 141.14, 141.16, 141.12, 141.14,
 #'           141.16, 141.12, 141.14)
 #' lat <- c(-37.10, -37.10, -37.12, -37.12, -37.12, -37.14, -37.14,
 #'          -37.14, -37.16, -37.16)
 #'
-#' # cluster 10 hot spots with different values of adjDist
+#' # Cluster 10 hot spots with different values of adjDist
 #' local_clustering(lon, lat, 2000)
 #' local_clustering(lon, lat, 3000)
 #' local_clustering(lon, lat, 4000)

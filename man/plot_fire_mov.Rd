@@ -15,26 +15,26 @@ plot_fire_mov(
 )
 }
 \arguments{
-\item{result}{\code{spotoroo} object; a result of a call to \code{\link[=hotspot_cluster]{hotspot_cluster()}}.}
+\item{result}{\code{spotoroo} object. A result of a call to \code{\link[=hotspot_cluster]{hotspot_cluster()}}.}
 
-\item{cluster}{character/integer; if "all", plot all clusters. if a integer
+\item{cluster}{Character/Integer. If "all", plot all clusters. If a integer
 vector is given, plot corresponding clusters.}
 
-\item{hotspot}{logical; if \code{TRUE}, plot the hot spots.}
+\item{hotspot}{Logical. If \code{TRUE}, plot the hot spots.}
 
-\item{from}{\strong{OPTIONAL}; date/datetime/numeric; start time; the data type
+\item{from}{\strong{OPTIONAL}. Date/Datetime/Numeric. Start time. The data type
 needs to be the same as the provided observed time.}
 
-\item{to}{\strong{OPTIONAL}; date/datetime/numeric; end time; the data type
+\item{to}{\strong{OPTIONAL}. Date/Datetime/Numeric. End time. The data type
 needs to be the same as the provided observed time.}
 
-\item{step}{integer (>0); step size used in the calculation of the
+\item{step}{Integer (>0). Step size used in the calculation of the
 fire movement.}
 
-\item{bg}{\strong{OPTIONAL}; \code{ggplot} object; if specified, plot onto this object.}
+\item{bg}{\strong{OPTIONAL}. \code{ggplot} object. If specified, plot onto this object.}
 }
 \value{
-A \code{ggplot} object; the plot of the fire movements.
+A \code{ggplot} object. The plot of the fire movements.
 }
 \description{
 This function plots the fire movement. The fire movement is calculated
@@ -43,10 +43,10 @@ from \code{\link[=get_fire_mov]{get_fire_mov()}}.
 \examples{
 \donttest{
 
-  # time consuming functions (>5 seconds)
+  # Time consuming functions (>5 seconds)
 
 
-  # get clustering results
+  # Get clustering results
   result <- hotspot_cluster(hotspots,
                           lon = "lon",
                           lat = "lat",
@@ -59,10 +59,10 @@ from \code{\link[=get_fire_mov]{get_fire_mov()}}.
                           timeUnit = "h",
                           timeStep = 1)
 
-  # plot cluster 1 to 4
+  # Plot cluster 1 to 4
   plot_fire_mov(result, cluster = 1:4)
 
-  # plot cluster 1 to 4, set step = 6
+  # Plot cluster 1 to 4, set step = 6
   plot_fire_mov(result, cluster = 1:4, step = 6)
 }
 

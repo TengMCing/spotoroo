@@ -7,10 +7,10 @@
 \method{summary}{spotoroo}(object, ...)
 }
 \arguments{
-\item{object}{\code{spotoroo} object;
-a result of a call to \code{\link[=hotspot_cluster]{hotspot_cluster()}}.}
+\item{object}{\code{spotoroo} object.
+A result of a call to \code{\link[=hotspot_cluster]{hotspot_cluster()}}.}
 
-\item{\dots}{additional arguments pass to \code{\link[=summary_spotoroo]{summary_spotoroo()}}}
+\item{...}{Additional arguments pass to \code{\link[=summary_spotoroo]{summary_spotoroo()}}}
 }
 \value{
 No return value, called for side effects
@@ -22,10 +22,10 @@ It is a simple wrapper of \code{\link[=summary_spotoroo]{summary_spotoroo()}}.
 \examples{
 \donttest{
 
-  # time consuming functions (>5 seconds)
+  # Time consuming functions (>5 seconds)
 
 
-  # get clustering results
+  # Get clustering results
   result <- hotspot_cluster(hotspots,
                            lon = "lon",
                            lat = "lat",
@@ -39,7 +39,7 @@ It is a simple wrapper of \code{\link[=summary_spotoroo]{summary_spotoroo()}}.
                            timeStep = 1)
 
 
-  # make a summary
+  # Make a summary
   summary(result)
 }
 

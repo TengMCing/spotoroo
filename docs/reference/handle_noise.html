@@ -141,26 +141,26 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>global_membership</th>
-      <td><p>integer; a vector of membership labels.</p></td>
+      <td><p>Integer. A vector of membership labels.</p></td>
     </tr>
     <tr>
       <th>timeID</th>
-      <td><p>integer; a vector of time indexes.</p></td>
+      <td><p>Integer. A vector of time indexes.</p></td>
     </tr>
     <tr>
       <th>minPts</th>
-      <td><p>numeric (&gt;0); minimum number of hot spots in a cluster.</p></td>
+      <td><p>Numeric (&gt;0). Minimum number of hot spots in a cluster.</p></td>
     </tr>
     <tr>
       <th>minTime</th>
-      <td><p>numeric (&gt;=0); minimum length of time of a cluster;
-unit is time index.</p></td>
+      <td><p>Numeric (&gt;=0). Minimum length of time of a cluster.
+Unit is time index.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Integer; a vector of membership labels.</p>
+    <p>Integer. A vector of membership labels.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>For more details about the clustering algorithm and the arguments
@@ -171,11 +171,12 @@ given threshold (minimum number of points and minimum length of time) to
 find noise and label it with <code>-1</code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># define membership labels and timeID for 10 observations</span>
+    <pre class="examples"><div class='input'>
+<span class='co'># Define membership labels and timeID for 10 observations</span>
 <span class='va'>global_membership</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>1</span>,<span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>2</span>,<span class='fl'>2</span>,<span class='fl'>2</span>,<span class='fl'>2</span>,<span class='fl'>2</span>,<span class='fl'>3</span>,<span class='fl'>3</span>,<span class='fl'>3</span>,<span class='fl'>3</span>,<span class='fl'>3</span>,<span class='fl'>3</span><span class='op'>)</span>
 <span class='va'>timeID</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>3</span>,<span class='fl'>2</span>,<span class='fl'>3</span>,<span class='fl'>3</span>,<span class='fl'>4</span>,<span class='fl'>5</span>,<span class='fl'>6</span>,<span class='fl'>3</span>,<span class='fl'>3</span>,<span class='fl'>3</span>,<span class='fl'>3</span>,<span class='fl'>3</span>,<span class='fl'>3</span><span class='op'>)</span>
 
-<span class='co'># handle noise with different values of minPts and minTime</span>
+<span class='co'># Handle noise with different values of minPts and minTime</span>
 <span class='fu'>handle_noise</span><span class='op'>(</span><span class='va'>global_membership</span>, <span class='va'>timeID</span>, <span class='fl'>4</span>, <span class='fl'>0</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>-- <span style='color: #00BB00;'>minPts</span><span> = </span><span style='color: #0000BB;'>4</span><span> </span><span style='color: #BB00BB;'>hot spots</span><span> | </span><span style='color: #00BB00;'>minTime</span><span> = </span><span style='color: #0000BB;'>0</span><span> </span><span style='color: #BB00BB;'>time indexes</span><span> </span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #BBBB00;font-weight: bold;'>Handle</span><span> </span><span style='color: #00BB00;'>noise</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> </span><span style='color: #0000BB;'>2</span><span> clusters </span><span style='color: #B2B2B2;'>left</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> noise </span><span style='color: #B2B2B2;'>proportion</span><span> : </span><span style='color: #0000BB;'>20 %</span><span> </span></div><div class='output co'>#&gt;  [1] -1 -1 -1  1  1  1  1  1  1  2  2  2  2  2  2</div><div class='input'><span class='fu'>handle_noise</span><span class='op'>(</span><span class='va'>global_membership</span>, <span class='va'>timeID</span>, <span class='fl'>4</span>, <span class='fl'>1</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>-- </span><span style='color: #00BB00;'>minPts</span><span> = </span><span style='color: #0000BB;'>4</span><span> </span><span style='color: #BB00BB;'>hot spots</span><span> | </span><span style='color: #00BB00;'>minTime</span><span> = </span><span style='color: #0000BB;'>1</span><span> </span><span style='color: #BB00BB;'>time index</span><span> </span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #BBBB00;font-weight: bold;'>Handle</span><span> </span><span style='color: #00BB00;'>noise</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> </span><span style='color: #0000BB;'>1</span><span> cluster </span><span style='color: #B2B2B2;'>left</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>i</span><span> noise </span><span style='color: #B2B2B2;'>proportion</span><span> : </span><span style='color: #0000BB;'>60 %</span><span> </span></div><div class='output co'>#&gt;  [1] -1 -1 -1  1  1  1  1  1  1 -1 -1 -1 -1 -1 -1</div><div class='input'><span class='fu'>handle_noise</span><span class='op'>(</span><span class='va'>global_membership</span>, <span class='va'>timeID</span>, <span class='fl'>3</span>, <span class='fl'>3</span><span class='op'>)</span>

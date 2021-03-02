@@ -62,63 +62,63 @@
 #'
 #'
 #'
-#' @param hotspots list/data frame; a list or a data frame which
+#' @param hotspots List/Data frame. A list or a data frame which
 #'                                  contains information of hot spots.
-#' @param lon character; the name of the column of the list which contains
+#' @param lon Character. The name of the column of the list which contains
 #'                       numeric longitude values.
-#' @param lat character; the name of the column of the list which contains
+#' @param lat Character. The name of the column of the list which contains
 #'                       numeric latitude values.
-#' @param obsTime character; the name of the column of the list which contains
-#'                           the observed time of hot spots; the observed time
+#' @param obsTime Character. The name of the column of the list which contains
+#'                           the observed time of hot spots. The observed time
 #'                           has to be in date, datetime or numeric.
-#' @param activeTime numeric (>=0); time tolerance; unit is time index.
-#' @param adjDist numeric (>0); distance tolerance; unit is metre.
-#' @param minPts numeric (>0); minimum number of hot spots in a cluster.
-#' @param minTime numeric (>=0); minimum length of time of a cluster;
-#'                               unit is time index.
-#' @param ignitionCenter character; method to calculate ignition points,
+#' @param activeTime Numeric (>=0). Time tolerance. Unit is time index.
+#' @param adjDist Numeric (>0). Distance tolerance. Unit is metre.
+#' @param minPts Numeric (>0). Minimum number of hot spots in a cluster.
+#' @param minTime Numeric (>=0). Minimum length of time of a cluster.
+#'                               Unit is time index.
+#' @param ignitionCenter Character. Method to calculate ignition points,
 #'                                  either "mean" or "median".
-#' @param timeUnit character; one of "s" (seconds),
+#' @param timeUnit Character. One of "s" (seconds),
 #'                                      "m" (minutes), "h" (hours),
 #'                                      "d" (days) and "n" (numeric).
-#' @param timeStep numeric (>0); number of units of `timeUnit` in a time step.
-#' @return A `spotoroo` object; the clustering results; it is also a list:
+#' @param timeStep Numeric (>0). Number of units of `timeUnit` in a time step.
+#' @return A `spotoroo` object. The clustering results. It is also a list:
 #' \itemize{
-#'   \item \code{hotspots} : a data frame contains information of hot spots.
+#'   \item \code{hotspots} : A data frame contains information of hot spots.
 #'   \itemize{
-#'     \item \code{lon} : longitude.
-#'     \item \code{lat} : latitude.
-#'     \item \code{obsTime} : observed time.
-#'     \item \code{timeID} : time index.
-#'     \item \code{membership} : membership label.
-#'     \item \code{noise} : whether it is a noise point.
-#'     \item \code{distToIgnition} : distance to the ignition location.
-#'     \item \code{distToIgnitionUnit} : unit of distance to the ignition
+#'     \item \code{lon} : Longitude.
+#'     \item \code{lat} : Latitude.
+#'     \item \code{obsTime} : Observed time.
+#'     \item \code{timeID} : Time index.
+#'     \item \code{membership} : Membership label.
+#'     \item \code{noise} : Whether it is a noise point.
+#'     \item \code{distToIgnition} : Distance to the ignition location.
+#'     \item \code{distToIgnitionUnit} : Unit of distance to the ignition
 #'                                       location.
-#'     \item \code{timeFromIgnition} : time from ignition.
-#'     \item \code{timeFromIgnitionUnit} : unit of time from ignition.
+#'     \item \code{timeFromIgnition} : Time from ignition.
+#'     \item \code{timeFromIgnitionUnit} : Unit of time from ignition.
 #'   }
-#'   \item \code{ignition} : a data frame contains information of ignition
+#'   \item \code{ignition} : A data frame contains information of ignition
 #'                           points.
 #'   \itemize{
-#'     \item \code{lon} : longitude.
-#'     \item \code{lat} : latitude.
-#'     \item \code{obsTime} : observed time.
-#'     \item \code{timeID} : time index.
-#'     \item \code{obsInCluster} : number of observations in the cluster.
-#'     \item \code{clusterTimeLen} : length of time of the cluster.
-#'     \item \code{clusterTimeLenUnit} : unit of length of time of the
+#'     \item \code{lon} : Longitude.
+#'     \item \code{lat} : Latitude.
+#'     \item \code{obsTime} : Observed time.
+#'     \item \code{timeID} : Time index.
+#'     \item \code{obsInCluster} : Number of observations in the cluster.
+#'     \item \code{clusterTimeLen} : Length of time of the cluster.
+#'     \item \code{clusterTimeLenUnit} : Unit of length of time of the
 #'     cluster.
 #'   }
-#'   \item \code{setting} : a list contains the clustering settings.
+#'   \item \code{setting} : A list contains the clustering settings.
 #' }
 #' @examples
 #' \donttest{
 #'
-#'   # time consuming functions (>5 seconds)
+#'   # Time consuming functions (>5 seconds)
 #'
 #'
-#'   # get clustering results
+#'   # Get clustering results
 #'   result <- hotspot_cluster(hotspots,
 #'                 lon = "lon",
 #'                 lat = "lat",
@@ -276,17 +276,17 @@ hotspot_cluster <- function(hotspots,
 #' `summary.spotoroo()` is the `summary` method of the class `spotoroo`.
 #' It is a simple wrapper of [summary_spotoroo()].
 #'
-#' @param object `spotoroo` object;
-#' a result of a call to [hotspot_cluster()].
-#' @param \dots additional arguments pass to [summary_spotoroo()]
+#' @param object `spotoroo` object.
+#' A result of a call to [hotspot_cluster()].
+#' @param ... Additional arguments pass to [summary_spotoroo()]
 #' @return No return value, called for side effects
 #' @examples
 #' \donttest{
 #'
-#'   # time consuming functions (>5 seconds)
+#'   # Time consuming functions (>5 seconds)
 #'
 #'
-#'   # get clustering results
+#'   # Get clustering results
 #'   result <- hotspot_cluster(hotspots,
 #'                            lon = "lon",
 #'                            lat = "lat",
@@ -300,7 +300,7 @@ hotspot_cluster <- function(hotspots,
 #'                            timeStep = 1)
 #'
 #'
-#'   # make a summary
+#'   # Make a summary
 #'   summary(result)
 #' }
 #'
@@ -314,17 +314,17 @@ summary.spotoroo <- function(object, ...) {
 #'
 #' `print.spotoroo()` is the `print` method of the class `spotoroo`.
 #'
-#' @param x `spotoroo` object;
-#' a result of a call to [hotspot_cluster()].
-#' @param \dots additional arguments will be ignored.
+#' @param x `spotoroo` object.
+#' A result of a call to [hotspot_cluster()].
+#' @param ... Additional arguments will be ignored.
 #' @return No return value, called for side effects
 #' @examples
 #' \donttest{
 #'
-#'   # time consuming functions (>5 seconds)
+#'   # Time consuming functions (>5 seconds)
 #'
 #'
-#'   # get clustering results
+#'   # Get clustering results
 #'   result <- hotspot_cluster(hotspots,
 #'                            lon = "lon",
 #'                            lat = "lat",
@@ -366,18 +366,18 @@ print.spotoroo <- function(x, ...) {
 #' `plot.spotoroo()` is the `plot` method of the class `spotoroo`.
 #' It is a simple wrapper of [plot_spotoroo()].
 #'
-#' @param x `spotoroo` object;
-#' a result of a call to [hotspot_cluster()].
-#' @param \dots additional arguments pass to [plot_spotoroo()]
-#' @return A `ggplot` object; the plot of the clustering results.
+#' @param x `spotoroo` object.
+#' A result of a call to [hotspot_cluster()].
+#' @param ... Additional arguments pass to [plot_spotoroo()]
+#' @return A `ggplot` object. The plot of the clustering results.
 #' @examples
 #'
 #' \donttest{
 #'
-#'   # time consuming functions (>5 seconds)
+#'   # Time consuming functions (>5 seconds)
 #'
 #'
-#'   # get clustering results
+#'   # Get clustering results
 #'   result <- hotspot_cluster(hotspots,
 #'                            lon = "lon",
 #'                            lat = "lat",
@@ -392,12 +392,12 @@ print.spotoroo <- function(x, ...) {
 #'
 #'
 #'
-#'   # different types of plots
+#'   # Different types of plots
 #'
-#'   # default plot
+#'   # Default plot
 #'   plot(result, "def", bg = plot_vic_map())
 #'
-#'   # fire movement plot
+#'   # Fire movement plot
 #'   plot(result, "mov", cluster = 1:3, step = 3, bg = plot_vic_map())
 #' }
 #'

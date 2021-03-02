@@ -7,16 +7,16 @@
 dist_point_to_vector(plon, plat, vlon, vlat)
 }
 \arguments{
-\item{plon}{numeric; the longitude of a point.}
+\item{plon}{Numeric. The longitude of a point.}
 
-\item{plat}{numeric; the latitude of a point.}
+\item{plat}{Numeric. The latitude of a point.}
 
-\item{vlon}{numeric; a vector of longitude values.}
+\item{vlon}{Numeric. A vector of longitude values.}
 
-\item{vlat}{numeric; a vector of latitude values.}
+\item{vlat}{Numeric. A vector of latitude values.}
 }
 \value{
-Numeric; the geodesic of a point to multiple points in meters.
+Numeric. The geodesic of a point to multiple points in meters.
 }
 \description{
 This function calculates the geodesic of a point to multiple
@@ -24,11 +24,12 @@ points given the coordinate information. It is a wrapper of
 \code{\link[geodist:geodist_vec]{geodist::geodist_vec()}}.
 }
 \examples{
-# define vlon and vlat
+
+# Define vlon and vlat
 vlon <- c(141.12, 141.13)
 vlat <- c(-37.1, -37.0)
 
-# calculate the geodesic
+# Calculate the geodesic
 dist_point_to_vector(141.12, -37.1, vlon, vlat)
 
 }

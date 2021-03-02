@@ -14,44 +14,44 @@ plot_timeline(
 )
 }
 \arguments{
-\item{result}{\code{spotoroo} object; a result of a call to \code{\link[=hotspot_cluster]{hotspot_cluster()}}.}
+\item{result}{\code{spotoroo} object. A result of a call to \code{\link[=hotspot_cluster]{hotspot_cluster()}}.}
 
-\item{from}{\strong{OPTIONAL}; date/datetime/numeric; start time; the data type
+\item{from}{\strong{OPTIONAL}. Date/Datetime/Numeric. Start time. The data type
 needs to be the same as the provided observed time.}
 
-\item{to}{\strong{OPTIONAL}; date/datetime/numeric; end time; the data type
+\item{to}{\strong{OPTIONAL}. Date/Datetime/Numeric. End time. The data type
 needs to be the same as the provided observed time.}
 
-\item{mainBreak}{\strong{OPTIONAL}; character/numeric; a string/value giving the
-difference between major breaks; if the
+\item{mainBreak}{\strong{OPTIONAL}. Character/Numeric. A string/value giving the
+difference between major breaks. If the
 observed time is in date/datetime
 format,
-this value will pass to
+this value will be passed to
 \code{\link[ggplot2:scale_date]{ggplot2::scale_x_date()}} or
 \code{\link[ggplot2:scale_date]{ggplot2::scale_x_datetime()}} as
 \code{date_breaks}.}
 
-\item{minorBreak}{\strong{OPTIONAL}; character/numeric; a string/value giving the
-difference between minor breaks; if the
+\item{minorBreak}{\strong{OPTIONAL}. Character/Numeric. A string/value giving the
+difference between minor breaks. If the
 observed time is in date/datetime
 format,
-this value will pass to
+this value will be passed to
 \code{\link[ggplot2:scale_date]{ggplot2::scale_x_date()}} or
 \code{\link[ggplot2:scale_date]{ggplot2::scale_x_datetime()}} as
 \code{date_breaks}.}
 
-\item{dateLabel}{\strong{OPTIONAL}; character; a string giving the formatting
-specification for the labels; if the
+\item{dateLabel}{\strong{OPTIONAL}. Character. A string giving the formatting
+specification for the labels. If the
 observed
 time is in date/datetime format,
-this value will pass to
+this value will be passed to
 \code{\link[ggplot2:scale_date]{ggplot2::scale_x_date()}} or
 \code{\link[ggplot2:scale_date]{ggplot2::scale_x_datetime()}} as
-\code{date_labels}; unavailable if the observed
+\code{date_labels}. Unavailable if the observed
 time is in numeric format.}
 }
 \value{
-A \code{ggplot} object; the plot of the timeline.
+A \code{ggplot} object. The plot of the timeline.
 }
 \description{
 This function plots the timeline of the fires and the noise points.
@@ -59,10 +59,10 @@ This function plots the timeline of the fires and the noise points.
 \examples{
 \donttest{
 
-  # time consuming functions (>5 seconds)
+  # Time consuming functions (>5 seconds)
 
 
-  # get clustering results
+  # Get clustering results
   result <- hotspot_cluster(hotspots,
                           lon = "lon",
                           lat = "lat",
@@ -75,7 +75,7 @@ This function plots the timeline of the fires and the noise points.
                           timeUnit = "h",
                           timeStep = 1)
 
-  # plot timeline
+  # Plot timeline
   plot_timeline(result,
               mainBreak = "1 week",
               minorBreak = "1 day",

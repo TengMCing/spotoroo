@@ -3,39 +3,39 @@
 #' This function takes a `spotoroo` object to produce a data frame which
 #' contains information about the fire.
 #'
-#' @param result `spotoroo` object;
-#' a result of a call to [hotspot_cluster()].
-#' @param cluster character/integer; if "all", extract all clusters.
-#'                if a integer vector is given, extract corresponding
+#' @param result `spotoroo` object.
+#' A result of a call to [hotspot_cluster()].
+#' @param cluster Character/Integer. If "all", extract all clusters.
+#'                If a integer vector is given, extract corresponding
 #'                clusters.
-#' @param noise logical; whether or not to include noise.
-#' @return A data.frame; the fire information
+#' @param noise Logical. Whether or not to include noise.
+#' @return A data.frame. The fire information
 #' \itemize{
-#'   \item \code{lon} : longitude.
-#'   \item \code{lat} : latitude.
-#'   \item \code{obsTime} : observed time.
-#'   \item \code{timeID} : time indexes.
-#'   \item \code{membership} : membership labels.
-#'   \item \code{noise} : whether it is a noise point.
-#'   \item \code{distToIgnition} : distance to the ignition location.
-#'   \item \code{distToIgnitionUnit} : unit of distance to the ignition
+#'   \item \code{lon} : Longitude.
+#'   \item \code{lat} : Latitude.
+#'   \item \code{obsTime} : Observed time.
+#'   \item \code{timeID} : Time indexes.
+#'   \item \code{membership} : Membership labels.
+#'   \item \code{noise} : Whether it is a noise point.
+#'   \item \code{distToIgnition} : Distance to the ignition location.
+#'   \item \code{distToIgnitionUnit} : Unit of distance to the ignition
 #'                                       location.
-#'   \item \code{timeFromIgnition} : time from ignition.
-#'   \item \code{timeFromIgnitionUnit} : unit of time from ignition.
-#'   \item \code{type} : type of the entry, either "hotspot", "noise" or
+#'   \item \code{timeFromIgnition} : Time from ignition.
+#'   \item \code{timeFromIgnitionUnit} : Unit of time from ignition.
+#'   \item \code{type} : Type of the entry, either "hotspot", "noise" or
 #'                       "ignition"
-#'   \item \code{obsInCluster} : number of observations in the cluster.
-#'   \item \code{clusterTimeLen} : length of time of the cluster.
-#'   \item \code{clusterTimeLenUnit} : unit of length of time of the
+#'   \item \code{obsInCluster} : Number of observations in the cluster.
+#'   \item \code{clusterTimeLen} : Length of time of the cluster.
+#'   \item \code{clusterTimeLenUnit} : Unit of length of time of the
 #'     cluster.
 #' }
 #' @examples
 #' \donttest{
 #'
-#'   # time consuming functions (>5 seconds)
+#'   # Time consuming functions (>5 seconds)
 #'
 #'
-#'   # get clustering results
+#'   # Get clustering results
 #'   result <- hotspot_cluster(hotspots,
 #'                           lon = "lon",
 #'                           lat = "lat",
@@ -49,11 +49,11 @@
 #'                           timeStep = 1)
 #'
 #'
-#'   # extract all fires
+#'   # Extract all fires
 #'   all_fires <- extract_fire(result)
 #'   head(all_fires, 3)
 #'
-#'   # extract cluster 4
+#'   # Extract cluster 4
 #'   fire_4 <- extract_fire(result, 4)
 #'   head(fire_4, 3)
 #' }

@@ -143,32 +143,33 @@ points given the coordinate information. It is a wrapper of
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>plon</th>
-      <td><p>numeric; the longitude of a point.</p></td>
+      <td><p>Numeric. The longitude of a point.</p></td>
     </tr>
     <tr>
       <th>plat</th>
-      <td><p>numeric; the latitude of a point.</p></td>
+      <td><p>Numeric. The latitude of a point.</p></td>
     </tr>
     <tr>
       <th>vlon</th>
-      <td><p>numeric; a vector of longitude values.</p></td>
+      <td><p>Numeric. A vector of longitude values.</p></td>
     </tr>
     <tr>
       <th>vlat</th>
-      <td><p>numeric; a vector of latitude values.</p></td>
+      <td><p>Numeric. A vector of latitude values.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Numeric; the geodesic of a point to multiple points in meters.</p>
+    <p>Numeric. The geodesic of a point to multiple points in meters.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># define vlon and vlat</span>
+    <pre class="examples"><div class='input'>
+<span class='co'># Define vlon and vlat</span>
 <span class='va'>vlon</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>141.12</span>, <span class='fl'>141.13</span><span class='op'>)</span>
 <span class='va'>vlat</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>37.1</span>, <span class='op'>-</span><span class='fl'>37.0</span><span class='op'>)</span>
 
-<span class='co'># calculate the geodesic</span>
+<span class='co'># Calculate the geodesic</span>
 <span class='fu'>dist_point_to_vector</span><span class='op'>(</span><span class='fl'>141.12</span>, <span class='op'>-</span><span class='fl'>37.1</span>, <span class='va'>vlon</span>, <span class='va'>vlat</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; [1]     0.00 11148.63</div><div class='input'>
 </div></pre>

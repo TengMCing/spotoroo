@@ -4,8 +4,8 @@
 #'
 #' Require package `sf` installed.
 #'
-#' @param ... all arguments will be ignored.
-#' @return A `ggplot` object; the map of Victoria, Australia.
+#' @param ... All arguments will be ignored.
+#' @return A `ggplot` object. The map of Victoria, Australia.
 #' @examples
 #' if (requireNamespace("sf", quietly = TRUE)) {
 #'   plot_vic_map()

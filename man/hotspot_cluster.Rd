@@ -19,67 +19,67 @@ hotspot_cluster(
 )
 }
 \arguments{
-\item{hotspots}{list/data frame; a list or a data frame which
+\item{hotspots}{List/Data frame. A list or a data frame which
 contains information of hot spots.}
 
-\item{lon}{character; the name of the column of the list which contains
+\item{lon}{Character. The name of the column of the list which contains
 numeric longitude values.}
 
-\item{lat}{character; the name of the column of the list which contains
+\item{lat}{Character. The name of the column of the list which contains
 numeric latitude values.}
 
-\item{obsTime}{character; the name of the column of the list which contains
-the observed time of hot spots; the observed time
+\item{obsTime}{Character. The name of the column of the list which contains
+the observed time of hot spots. The observed time
 has to be in date, datetime or numeric.}
 
-\item{activeTime}{numeric (>=0); time tolerance; unit is time index.}
+\item{activeTime}{Numeric (>=0). Time tolerance. Unit is time index.}
 
-\item{adjDist}{numeric (>0); distance tolerance; unit is metre.}
+\item{adjDist}{Numeric (>0). Distance tolerance. Unit is metre.}
 
-\item{minPts}{numeric (>0); minimum number of hot spots in a cluster.}
+\item{minPts}{Numeric (>0). Minimum number of hot spots in a cluster.}
 
-\item{minTime}{numeric (>=0); minimum length of time of a cluster;
-unit is time index.}
+\item{minTime}{Numeric (>=0). Minimum length of time of a cluster.
+Unit is time index.}
 
-\item{ignitionCenter}{character; method to calculate ignition points,
+\item{ignitionCenter}{Character. Method to calculate ignition points,
 either "mean" or "median".}
 
-\item{timeUnit}{character; one of "s" (seconds),
+\item{timeUnit}{Character. One of "s" (seconds),
 "m" (minutes), "h" (hours),
 "d" (days) and "n" (numeric).}
 
-\item{timeStep}{numeric (>0); number of units of \code{timeUnit} in a time step.}
+\item{timeStep}{Numeric (>0). Number of units of \code{timeUnit} in a time step.}
 }
 \value{
-A \code{spotoroo} object; the clustering results; it is also a list:
+A \code{spotoroo} object. The clustering results. It is also a list:
 \itemize{
-\item \code{hotspots} : a data frame contains information of hot spots.
+\item \code{hotspots} : A data frame contains information of hot spots.
 \itemize{
-\item \code{lon} : longitude.
-\item \code{lat} : latitude.
-\item \code{obsTime} : observed time.
-\item \code{timeID} : time index.
-\item \code{membership} : membership label.
-\item \code{noise} : whether it is a noise point.
-\item \code{distToIgnition} : distance to the ignition location.
-\item \code{distToIgnitionUnit} : unit of distance to the ignition
+\item \code{lon} : Longitude.
+\item \code{lat} : Latitude.
+\item \code{obsTime} : Observed time.
+\item \code{timeID} : Time index.
+\item \code{membership} : Membership label.
+\item \code{noise} : Whether it is a noise point.
+\item \code{distToIgnition} : Distance to the ignition location.
+\item \code{distToIgnitionUnit} : Unit of distance to the ignition
 location.
-\item \code{timeFromIgnition} : time from ignition.
-\item \code{timeFromIgnitionUnit} : unit of time from ignition.
+\item \code{timeFromIgnition} : Time from ignition.
+\item \code{timeFromIgnitionUnit} : Unit of time from ignition.
 }
-\item \code{ignition} : a data frame contains information of ignition
+\item \code{ignition} : A data frame contains information of ignition
 points.
 \itemize{
-\item \code{lon} : longitude.
-\item \code{lat} : latitude.
-\item \code{obsTime} : observed time.
-\item \code{timeID} : time index.
-\item \code{obsInCluster} : number of observations in the cluster.
-\item \code{clusterTimeLen} : length of time of the cluster.
-\item \code{clusterTimeLenUnit} : unit of length of time of the
+\item \code{lon} : Longitude.
+\item \code{lat} : Latitude.
+\item \code{obsTime} : Observed time.
+\item \code{timeID} : Time index.
+\item \code{obsInCluster} : Number of observations in the cluster.
+\item \code{clusterTimeLen} : Length of time of the cluster.
+\item \code{clusterTimeLenUnit} : Unit of length of time of the
 cluster.
 }
-\item \code{setting} : a list contains the clustering settings.
+\item \code{setting} : A list contains the clustering settings.
 }
 }
 \description{
@@ -147,10 +147,10 @@ of the ignition point. This needs to be specified in argument
 \examples{
 \donttest{
 
-  # time consuming functions (>5 seconds)
+  # Time consuming functions (>5 seconds)
 
 
-  # get clustering results
+  # Get clustering results
   result <- hotspot_cluster(hotspots,
                 lon = "lon",
                 lat = "lat",

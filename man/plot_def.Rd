@@ -16,27 +16,29 @@ plot_def(
 )
 }
 \arguments{
-\item{result}{\code{spotoroo} object; a result of a call to \code{\link[=hotspot_cluster]{hotspot_cluster()}}.}
+\item{result}{\code{spotoroo} object. A result of a call to \code{\link[=hotspot_cluster]{hotspot_cluster()}}.}
 
-\item{cluster}{character/integer; if "all", plot all clusters. if a integer
+\item{cluster}{Character/Integer. If "all", plot all clusters. If a integer
 vector is given, plot corresponding clusters.}
 
-\item{hotspot}{logical; if \code{TRUE}, plot the hot spots.}
+\item{hotspot}{Logical. If \code{TRUE}, plot the hot spots.}
 
-\item{noise}{logical; if \code{TRUE}, plot the noise points.}
+\item{noise}{Logical. If \code{TRUE}, plot the noise points.}
 
-\item{ignition}{logical; if \code{TRUE}, plot the ignition points.}
+\item{ignition}{Logical. If \code{TRUE}, plot the ignition points.}
 
-\item{from}{\strong{OPTIONAL}; date/datetime/numeric; start time; the data type
+\item{from}{\strong{OPTIONAL}. Date/Datetime/Numeric. Start time. The data type
+needs to be the same as the provided
+observed time.}
+
+\item{to}{\strong{OPTIONAL}. Date/Datetime/Numeric. End time. The data type
 needs to be the same as the provided observed time.}
 
-\item{to}{\strong{OPTIONAL}; date/datetime/numeric; end time; the data type
-needs to be the same as the provided observed time.}
-
-\item{bg}{\strong{OPTIONAL}; \code{ggplot} object; if specified, plot onto this object.}
+\item{bg}{\strong{OPTIONAL}. \code{ggplot} object. If specified, plot onto
+this object.}
 }
 \value{
-A \code{ggplot} object; the plot of the clustering results.
+A \code{ggplot} object. The plot of the clustering results.
 }
 \description{
 This function plots the clustering result spatially as a scatter plot.
@@ -44,10 +46,10 @@ This function plots the clustering result spatially as a scatter plot.
 \examples{
 \donttest{
 
-  # time consuming functions (>5 seconds)
+  # Time consuming functions (>5 seconds)
 
 
-  # get clustering results
+  # Get clustering results
   result <- hotspot_cluster(hotspots,
                           lon = "lon",
                           lat = "lat",
@@ -60,10 +62,10 @@ This function plots the clustering result spatially as a scatter plot.
                           timeUnit = "h",
                           timeStep = 1)
 
-  # plot a subset of clusters
+  # Plot a subset of clusters
   plot_def(result, cluster = 1:3)
 
-  # plot all clusters
+  # Plot all clusters
   plot_def(result, cluster = "all")
 }
 
