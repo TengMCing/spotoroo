@@ -145,7 +145,12 @@ of the ignition point. This needs to be specified in argument
 \code{ignitionCenter}.
 }
 \examples{
-if (FALSE) {
+\donttest{
+
+  # time consuming functions (>5 seconds)
+
+
+  # get clustering results
   result <- hotspot_cluster(hotspots,
                 lon = "lon",
                 lat = "lat",

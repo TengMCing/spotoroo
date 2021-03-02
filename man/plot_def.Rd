@@ -42,7 +42,11 @@ A \code{ggplot} object; the plot of the clustering results.
 This function plots the clustering result spatially as a scatter plot.
 }
 \examples{
-if (FALSE) {
+\donttest{
+
+  # time consuming functions (>5 seconds)
+
+
   # get clustering results
   result <- hotspot_cluster(hotspots,
                           lon = "lon",

@@ -43,7 +43,11 @@ This function takes a \code{spotoroo} object to produce a data frame which
 contains information about the fire.
 }
 \examples{
-if (FALSE) {
+\donttest{
+
+  # time consuming functions (>5 seconds)
+
+
   # get clustering results
   result <- hotspot_cluster(hotspots,
                           lon = "lon",

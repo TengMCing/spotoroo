@@ -22,7 +22,11 @@ This function takes a \code{spotoroo} object to produce a summary of the
 clustering results. It can be called by \code{\link[=summary.spotoroo]{summary.spotoroo()}}.
 }
 \examples{
-if (FALSE) {
+\donttest{
+
+  # time consuming functions (>5 seconds)
+
+
   # get clustering results
   result <- hotspot_cluster(hotspots,
                            lon = "lon",

@@ -41,7 +41,11 @@ This function plots the fire movement. The fire movement is calculated
 from \code{\link[=get_fire_mov]{get_fire_mov()}}.
 }
 \examples{
-if (FALSE) {
+\donttest{
+
+  # time consuming functions (>5 seconds)
+
+
   # get clustering results
   result <- hotspot_cluster(hotspots,
                           lon = "lon",

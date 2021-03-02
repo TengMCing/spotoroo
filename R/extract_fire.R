@@ -30,7 +30,11 @@
 #'     cluster.
 #' }
 #' @examples
-#' if (FALSE) {
+#' \donttest{
+#'
+#'   # time consuming functions (>5 seconds)
+#'
+#'
 #'   # get clustering results
 #'   result <- hotspot_cluster(hotspots,
 #'                           lon = "lon",

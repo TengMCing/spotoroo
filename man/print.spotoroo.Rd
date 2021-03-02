@@ -19,7 +19,11 @@ No return value, called for side effects
 \code{print.spotoroo()} is the \code{print} method of the class \code{spotoroo}.
 }
 \examples{
-if (FALSE) {
+\donttest{
+
+  # time consuming functions (>5 seconds)
+
+
   # get clustering results
   result <- hotspot_cluster(hotspots,
                            lon = "lon",

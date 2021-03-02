@@ -113,7 +113,12 @@
 #'   \item \code{setting} : a list contains the clustering settings.
 #' }
 #' @examples
-#' if (FALSE) {
+#' \donttest{
+#'
+#'   # time consuming functions (>5 seconds)
+#'
+#'
+#'   # get clustering results
 #'   result <- hotspot_cluster(hotspots,
 #'                 lon = "lon",
 #'                 lat = "lat",
@@ -276,7 +281,11 @@ hotspot_cluster <- function(hotspots,
 #' @param \dots additional arguments pass to [summary_spotoroo()]
 #' @return No return value, called for side effects
 #' @examples
-#' if (FALSE) {
+#' \donttest{
+#'
+#'   # time consuming functions (>5 seconds)
+#'
+#'
 #'   # get clustering results
 #'   result <- hotspot_cluster(hotspots,
 #'                            lon = "lon",
@@ -310,7 +319,11 @@ summary.spotoroo <- function(object, ...) {
 #' @param \dots additional arguments will be ignored.
 #' @return No return value, called for side effects
 #' @examples
-#' if (FALSE) {
+#' \donttest{
+#'
+#'   # time consuming functions (>5 seconds)
+#'
+#'
 #'   # get clustering results
 #'   result <- hotspot_cluster(hotspots,
 #'                            lon = "lon",
@@ -358,7 +371,12 @@ print.spotoroo <- function(x, ...) {
 #' @param \dots additional arguments pass to [plot_spotoroo()]
 #' @return A `ggplot` object; the plot of the clustering results.
 #' @examples
-#' if (FALSE) {
+#'
+#' \donttest{
+#'
+#'   # time consuming functions (>5 seconds)
+#'
+#'
 #'   # get clustering results
 #'   result <- hotspot_cluster(hotspots,
 #'                            lon = "lon",

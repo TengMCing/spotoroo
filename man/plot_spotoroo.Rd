@@ -130,7 +130,11 @@ See also \code{\link[=plot_timeline]{plot_timeline()}}. Available arguments:
 }
 }
 \examples{
-if (FALSE) {
+\donttest{
+
+  # time consuming functions (>5 seconds)
+
+
   # get clustering result
   result <- hotspot_cluster(hotspots,
                           lon = "lon",

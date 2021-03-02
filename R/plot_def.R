@@ -15,7 +15,11 @@
 #' @param bg **OPTIONAL**; `ggplot` object; if specified, plot onto this object.
 #' @return A `ggplot` object; the plot of the clustering results.
 #' @examples
-#' if (FALSE) {
+#' \donttest{
+#'
+#'   # time consuming functions (>5 seconds)
+#'
+#'
 #'   # get clustering results
 #'   result <- hotspot_cluster(hotspots,
 #'                           lon = "lon",

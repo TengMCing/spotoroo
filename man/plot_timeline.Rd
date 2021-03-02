@@ -57,7 +57,11 @@ A \code{ggplot} object; the plot of the timeline.
 This function plots the timeline of the fires and the noise points.
 }
 \examples{
-if (FALSE) {
+\donttest{
+
+  # time consuming functions (>5 seconds)
+
+
   # get clustering results
   result <- hotspot_cluster(hotspots,
                           lon = "lon",

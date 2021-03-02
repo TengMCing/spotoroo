@@ -86,7 +86,11 @@
 #'                         unavailable in [plot_timeline()].
 #' @return A `ggplot` object; the plot of the clustering results.
 #' @examples
-#' if (FALSE) {
+#' \donttest{
+#'
+#'   # time consuming functions (>5 seconds)
+#'
+#'
 #'   # get clustering result
 #'   result <- hotspot_cluster(hotspots,
 #'                           lon = "lon",
