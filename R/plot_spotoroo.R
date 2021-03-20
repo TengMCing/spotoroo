@@ -39,7 +39,7 @@
 #' @param result `spotoroo` object. A result of a call to [hotspot_cluster()].
 #' @param type Character. Type of the plot. One of "def" (default),
 #'                        "timeline" (timeline) and "mov" (fire movement).
-#' @param cluster Character/Integer. If "all", plot all clusters. If a integer
+#' @param cluster Character/Integer. If "all", plot all clusters. If an integer
 #'                vector is given, plot corresponding clusters. Unavailable in
 #'                [plot_timeline()].
 #' @param ignition Logical. If `TRUE`, plot the ignition points. Only used in
@@ -70,7 +70,7 @@
 #'                                     this value will be passed to
 #'                                     [ggplot2::scale_x_date()] or
 #'                                     [ggplot2::scale_x_datetime()] as
-#'                                     `date_breaks`. Only used in
+#'                                     `date_minor_breaks`. Only used in
 #'                                     [plot_timeline()].
 #' @param dateLabel **OPTIONAL**. Character. A string giving the formatting
 #'                                specification for the labels. If the

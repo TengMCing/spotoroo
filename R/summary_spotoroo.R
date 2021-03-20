@@ -6,7 +6,7 @@
 #' @param result `spotoroo` object.
 #' A result of a call to [hotspot_cluster()].
 #' @param cluster Character/Integer. If "all", summarize all clusters.
-#'                If a integer vector is given, summarize corresponding
+#'                If an integer vector is given, summarize corresponding
 #'                clusters.
 #' @return No return value, called for side effects
 #' @examples

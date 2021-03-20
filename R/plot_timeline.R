@@ -22,7 +22,7 @@
 #'                                     this value will be passed to
 #'                                     [ggplot2::scale_x_date()] or
 #'                                     [ggplot2::scale_x_datetime()] as
-#'                                     `date_breaks`.
+#'                                     `date_minor_breaks`.
 #' @param dateLabel **OPTIONAL**. Character. A string giving the formatting
 #'                                specification for the labels. If the
 #'                                observed

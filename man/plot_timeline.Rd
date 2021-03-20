@@ -38,7 +38,7 @@ format,
 this value will be passed to
 \code{\link[ggplot2:scale_date]{ggplot2::scale_x_date()}} or
 \code{\link[ggplot2:scale_date]{ggplot2::scale_x_datetime()}} as
-\code{date_breaks}.}
+\code{date_minor_breaks}.}
 
 \item{dateLabel}{\strong{OPTIONAL}. Character. A string giving the formatting
 specification for the labels. If the

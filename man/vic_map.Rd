@@ -5,7 +5,7 @@
 \alias{vic_map}
 \title{simple features map of Victoria}
 \format{
-A "\code{sf}" object with 1 row
+A "\code{sf}" object with 1 row.
 }
 \source{
 \url{https://www.naturalearthdata.com/}

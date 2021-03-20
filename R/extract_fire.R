@@ -6,7 +6,7 @@
 #' @param result `spotoroo` object.
 #' A result of a call to [hotspot_cluster()].
 #' @param cluster Character/Integer. If "all", extract all clusters.
-#'                If a integer vector is given, extract corresponding
+#'                If an integer vector is given, extract corresponding
 #'                clusters.
 #' @param noise Logical. Whether or not to include noise.
 #' @return A data.frame. The fire information

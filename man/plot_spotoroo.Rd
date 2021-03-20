@@ -26,7 +26,7 @@ plot_spotoroo(
 \item{type}{Character. Type of the plot. One of "def" (default),
 "timeline" (timeline) and "mov" (fire movement).}
 
-\item{cluster}{Character/Integer. If "all", plot all clusters. If a integer
+\item{cluster}{Character/Integer. If "all", plot all clusters. If an integer
 vector is given, plot corresponding clusters. Unavailable in
 \code{\link[=plot_timeline]{plot_timeline()}}.}
 
@@ -65,7 +65,7 @@ format,
 this value will be passed to
 \code{\link[ggplot2:scale_date]{ggplot2::scale_x_date()}} or
 \code{\link[ggplot2:scale_date]{ggplot2::scale_x_datetime()}} as
-\code{date_breaks}. Only used in
+\code{date_minor_breaks}. Only used in
 \code{\link[=plot_timeline]{plot_timeline()}}.}
 
 \item{dateLabel}{\strong{OPTIONAL}. Character. A string giving the formatting

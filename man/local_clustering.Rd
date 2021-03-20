@@ -14,7 +14,7 @@ local_clustering(lon, lat, adjDist)
 \item{adjDist}{Numeric (>0). Distance tolerance. Unit is metre.}
 }
 \value{
-Integer. A vector of membership labels
+Integer. A vector of membership labels.
 }
 \description{
 This function clusters hot spots spatially.

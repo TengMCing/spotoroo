@@ -17,7 +17,7 @@ plot_fire_mov(
 \arguments{
 \item{result}{\code{spotoroo} object. A result of a call to \code{\link[=hotspot_cluster]{hotspot_cluster()}}.}
 
-\item{cluster}{Character/Integer. If "all", plot all clusters. If a integer
+\item{cluster}{Character/Integer. If "all", plot all clusters. If an integer
 vector is given, plot corresponding clusters.}
 
 \item{hotspot}{Logical. If \code{TRUE}, plot the hot spots.}

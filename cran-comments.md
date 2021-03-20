@@ -21,7 +21,6 @@ There was 1 NOTE:
 ## Resubmission
 This is a resubmission. In this version I have:
 
-* added missing Rd tags: \value and \arguments for some Rd files
-* added inst/CITATION. The method used in this package has not been published in any journal yet, so I link it to my Github page.
+* replaced if(FALSE){} with \donttest{} for time-consuming examples
 
   

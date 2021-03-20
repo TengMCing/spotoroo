@@ -10,7 +10,7 @@
 #' @param lon Numeric. A vector of longitude values.
 #' @param lat Numeric. A vector of latitude values.
 #' @param adjDist Numeric (>0). Distance tolerance. Unit is metre.
-#' @return Integer. A vector of membership labels
+#' @return Integer. A vector of membership labels.
 #' @examples
 #'
 #' # Define lon and lat for 10 observations

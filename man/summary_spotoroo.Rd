@@ -11,7 +11,7 @@ summary_spotoroo(result, cluster = "all")
 A result of a call to \code{\link[=hotspot_cluster]{hotspot_cluster()}}.}
 
 \item{cluster}{Character/Integer. If "all", summarize all clusters.
-If a integer vector is given, summarize corresponding
+If an integer vector is given, summarize corresponding
 clusters.}
 }
 \value{

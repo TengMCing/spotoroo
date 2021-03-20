@@ -8,7 +8,7 @@
 #' \code{vic_map <- au_map[7,]$geometry}
 #'
 #'
-#' @format A "\code{sf}" object with 1 row
+#' @format A "\code{sf}" object with 1 row.
 #' @source \url{https://www.naturalearthdata.com/}
 "vic_map"
 

@@ -4,7 +4,7 @@
 #' from [get_fire_mov()].
 #'
 #' @param result `spotoroo` object. A result of a call to [hotspot_cluster()].
-#' @param cluster Character/Integer. If "all", plot all clusters. If a integer
+#' @param cluster Character/Integer. If "all", plot all clusters. If an integer
 #'                vector is given, plot corresponding clusters.
 #' @param hotspot Logical. If `TRUE`, plot the hot spots.
 #' @param from **OPTIONAL**. Date/Datetime/Numeric. Start time. The data type
