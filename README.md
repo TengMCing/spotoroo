@@ -18,10 +18,10 @@ points and reconstruct fire movement.
 
 ## Installation
 
-<!-- You can install the released version of spotoroo from [CRAN](https://CRAN.R-project.org) with: -->
-<!-- ``` r -->
-<!-- install.packages("spotoroo") -->
-<!-- ``` -->
+You can install the released version of spotoroo from [CRAN](https://CRAN.R-project.org) with:
+``` r
+install.packages("spotoroo")
+```
 
 ``` r
 # You can install the development version from GitHub with:
