@@ -20,6 +20,7 @@ plot_vic_map <- function(...) {
   }
 
   vic_map <- vic_map
+  sf::st_crs(vic_map) <- 4326
   geometry <- NULL
 
   ggplot2::ggplot() +

@@ -1,3 +1,7 @@
+# spotoroo 0.1.1
+
+* Fixed a bug in `plot_vic_map()` that caused problems with older version of spatial packages.
+
 # spotoroo 0.1.0
 
 **First release**
