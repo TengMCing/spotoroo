@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">spotoroo</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
       </span>
     </div>
 
@@ -272,32 +272,32 @@
                           timeUnit <span class="op">=</span> <span class="st">"h"</span>,
                           timeStep <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; -------------------------------- SPOTOROO 0.1.0 --------------------------------</span>
+<span class="co">#&gt; ──────────────────────────────── SPOTOROO 0.1.1 ────────────────────────────────</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; -- Calling Core Function : `hotspot_cluster()` --</span>
+<span class="co">#&gt; ── Calling Core Function : `hotspot_cluster()` ──</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; -- 1 time index = 1 hours</span>
-<span class="co">#&gt; v Transform observed time &gt; time indexes</span>
-<span class="co">#&gt; i 970 time indexes found</span>
+<span class="co">#&gt; ── 1 time index = 1 hours</span>
+<span class="co">#&gt; ✓ Transform observed time → time indexes</span>
+<span class="co">#&gt; ℹ 970 time indexes found</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; -- activeTime = 24 time indexes | adjDist = 3000 meters</span>
-<span class="co">#&gt; v Cluster</span>
-<span class="co">#&gt; i 16 clusters found (including noise)</span>
+<span class="co">#&gt; ── activeTime = 24 time indexes | adjDist = 3000 meters</span>
+<span class="co">#&gt; ✓ Cluster</span>
+<span class="co">#&gt; ℹ 16 clusters found (including noise)</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; -- minPts = 4 hot spots | minTime = 3 time indexes</span>
-<span class="co">#&gt; v Handle noise</span>
-<span class="co">#&gt; i 6 clusters left</span>
-<span class="co">#&gt; i noise proportion : 0.935 %</span>
+<span class="co">#&gt; ── minPts = 4 hot spots | minTime = 3 time indexes</span>
+<span class="co">#&gt; ✓ Handle noise</span>
+<span class="co">#&gt; ℹ 6 clusters left</span>
+<span class="co">#&gt; ℹ noise proportion : 0.935 %</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; -- ignitionCenter = 'mean'</span>
-<span class="co">#&gt; v Compute ignition points for clusters</span>
-<span class="co">#&gt; i average hot spots : 176.7</span>
-<span class="co">#&gt; i average duration : 131.9 hours</span>
+<span class="co">#&gt; ── ignitionCenter = 'mean'</span>
+<span class="co">#&gt; ✓ Compute ignition points for clusters</span>
+<span class="co">#&gt; ℹ average hot spots : 176.7</span>
+<span class="co">#&gt; ℹ average duration : 131.9 hours</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; -- Time taken = 0 mins 3 secs for 1070 hot spots</span>
-<span class="co">#&gt; i 0.003 secs per hot spot</span>
+<span class="co">#&gt; ── Time taken = 0 mins 3 secs for 1070 hot spots</span>
+<span class="co">#&gt; ℹ 0.003 secs per hot spot</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; --------------------------------------------------------------------------------</span></code></pre></div>
+<span class="co">#&gt; ────────────────────────────────────────────────────────────────────────────────</span></code></pre></div>
 <p>Messages produced by this function tell you some important information of the clustering results such as the number of discrete time indexes, the number of clusters and the proportion of noise. If you would like to silent this function, you could wrap this function with the <code><a href="https://rdrr.io/r/base/message.html">suppressMessages()</a></code> function like the example given below.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># NOT RUN</span>
@@ -310,7 +310,7 @@
 <p>If you evaluate the <code>result</code> or print it, you will get a concise description of the clustering results. Here, according to the output, we know there are <span class="math inline">\(6\)</span> clusters in the clustering results.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">result</span>
-<span class="co">#&gt; i spotoroo object: 6 clusters | 1070 hot spots (including noise points)</span></code></pre></div>
+<span class="co">#&gt; ℹ spotoroo object: 6 clusters | 1070 hot spots (including noise points)</span></code></pre></div>
 <p>You can access these two <code>data.frame</code>s in the usual way.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">result</span><span class="op">$</span><span class="va">hotspots</span>, <span class="fl">2</span><span class="op">)</span>
@@ -413,17 +413,17 @@
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/summary_spotoroo.html">summary_spotoroo</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; -------------------------------- SPOTOROO 0.1.0 --------------------------------</span>
+<span class="co">#&gt; ──────────────────────────────── SPOTOROO 0.1.1 ────────────────────────────────</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; -- Calling Core Function : `summary_spotoroo()` --</span>
+<span class="co">#&gt; ── Calling Core Function : `summary_spotoroo()` ──</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; CLUSTERS: ALL</span>
 <span class="co">#&gt; OBSERVATIONS: 1070</span>
 <span class="co">#&gt; FROM: 2019-12-29 13:10:00</span>
 <span class="co">#&gt; TO:   2020-02-07 22:50:00</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; -- Clusters</span>
-<span class="co">#&gt; i Number of clusters: 6</span>
+<span class="co">#&gt; ── Clusters</span>
+<span class="co">#&gt; ℹ Number of clusters: 6</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Observations in cluster</span>
 <span class="co">#&gt;         Min.     1st Qu.        Mean     3rd Qu.        Max.</span>
@@ -432,8 +432,8 @@
 <span class="co">#&gt;         Min.     1st Qu.        Mean     3rd Qu.        Max.</span>
 <span class="co">#&gt;        111.2       118.2       131.9       146.1       148.3</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; -- Hot spots (excluding noise)</span>
-<span class="co">#&gt; i Number of hot spots: 1060</span>
+<span class="co">#&gt; ── Hot spots (excluding noise)</span>
+<span class="co">#&gt; ℹ Number of hot spots: 1060</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Distance to ignition points (m)</span>
 <span class="co">#&gt;         Min.     1st Qu.        Mean     3rd Qu.        Max.</span>
@@ -442,10 +442,10 @@
 <span class="co">#&gt;         Min.     1st Qu.        Mean     3rd Qu.        Max.</span>
 <span class="co">#&gt;          0.0        25.2        62.5        98.2       148.3</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; -- Noise</span>
-<span class="co">#&gt; i Number of noise points: 10 (0.93 %)</span>
+<span class="co">#&gt; ── Noise</span>
+<span class="co">#&gt; ℹ Number of noise points: 10 (0.93 %)</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; --------------------------------------------------------------------------------</span></code></pre></div>
+<span class="co">#&gt; ────────────────────────────────────────────────────────────────────────────────</span></code></pre></div>
 <p>Or make a brief summary of a subset of clusters by providing a vector of membership labels to the <code>cluster</code> argument.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/summary_spotoroo.html">summary_spotoroo</a></span><span class="op">(</span><span class="va">result</span>, cluster <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -474,8 +474,7 @@
 <h3 class="hasAnchor">
 <a href="#timeline" class="anchor"></a>Timeline</h3>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/plot_spotoroo.html">plot_spotoroo</a></span><span class="op">(</span><span class="va">result</span>, type <span class="op">=</span> <span class="st">"timeline"</span><span class="op">)</span>
-<span class="co">#&gt; This version of bslib is designed to work with shiny version 1.5.0.9007 or higher.</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/plot_spotoroo.html">plot_spotoroo</a></span><span class="op">(</span><span class="va">result</span>, type <span class="op">=</span> <span class="st">"timeline"</span><span class="op">)</span></code></pre></div>
 <p><img src="Clustering-hot-spots_files/figure-html/unnamed-chunk-20-1.png" width="700"></p>
 </div>
 <div id="fire-movement" class="section level3">
@@ -502,13 +501,13 @@
 <h3 class="hasAnchor">
 <a href="#called-by-plot" class="anchor"></a>Called by <code>plot()</code>
 </h3>
-<p>For convenience, the <code><a href="../reference/plot_spotoroo.html">plot_spotoroo()</a></code> can be called by the <code><a href="https://rdrr.io/r/graphics/plot.html">plot()</a></code> function.</p>
+<p>For convenience, the <code><a href="../reference/plot_spotoroo.html">plot_spotoroo()</a></code> can be called by the <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> function.</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span><span class="op">(</span><span class="va">result</span>, type <span class="op">=</span> <span class="st">"timeline"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span><span class="op">(</span><span class="va">result</span>, type <span class="op">=</span> <span class="st">"mov"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span><span class="op">(</span><span class="va">result</span>, bg <span class="op">=</span> <span class="fu"><a href="../reference/plot_vic_map.html">plot_vic_map</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span><span class="op">(</span><span class="va">result</span>, type <span class="op">=</span> <span class="st">"mov"</span>, bg <span class="op">=</span> <span class="fu"><a href="../reference/plot_vic_map.html">plot_vic_map</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span>, type <span class="op">=</span> <span class="st">"timeline"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span>, type <span class="op">=</span> <span class="st">"mov"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span>, bg <span class="op">=</span> <span class="fu"><a href="../reference/plot_vic_map.html">plot_vic_map</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span>, type <span class="op">=</span> <span class="st">"mov"</span>, bg <span class="op">=</span> <span class="fu"><a href="../reference/plot_vic_map.html">plot_vic_map</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
 </div>
