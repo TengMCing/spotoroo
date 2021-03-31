@@ -14,7 +14,7 @@ There were no ERRORs or WARNINGs.
 ## Note
 This is a patched version. In this version I have:
 
-* attempted to fix a bug to pass R CMD check on r-patched-solaris-x86 and r-oldrel-macos-x86_64. This bug would cause problems if older version of spatial packages are used.
+* attempted to fix a bug to pass R CMD check on r-patched-solaris-x86 and r-oldrel-macos-x86_64. This bug would cause problems if older versions of spatial packages were used.
 
 
   
