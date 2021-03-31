@@ -333,7 +333,7 @@
 <div id="extract-a-subset-of-clusters" class="section level3">
 <h3 class="hasAnchor">
 <a href="#extract-a-subset-of-clusters" class="anchor"></a>Extract a subset of clusters</h3>
-<p>If you would like to extract a subset of clusters from the results or merge the <code>hotspots</code> and <code>ignition</code> dataset, you could the function <code><a href="../reference/extract_fire.html">extract_fire()</a></code>.</p>
+<p>If you would like to extract a subset of clusters from the results or merge the <code>hotspots</code> and <code>ignition</code> dataset, you could use the function <code><a href="../reference/extract_fire.html">extract_fire()</a></code>.</p>
 <p>You could choose to extract all clusters along with noise points by setting <code>cluster = "all"</code> and <code>noise = TRUE</code>. This will merge the <code>hotspots</code> and <code>ignition</code> dataset.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Merge the `hotspots` and `ignition` dataset</span>
@@ -491,10 +491,14 @@
 <p>If you have a background <code>ggplot</code> object, you can let the function plots onto it.</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"sf"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
-    <span class="fu"><a href="../reference/plot_spotoroo.html">plot_spotoroo</a></span><span class="op">(</span><span class="va">result</span>, bg <span class="op">=</span> <span class="fu"><a href="../reference/plot_vic_map.html">plot_vic_map</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
-    <span class="fu"><a href="../reference/plot_spotoroo.html">plot_spotoroo</a></span><span class="op">(</span><span class="va">result</span>, type <span class="op">=</span> <span class="st">"mov"</span>, bg <span class="op">=</span> <span class="fu"><a href="../reference/plot_vic_map.html">plot_vic_map</a></span><span class="op">(</span><span class="op">)</span>, step <span class="op">=</span> <span class="fl">6</span><span class="op">)</span>
+  <span class="fu"><a href="../reference/plot_spotoroo.html">plot_spotoroo</a></span><span class="op">(</span><span class="va">result</span>, bg <span class="op">=</span> <span class="fu"><a href="../reference/plot_vic_map.html">plot_vic_map</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
 <span class="op">}</span></code></pre></div>
 <p><img src="Clustering-hot-spots_files/figure-html/unnamed-chunk-22-1.png" width="700"></p>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"sf"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+  <span class="fu"><a href="../reference/plot_spotoroo.html">plot_spotoroo</a></span><span class="op">(</span><span class="va">result</span>, type <span class="op">=</span> <span class="st">"mov"</span>, bg <span class="op">=</span> <span class="fu"><a href="../reference/plot_vic_map.html">plot_vic_map</a></span><span class="op">(</span><span class="op">)</span>, step <span class="op">=</span> <span class="fl">6</span><span class="op">)</span>
+<span class="op">}</span></code></pre></div>
+<p><img src="Clustering-hot-spots_files/figure-html/unnamed-chunk-23-1.png" width="700"></p>
 <p>More details about the usage of this function can be found by using the <code><a href="../reference/plot_spotoroo.html">help(plot_spotoroo)</a></code> function.</p>
 </div>
 <div id="called-by-plot" class="section level3">
@@ -502,7 +506,7 @@
 <a href="#called-by-plot" class="anchor"></a>Called by <code>plot()</code>
 </h3>
 <p>For convenience, the <code><a href="../reference/plot_spotoroo.html">plot_spotoroo()</a></code> can be called by the <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> function.</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span>, type <span class="op">=</span> <span class="st">"timeline"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span>, type <span class="op">=</span> <span class="st">"mov"</span><span class="op">)</span>

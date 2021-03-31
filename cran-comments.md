@@ -18,8 +18,8 @@ There was 1 NOTE:
     
   Spatiotemporal is the correct word. 
   
-## Resubmission
-This is a resubmission. In this version I have:
+## Patch version
+This is a patch version. In this version I have:
 
 * replaced if(FALSE){} with \donttest{} for time-consuming examples
 

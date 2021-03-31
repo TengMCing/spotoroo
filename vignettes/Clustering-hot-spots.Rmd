@@ -206,7 +206,7 @@ The `ignition` dataset contains information of each cluster. Similarly, the `mem
 
 ### Extract a subset of clusters
 
-If you would like to extract a subset of clusters from the results or merge the `hotspots` and `ignition` dataset, you could the function `extract_fire()`.
+If you would like to extract a subset of clusters from the results or merge the `hotspots` and `ignition` dataset, you could use the function `extract_fire()`.
 
 You could choose to extract all clusters along with noise points by setting `cluster = "all"` and `noise = TRUE`. This will merge the `hotspots` and `ignition` dataset.
 
@@ -375,8 +375,13 @@ If you have a background `ggplot` object, you can let the function plots onto it
 
 ```{r}
 if (requireNamespace("sf", quietly = TRUE)) {
-    plot_spotoroo(result, bg = plot_vic_map())
-    plot_spotoroo(result, type = "mov", bg = plot_vic_map(), step = 6)
+  plot_spotoroo(result, bg = plot_vic_map())
+}
+```
+
+```{r}
+if (requireNamespace("sf", quietly = TRUE)) {
+  plot_spotoroo(result, type = "mov", bg = plot_vic_map(), step = 6)
 }
 ```
 
