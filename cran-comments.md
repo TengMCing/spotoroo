@@ -1,5 +1,6 @@
 ## Test environments
 * local Windows 10 installation: R 3.6.3
+* local mac OS X: release
 * Github Actions (Mac OS X): release
 * win-builder: devel, release, oldrel
 * R-hub (Ubuntu Linux): devel, release
@@ -9,18 +10,11 @@
 ## R CMD check results
 
 There were no ERRORs or WARNINGs. 
-
-There was 1 NOTE:
-
-* checking CRAN incoming feasibility ... NOTE
-  Possibly mis-spelled words in DESCRIPTION:
-    Spatiotemporal (2:8)
-    
-  Spatiotemporal is the correct word. 
   
-## Patch version
-This is a patch version. In this version I have:
+## Note
+This is a patched version. In this version I have:
 
-* replaced if(FALSE){} with \donttest{} for time-consuming examples
+* attempted to fix a bug to pass R CMD check on r-patched-solaris-x86 and r-oldrel-macos-x86_64. This bug would cause problems if older version of spatial packages are used.
+
 
   
