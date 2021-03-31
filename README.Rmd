@@ -29,16 +29,15 @@ knitr::opts_chunk$set(
 
 ## Installation
 
-<!-- You can install the released version of spotoroo from [CRAN](https://CRAN.R-project.org) with: -->
-
-<!-- ``` r -->
-<!-- install.packages("spotoroo") -->
-<!-- ``` -->
-
-
+You can install the released version of spotoroo from [CRAN](https://CRAN.R-project.org) with:
 
 ``` r
-# You can install the development version from GitHub with:
+install.packages("spotoroo")
+```
+
+You can install the development version from GitHub with:
+
+``` r
 # install.packages("devtools")
 devtools::install_github("TengMCing/spotoroo")
 ```

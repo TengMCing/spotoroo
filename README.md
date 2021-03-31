@@ -18,13 +18,16 @@ points and reconstruct fire movement.
 
 ## Installation
 
-You can install the released version of spotoroo from [CRAN](https://CRAN.R-project.org) with:
+You can install the released version of spotoroo from
+[CRAN](https://CRAN.R-project.org) with:
+
 ``` r
 install.packages("spotoroo")
 ```
 
+You can install the development version from GitHub with:
+
 ``` r
-# You can install the development version from GitHub with:
 # install.packages("devtools")
 devtools::install_github("TengMCing/spotoroo")
 ```
@@ -82,36 +85,36 @@ result <- hotspot_cluster(hotspots,
                           timeUnit = "h",
                           timeStep = 1)
 #> 
-#> -------------------------------- SPOTOROO 0.1.0 --------------------------------
+#> ──────────────────────────────── SPOTOROO 0.1.1 ────────────────────────────────
 #> 
-#> -- Calling Core Function : `hotspot_cluster()` --
+#> ── Calling Core Function : `hotspot_cluster()` ──
 #> 
-#> -- 1 time index = 1 hours
-#> v Transform observed time > time indexes
-#> i 970 time indexes found
+#> ── 1 time index = 1 hours
+#> ✓ Transform observed time → time indexes
+#> ℹ 970 time indexes found
 #> 
-#> -- activeTime = 24 time indexes | adjDist = 3000 meters
-#> v Cluster
-#> i 16 clusters found (including noise)
+#> ── activeTime = 24 time indexes | adjDist = 3000 meters
+#> ✓ Cluster
+#> ℹ 16 clusters found (including noise)
 #> 
-#> -- minPts = 4 hot spots | minTime = 3 time indexes
-#> v Handle noise
-#> i 6 clusters left
-#> i noise proportion : 0.935 %
+#> ── minPts = 4 hot spots | minTime = 3 time indexes
+#> ✓ Handle noise
+#> ℹ 6 clusters left
+#> ℹ noise proportion : 0.935 %
 #> 
-#> -- ignitionCenter = 'mean'
-#> v Compute ignition points for clusters
-#> i average hot spots : 176.7
-#> i average duration : 131.9 hours
+#> ── ignitionCenter = 'mean'
+#> ✓ Compute ignition points for clusters
+#> ℹ average hot spots : 176.7
+#> ℹ average duration : 131.9 hours
 #> 
-#> -- Time taken = 0 mins 3 secs for 1070 hot spots
-#> i 0.003 secs per hot spot
+#> ── Time taken = 0 mins 3 secs for 1070 hot spots
+#> ℹ 0.002 secs per hot spot
 #> 
-#> --------------------------------------------------------------------------------
+#> ────────────────────────────────────────────────────────────────────────────────
 
 
 result
-#> i spotoroo object: 6 clusters | 1070 hot spots (including noise points)
+#> ℹ spotoroo object: 6 clusters | 1070 hot spots (including noise points)
 ```
 
 You can make a summary of the clustering results.
@@ -119,17 +122,17 @@ You can make a summary of the clustering results.
 ``` r
 summary(result)
 #> 
-#> -------------------------------- SPOTOROO 0.1.0 --------------------------------
+#> ──────────────────────────────── SPOTOROO 0.1.1 ────────────────────────────────
 #> 
-#> -- Calling Core Function : `summary_spotoroo()` --
+#> ── Calling Core Function : `summary_spotoroo()` ──
 #> 
 #> CLUSTERS: ALL
 #> OBSERVATIONS: 1070
 #> FROM: 2019-12-29 13:10:00
 #> TO:   2020-02-07 22:50:00
 #> 
-#> -- Clusters
-#> i Number of clusters: 6
+#> ── Clusters
+#> ℹ Number of clusters: 6
 #> 
 #> Observations in cluster
 #>         Min.     1st Qu.        Mean     3rd Qu.        Max.
@@ -138,8 +141,8 @@ summary(result)
 #>         Min.     1st Qu.        Mean     3rd Qu.        Max.
 #>        111.2       118.2       131.9       146.1       148.3
 #> 
-#> -- Hot spots (excluding noise)
-#> i Number of hot spots: 1060
+#> ── Hot spots (excluding noise)
+#> ℹ Number of hot spots: 1060
 #> 
 #> Distance to ignition points (m)
 #>         Min.     1st Qu.        Mean     3rd Qu.        Max.
@@ -148,10 +151,10 @@ summary(result)
 #>         Min.     1st Qu.        Mean     3rd Qu.        Max.
 #>          0.0        25.2        62.5        98.2       148.3
 #> 
-#> -- Noise
-#> i Number of noise points: 10 (0.93 %)
+#> ── Noise
+#> ℹ Number of noise points: 10 (0.93 %)
 #> 
-#> --------------------------------------------------------------------------------
+#> ────────────────────────────────────────────────────────────────────────────────
 ```
 
 You can extract a subset of clusters from the results.
