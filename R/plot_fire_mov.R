@@ -204,8 +204,8 @@ plot_fire_mov <- function(result,
   if (hotspot) {
 
     temp_data <- filter(result$hotspots, include) %>%
-      mutate(lon_jit = jitter(lon, factor = 1),
-             lat_jit = jitter(lat, factor = 1))
+      mutate(lon_jit = jitter(lon, factor = 2.5),
+             lat_jit = jitter(lat, factor = 2.5))
 
 
     p <- p + geom_point(data = temp_data,
