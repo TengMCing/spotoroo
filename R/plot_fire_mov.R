@@ -243,7 +243,7 @@ plot_fire_mov <- function(result,
     p <- p + geom_path(data = temp_data,
                        aes(lon, lat),
                        col = "black",
-                       linetype = 2)
+                       linetype = 1)
   }
 
   # draw end point
