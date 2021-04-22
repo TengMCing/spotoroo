@@ -107,7 +107,7 @@ result <- hotspot_cluster(hotspots,
 #> ℹ average hot spots : 176.7
 #> ℹ average duration : 131.9 hours
 #> 
-#> ── Time taken = 0 mins 3 secs for 1070 hot spots
+#> ── Time taken = 0 mins 2 secs for 1070 hot spots
 #> ℹ 0.002 secs per hot spot
 #> 
 #> ────────────────────────────────────────────────────────────────────────────────
