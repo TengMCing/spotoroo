@@ -79,7 +79,7 @@
 
       
 
-      </header><script src="Clustering-hot-spots_files/header-attrs-2.7/header-attrs.js"></script><div class="row">
+      </header><script src="Clustering-hot-spots_files/header-attrs-2.8/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Guide to spotoroo</h1>
@@ -272,11 +272,11 @@
                           timeUnit <span class="op">=</span> <span class="st">"h"</span>,
                           timeStep <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; ──────────────────────────────── SPOTOROO 0.1.1 ────────────────────────────────</span>
+<span class="co">#&gt; ──────────────────────────────── SPOTOROO 0.1.2 ────────────────────────────────</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; ── Calling Core Function : `hotspot_cluster()` ──</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; ── 1 time index = 1 hours</span>
+<span class="co">#&gt; ── '1' time index = 1 hours</span>
 <span class="co">#&gt; ✓ Transform observed time → time indexes</span>
 <span class="co">#&gt; ℹ 970 time indexes found</span>
 <span class="co">#&gt; </span>
@@ -287,15 +287,15 @@
 <span class="co">#&gt; ── minPts = 4 hot spots | minTime = 3 time indexes</span>
 <span class="co">#&gt; ✓ Handle noise</span>
 <span class="co">#&gt; ℹ 6 clusters left</span>
-<span class="co">#&gt; ℹ noise proportion : 0.935 %</span>
+<span class="co">#&gt; ℹ noise proportion : '0.935 %'</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; ── ignitionCenter = 'mean'</span>
 <span class="co">#&gt; ✓ Compute ignition points for clusters</span>
 <span class="co">#&gt; ℹ average hot spots : 176.7</span>
 <span class="co">#&gt; ℹ average duration : 131.9 hours</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; ── Time taken = 0 mins 3 secs for 1070 hot spots</span>
-<span class="co">#&gt; ℹ 0.003 secs per hot spot</span>
+<span class="co">#&gt; ── Time taken = 0 mins 1 sec for 1070 hot spots</span>
+<span class="co">#&gt; ℹ 0.001 secs per hot spot</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; ────────────────────────────────────────────────────────────────────────────────</span></code></pre></div>
 <p>Messages produced by this function tell you some important information of the clustering results such as the number of discrete time indexes, the number of clusters and the proportion of noise. If you would like to silent this function, you could wrap this function with the <code><a href="https://rdrr.io/r/base/message.html">suppressMessages()</a></code> function like the example given below.</p>
@@ -318,8 +318,8 @@
 <span class="co">#&gt; 1 147.46 -37.46000 2020-02-01 05:20:00    809         -1  TRUE              0</span>
 <span class="co">#&gt; 2 146.48 -37.93999 2020-01-02 06:30:00     90         -1  TRUE              0</span>
 <span class="co">#&gt;   distToIgnitionUnit timeFromIgnition timeFromIgnitionUnit</span>
-<span class="co">#&gt; 1                  m   718.8333 hours                    h</span>
-<span class="co">#&gt; 2                  m   718.8333 hours                    h</span>
+<span class="co">#&gt; 1                  m          0 hours                    h</span>
+<span class="co">#&gt; 2                  m          0 hours                    h</span>
 
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">result</span><span class="op">$</span><span class="va">ignition</span>, <span class="fl">2</span><span class="op">)</span>
 <span class="co">#&gt;   membership    lon    lat             obsTime timeID obsInCluster</span>
@@ -413,7 +413,7 @@
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/summary_spotoroo.html">summary_spotoroo</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; ──────────────────────────────── SPOTOROO 0.1.1 ────────────────────────────────</span>
+<span class="co">#&gt; ──────────────────────────────── SPOTOROO 0.1.2 ────────────────────────────────</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; ── Calling Core Function : `summary_spotoroo()` ──</span>
 <span class="co">#&gt; </span>
@@ -443,7 +443,7 @@
 <span class="co">#&gt;          0.0        25.2        62.5        98.2       148.3</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; ── Noise</span>
-<span class="co">#&gt; ℹ Number of noise points: 10 (0.93 %)</span>
+<span class="co">#&gt; ℹ Number of noise points: 10 ('0.93 %')</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; ────────────────────────────────────────────────────────────────────────────────</span></code></pre></div>
 <p>Or make a brief summary of a subset of clusters by providing a vector of membership labels to the <code>cluster</code> argument.</p>

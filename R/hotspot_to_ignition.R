@@ -54,11 +54,18 @@ hotspot_to_ignition <- function(lon,
     } else {
       time_vec[indexes] <- obsTime[indexes] - ignition$obsTime[indexes2]
     }
-
-
-
   }
 
+  indexes <- membership == -1
+  if (length(indexes) > 0) {
+    fin_vec[indexes] <- 0
+    if (timeUnit != "numeric") {
+      time_vec[indexes] <- difftime(obsTime[1], obsTime[1],
+                                    units = timeUnit)
+    } else {
+      time_vec[indexes] <- 0
+    }
+  }
 
   list(distToIgnition = fin_vec, timeFromIgnition = time_vec)
 }

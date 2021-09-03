@@ -85,11 +85,11 @@ result <- hotspot_cluster(hotspots,
                           timeUnit = "h",
                           timeStep = 1)
 #> 
-#> ──────────────────────────────── SPOTOROO 0.1.1 ────────────────────────────────
+#> ──────────────────────────────── SPOTOROO 0.1.2 ────────────────────────────────
 #> 
 #> ── Calling Core Function : `hotspot_cluster()` ──
 #> 
-#> ── 1 time index = 1 hours
+#> ── '1' time index = 1 hours
 #> ✓ Transform observed time → time indexes
 #> ℹ 970 time indexes found
 #> 
@@ -100,15 +100,15 @@ result <- hotspot_cluster(hotspots,
 #> ── minPts = 4 hot spots | minTime = 3 time indexes
 #> ✓ Handle noise
 #> ℹ 6 clusters left
-#> ℹ noise proportion : 0.935 %
+#> ℹ noise proportion : '0.935 %'
 #> 
 #> ── ignitionCenter = 'mean'
 #> ✓ Compute ignition points for clusters
 #> ℹ average hot spots : 176.7
 #> ℹ average duration : 131.9 hours
 #> 
-#> ── Time taken = 0 mins 2 secs for 1070 hot spots
-#> ℹ 0.002 secs per hot spot
+#> ── Time taken = 0 mins 1 sec for 1070 hot spots
+#> ℹ 0.001 secs per hot spot
 #> 
 #> ────────────────────────────────────────────────────────────────────────────────
 
@@ -122,7 +122,7 @@ You can make a summary of the clustering results.
 ``` r
 summary(result)
 #> 
-#> ──────────────────────────────── SPOTOROO 0.1.1 ────────────────────────────────
+#> ──────────────────────────────── SPOTOROO 0.1.2 ────────────────────────────────
 #> 
 #> ── Calling Core Function : `summary_spotoroo()` ──
 #> 
@@ -152,7 +152,7 @@ summary(result)
 #>          0.0        25.2        62.5        98.2       148.3
 #> 
 #> ── Noise
-#> ℹ Number of noise points: 10 (0.93 %)
+#> ℹ Number of noise points: 10 ('0.93 %')
 #> 
 #> ────────────────────────────────────────────────────────────────────────────────
 ```
