@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">spotoroo</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
       </span>
     </div>
 
@@ -133,6 +133,7 @@
 <ul>
 <li>Fixed a bug in <code>hotspot_to_ignition</code> that caused problems with time calculation of noise points.</li>
 <li>Fixed a bug in <code>plot_timeline</code> that caused problems with counting number of fires.</li>
+<li>Fixed the aspect ratio of <code>plot_fire_mov</code>. It now equals to <code><a href="https://rdrr.io/r/base/Trig.html">cos(mean(range(lat))*pi/180)</a></code>.</li>
 </ul>
 </div>
     <div id="spotoroo-011" class="section level1">

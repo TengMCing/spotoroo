@@ -259,8 +259,9 @@ plot_fire_mov <- function(result,
 
 
 
-  # facet
-  p <- p + ggplot2::facet_wrap(~membership, scales = "free")
+  # facet and adjust aspect ratio
+  p <- p + ggplot2::facet_wrap(~membership, scales = "free") +
+    ggplot2::theme(aspect.ratio = cos(mean(range(filter(result$hotspots, include)$lat))*pi/180))
 
 
   # edit subtitle
@@ -314,7 +315,7 @@ plot_fire_mov <- function(result,
       theme(legend.position = "none") +
       scale_color_brewer(palette = "Set1")
 
-    p <- patchwork::wrap_plots(bg, p)
+    p <- patchwork::wrap_plots(bg, p, widths = c(1, 1))
 
   } else {
 
