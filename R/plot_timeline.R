@@ -251,7 +251,7 @@ plot_timeline <- function(result,
   }
 
   # add title
-  title <- paste("Fires Displayed:", nrow(result$ignition), "\n")
+  title <- paste("Fires Displayed:", length(unique(result$hotspots$membership)) - 1, "\n")
   left <- min(result$hotspots$obsTime)
   right <- max(result$hotspots$obsTime)
 
