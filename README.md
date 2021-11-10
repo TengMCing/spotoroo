@@ -7,7 +7,7 @@
 
 [![R-CMD-check](https://github.com/TengMCing/spotoroo/workflows/R-CMD-check/badge.svg)](https://github.com/TengMCing/spotoroo/actions)
 [![Codecov test
-coverage](https://codecov.io/gh/TengMCing/spotoroo/branch/master/graph/badge.svg)](https://codecov.io/gh/TengMCing/spotoroo?branch=master)
+coverage](https://codecov.io/gh/TengMCing/spotoroo/branch/master/graph/badge.svg)](https://app.codecov.io/gh/TengMCing/spotoroo?branch=master)
 <!-- badges: end -->
 
 ## Overview
