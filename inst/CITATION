@@ -4,5 +4,5 @@ citEntry(entry = "misc",
   author = "Weihao Li and Dianne Cook and Emily Dodwell",
   title = "spotoroo: Spatiotemporal Clustering of Satellite Hot Spot Data",
   year = "2021",
-  url = "https://tengmcing.github.io/spotoroo/",
-  textVersion = "Weihao Li, Dianne Cook and Emily Dodwell (2021). spotoroo: Spatiotemporal Clustering of Satellite Hot Spot Data. https://tengmcing.github.io/spotoroo/")
+  url = "https://cran.r-project.org/web/packages/spotoroo/index.html",
+  textVersion = "Weihao Li, Dianne Cook and Emily Dodwell (2021). spotoroo: Spatiotemporal Clustering of Satellite Hot Spot Data. https://cran.r-project.org/web/packages/spotoroo/index.html")
