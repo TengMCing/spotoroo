@@ -35,7 +35,7 @@ global_clustering <- function(lon, lat, timeID, activeTime, adjDist) {
                             span.unit = list(color = "magenta"),
                             .val = list(digits = 3),
                             span.side = list(color = "grey")))
-  cli::cli_h3("{.field activeTime} = {.val {activeTime}} {.unit time indexes} | {.field adjDist} = {.val {adjDist}} {.unit meters}")
+  cli::cli_h3("{.field activeTime} = {.val {activeTime}} {.unit time index{?es}} | {.field adjDist} = {.val {adjDist}} {.unit meter{?s}}")
 
 
   global_membership <- rep(0, length(lon))

@@ -1,7 +1,7 @@
 pandoc: 2.11.4
-pkgdown: 1.6.1
+pkgdown: 2.0.1
 pkgdown_sha: ~
 articles:
   Clustering-hot-spots: Clustering-hot-spots.html
-last_built: 2021-09-03T13:23Z
+last_built: 2022-04-27T07:50Z
 

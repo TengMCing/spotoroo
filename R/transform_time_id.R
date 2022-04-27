@@ -66,9 +66,12 @@ transform_time_id <- function(obsTime, timeUnit, timeStep) {
                             span.unit = list(color = "magenta"),
                             .val = list(digits = 3),
                             span.side = list(color = "grey")))
+
+  if (timeStep == 1) timeUnit <- gsub("s$", "", timeUnit)
+
   cli::cli_h3("{.val 1} {.unit time index} = {.val {timeStep}} {.unit {timeUnit}}")
   cli::cli_alert_success("{.vrb Transform} {.field observed time} {cli::symbol$arrow_right} {.field time indexes}")
-  cli::cli_alert_info("{.val {max(timeID)}} {.unit time indexes} {.side found}")
+  cli::cli_alert_info("{.val {max(timeID)}} {.unit time index{?es}} {.side found}")
 
   cli::cli_end()
 

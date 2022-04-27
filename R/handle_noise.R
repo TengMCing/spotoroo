@@ -65,7 +65,7 @@ handle_noise <- function(global_membership, timeID, minPts, minTime) {
 
   cli::cli_alert_success("{.vrb Handle} {.field noise}")
   cli::cli_alert_info("{.val {max(c(global_membership, 0))}} cluster{?s} {.side left}")
-  cli::cli_alert_info("noise {.side proportion} : {.val {mean(global_membership == -1)*100} %} ")
+  cli::cli_alert_info("noise {.side proportion} : {.val {mean(global_membership == -1)*100}} %")
   cli::cli_end()
 
   return(global_membership)

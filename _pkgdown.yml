@@ -1,5 +1,5 @@
 reference:
-- title: "Spatiotemporal clustering of hot spot data"
+- title: Spatiotemporal clustering of hot spot data
   desc: >
     Functions for clustering satellite hot spots into fires
 - contents:
@@ -8,7 +8,7 @@ reference:
   - local_clustering
   - handle_noise
   - ignition_point
-- title: "Exploring spatiotemporal clustering results"
+- title: Exploring spatiotemporal clustering results
   desc: >
     Functions for accessing, summarizing and visualizing clustering results
 - contents:
@@ -23,13 +23,13 @@ reference:
 - contents:
   - transform_time_id
   - dist_point_to_vector
-- title: "Datasets"
+- title: Datasets
   desc: >
     Built-in datasets
 - contents:
   - starts_with("hotspots")
   - vic_map
-- title: "Package metadata"
+- title: Package metadata
   desc: >
     Authors and functions
 - contents:

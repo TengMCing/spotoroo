@@ -170,7 +170,7 @@ summary_spotoroo <- function(result, cluster = "all"){
 
   if (identical(cluster, "all")) {
     cli::cli_h3("{.type Noise}")
-    cli::cli_alert_info("{.bi Number of noise points: {.val {num_noise}}} ({.val {per_noise} %})")
+    cli::cli_alert_info("{.bi Number of noise points: {.val {num_noise}}} ({.val {per_noise}} %)")
     cli::cli_text()
   }
 

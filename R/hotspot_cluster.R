@@ -257,7 +257,7 @@ hotspot_cluster <- function(hotspots,
 
   cli::cli_h3(paste("{.field Time taken} = {.val {taken_mins}} {.unit min{?s}}",
                       "{.val {taken_secs}} {.unit sec{?s}}",
-                      "{.side for} {.val {length(lon)}} hot spots"))
+                      "{.side for} {.val {length(lon)}} hot spot{?s}"))
   cli::cli_alert_info("{.val {round(total_secs/length(lon), 3)}} {.unit sec{?s}} {.side per} hot spot")
   cli::cli_rule()
   cli::cli_end()

@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,18 +33,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">spotoroo</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.2</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="reference/index.html">Reference</a>
 </li>
@@ -64,7 +60,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/TengMCing/spotoroo/">
+  <a href="https://github.com/TengMCing/spotoroo/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -81,35 +77,35 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="spotoroo" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#spotoroo" class="anchor"></a>spotoroo</h1></div>
+<div class="section level1">
+<div class="page-header"><h1 id="spotoroo">spotoroo<a class="anchor" aria-label="anchor" href="#spotoroo"></a>
+</h1></div>
 <!-- badges: start -->
 
-<div id="overview" class="section level2">
-<h2 class="hasAnchor">
-<a href="#overview" class="anchor"></a>Overview</h2>
+<div class="section level2">
+<h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
+</h2>
 <p>“spotoroo” stands for spatiotemporal clustering in R of hot spot data. It is an algorithm to cluster satellite hot spots, detect ignition points and reconstruct fire movement.</p>
 </div>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
-<p>You can install the released version of spotoroo from <a href="https://CRAN.R-project.org">CRAN</a> with:</p>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
+<p>You can install the released version of spotoroo from <a href="https://CRAN.R-project.org" class="external-link">CRAN</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"spotoroo"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"spotoroo"</span><span class="op">)</span></code></pre></div>
 <p>You can install the development version from GitHub with:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"TengMCing/spotoroo"</span><span class="op">)</span></code></pre></div>
+<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"TengMCing/spotoroo"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="usage" class="section level2">
-<h2 class="hasAnchor">
-<a href="#usage" class="anchor"></a>Usage</h2>
+<div class="section level2">
+<h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
+</h2>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tengmcing.github.io/spotoroo/">spotoroo</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tengmcing.github.io/spotoroo/" class="external-link">spotoroo</a></span><span class="op">)</span></code></pre></div>
 <p>The below examples use the built-in dataset <code>hotspots</code>. The hot spot data needs to has at least three columns: the longitude, the latitude, and the observed time.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">hotspots</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">hotspots</span><span class="op">)</span>
 <span class="co">#&gt; 'data.frame':    1070 obs. of  3 variables:</span>
 <span class="co">#&gt;  $ lon    : num  147 146 143 149 142 ...</span>
 <span class="co">#&gt;  $ lat    : num  -37.5 -37.9 -37.8 -37.4 -37.1 ...</span>
@@ -169,7 +165,7 @@
 <span class="co">#&gt; ℹ spotoroo object: 6 clusters | 1070 hot spots (including noise points)</span></code></pre></div>
 <p>You can make a summary of the clustering results.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; ──────────────────────────────── SPOTOROO 0.1.2 ────────────────────────────────</span>
 <span class="co">#&gt; </span>
@@ -207,7 +203,7 @@
 <p>You can extract a subset of clusters from the results.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">fire_1_and_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/extract_fire.html">extract_fire</a></span><span class="op">(</span><span class="va">result</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">fire_1_and_2</span>, <span class="fl">2</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">fire_1_and_2</span>, <span class="fl">2</span><span class="op">)</span>
 <span class="co">#&gt;     lon       lat             obsTime timeID membership noise distToIgnition</span>
 <span class="co">#&gt; 1 149.3 -37.75999 2019-12-29 13:10:00      1          1 FALSE       1111.885</span>
 <span class="co">#&gt; 2 149.3 -37.78000 2019-12-29 13:10:00      1          1 FALSE       1111.885</span>
@@ -219,15 +215,15 @@
 <span class="co">#&gt; 2 116.1667 hours                  h</span></code></pre></div>
 <p>Plot of the result. In this example, there is a total of 6 clusters, so all can be displayed.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span>, bg <span class="op">=</span> <span class="fu"><a href="reference/plot_vic_map.html">plot_vic_map</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span>, bg <span class="op">=</span> <span class="fu"><a href="reference/plot_vic_map.html">plot_vic_map</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-6-1.png" width="70%" height="70%"></p>
 <p>You can also choose a subset of clusters, and this will plot without a map, so that you can see a zoomed in view of the hot spot clusters and their ignition points.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span>, cluster <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span>, cluster <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-7-1.png" width="70%" height="70%"></p>
 <p>To examine the fire movements, use the option “mov”, and the movement will be shown as connected lines between centroids at each time step, for each cluster.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span>,
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span>,
    type <span class="op">=</span> <span class="st">"mov"</span>,
    cluster <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>,
    step <span class="op">=</span> <span class="fl">6</span>,
@@ -235,7 +231,7 @@
 <p><img src="reference/figures/README-unnamed-chunk-8-1.png" width="70%" height="70%"></p>
 <p>To examine the time line of clusters and learn about the intensity of fire periods, use the option “timeline”.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span>, <span class="st">"timeline"</span>, 
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span>, <span class="st">"timeline"</span>, 
      dateLabel <span class="op">=</span> <span class="st">"%b %d"</span>, 
      mainBreak <span class="op">=</span> <span class="st">"1 week"</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-9-1.png" width="70%" height="70%"></p>
@@ -245,54 +241,58 @@
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=spotoroo">https://​cloud.r-project.org/​package=spotoroo</a>
-</li>
-<li>Browse source code at <br><a href="https://github.com/TengMCing/spotoroo/">https://​github.com/​TengMCing/​spotoroo/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/TengMCing/spotoroo/issues">https://​github.com/​TengMCing/​spotoroo/​issues</a>
-</li>
-</ul>
-</div>
-<div class="license">
-<h2>License</h2>
-<ul class="list-unstyled">
-<li><a href="LICENSE.html">Full license</a></li>
-<li><small><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
-</ul>
-</div>
-<div class="citation">
-<h2>Citation</h2>
-<ul class="list-unstyled">
-<li><a href="authors.html">Citing spotoroo</a></li>
-</ul>
-</div>
-<div class="developers">
-<h2>Developers</h2>
-<ul class="list-unstyled">
-<li>Weihao Li <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0003-4959-106X" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li><a href="authors.html">All authors...</a></li>
+<li><a href="https://cloud.r-project.org/package=spotoroo" class="external-link">View on CRAN</a></li>
+<li><a href="https://github.com/TengMCing/spotoroo/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/TengMCing/spotoroo/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="license">
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/TengMCing/spotoroo/actions"><img src="https://github.com/TengMCing/spotoroo/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
-<li><a href="https://codecov.io/gh/TengMCing/spotoroo?branch=master"><img src="https://codecov.io/gh/TengMCing/spotoroo/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
+<li><a href="LICENSE.html">Full license</a></li>
+<li><small><a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
+
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
+<ul class="list-unstyled">
+<li><a href="authors.html#citation">Citing spotoroo</a></li>
+</ul>
 </div>
+
+<div class="developers">
+<h2 data-toc-skip>Developers</h2>
+<ul class="list-unstyled">
+<li>Weihao Li <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0003-4959-106X" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li><a href="authors.html">More about authors...</a></li>
+</ul>
+</div>
+
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://github.com/TengMCing/spotoroo/actions" class="external-link"><img src="https://github.com/TengMCing/spotoroo/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://app.codecov.io/gh/TengMCing/spotoroo?branch=master" class="external-link"><img src="https://codecov.io/gh/TengMCing/spotoroo/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
+</ul>
+</div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Weihao Li.</p>
+  <p></p>
+<p>Developed by Weihao Li.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer>
@@ -300,6 +300,8 @@
 
   
 
+
+  
 
   </body>
 </html>
