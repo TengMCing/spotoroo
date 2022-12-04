@@ -1,3 +1,6 @@
+url: ~
+template:
+  bootstrap: 5
 reference:
 - title: Spatiotemporal clustering of hot spot data
   desc: >
