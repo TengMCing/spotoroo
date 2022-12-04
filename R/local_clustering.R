@@ -86,3 +86,53 @@ local_clustering <- function(lon, lat, adjDist) {
   membership[order(hotspots_list)]
 
 }
+
+
+local_clustering_density <- function(lon, lat, adjDist, minPts) {
+  raw_result <- local_clustering(lon, lat, adjDist)
+  final_result <- raw_result
+
+  # Clusters that has at least minPts
+  qualified_labels <- which(unname(table(raw_result)) >= minPts)
+
+  # For these clusters
+  for (label in qualified_labels) {
+    current_lon <- lon[raw_result == label]
+    current_lat <- lat[raw_result == label]
+
+    # Get the core points
+    core_points <- c()
+    for (i in 1:nrow(current_lon)) {
+      if (sum(dist_point_to_vector(current_lon[i],
+                                   current_lat[i],
+                                   current_lon,
+                                   current_lat) <= adjDist) >= minPts) {
+        core_points <- c(core_points, i)
+      }
+    }
+
+    # Points that connect to core points are boundary points
+    boundary_points <- c()
+    for (i in (1:nrow(current_lon))[-core_points]) {
+      if (dist_point_to_vector(current_lon[i],
+                               current_lat[i],
+                               current_lon[core_points],
+                               current_lat[core_points]) <= adjDist) {
+        boundary_points <- c(boundary_points, i)
+      }
+    }
+
+    # The rest are boundary points
+    noise_points <- (1:nrow(current_lon))[-c(core_points, boundary_points)]
+    final_result[which(raw_result == label)[noise_points]] <- -1
+  }
+
+  # For those clusters smaller than minPts
+  for (label in unique(raw_result)) {
+    if (!label %in% qualified_labels) {
+      final_result[raw_result == label] <- -1
+    }
+  }
+
+  return(final_result)
+}
