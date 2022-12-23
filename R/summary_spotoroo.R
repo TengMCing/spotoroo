@@ -71,6 +71,10 @@ summary_spotoroo <- function(result, cluster = "all"){
                                         color = "cyan",
                                         "font-color" = "black"),
                             span.unit = list(color = "magenta"),
+                            span.subh = list(color = "red",
+                                            `text-decoration` = "underline",
+                                            `font-style` = "italic",
+                                            `font-weight` = "bold"),
                             span.type = list(color = "red",
                                              `text-decoration` = "underline",
                                              `font-style` = "italic",
@@ -98,7 +102,7 @@ summary_spotoroo <- function(result, cluster = "all"){
   cli::cat_line(paste('FROM:',from))
   cli::cat_line(paste('TO:  ',to))
   cli::cli_text()
-  cli::cli_h3("{.type Clusters}")
+  cli::cli_h3("{.subh Clusters}")
   cli::cli_alert_info("{.bi Number of clusters: {.val {num_cluster}}}")
   cli::cli_text()
 
@@ -134,7 +138,7 @@ summary_spotoroo <- function(result, cluster = "all"){
   cli::cat_line(five_names, col = "green")
   cli::cat_line(vals, col = "blue")
 
-  cli::cli_h3("{.type Hot spots (excluding noise)}")
+  cli::cli_h3("{.subh Hot spots (excluding noise)}")
   cli::cli_alert_info("{.bi Number of hot spots: {.val {num_hotspots}}}")
   cli::cli_text()
 
@@ -169,7 +173,7 @@ summary_spotoroo <- function(result, cluster = "all"){
   cli::cat_line(vals, col = "blue")
 
   if (identical(cluster, "all")) {
-    cli::cli_h3("{.type Noise}")
+    cli::cli_h3("{.subh Noise}")
     cli::cli_alert_info("{.bi Number of noise points: {.val {num_noise}}} ({.val {per_noise}} %)")
     cli::cli_text()
   }
