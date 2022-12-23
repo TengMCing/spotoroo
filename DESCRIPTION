@@ -33,7 +33,7 @@ Imports:
     patchwork,
     ggrepel,
     ggExtra (>= 0.9),
-    ggbeeswarm (>= 0.6.0),
+    ggbeeswarm (== 0.6.0),
     ggplot2 (>= 3.0.0)
 Suggests:
     sf (>= 0.7-3),
