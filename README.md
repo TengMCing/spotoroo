@@ -56,21 +56,21 @@ which to observed time (“obsTime”).
 
 There is a choice of options for the algorithm.
 
--   “activeTime” sets the time to consider that a fire can be active,
-    and longer than this between hot spots will create a new cluster
+- “activeTime” sets the time to consider that a fire can be active, and
+  longer than this between hot spots will create a new cluster
 
--   “adjDist” sets the maximum intra-cluster spatial distance between
-    nearest hot spots beyond which they would be considered part of a
-    different cluster
+- “adjDist” sets the maximum intra-cluster spatial distance between
+  nearest hot spots beyond which they would be considered part of a
+  different cluster
 
--   “minPts” sets the minimum number of hot spots in a cluster
+- “minPts” sets the minimum number of hot spots in a cluster
 
--   “minTime” sets the minimum length of time of a cluster
+- “minTime” sets the minimum length of time of a cluster
 
--   “ignitionCenter” sets the method to calculate the ignition points
+- “ignitionCenter” sets the method to calculate the ignition points
 
--   “timeUnit” and “timeStep” set the length of time between successive
-    time indexes
+- “timeUnit” and “timeStep” set the length of time between successive
+  time indexes
 
 ``` r
 result <- hotspot_cluster(hotspots,
@@ -85,25 +85,25 @@ result <- hotspot_cluster(hotspots,
                           timeUnit = "h",
                           timeStep = 1)
 #> 
-#> ──────────────────────────────── SPOTOROO 0.1.2 ────────────────────────────────
+#> ──────────────────────────────── SPOTOROO 0.1.3 ────────────────────────────────
 #> 
 #> ── Calling Core Function : `hotspot_cluster()` ──
 #> 
-#> ── '1' time index = 1 hours
-#> ✓ Transform observed time → time indexes
+#> ── "1" time index = 1 hour
+#> ✔ Transform observed time → time indexes
 #> ℹ 970 time indexes found
 #> 
 #> ── activeTime = 24 time indexes | adjDist = 3000 meters
-#> ✓ Cluster
+#> ✔ Cluster
 #> ℹ 16 clusters found (including noise)
 #> 
 #> ── minPts = 4 hot spots | minTime = 3 time indexes
-#> ✓ Handle noise
+#> ✔ Handle noise
 #> ℹ 6 clusters left
-#> ℹ noise proportion : '0.935 %'
+#> ℹ noise proportion : 0.935 %
 #> 
-#> ── ignitionCenter = 'mean'
-#> ✓ Compute ignition points for clusters
+#> ── ignitionCenter = "mean"
+#> ✔ Compute ignition points for clusters
 #> ℹ average hot spots : 176.7
 #> ℹ average duration : 131.9 hours
 #> 
@@ -122,7 +122,7 @@ You can make a summary of the clustering results.
 ``` r
 summary(result)
 #> 
-#> ──────────────────────────────── SPOTOROO 0.1.2 ────────────────────────────────
+#> ──────────────────────────────── SPOTOROO 0.1.3 ────────────────────────────────
 #> 
 #> ── Calling Core Function : `summary_spotoroo()` ──
 #> 
@@ -152,7 +152,7 @@ summary(result)
 #>          0.0        25.2        62.5        98.2       148.3
 #> 
 #> ── Noise
-#> ℹ Number of noise points: 10 ('0.93 %')
+#> ℹ Number of noise points: 10 (0.93 %)
 #> 
 #> ────────────────────────────────────────────────────────────────────────────────
 ```
@@ -213,6 +213,7 @@ fire periods, use the option “timeline”.
 plot(result, "timeline", 
      dateLabel = "%b %d", 
      mainBreak = "1 week")
+#> ℹ `plot_timeline()`: Package ggbeeswarm version is not 0.6.0. `geom_point()` will be used insted to draw noise.
 ```
 
 <img src="man/figures/README-unnamed-chunk-9-1.png" width="70%" height="70%" />

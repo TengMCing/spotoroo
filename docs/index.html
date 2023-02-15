@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="index.html">spotoroo</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.3</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -122,25 +122,25 @@
 <span>                          timeUnit <span class="op">=</span> <span class="st">"h"</span>,</span>
 <span>                          timeStep <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; ──────────────────────────────── SPOTOROO 0.1.2 ────────────────────────────────</span></span>
+<span><span class="co">#&gt; ──────────────────────────────── SPOTOROO 0.1.3 ────────────────────────────────</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ── Calling Core Function : `hotspot_cluster()` ──</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; ── '1' time index = 1 hours</span></span>
-<span><span class="co">#&gt; ✓ Transform observed time → time indexes</span></span>
+<span><span class="co">#&gt; ── "1" time index = 1 hour</span></span>
+<span><span class="co">#&gt; ✔ Transform observed time → time indexes</span></span>
 <span><span class="co">#&gt; ℹ 970 time indexes found</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ── activeTime = 24 time indexes | adjDist = 3000 meters</span></span>
-<span><span class="co">#&gt; ✓ Cluster</span></span>
+<span><span class="co">#&gt; ✔ Cluster</span></span>
 <span><span class="co">#&gt; ℹ 16 clusters found (including noise)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ── minPts = 4 hot spots | minTime = 3 time indexes</span></span>
-<span><span class="co">#&gt; ✓ Handle noise</span></span>
+<span><span class="co">#&gt; ✔ Handle noise</span></span>
 <span><span class="co">#&gt; ℹ 6 clusters left</span></span>
-<span><span class="co">#&gt; ℹ noise proportion : '0.935 %'</span></span>
+<span><span class="co">#&gt; ℹ noise proportion : 0.935 %</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; ── ignitionCenter = 'mean'</span></span>
-<span><span class="co">#&gt; ✓ Compute ignition points for clusters</span></span>
+<span><span class="co">#&gt; ── ignitionCenter = "mean"</span></span>
+<span><span class="co">#&gt; ✔ Compute ignition points for clusters</span></span>
 <span><span class="co">#&gt; ℹ average hot spots : 176.7</span></span>
 <span><span class="co">#&gt; ℹ average duration : 131.9 hours</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -156,7 +156,7 @@
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; ──────────────────────────────── SPOTOROO 0.1.2 ────────────────────────────────</span></span>
+<span><span class="co">#&gt; ──────────────────────────────── SPOTOROO 0.1.3 ────────────────────────────────</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ── Calling Core Function : `summary_spotoroo()` ──</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -186,7 +186,7 @@
 <span><span class="co">#&gt;          0.0        25.2        62.5        98.2       148.3</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ── Noise</span></span>
-<span><span class="co">#&gt; ℹ Number of noise points: 10 ('0.93 %')</span></span>
+<span><span class="co">#&gt; ℹ Number of noise points: 10 (0.93 %)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ────────────────────────────────────────────────────────────────────────────────</span></span></code></pre></div>
 <p>You can extract a subset of clusters from the results.</p>
@@ -222,7 +222,8 @@
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span>, <span class="st">"timeline"</span>, </span>
 <span>     dateLabel <span class="op">=</span> <span class="st">"%b %d"</span>, </span>
-<span>     mainBreak <span class="op">=</span> <span class="st">"1 week"</span><span class="op">)</span></span></code></pre></div>
+<span>     mainBreak <span class="op">=</span> <span class="st">"1 week"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; ℹ `plot_timeline()`: Package ggbeeswarm version is not 0.6.0. `geom_point()` will be used insted to draw noise.</span></span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-9-1.png" width="70%" height="70%"></p>
 </div>
 </div>

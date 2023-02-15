@@ -1,5 +1,6 @@
-# spotoroo 0.1.2-devel
+# spotoroo 0.1.3
 
+* Fixed a bug in `plot_timeline` that draws incorrect noise.
 * Fixed a bug in `hotspot_cluster` that printed incorrect plural form of a noun via `cli`.
 * Fixed a bug in `summary_spotoroo` that printed incorrect plural form of a noun via `cli`.
 

@@ -1,6 +1,6 @@
 Package: spotoroo
 Title: Spatiotemporal Clustering of Satellite Hot Spot Data
-Version: 0.1.2
+Version: 0.1.3
 Authors@R: 
     c(person(given = "Weihao",
            family = "Li",
