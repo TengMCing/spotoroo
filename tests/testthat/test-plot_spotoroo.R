@@ -25,13 +25,13 @@ test_that("plot_spotoroo() works", {
                               from = as.POSIXct("2019-01-20"),
                               to = as.POSIXct("2020-01-27")))
 
-  expect_silent(plot_spotoroo(result, type = "timeline"))
-  expect_silent(plot_spotoroo(result, type = "timeline",
-                              from = as.POSIXct("2020-01-20"),
-                              to = as.POSIXct("2020-01-27"),
-                              mainBreak = "1 week",
-                              minorBreak = "1 hour",
-                              dateLabel = "%b %d"))
+  expect_no_error(plot_spotoroo(result, type = "timeline"))
+  expect_no_error(plot_spotoroo(result, type = "timeline",
+                                from = as.POSIXct("2020-01-20"),
+                                to = as.POSIXct("2020-01-27"),
+                                mainBreak = "1 week",
+                                minorBreak = "1 hour",
+                                dateLabel = "%b %d"))
 
 
   temp_hotspots <- hotspots
@@ -61,10 +61,10 @@ test_that("plot_spotoroo() works", {
                               from = 1,
                               to = 800))
 
-  expect_silent(plot_spotoroo(result, type = "timeline"))
-  expect_silent(plot_spotoroo(result, type = "timeline",
-                              from = 500,
-                              to = 800,
-                              mainBreak = 7*24,
-                              minorBreak = 1))
+  expect_no_error(plot_spotoroo(result, type = "timeline"))
+  expect_no_error(plot_spotoroo(result, type = "timeline",
+                                from = 500,
+                                to = 800,
+                                mainBreak = 7*24,
+                                minorBreak = 1))
 })

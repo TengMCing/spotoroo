@@ -12,15 +12,28 @@ plot_timeline_only_noise <- function(result,
   noise_num <- nrow(result$hotspots)
   result$hotspots$membership <- result$hotspots$membership + 1
 
-  p <- ggplot2::ggplot() +
-    ggbeeswarm::geom_quasirandom(data = result$hotspots,
-                        ggplot2::aes(obsTime,
-                                     membership),
-                        col = "#d95f02",
-                        groupOnX = FALSE,
-                        width = 0.1,
-                        alpha = max(1/log(noise_num), 0.1),
-                        size = 1) +
+  p <- ggplot2::ggplot()
+
+  if (utils::packageVersion("ggbeeswarm") == '0.6.0') {
+    p <- p + ggbeeswarm::geom_quasirandom(data = result$hotspots,
+                                          ggplot2::aes(obsTime,
+                                                       membership),
+                                          col = "#d95f02",
+                                          groupOnX = FALSE,
+                                          width = 0.1,
+                                          alpha = max(1/log(noise_num), 0.1),
+                                          size = 1)
+  } else {
+    cli::cli_alert_info("{.fn plot_timeline}: Package {.pkg ggbeeswarm} version is not 0.6.0. {.fn geom_point} will be used insted to draw noise.")
+    p <- p + ggplot2::geom_point(data = result$hotspots,
+                                 ggplot2::aes(obsTime,
+                                              membership),
+                                 col = "#d95f02",
+                                 alpha = max(1/log(noise_num), 0.1),
+                                 size = 1)
+  }
+
+  p <- p +
     ggplot2::geom_density(data = result$hotspots,
                           ggplot2::aes(obsTime, ..scaled../10),
                           linetype = 2

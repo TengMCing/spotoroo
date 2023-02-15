@@ -181,15 +181,27 @@ plot_timeline <- function(result,
 
   if (noise_num > 0) {
 
-    p <- p + ggbeeswarm::geom_quasirandom(data = dplyr::filter(result$hotspots,
-                                                               noise),
-                                 ggplot2::aes(obsTime,
-                                              membership),
-                                 col = "#d95f02",
-                                 groupOnX = FALSE,
-                                 width = base10/2,
-                                 alpha = max(1/log(noise_num), 0.1),
-                                 size = 1)
+    if (utils::packageVersion("ggbeeswarm") == '0.6.0') {
+      p <- p + ggbeeswarm::geom_quasirandom(data = dplyr::filter(result$hotspots,
+                                                                 noise),
+                                            ggplot2::aes(obsTime,
+                                                         membership),
+                                            col = "#d95f02",
+                                            groupOnX = FALSE,
+                                            width = base10/2,
+                                            alpha = max(1/log(noise_num), 0.1),
+                                            size = 1)
+    } else {
+      cli::cli_alert_info("{.fn plot_timeline}: Package {.pkg ggbeeswarm} version is not 0.6.0. {.fn geom_point} will be used insted to draw noise.")
+      p <- p + ggplot2::geom_point(data = dplyr::filter(result$hotspots,
+                                                        noise),
+                                   ggplot2::aes(obsTime,
+                                                membership),
+                                   col = "#d95f02",
+                                   alpha = max(1/log(noise_num), 0.1),
+                                   size = 1)
+    }
+
   }
 
 
