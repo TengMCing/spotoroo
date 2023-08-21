@@ -187,7 +187,7 @@ hotspot_cluster <- function(hotspots,
                                         "margin-bottom" = 0,
                                         color = "cyan",
                                         "font-color" = "black")))
-  cli::cli_rule(center = "{.def SPOTOROO 0.1.3}")
+  cli::cli_rule(center = "{.def SPOTOROO 0.1.4}")
   cli::cli_h2("Calling Core Function : {.fn hotspot_cluster}")
 
   # more safety checks and handle time col
@@ -407,49 +407,3 @@ plot.spotoroo <- function(x, ...) {
 }
 
 
-#' spotoroo: spatiotemporal clustering in R of hot spot
-#'
-#' A package for clustering satellite hot spots and detecting
-#' fire ignition points.
-#'
-#' @section Authors:
-#' \itemize{
-#'   \item{Weihao Li \email{llreczx@gmail.com}}
-#'   \item{Dianne Cook \email{dicook@monash.edu}}
-#'   \item{Emily Dodwell \email{emdodwell@gmail.com}}
-#' }
-#'
-#'
-#' @section Functions:
-#' The spotoroo package provides 13 important functions:
-#' \itemize{
-#'  \item{[hotspot_cluster()]}
-#'  \item{[global_clustering()]}
-#'  \item{[local_clustering()]}
-#'  \item{[handle_noise()]}
-#'  \item{[ignition_point()]}
-#'  \item{[get_fire_mov()]}
-#'  \item{[plot.spotoroo()]}
-#'  \item{[plot_spotoroo()]}
-#'  \item{[plot_def()]}
-#'  \item{[plot_fire_mov()]}
-#'  \item{[plot_timeline()]}
-#'  \item{[plot_vic_map()]}
-#'  \item{[summary.spotoroo()]}
-#'  \item{[summary_spotoroo()]}
-#'  \item{[print.spotoroo()]}
-#'  \item{[transform_time_id()]}
-#'  \item{[dist_point_to_vector()]}
-#'  }
-#'
-#'
-#'
-#' The spotoroo package provides 2 external data objects:
-#' \itemize{
-#'   \item{[hotspots]}
-#'   \item{[vic_map]}
-#' }
-#'
-#' @docType package
-#' @name spotoroo
-NULL
