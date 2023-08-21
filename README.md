@@ -85,7 +85,7 @@ result <- hotspot_cluster(hotspots,
                           timeUnit = "h",
                           timeStep = 1)
 #> 
-#> ──────────────────────────────── SPOTOROO 0.1.3 ────────────────────────────────
+#> ──────────────────────────────── SPOTOROO 0.1.4 ────────────────────────────────
 #> 
 #> ── Calling Core Function : `hotspot_cluster()` ──
 #> 
@@ -122,7 +122,7 @@ You can make a summary of the clustering results.
 ``` r
 summary(result)
 #> 
-#> ──────────────────────────────── SPOTOROO 0.1.3 ────────────────────────────────
+#> ──────────────────────────────── SPOTOROO 0.1.4 ────────────────────────────────
 #> 
 #> ── Calling Core Function : `summary_spotoroo()` ──
 #> 
@@ -213,7 +213,6 @@ fire periods, use the option “timeline”.
 plot(result, "timeline", 
      dateLabel = "%b %d", 
      mainBreak = "1 week")
-#> ℹ `plot_timeline()`: Package ggbeeswarm version is not 0.6.0. `geom_point()` will be used insted to draw noise.
 ```
 
 <img src="man/figures/README-unnamed-chunk-9-1.png" width="70%" height="70%" />

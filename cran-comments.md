@@ -16,9 +16,9 @@ The word "Spatiotemporal" is correctly spelled.
 ## Note
 This is a patched version. In this version I have:
 
-* attempted to fix a bug in `plot_timeline()` caused by the update of a upstream dependency `ggbeeswarm`.
-* attempted to fixed a bug in `hotspot_cluster` that printed incorrect plural form of a noun via `cli`.
-* attempted to fixed a bug in `summary_spotoroo` that printed incorrect plural form of a noun via `cli`.
+* attempted to fixed a bug in package documentation caused by the use of a deprecated roxygen2 feature `@doctype package`.
+* attempted to add support for new `ggbeeswarm 0.7.2` feature `orientation`, and deleted unused fallback methods from `plot_timeline()`.
+
 
 
   

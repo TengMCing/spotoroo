@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">spotoroo</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.4</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -51,16 +51,21 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.1.3" id="spotoroo-013">spotoroo 0.1.3<a class="anchor" aria-label="anchor" href="#spotoroo-013"></a></h2>
-<ul><li>Fixed a bug in <code>plot_timeline</code> that draws incorrect noise.</li>
-<li>Fixed a bug in <code>hotspot_cluster</code> that printed incorrect plural form of a noun via <code>cli</code>.</li>
-<li>Fixed a bug in <code>summary_spotoroo</code> that printed incorrect plural form of a noun via <code>cli</code>.</li>
+<h2 class="pkg-version" data-toc-text="0.1.4" id="spotoroo-014">spotoroo 0.1.4<a class="anchor" aria-label="anchor" href="#spotoroo-014"></a></h2>
+<ul><li>Fixed a bug in package documentation due to the use of a deprecated roxygen2 feature <code>@doctype package</code>.</li>
+<li>Add support for new <code>ggbeeswarm 0.7.2</code> feature <code>orientation</code>. <code><a href="../reference/plot_timeline.html">plot_timeline()</a></code> no longer uses <code><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point()</a></code> to draw noise as a fallback method.</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.1.3" id="spotoroo-013">spotoroo 0.1.3<a class="anchor" aria-label="anchor" href="#spotoroo-013"></a></h2><p class="text-muted">CRAN release: 2023-02-15</p>
+<ul><li>Fixed a bug in <code><a href="../reference/plot_timeline.html">plot_timeline()</a></code> that draws incorrect noise.</li>
+<li>Fixed a bug in <code><a href="../reference/hotspot_cluster.html">hotspot_cluster()</a></code> that printed incorrect plural form of a noun via <code>cli</code>.</li>
+<li>Fixed a bug in <code><a href="../reference/summary_spotoroo.html">summary_spotoroo()</a></code> that printed incorrect plural form of a noun via <code>cli</code>.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.1.2" id="spotoroo-012">spotoroo 0.1.2<a class="anchor" aria-label="anchor" href="#spotoroo-012"></a></h2><p class="text-muted">CRAN release: 2021-11-10</p>
-<ul><li>Fixed a bug in <code>hotspot_to_ignition</code> that caused problems with time calculation of noise points.</li>
-<li>Fixed a bug in <code>plot_timeline</code> that caused problems with counting number of fires.</li>
-<li>Fixed the aspect ratio of <code>plot_fire_mov</code>. It now equals to <code>cos(mean(range(lat))*pi/180)</code>.</li>
+<ul><li>Fixed a bug in <code>hotspot_to_ignition()</code> that caused problems with time calculation of noise points.</li>
+<li>Fixed a bug in <code><a href="../reference/plot_timeline.html">plot_timeline()</a></code> that caused problems with counting number of fires.</li>
+<li>Fixed the aspect ratio of <code><a href="../reference/plot_fire_mov.html">plot_fire_mov()</a></code>. It now equals to <code>cos(mean(range(lat))*pi/180)</code>.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.1.1" id="spotoroo-011">spotoroo 0.1.1<a class="anchor" aria-label="anchor" href="#spotoroo-011"></a></h2><p class="text-muted">CRAN release: 2021-03-31</p>
