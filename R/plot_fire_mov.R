@@ -229,7 +229,7 @@ plot_fire_mov <- function(result,
   p <- p + geom_point(data = temp_data,
                       aes(lon, lat),
                       col = "black",
-                      shape = 21,
+                      shape = 24,
                       size = 3)
 
   # draw line
@@ -254,7 +254,7 @@ plot_fire_mov <- function(result,
   p <- p + geom_point(data = temp_data,
                       aes(lon, lat),
                       col = "black",
-                      shape = 24,
+                      shape = 21,
                       size = 2.5)
 
 

@@ -1,3 +1,7 @@
+# spotoroo 0.1.5
+
+* Fixed a bug in `plot_fire_mov()` that caused the start symbol and end symbol interchanged.
+
 # spotoroo 0.1.4
 
 * Fixed a bug in package documentation due to the use of a deprecated roxygen2 feature `@doctype package`.
