@@ -85,7 +85,7 @@ result <- hotspot_cluster(hotspots,
                           timeUnit = "h",
                           timeStep = 1)
 #> 
-#> ──────────────────────────────── SPOTOROO 0.1.4 ────────────────────────────────
+#> ──────────────────────────────── SPOTOROO 0.1.5 ────────────────────────────────
 #> 
 #> ── Calling Core Function : `hotspot_cluster()` ──
 #> 

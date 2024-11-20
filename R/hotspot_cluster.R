@@ -175,6 +175,7 @@ hotspot_cluster <- function(hotspots,
   lon <- hotspots[[lon]]
   lat <- hotspots[[lat]]
   obsTime <- hotspots[[obsTime]]
+  pkg_version <- utils::packageVersion("spotoroo")
 
   # command line output
   cli::cli_div(theme = list(span.vrb = list(color = "yellow"),
@@ -187,7 +188,7 @@ hotspot_cluster <- function(hotspots,
                                         "margin-bottom" = 0,
                                         color = "cyan",
                                         "font-color" = "black")))
-  cli::cli_rule(center = "{.def SPOTOROO 0.1.4}")
+  cli::cli_rule(center = "{.def SPOTOROO {pkg_version}}")
   cli::cli_h2("Calling Core Function : {.fn hotspot_cluster}")
 
   # more safety checks and handle time col

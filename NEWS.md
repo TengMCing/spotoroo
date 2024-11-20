@@ -1,3 +1,7 @@
+# spotoroo 0.1.6
+
+* Fixed a bug in `hotspot_cluster()` that reported an incorrect package version.
+
 # spotoroo 0.1.5
 
 * Fixed a bug in `plot_fire_mov()` that caused the start symbol and end symbol interchanged.
